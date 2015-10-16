@@ -10,27 +10,104 @@
 
 @implementation DeHansknoechelGooglemapsMarkerProxy
 
--(void)_initWithProperties:(NSDictionary *)properties
-{
-    ENSURE_UI_THREAD_1_ARG(properties);
-    marker = [[[GMSMarker alloc] init] retain];
-    
-    [marker setPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:[properties objectForKey:@"latitude"]],[TiUtils doubleValue:[properties valueForKey:@"longitude"]])];
-    
-    [marker setTitle:[TiUtils stringValue:[properties objectForKey:@"title"]]];
-    [marker setSnippet:[TiUtils stringValue:[properties objectForKey:@"snippet"]]];
-    
-    [super _initWithProperties:properties];
-}
-
 -(GMSMarker*)marker
 {
+    if (marker == nil) {
+        marker = [[GMSMarker alloc] init];
+        
+        [marker setPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:[self valueForKey:@"latitude"]],[TiUtils doubleValue:[self valueForKey:@"longitude"]])];
+    }
+    
     return marker;
+}
+
+-(void)setMarker:(GMSMarker*)_marker
+{
+    self.marker = _marker;
 }
 
 -(void)dealloc
 {
     [super dealloc];
+}
+
+#pragma mark Public API's
+
+-(void)setTitle:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    [[self marker] setTitle:[TiUtils stringValue:value]];
+}
+
+-(NSString*)title
+{
+    return [[self marker] title];
+}
+
+-(void)setSnippet:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    [[self marker] setSnippet:[TiUtils stringValue:value]];
+}
+
+-(NSString*)snippet
+{
+    return [[self marker] snippet];
+}
+
+-(void)setIcon:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    [[self marker] setIcon:[TiUtils image:value proxy:self]];
+}
+
+-(TiBlob*)icon
+{
+    return [[TiBlob alloc] initWithImage:[[self marker] icon]];
+}
+
+-(void)setTappable:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    [[self marker] setTappable:[TiUtils boolValue:value def:YES]];
+}
+
+-(NSNumber*)tappable
+{
+    return NUMBOOL([[self marker] isTappable]);
+}
+
+-(void)setFlat:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    [[self marker] setFlat:[TiUtils boolValue:value def:NO]];
+}
+
+-(NSNumber*)flat
+{
+    return NUMBOOL([[self marker] isFlat]);
+}
+
+-(void)setDraggable:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    [[self marker] setDraggable:[TiUtils boolValue:value def:YES]];
+}
+
+-(NSNumber*)draggable
+{
+    return NUMBOOL([[self marker] isDraggable]);
+}
+
+-(void)setUserData:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    [[self marker] setUserData:value];
+}
+
+-(id)userData
+{
+    return [[self marker] userData];
 }
 
 @end

@@ -7,11 +7,12 @@
 #import "TiViewProxy.h"
 #import "DeHansknoechelGooglemapsMapView.h"
 
-@interface DeHansknoechelGooglemapsMapViewProxy : TiViewProxy {
+@interface DeHansknoechelGooglemapsMapViewProxy : TiViewProxy<GMSMapViewDelegate> {
     DeHansknoechelGooglemapsMapView* mapView;
 }
 
 -(void)addMarker:(id)args;
 -(void)removeMarker:(id)args;
+-(void)setMapView:(GMSMapView*)mapView;
 
 @end

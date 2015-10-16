@@ -7,10 +7,11 @@
 #import "TiViewProxy.h"
 #import <GoogleMaps/GoogleMaps.h>
 
-@interface DeHansknoechelGooglemapsMarkerProxy : TiProxy {
+@interface DeHansknoechelGooglemapsMarkerProxy : TiProxy<GMSMapViewDelegate> {
     GMSMarker *marker;
 }
 
 -(GMSMarker*)marker;
+-(void)setMarker:(GMSMarker*)marker;
 
 @end

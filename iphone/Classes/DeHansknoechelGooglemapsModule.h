@@ -13,7 +13,6 @@
 }
 
 -(void)setAPIKey:(id)value;
--(id)createMarker:(id)args;
 -(NSString*)version;
 
 @end

@@ -16,6 +16,13 @@
     return (DeHansknoechelGooglemapsMapView*)[self view];
 }
 
+-(void)setMapView:(GMSMapView*)_mapView
+{
+    [self setMapView:_mapView];
+}
+
+#pragma mark Public API's
+
 -(void)addMarker:(id)args
 {
     DeHansknoechelGooglemapsMarkerProxy *marker = [args objectAtIndex:0];
