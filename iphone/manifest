@@ -8,7 +8,7 @@ architectures: armv7 arm64 i386 x86_64
 description: ti.googlemaps
 author: Hans Knoechel
 license: Specify your license
-copyright: Copyright (c) 2015 by Your Company
+copyright: Copyright (c) 2015 by Hans Knoechel
 
 # these should not be edited
 name: ti.googlemaps
