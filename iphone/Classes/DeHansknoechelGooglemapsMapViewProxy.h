@@ -11,8 +11,19 @@
     DeHansknoechelGooglemapsMapView* mapView;
 }
 
--(void)addMarker:(id)args;
--(void)removeMarker:(id)args;
 -(void)setMapView:(GMSMapView*)mapView;
+
+-(void)addMarker:(id)args;
+-(void)addMarkers:(id)args;
+-(void)removeMarker:(id)args;
+
+-(void)addPolyline:(id)args;
+-(void)removePolyline:(id)args;
+
+-(void)addPolygon:(id)args;
+-(void)removePolygon:(id)args;
+
+-(void)addCircle:(id)args;
+-(void)removeCircle:(id)args;
 
 @end

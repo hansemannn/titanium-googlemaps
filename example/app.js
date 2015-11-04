@@ -1,39 +1,73 @@
-// This is a test harness for your module
-// You should do something interesting in this harness
-// to test out the module and to provide instructions
-// to users on how to use it by example.
+var win = Ti.UI.createWindow();
+var maps = require("de.hansknoechel.googlemaps");
+maps.setAPIKey("AIzaSyC8XCAFXe_oGrkM0o7God1YNeMApwLFQ3c");
 
+/*
+ *  MapView
+ */
+var mapView = maps.createMapView();
+mapView.setMapType(maps.MAP_TYPE_TERRAIN);
 
-// open a single window
-var win = Ti.UI.createWindow({
-	backgroundColor:'white'
+/*
+ *  Marker
+ */
+var marker = maps.createMarker({
+	latitude : -32.9689,
+	longitude : 151.7721,
+	title : "Newcastle",
+	snippet : "Australia"
 });
-var label = Ti.UI.createLabel();
-win.add(label);
+
+mapView.addMarker(marker);
+// mapView.addMarkers([marker]);
+// mapView.removeMarker(marker);
+
+/*
+ *  Overlays - Polyline
+ */
+var polyline = maps.createPolyline({
+	points : [{ // Can handle both object and array
+		latitude : -37.81319,
+		longitude : 144.96298
+	}, [-31.95285, 115.85734]],
+	strokeWidth : 3,
+	strokeColor : "#f00"
+});
+
+mapView.addPolyline(polyline);
+// mapView.removePolyline(polyline);
+
+/*
+ *  Overlays - Polygon
+ */
+var polygon = maps.createPolygon({
+	points : [{ // Can handle both object and array
+		latitude : -37.81819,
+		longitude : 144.96798
+	},
+	[-32.95785, 115.86234],
+	[-33.91785, 115.82234]],
+	strokeWidth : 3,
+	fillColor : "yellow",
+	strokeColor : "green"
+});
+
+mapView.addPolygon(polygon);
+// mapView.removePolygon(polygon);
+
+/*
+ *  Overlays - Circle
+ */
+var circle = maps.createCircle({
+	center : [-32.9689, 151.7721], // Can handle both object and array
+	radius : 500 * 1000, // 500km
+	// fillColor: "blue",
+	strokeWidth : 3,
+	strokeColor : "orange"
+});
+
+mapView.addCircle(circle);
+// mapView.removeCircle(circle);
+
+win.add(mapView);
 win.open();
-
-// TODO: write your module tests here
-var ti_googlemaps = require('de.hansknoechel.googlemaps');
-Ti.API.info("module is => " + ti_googlemaps);
-
-label.text = ti_googlemaps.example();
-
-Ti.API.info("module exampleProp is => " + ti_googlemaps.exampleProp);
-ti_googlemaps.exampleProp = "This is a test value";
-
-if (Ti.Platform.name == "android") {
-	var proxy = ti_googlemaps.createExample({
-		message: "Creating an example Proxy",
-		backgroundColor: "red",
-		width: 100,
-		height: 100,
-		top: 100,
-		left: 150
-	});
-
-	proxy.printMessage("Hello world!");
-	proxy.message = "Hi world!.  It's me again.";
-	proxy.printMessage("Hello world!");
-	win.add(proxy);
-}
-
