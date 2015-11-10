@@ -10,20 +10,27 @@
 
 @implementation DeHansknoechelGooglemapsMarkerProxy
 
+@synthesize marker = _marker;
+
 -(GMSMarker*)marker
 {
-    if (marker == nil) {
-        marker = [[GMSMarker alloc] init];
+    if (_marker == nil) {
+        _marker = [[GMSMarker alloc] init];
         
-        [marker setPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:[self valueForKey:@"latitude"]],[TiUtils doubleValue:[self valueForKey:@"longitude"]])];
+        [_marker setPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:[self valueForKey:@"latitude"]],[TiUtils doubleValue:[self valueForKey:@"longitude"]])];
     }
     
-    return marker;
+    return _marker;
 }
 
--(void)setMarker:(GMSMarker*)_marker
+-(void)setMarker:(GMSMarker*)marker
 {
-    self.marker = _marker;
+    if (_marker) {
+        RELEASE_TO_NIL(_marker);
+    }
+    
+    _marker = marker;
+    [self marker];
 }
 
 -(void)dealloc

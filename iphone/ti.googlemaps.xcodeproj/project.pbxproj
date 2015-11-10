@@ -38,6 +38,8 @@
 		3A433F031BE9AB270005C8AE /* DeHansknoechelGooglemapsPolygonProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A433F011BE9AB270005C8AE /* DeHansknoechelGooglemapsPolygonProxy.m */; };
 		3A433F071BE9AE620005C8AE /* DeHansknoechelGooglemapsCircleProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A433F051BE9AE620005C8AE /* DeHansknoechelGooglemapsCircleProxy.h */; };
 		3A433F081BE9AE620005C8AE /* DeHansknoechelGooglemapsCircleProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A433F061BE9AE620005C8AE /* DeHansknoechelGooglemapsCircleProxy.m */; };
+		3A7097E21BF1CD9B0044DBFB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900A31BC1ED7800172627 /* ImageIO.framework */; };
+		3A7097E91BF1D5480044DBFB /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A7097E81BF1D5480044DBFB /* GoogleMaps.framework */; };
 		3AF900AB1BC1ED7800172627 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF9009B1BC1ED7800172627 /* Accelerate.framework */; };
 		3AF900AC1BC1ED7800172627 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF9009C1BC1ED7800172627 /* AVFoundation.framework */; };
 		3AF900AD1BC1ED7800172627 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF9009D1BC1ED7800172627 /* CoreBluetooth.framework */; };
@@ -46,7 +48,6 @@
 		3AF900B01BC1ED7800172627 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900A01BC1ED7800172627 /* CoreLocation.framework */; };
 		3AF900B11BC1ED7800172627 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900A11BC1ED7800172627 /* CoreText.framework */; };
 		3AF900B21BC1ED7800172627 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900A21BC1ED7800172627 /* GLKit.framework */; };
-		3AF900B31BC1ED7800172627 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900A31BC1ED7800172627 /* ImageIO.framework */; };
 		3AF900B71BC1ED7800172627 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900A71BC1ED7800172627 /* OpenGLES.framework */; };
 		3AF900B81BC1ED7800172627 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900A81BC1ED7800172627 /* QuartzCore.framework */; };
 		3AF900B91BC1ED7800172627 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900A91BC1ED7800172627 /* Security.framework */; };
@@ -54,7 +55,6 @@
 		3AF900C31BC1F05900172627 /* libicucore.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900C01BC1F05900172627 /* libicucore.A.dylib */; };
 		3AF900C41BC1F05900172627 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900C11BC1F05900172627 /* libz.1.dylib */; };
 		3AF900C61BC1F08200172627 /* libc++.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900C51BC1F08200172627 /* libc++.1.dylib */; };
-		3AF900CA1BC1F8B600172627 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900C91BC1F8B600172627 /* GoogleMaps.framework */; };
 		AA747D9F0F9514B9006C5449 /* DeHansknoechelGooglemaps_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* DeHansknoechelGooglemaps_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -87,6 +87,8 @@
 		3A433F011BE9AB270005C8AE /* DeHansknoechelGooglemapsPolygonProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeHansknoechelGooglemapsPolygonProxy.m; path = Classes/DeHansknoechelGooglemapsPolygonProxy.m; sourceTree = "<group>"; };
 		3A433F051BE9AE620005C8AE /* DeHansknoechelGooglemapsCircleProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeHansknoechelGooglemapsCircleProxy.h; path = Classes/DeHansknoechelGooglemapsCircleProxy.h; sourceTree = "<group>"; };
 		3A433F061BE9AE620005C8AE /* DeHansknoechelGooglemapsCircleProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeHansknoechelGooglemapsCircleProxy.m; path = Classes/DeHansknoechelGooglemapsCircleProxy.m; sourceTree = "<group>"; };
+		3A7097E81BF1D5480044DBFB /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = platform/GoogleMaps.framework; sourceTree = "<group>"; };
+		3A7097EA1BF1D5830044DBFB /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = platform/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		3AF9009B1BC1ED7800172627 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		3AF9009C1BC1ED7800172627 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3AF9009D1BC1ED7800172627 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -109,7 +111,6 @@
 		3AF900C01BC1F05900172627 /* libicucore.A.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.A.dylib; path = ../../../../../../usr/lib/libicucore.A.dylib; sourceTree = "<group>"; };
 		3AF900C11BC1F05900172627 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = ../../../../../../usr/lib/libz.1.dylib; sourceTree = "<group>"; };
 		3AF900C51BC1F08200172627 /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "../../../../../../usr/lib/libc++.1.dylib"; sourceTree = "<group>"; };
-		3AF900C91BC1F8B600172627 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = platform/GoogleMaps.framework; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* DeHansknoechelGooglemaps_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeHansknoechelGooglemaps_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libDeHansknoechelGooglemaps.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDeHansknoechelGooglemaps.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,18 +127,18 @@
 				3AF900AB1BC1ED7800172627 /* Accelerate.framework in Frameworks */,
 				3AF900AC1BC1ED7800172627 /* AVFoundation.framework in Frameworks */,
 				3AF900AD1BC1ED7800172627 /* CoreBluetooth.framework in Frameworks */,
-				3AF900CA1BC1F8B600172627 /* GoogleMaps.framework in Frameworks */,
 				3AF900AE1BC1ED7800172627 /* CoreData.framework in Frameworks */,
 				3AF900AF1BC1ED7800172627 /* CoreGraphics.framework in Frameworks */,
 				3AF900B01BC1ED7800172627 /* CoreLocation.framework in Frameworks */,
 				3AF900B11BC1ED7800172627 /* CoreText.framework in Frameworks */,
 				3AF900B21BC1ED7800172627 /* GLKit.framework in Frameworks */,
-				3AF900B31BC1ED7800172627 /* ImageIO.framework in Frameworks */,
 				3AF900B71BC1ED7800172627 /* OpenGLES.framework in Frameworks */,
 				3AF900B81BC1ED7800172627 /* QuartzCore.framework in Frameworks */,
 				3AF900B91BC1ED7800172627 /* Security.framework in Frameworks */,
 				3AF900BA1BC1ED7800172627 /* SystemConfiguration.framework in Frameworks */,
+				3A7097E21BF1CD9B0044DBFB /* ImageIO.framework in Frameworks */,
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
+				3A7097E91BF1D5480044DBFB /* GoogleMaps.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,7 +167,8 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3AF900C91BC1F8B600172627 /* GoogleMaps.framework */,
+				3A7097EA1BF1D5830044DBFB /* GoogleMaps.bundle */,
+				3A7097E81BF1D5480044DBFB /* GoogleMaps.framework */,
 				3AF9009B1BC1ED7800172627 /* Accelerate.framework */,
 				3AF9009C1BC1ED7800172627 /* AVFoundation.framework */,
 				3AF9009D1BC1ED7800172627 /* CoreBluetooth.framework */,
@@ -335,7 +337,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0710;
 			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "ti.googlemaps" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -408,6 +410,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DSTROOT = /tmp/DeHansknoechelGooglemaps.dst;
+				ENABLE_TESTABILITY = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoogleMaps/Frameworks",
@@ -450,7 +453,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				DSTROOT = /tmp/DeHansknoechelGooglemaps.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -493,6 +496,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DSTROOT = /tmp/DeHansknoechelGooglemaps.dst;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoogleMaps/Frameworks",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/platform",
+				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -521,6 +531,7 @@
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = Debug;
 		};
@@ -528,9 +539,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LIBRARY = "libstdc++";
 				DSTROOT = /tmp/DeHansknoechelGooglemaps.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoogleMaps/Frameworks",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/platform",
+				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -554,6 +571,7 @@
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = Release;
 		};

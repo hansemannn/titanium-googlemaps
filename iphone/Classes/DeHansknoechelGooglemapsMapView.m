@@ -11,28 +11,30 @@
 
 @implementation DeHansknoechelGooglemapsMapView
 
+@synthesize mapView = _mapView;
+
 -(GMSMapView*)mapView
 {
-    if (mapView == nil) {
+    if (_mapView == nil) {
         
         // TODO: Own proxy maps.createCamera({latitude:longitude:zoom})
         // GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.86 longitude:151.20 zoom:6];
         
-        mapView = [GMSMapView mapWithFrame:self.bounds camera:nil];
-        mapView.delegate = self;
-        mapView.myLocationEnabled = [TiUtils boolValue:[self.proxy valueForKey:@"myLocationEnabled"] def:YES];
-        mapView.userInteractionEnabled = [TiUtils boolValue:[self.proxy valueForKey:@"userInteractionEnabled"] def:YES];
-        mapView.autoresizingMask = UIViewAutoresizingNone;
+        _mapView = [GMSMapView mapWithFrame:self.bounds camera:nil];
+        _mapView.delegate = self;
+        _mapView.myLocationEnabled = [TiUtils boolValue:[self.proxy valueForKey:@"myLocationEnabled"] def:YES];
+        _mapView.userInteractionEnabled = [TiUtils boolValue:[self.proxy valueForKey:@"userInteractionEnabled"] def:YES];
+        _mapView.autoresizingMask = UIViewAutoresizingNone;
         
-        [self addSubview:mapView];
+        [self addSubview:_mapView];
     }
     
-    return mapView;
+    return _mapView;
 }
 
 - (void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
 {
-    [TiUtils setView:mapView positionRect:bounds];
+    [TiUtils setView:_mapView positionRect:bounds];
     [super frameSizeChanged:frame bounds:bounds];
 }
 
@@ -43,7 +45,7 @@
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSNumber);
     
-    [mapView setMyLocationEnabled:[TiUtils boolValue:value]];
+    [_mapView setMyLocationEnabled:[TiUtils boolValue:value]];
 }
 
 -(NSNumber*)myLocationEnabled
@@ -61,7 +63,7 @@
 
 -(NSNumber*)mapType
 {
-    return NUMINT([mapView mapType]);
+    return NUMINT([_mapView mapType]);
 }
 
 
@@ -124,12 +126,21 @@
 
 - (void)mapView:(GMSMapView *)mapView didTapOverlay:(GMSOverlay *)overlay
 {
+   
+    if ([overlay isKindOfClass:[GMSPolygon class]]) {
+        
+    } else if([overlay isKindOfClass:[GMSPolyline class]]) {
+        
+    } else if([overlay isKindOfClass:[GMSCircle class]]) {
+        
+    }
+    /*
     if ([[self proxy] _hasListeners:@"overlayclick"]) {
         NSDictionary *event = @{
             @"overlay" : [self dictionaryFromOverlay:overlay]
         };
         [[self proxy] fireEvent:@"overlayclick" withObject:event];
-    }
+    }*/
 }
 
 - (void)mapView:(GMSMapView *)mapView didBeginDraggingMarker:(GMSMarker *)marker
@@ -162,11 +173,11 @@
     }
 }
 
-- (BOOL)didTapMyLocationButtonForMapView:(GMSMapView *)_mapView
+- (BOOL)didTapMyLocationButtonForMapView:(GMSMapView *)mapView
 {
     if ([[self proxy] _hasListeners:@"locationclick"]) {
         DeHansknoechelGooglemapsMapViewProxy *mapViewProxy = [[DeHansknoechelGooglemapsMapViewProxy alloc] init];
-        [mapViewProxy setMapView:_mapView];
+        [mapViewProxy setMapView:mapView];
 
         NSDictionary *event = @{
             @"mapView" : mapViewProxy

@@ -8,6 +8,7 @@ Ti.GoogleMaps is an open-source project to support the Google Maps SDK for iOS o
   - Polygon overlay
   - Polyline overlay
   - Circle overlay
+  - All delegates (exposed as events)
 
 Requirements
 ---------------
@@ -21,7 +22,7 @@ Download + Setup
 ### Download
   * [Stable release](https://github.com/hansemannn/Ti.GoogleMaps/releases)
   * Install from gitTio    [![gitTio](http://gitt.io/badge.png)](http://gitt.io/component/de.hansknoechel.googlemaps)
-  
+
 ### Setup
 Unpack the module and place it inside the ``/modules/iphone`` folder of your project.
 Edit the modules section of your ``tiapp.xml`` file to include this module:
@@ -39,7 +40,7 @@ maps.setAPIKey("<YOUR_API_KEY>");
 Features
 --------------------------------
 #### Map View
-A map view creates the view on which marker and overlays can be added to. You can specify one of the following constants to the ``mapType`` property:
+A map view creates the view on which marker and overlays can be added to. You can see all possible events in the demo and. In addition, you can specify one of the following constants to the ``mapType`` property:
  - ``MAP_TYPE_NORMAL``
  - ``MAP_TYPE_HYBRID``
  - ``MAP_TYPE_SATELLITE``
@@ -141,6 +142,3 @@ MIT
 Contributing
 ---------------
 Code contributions are greatly appriciated, please submit a pull request!
-
-
-

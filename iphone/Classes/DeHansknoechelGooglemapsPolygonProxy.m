@@ -9,11 +9,13 @@
 
 @implementation DeHansknoechelGooglemapsPolygonProxy
 
+@synthesize polygon = _polygon, path = _path;
+
 -(GMSPolygon*)polygon
 {
-    if (polygon == nil) {
-        _path = [GMSMutablePath path];
-        polygon = [GMSPolygon polygonWithPath:_path];
+    if (_polygon == nil) {
+        [self setPath:[GMSMutablePath path]];
+        [self setPolygon:[GMSPolygon polygonWithPath:_path]];
     
         id points = [self valueForKey:@"points"];
         
@@ -22,7 +24,7 @@
         if (points != nil) {
             if ([points count] < 2) {
                 NSLog(@"[WARN] GoogleMaps: You need to specify at least 2 points to create a polygon");
-                return polygon;
+                return _polygon;
             }
             
             for(id point in points) {
@@ -41,15 +43,15 @@
             }
         }
         
-        polygon.path = self.path;
-        polygon.fillColor = [[TiUtils colorValue:[self valueForKey:@"fillColor"]] _color];
-        polygon.strokeColor = [[TiUtils colorValue:[self valueForKey:@"strokeColor"]] _color];
-        polygon.strokeWidth = [TiUtils floatValue:[self valueForKey:@"strokeWidth"] def:1];
-        polygon.geodesic = [TiUtils boolValue:[self valueForKey:@"geodesic"] def:NO];
+        _polygon.path = self.path;
+        _polygon.fillColor = [[TiUtils colorValue:[self valueForKey:@"fillColor"]] _color];
+        _polygon.strokeColor = [[TiUtils colorValue:[self valueForKey:@"strokeColor"]] _color];
+        _polygon.strokeWidth = [TiUtils floatValue:[self valueForKey:@"strokeWidth"] def:1];
+        _polygon.geodesic = [TiUtils boolValue:[self valueForKey:@"geodesic"] def:NO];
 
     }
     
-    return polygon;
+    return _polygon;
 }
 
 @end

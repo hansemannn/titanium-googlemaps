@@ -8,12 +8,10 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "TiUtils.h"
 
-@interface DeHansknoechelGooglemapsPolygonProxy : TiProxy {
-    GMSPolygon *polygon;
-}
+@interface DeHansknoechelGooglemapsPolygonProxy : TiProxy
+
+@property(nonatomic,retain) GMSPolygon *polygon;
 
 @property(nonatomic,retain) GMSMutablePath *path;
-
--(GMSPolygon*)polygon;
 
 @end

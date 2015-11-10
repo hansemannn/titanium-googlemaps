@@ -9,11 +9,13 @@
 
 @implementation DeHansknoechelGooglemapsPolylineProxy
 
+@synthesize polyline = _polyline, path = _path;
+
 -(GMSPolyline*)polyline
 {
-    if (polyline == nil) {
-        _path = [GMSMutablePath path];
-        polyline = [GMSPolyline polylineWithPath:_path];
+    if (_polyline == nil) {
+        [self setPath:[GMSMutablePath path]];
+        [self setPolyline:[GMSPolyline polylineWithPath:_path]];
     
         id points = [self valueForKey:@"points"];
         
@@ -22,7 +24,7 @@
         if (points != nil) {
             if ([points count] < 2) {
                 NSLog(@"[WARN] GoogleMaps: You need to specify at least 2 points to create a polyline");
-                return polyline;
+                return _polyline;
             }
             
             for(id point in points) {
@@ -41,13 +43,13 @@
             }
         }
         
-        polyline.path = self.path;
-        polyline.strokeColor = [[TiUtils colorValue:[self valueForKey:@"strokeColor"]] _color];
-        polyline.strokeWidth = [TiUtils floatValue:[self valueForKey:@"strokeWidth"] def:1];
-        polyline.geodesic = [TiUtils boolValue:[self valueForKey:@"geodesic"] def:NO];
+        _polyline.path = self.path;
+        _polyline.strokeColor = [[TiUtils colorValue:[self valueForKey:@"strokeColor"]] _color];
+        _polyline.strokeWidth = [TiUtils floatValue:[self valueForKey:@"strokeWidth"] def:1];
+        _polyline.geodesic = [TiUtils boolValue:[self valueForKey:@"geodesic"] def:NO];
     }
     
-    return polyline;
+    return _polyline;
 }
 
 @end

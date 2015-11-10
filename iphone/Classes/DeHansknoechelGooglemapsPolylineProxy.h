@@ -8,12 +8,10 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "TiUtils.h"
 
-@interface DeHansknoechelGooglemapsPolylineProxy : TiProxy {
-    GMSPolyline *polyline;
-}
+@interface DeHansknoechelGooglemapsPolylineProxy : TiProxy
+
+@property(nonatomic,retain) GMSPolyline *polyline;
 
 @property(nonatomic,retain) GMSMutablePath *path;
-
--(GMSPolyline*)polyline;
 
 @end

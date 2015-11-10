@@ -9,18 +9,20 @@
 
 @implementation DeHansknoechelGooglemapsCircleProxy
 
+@synthesize circle = _circle, path = _path;
+
 -(GMSCircle*)circle
 {
-    if (circle == nil) {
-        circle = [GMSCircle circleWithPosition:[self positionFromPoint:[self valueForKey:@"center"]]
+    if (_circle == nil) {
+        _circle = [GMSCircle circleWithPosition:[self positionFromPoint:[self valueForKey:@"center"]]
                                          radius:[TiUtils doubleValue:[self valueForKey:@"radius"]]];
     
-        circle.fillColor = [[TiUtils colorValue:[self valueForKey:@"fillColor"]] _color];
-        circle.strokeColor = [[TiUtils colorValue:[self valueForKey:@"strokeColor"]] _color];
-        circle.strokeWidth = [TiUtils floatValue:[self valueForKey:@"strokeWidth"] def:1];
+        _circle.fillColor = [[TiUtils colorValue:[self valueForKey:@"fillColor"]] _color];
+        _circle.strokeColor = [[TiUtils colorValue:[self valueForKey:@"strokeColor"]] _color];
+        _circle.strokeWidth = [TiUtils floatValue:[self valueForKey:@"strokeWidth"] def:1];
     }
     
-    return circle;
+    return _circle;
 }
 
 -(CLLocationCoordinate2D)positionFromPoint:(id)point

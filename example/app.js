@@ -1,12 +1,89 @@
 var win = Ti.UI.createWindow();
 var maps = require("de.hansknoechel.googlemaps");
-maps.setAPIKey("AIzaSyC8XCAFXe_oGrkM0o7God1YNeMApwLFQ3c");
+maps.setAPIKey("<YOUR_API_KEY>");
 
 /*
  *  MapView
  */
 var mapView = maps.createMapView();
 mapView.setMapType(maps.MAP_TYPE_TERRAIN);
+
+/*
+ * Events
+ */
+
+function handleClickEvent(e) {
+	Ti.API.warn("\"click\" event fired!");
+	Ti.API.warn(e);
+}
+
+function handleLongpressEvent(e) {
+	Ti.API.warn("\"longpress\" event fired!");
+	Ti.API.warn(e);
+}
+
+function handlerMarkerClickEvent(e) {
+	Ti.API.warn("\"markerclick\" event fired!");
+	Ti.API.warn(e);
+}
+
+function handleWillMoveEvent(e) {
+	Ti.API.warn("\"willmove\" event fired!");
+	Ti.API.warn(e);
+}
+
+function handleCameraChangeEvent(e) {
+	Ti.API.warn("\"camerachange\" event fired!");
+	Ti.API.warn(e);
+}
+
+function handleIdleEvent(e) {
+	Ti.API.warn("\"idle\" event fired!");
+	Ti.API.warn(e);
+}
+
+function handleMarkerInfoClickEvent(e) {
+	Ti.API.warn("\"markerinfoclick\" event fired!");
+	Ti.API.warn(e);
+}
+
+function handleOverlayClickEvent(e) {
+	Ti.API.warn("\"overlayclick\" event fired!");
+	Ti.API.warn(e);
+}
+
+function handleDragStartEvent(e) {
+	Ti.API.warn("\"dragstart\" event fired!");
+	Ti.API.warn(e);
+}
+
+function handleDragMoveEvent(e) {
+	Ti.API.warn("\"dragmove\" event fired!");
+	Ti.API.warn(e);
+}
+
+function handleDragEndEvent(e) {
+	Ti.API.warn("\"dragend\" event fired!");
+	Ti.API.warn(e);
+}
+
+function handleLocationClickEvent(e) {
+	Ti.API.warn("\"locationclick\" event fired!");
+	Ti.API.warn(e);
+}
+
+mapView.addEventListener("click", handleClickEvent);
+mapView.addEventListener("longpress", handleLongpressEvent);
+mapView.addEventListener("markerclick", handlerMarkerClickEvent);
+mapView.addEventListener("willmove", handleWillMoveEvent);
+mapView.addEventListener("camerachange", handleCameraChangeEvent);
+mapView.addEventListener("idle", handleIdleEvent);
+mapView.addEventListener("markerinfoclick", handleMarkerInfoClickEvent);
+mapView.addEventListener("overlayclick", handleOverlayClickEvent);
+mapView.addEventListener("dragstart", handleDragStartEvent);
+mapView.addEventListener("dragmove", handleDragMoveEvent);
+mapView.addEventListener("dragend", handleDragEndEvent);
+mapView.addEventListener("locationclick", handleLocationClickEvent);
 
 /*
  *  Marker

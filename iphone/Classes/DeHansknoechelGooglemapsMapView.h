@@ -8,10 +8,8 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "DeHansknoechelGooglemapsMarkerProxy.h"
 
-@interface DeHansknoechelGooglemapsMapView : TiUIView<GMSMapViewDelegate> {
-    GMSMapView *mapView;
-}
+@interface DeHansknoechelGooglemapsMapView : TiUIView<GMSMapViewDelegate>
 
--(GMSMapView*)mapView;
+@property(nonatomic,retain) GMSMapView *mapView;
 
 @end

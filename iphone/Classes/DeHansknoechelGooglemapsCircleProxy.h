@@ -8,12 +8,10 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "TiUtils.h"
 
-@interface DeHansknoechelGooglemapsCircleProxy : TiProxy {
-    GMSCircle *circle;
-}
+@interface DeHansknoechelGooglemapsCircleProxy : TiProxy
+
+@property(nonatomic,retain) GMSCircle *circle;
 
 @property(nonatomic,retain) GMSMutablePath *path;
-
--(GMSCircle*)circle;
 
 @end
