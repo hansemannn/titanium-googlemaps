@@ -26,6 +26,7 @@
 		24DD6CFA1134B3F500162E58 /* DeHansknoechelGooglemapsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* DeHansknoechelGooglemapsModule.m */; };
 		24DE9E1111C5FE74003F90F6 /* DeHansknoechelGooglemapsModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* DeHansknoechelGooglemapsModuleAssets.h */; };
 		24DE9E1211C5FE74003F90F6 /* DeHansknoechelGooglemapsModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* DeHansknoechelGooglemapsModuleAssets.m */; };
+		3A049B431BF3A5F30027DDBB /* GoogleMaps.bundle in Sources */ = {isa = PBXBuildFile; fileRef = 3A7097EA1BF1D5830044DBFB /* GoogleMaps.bundle */; };
 		3A433EF21BE9AAF00005C8AE /* DeHansknoechelGooglemapsMarkerProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A433EF01BE9AAF00005C8AE /* DeHansknoechelGooglemapsMarkerProxy.h */; };
 		3A433EF31BE9AAF00005C8AE /* DeHansknoechelGooglemapsMarkerProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A433EF11BE9AAF00005C8AE /* DeHansknoechelGooglemapsMarkerProxy.m */; };
 		3A433EF81BE9AAFE0005C8AE /* DeHansknoechelGooglemapsMapView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A433EF41BE9AAFE0005C8AE /* DeHansknoechelGooglemapsMapView.h */; };
@@ -381,6 +382,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A049B431BF3A5F30027DDBB /* GoogleMaps.bundle in Sources */,
 				24DD6CFA1134B3F500162E58 /* DeHansknoechelGooglemapsModule.m in Sources */,
 				24DE9E1211C5FE74003F90F6 /* DeHansknoechelGooglemapsModuleAssets.m in Sources */,
 				3A433F031BE9AB270005C8AE /* DeHansknoechelGooglemapsPolygonProxy.m in Sources */,
