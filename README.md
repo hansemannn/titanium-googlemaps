@@ -45,15 +45,21 @@ maps.setAPIKey("<YOUR_API_KEY>");
 Features
 --------------------------------
 #### Map View
-A map view creates the view on which marker and overlays can be added to. You can see all possible events in the demo and. In addition, you can specify one of the following constants to the ``mapType`` property:
+A map view creates the view on which marker and overlays can be added to. You can see all possible events in the demo app. In addition, you can specify one of the following constants to the ``mapType`` property:
  - ``MAP_TYPE_NORMAL``
  - ``MAP_TYPE_HYBRID``
  - ``MAP_TYPE_SATELLITE``
  - ``MAP_TYPE_TERRAIN``
  - ``MAP_TYPE_NONE``
+
 ```javascript
 var mapView = maps.createMapView({
-  mapType: maps.MAP_TYPE_TERRAIN
+  mapType: maps.MAP_TYPE_TERRAIN,
+  camera: { // Camera center of the map
+    latitude: 37.368122,
+    longitude: -121.913653,
+    zoom: 10 // Zoom in points
+  }
 });
 ```
 

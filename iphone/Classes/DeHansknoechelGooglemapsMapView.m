@@ -17,9 +17,6 @@
 {
     if (_mapView == nil) {
         
-        // TODO: Own proxy maps.createCamera({latitude:longitude:zoom})
-        // GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.86 longitude:151.20 zoom:6];
-        
         _mapView = [GMSMapView mapWithFrame:self.bounds camera:nil];
         _mapView.delegate = self;
         _mapView.myLocationEnabled = [TiUtils boolValue:[self.proxy valueForKey:@"myLocationEnabled"] def:YES];
@@ -46,6 +43,7 @@
     ENSURE_TYPE(value, NSNumber);
     
     [_mapView setMyLocationEnabled:[TiUtils boolValue:value]];
+    [[self proxy] replaceValue:value forKey:@"myLocationEnabled" notification:NO];
 }
 
 -(NSNumber*)myLocationEnabled
@@ -59,6 +57,7 @@
     ENSURE_TYPE(value, NSNumber);
     
     [[self mapView] setMapType:[TiUtils intValue:value def:kGMSTypeNormal]];
+    [[self proxy] replaceValue:value forKey:@"mapType" notification:NO];
 }
 
 -(NSNumber*)mapType
@@ -66,6 +65,26 @@
     return NUMINT([_mapView mapType]);
 }
 
+-(void)setCamera_:(id)args
+{
+    ENSURE_UI_THREAD_1_ARG(args);
+    ENSURE_TYPE(args, NSDictionary);
+    
+    id latitude = [args valueForKey:@"latitude"];
+    id longitude = [args valueForKey:@"longitude"];
+    id zoom = [args valueForKey:@"zoom"];
+    
+    ENSURE_TYPE(latitude, NSNumber);
+    ENSURE_TYPE(longitude, NSNumber)
+    ENSURE_TYPE_OR_NIL(zoom, NSNumber);
+    
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[TiUtils doubleValue:latitude]
+                                                            longitude:[TiUtils doubleValue:longitude]
+                                                                 zoom:[TiUtils floatValue:zoom def:1]];
+    [[self mapView] setCamera:camera];
+    
+    [[self proxy] replaceValue:args forKey:@"camera" notification:NO];
+}
 
 #pragma mark Delegates
 
