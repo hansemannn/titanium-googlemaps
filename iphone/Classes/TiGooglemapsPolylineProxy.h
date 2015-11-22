@@ -12,6 +12,4 @@
 
 @property(nonatomic,retain) GMSPolyline *polyline;
 
-@property(nonatomic,retain) GMSMutablePath *path;
-
 @end

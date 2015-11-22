@@ -12,6 +12,4 @@
 
 @property(nonatomic,retain) GMSPolygon *polygon;
 
-@property(nonatomic,retain) GMSMutablePath *path;
-
 @end

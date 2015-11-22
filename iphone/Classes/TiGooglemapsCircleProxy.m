@@ -9,21 +9,80 @@
 
 @implementation TiGooglemapsCircleProxy
 
-@synthesize circle = _circle, path = _path;
+@synthesize circle = _circle;
 
 -(GMSCircle*)circle
 {
     if (_circle == nil) {
-        _circle = [GMSCircle circleWithPosition:[self positionFromPoint:[self valueForKey:@"center"]]
-                                         radius:[TiUtils doubleValue:[self valueForKey:@"radius"]]];
-    
-        _circle.fillColor = [[TiUtils colorValue:[self valueForKey:@"fillColor"]] _color];
-        _circle.strokeColor = [[TiUtils colorValue:[self valueForKey:@"strokeColor"]] _color];
-        _circle.strokeWidth = [TiUtils floatValue:[self valueForKey:@"strokeWidth"] def:1];
+        _circle = [[GMSCircle alloc] init];
+        _circle.tappable = YES;
     }
     
     return _circle;
 }
+
+#pragma mark Public APIs
+
+-(void)setCenter:(id)args
+{
+    ENSURE_UI_THREAD(setCenter, args);
+    [self replaceValue:args forKey:@"center" notification:NO];
+    
+    if(![args isKindOfClass:[NSArray class]] && ![args isKindOfClass:[NSDictionary class]]) {
+        NSLog(@"[WARN] Ti.GoogleMaps: You need to specify the center either using an array or object.");
+        return;
+    }
+    
+    [[self circle] setPosition:[self positionFromPoint:args]];
+}
+
+-(void)setRadius:(id)value
+{
+    ENSURE_UI_THREAD(setRadius, value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [self replaceValue:value forKey:@"radius" notification:NO];
+    [[self circle] setRadius:[TiUtils doubleValue:value]];
+}
+
+-(void)setTappable:(id)value
+{
+    ENSURE_UI_THREAD(setTappable, value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [self replaceValue:value forKey:@"tappable" notification:NO];
+    
+    [[self circle] setTappable:[TiUtils boolValue:value]];
+}
+
+-(void)setFillColor:(id)value
+{
+    ENSURE_UI_THREAD(setFillColor, value);
+    
+    [self replaceValue:value forKey:@"fillColor" notification:NO];
+    
+    [[self circle] setFillColor:[[TiUtils colorValue:value] _color]];
+}
+
+-(void)setStrokeColor:(id)value
+{
+    ENSURE_UI_THREAD(setStrokeColor, value);
+    
+    [self replaceValue:value forKey:@"strokeColor" notification:NO];
+    
+    [[self circle] setStrokeColor:[[TiUtils colorValue:value] _color]];
+}
+
+-(void)setStrokeWidth:(id)value
+{
+    ENSURE_UI_THREAD(setStrokeWidth, value);
+    
+    [self replaceValue:value forKey:@"strokeWidth" notification:NO];
+    
+    [[self circle] setStrokeWidth:[TiUtils floatValue:value def:1]];
+}
+
+#pragma mark Utilities
 
 -(CLLocationCoordinate2D)positionFromPoint:(id)point
 {

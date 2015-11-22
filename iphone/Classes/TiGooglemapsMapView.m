@@ -8,6 +8,9 @@
 #import "TiGooglemapsMapView.h"
 #import "TiGooglemapsMarkerProxy.h"
 #import "TiGooglemapsMapViewProxy.h"
+#import "TiGooglemapsCircleProxy.h"
+#import "TiGooglemapsPolygonProxy.h"
+#import "TiGooglemapsPolylineProxy.h"
 
 @implementation TiGooglemapsMapView
 
@@ -145,21 +148,9 @@
 
 - (void)mapView:(GMSMapView *)mapView didTapOverlay:(GMSOverlay *)overlay
 {
-   
-    if ([overlay isKindOfClass:[GMSPolygon class]]) {
-        
-    } else if([overlay isKindOfClass:[GMSPolyline class]]) {
-        
-    } else if([overlay isKindOfClass:[GMSCircle class]]) {
-        
-    }
-    /*
     if ([[self proxy] _hasListeners:@"overlayclick"]) {
-        NSDictionary *event = @{
-            @"overlay" : [self dictionaryFromOverlay:overlay]
-        };
-        [[self proxy] fireEvent:@"overlayclick" withObject:event];
-    }*/
+        [[self proxy] fireEvent:@"overlayclick" withObject:[self dictionaryFromOverlay:overlay]];
+    }
 }
 
 - (void)mapView:(GMSMapView *)mapView didBeginDraggingMarker:(GMSMarker *)marker
@@ -195,7 +186,7 @@
 - (BOOL)didTapMyLocationButtonForMapView:(GMSMapView *)mapView
 {
     if ([[self proxy] _hasListeners:@"locationclick"]) {
-        TiGooglemapsMapViewProxy *mapViewProxy = [[TiGooglemapsMapViewProxy alloc] init];
+        TiGooglemapsMapViewProxy *mapViewProxy = [[TiGooglemapsMapViewProxy alloc] _initWithPageContext:[[self proxy] pageContext]];
         [mapViewProxy setMapView:mapView];
 
         NSDictionary *event = @{
@@ -232,18 +223,31 @@
 
 -(NSDictionary*)dictionaryFromOverlay:(GMSOverlay*)overlay
 {
-    if (overlay == nil) {
-        return @{};
+    NSString *type = nil;
+    TiProxy *proxy = nil;
+    
+    if([overlay isKindOfClass:[GMSPolygon class]]) {
+        proxy = [[[TiGooglemapsPolygonProxy alloc] _initWithPageContext:[[self proxy] pageContext]] autorelease];
+        [(TiGooglemapsPolygonProxy*)proxy setPolygon: (GMSPolygon*)overlay];
+        type = @"polygon";
+    } else if([overlay isKindOfClass:[GMSPolyline class]]) {
+        proxy = [[TiGooglemapsPolylineProxy alloc] _initWithPageContext:[[self proxy] pageContext]];
+        [(TiGooglemapsPolylineProxy*)proxy setPolyline: (GMSPolyline*)overlay];
+        type = @"polyline";
+        
+    } else if([overlay isKindOfClass:[GMSCircle class]]) {
+        proxy = [[TiGooglemapsCircleProxy alloc] _initWithPageContext:[[self proxy] pageContext]];
+        [(TiGooglemapsCircleProxy*)proxy setCircle:(GMSCircle*)overlay];
+        type = @"circle";
+    }
+
+    if (proxy == nil) {
+        [self throwException:@"Unknown overlay clicked" subreason:@"Overlay could not be assigned." location:CODELOCATION];
     }
     
-    TiGooglemapsMapViewProxy *mapViewProxy = [[TiGooglemapsMapViewProxy alloc] init];
-    [mapViewProxy setMapView:[overlay map]];
-    
     return @{
-        @"title" : overlay.title,
-        @"mapView" : mapViewProxy,
-        @"tappable": NUMBOOL(overlay.tappable),
-        @"zIndex": NUMINT(overlay.zIndex)
+        @"overlayType" : type,
+        @"overlay" : proxy
     };
 }
 
@@ -253,7 +257,7 @@
         return nil;
     }
     
-    TiGooglemapsMarkerProxy* markerProxy = [[TiGooglemapsMarkerProxy alloc] init];
+    TiGooglemapsMarkerProxy* markerProxy = [[TiGooglemapsMarkerProxy alloc] _initWithPageContext:[[self proxy] pageContext]];
     [markerProxy setMarker:marker];
     
     return markerProxy;

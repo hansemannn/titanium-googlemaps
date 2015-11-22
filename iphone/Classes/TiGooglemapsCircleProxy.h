@@ -12,6 +12,4 @@
 
 @property(nonatomic,retain) GMSCircle *circle;
 
-@property(nonatomic,retain) GMSMutablePath *path;
-
 @end
