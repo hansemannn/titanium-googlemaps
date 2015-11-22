@@ -5,9 +5,9 @@
  * Please see the LICENSE included with this distribution for details.
  */
 
-#import "DeHansknoechelGooglemapsCircleProxy.h"
+#import "TiGooglemapsCircleProxy.h"
 
-@implementation DeHansknoechelGooglemapsCircleProxy
+@implementation TiGooglemapsCircleProxy
 
 @synthesize circle = _circle, path = _path;
 

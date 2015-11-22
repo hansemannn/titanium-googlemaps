@@ -69,9 +69,9 @@ def generate_doc(config):
 	return documentation
 
 def compile_js(manifest,config):
-	js_file = os.path.join(cwd,'assets','de.hansknoechel.googlemaps.js')
+	js_file = os.path.join(cwd,'assets','ti.googlemaps.js')
 	if not os.path.exists(js_file):
-		js_file = os.path.join(cwd,'..','assets','de.hansknoechel.googlemaps.js')
+		js_file = os.path.join(cwd,'..','assets','ti.googlemaps.js')
 	if not os.path.exists(js_file): return
 
 	from compiler import Compiler
@@ -101,7 +101,7 @@ def compile_js(manifest,config):
 
 	from tools import splice_code
 
-	assets_router = os.path.join(cwd,'Classes','DeHansknoechelGooglemapsModuleAssets.m')
+	assets_router = os.path.join(cwd,'Classes','TiGooglemapsModuleAssets.m')
 	splice_code(assets_router, 'asset', root_asset_content)
 	splice_code(assets_router, 'resolve_asset', module_asset_content)
 

@@ -22,23 +22,22 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		24DD6CF91134B3F500162E58 /* DeHansknoechelGooglemapsModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DD6CF71134B3F500162E58 /* DeHansknoechelGooglemapsModule.h */; };
-		24DD6CFA1134B3F500162E58 /* DeHansknoechelGooglemapsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* DeHansknoechelGooglemapsModule.m */; };
-		24DE9E1111C5FE74003F90F6 /* DeHansknoechelGooglemapsModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* DeHansknoechelGooglemapsModuleAssets.h */; };
-		24DE9E1211C5FE74003F90F6 /* DeHansknoechelGooglemapsModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* DeHansknoechelGooglemapsModuleAssets.m */; };
-		3A049B431BF3A5F30027DDBB /* GoogleMaps.bundle in Sources */ = {isa = PBXBuildFile; fileRef = 3A7097EA1BF1D5830044DBFB /* GoogleMaps.bundle */; };
-		3A433EF21BE9AAF00005C8AE /* DeHansknoechelGooglemapsMarkerProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A433EF01BE9AAF00005C8AE /* DeHansknoechelGooglemapsMarkerProxy.h */; };
-		3A433EF31BE9AAF00005C8AE /* DeHansknoechelGooglemapsMarkerProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A433EF11BE9AAF00005C8AE /* DeHansknoechelGooglemapsMarkerProxy.m */; };
-		3A433EF81BE9AAFE0005C8AE /* DeHansknoechelGooglemapsMapView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A433EF41BE9AAFE0005C8AE /* DeHansknoechelGooglemapsMapView.h */; };
-		3A433EF91BE9AAFE0005C8AE /* DeHansknoechelGooglemapsMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A433EF51BE9AAFE0005C8AE /* DeHansknoechelGooglemapsMapView.m */; };
-		3A433EFA1BE9AAFE0005C8AE /* DeHansknoechelGooglemapsMapViewProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A433EF61BE9AAFE0005C8AE /* DeHansknoechelGooglemapsMapViewProxy.h */; };
-		3A433EFB1BE9AAFE0005C8AE /* DeHansknoechelGooglemapsMapViewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A433EF71BE9AAFE0005C8AE /* DeHansknoechelGooglemapsMapViewProxy.m */; };
-		3A433EFE1BE9AB0C0005C8AE /* DeHansknoechelGooglemapsPolylineProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A433EFC1BE9AB0C0005C8AE /* DeHansknoechelGooglemapsPolylineProxy.h */; };
-		3A433EFF1BE9AB0C0005C8AE /* DeHansknoechelGooglemapsPolylineProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A433EFD1BE9AB0C0005C8AE /* DeHansknoechelGooglemapsPolylineProxy.m */; };
-		3A433F021BE9AB270005C8AE /* DeHansknoechelGooglemapsPolygonProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A433F001BE9AB270005C8AE /* DeHansknoechelGooglemapsPolygonProxy.h */; };
-		3A433F031BE9AB270005C8AE /* DeHansknoechelGooglemapsPolygonProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A433F011BE9AB270005C8AE /* DeHansknoechelGooglemapsPolygonProxy.m */; };
-		3A433F071BE9AE620005C8AE /* DeHansknoechelGooglemapsCircleProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A433F051BE9AE620005C8AE /* DeHansknoechelGooglemapsCircleProxy.h */; };
-		3A433F081BE9AE620005C8AE /* DeHansknoechelGooglemapsCircleProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A433F061BE9AE620005C8AE /* DeHansknoechelGooglemapsCircleProxy.m */; };
+		24DD6CF91134B3F500162E58 /* TiGooglemapsModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DD6CF71134B3F500162E58 /* TiGooglemapsModule.h */; };
+		24DD6CFA1134B3F500162E58 /* TiGooglemapsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* TiGooglemapsModule.m */; };
+		24DE9E1111C5FE74003F90F6 /* TiGooglemapsModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* TiGooglemapsModuleAssets.h */; };
+		24DE9E1211C5FE74003F90F6 /* TiGooglemapsModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* TiGooglemapsModuleAssets.m */; };
+		3A433EF21BE9AAF00005C8AE /* TiGooglemapsMarkerProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A433EF01BE9AAF00005C8AE /* TiGooglemapsMarkerProxy.h */; };
+		3A433EF31BE9AAF00005C8AE /* TiGooglemapsMarkerProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A433EF11BE9AAF00005C8AE /* TiGooglemapsMarkerProxy.m */; };
+		3A433EF81BE9AAFE0005C8AE /* TiGooglemapsMapView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A433EF41BE9AAFE0005C8AE /* TiGooglemapsMapView.h */; };
+		3A433EF91BE9AAFE0005C8AE /* TiGooglemapsMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A433EF51BE9AAFE0005C8AE /* TiGooglemapsMapView.m */; };
+		3A433EFA1BE9AAFE0005C8AE /* TiGooglemapsMapViewProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A433EF61BE9AAFE0005C8AE /* TiGooglemapsMapViewProxy.h */; };
+		3A433EFB1BE9AAFE0005C8AE /* TiGooglemapsMapViewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A433EF71BE9AAFE0005C8AE /* TiGooglemapsMapViewProxy.m */; };
+		3A433EFE1BE9AB0C0005C8AE /* TiGooglemapsPolylineProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A433EFC1BE9AB0C0005C8AE /* TiGooglemapsPolylineProxy.h */; };
+		3A433EFF1BE9AB0C0005C8AE /* TiGooglemapsPolylineProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A433EFD1BE9AB0C0005C8AE /* TiGooglemapsPolylineProxy.m */; };
+		3A433F021BE9AB270005C8AE /* TiGooglemapsPolygonProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A433F001BE9AB270005C8AE /* TiGooglemapsPolygonProxy.h */; };
+		3A433F031BE9AB270005C8AE /* TiGooglemapsPolygonProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A433F011BE9AB270005C8AE /* TiGooglemapsPolygonProxy.m */; };
+		3A433F071BE9AE620005C8AE /* TiGooglemapsCircleProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A433F051BE9AE620005C8AE /* TiGooglemapsCircleProxy.h */; };
+		3A433F081BE9AE620005C8AE /* TiGooglemapsCircleProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A433F061BE9AE620005C8AE /* TiGooglemapsCircleProxy.m */; };
 		3A7097E21BF1CD9B0044DBFB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900A31BC1ED7800172627 /* ImageIO.framework */; };
 		3A7097E91BF1D5480044DBFB /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A7097E81BF1D5480044DBFB /* GoogleMaps.framework */; };
 		3AF900AB1BC1ED7800172627 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF9009B1BC1ED7800172627 /* Accelerate.framework */; };
@@ -56,7 +55,7 @@
 		3AF900C31BC1F05900172627 /* libicucore.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900C01BC1F05900172627 /* libicucore.A.dylib */; };
 		3AF900C41BC1F05900172627 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900C11BC1F05900172627 /* libz.1.dylib */; };
 		3AF900C61BC1F08200172627 /* libc++.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900C51BC1F08200172627 /* libc++.1.dylib */; };
-		AA747D9F0F9514B9006C5449 /* DeHansknoechelGooglemaps_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* DeHansknoechelGooglemaps_Prefix.pch */; };
+		AA747D9F0F9514B9006C5449 /* TiGooglemaps_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* TiGooglemaps_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,25 +70,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		24DD6CF71134B3F500162E58 /* DeHansknoechelGooglemapsModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeHansknoechelGooglemapsModule.h; path = Classes/DeHansknoechelGooglemapsModule.h; sourceTree = "<group>"; };
-		24DD6CF81134B3F500162E58 /* DeHansknoechelGooglemapsModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeHansknoechelGooglemapsModule.m; path = Classes/DeHansknoechelGooglemapsModule.m; sourceTree = "<group>"; };
+		24DD6CF71134B3F500162E58 /* TiGooglemapsModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsModule.h; path = Classes/TiGooglemapsModule.h; sourceTree = "<group>"; };
+		24DD6CF81134B3F500162E58 /* TiGooglemapsModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsModule.m; path = Classes/TiGooglemapsModule.m; sourceTree = "<group>"; };
 		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
-		24DE9E0F11C5FE74003F90F6 /* DeHansknoechelGooglemapsModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeHansknoechelGooglemapsModuleAssets.h; path = Classes/DeHansknoechelGooglemapsModuleAssets.h; sourceTree = "<group>"; };
-		24DE9E1011C5FE74003F90F6 /* DeHansknoechelGooglemapsModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeHansknoechelGooglemapsModuleAssets.m; path = Classes/DeHansknoechelGooglemapsModuleAssets.m; sourceTree = "<group>"; };
-		3A433EF01BE9AAF00005C8AE /* DeHansknoechelGooglemapsMarkerProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeHansknoechelGooglemapsMarkerProxy.h; path = Classes/DeHansknoechelGooglemapsMarkerProxy.h; sourceTree = "<group>"; };
-		3A433EF11BE9AAF00005C8AE /* DeHansknoechelGooglemapsMarkerProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeHansknoechelGooglemapsMarkerProxy.m; path = Classes/DeHansknoechelGooglemapsMarkerProxy.m; sourceTree = "<group>"; };
-		3A433EF41BE9AAFE0005C8AE /* DeHansknoechelGooglemapsMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeHansknoechelGooglemapsMapView.h; path = Classes/DeHansknoechelGooglemapsMapView.h; sourceTree = "<group>"; };
-		3A433EF51BE9AAFE0005C8AE /* DeHansknoechelGooglemapsMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeHansknoechelGooglemapsMapView.m; path = Classes/DeHansknoechelGooglemapsMapView.m; sourceTree = "<group>"; };
-		3A433EF61BE9AAFE0005C8AE /* DeHansknoechelGooglemapsMapViewProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeHansknoechelGooglemapsMapViewProxy.h; path = Classes/DeHansknoechelGooglemapsMapViewProxy.h; sourceTree = "<group>"; };
-		3A433EF71BE9AAFE0005C8AE /* DeHansknoechelGooglemapsMapViewProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeHansknoechelGooglemapsMapViewProxy.m; path = Classes/DeHansknoechelGooglemapsMapViewProxy.m; sourceTree = "<group>"; };
-		3A433EFC1BE9AB0C0005C8AE /* DeHansknoechelGooglemapsPolylineProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeHansknoechelGooglemapsPolylineProxy.h; path = Classes/DeHansknoechelGooglemapsPolylineProxy.h; sourceTree = "<group>"; };
-		3A433EFD1BE9AB0C0005C8AE /* DeHansknoechelGooglemapsPolylineProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeHansknoechelGooglemapsPolylineProxy.m; path = Classes/DeHansknoechelGooglemapsPolylineProxy.m; sourceTree = "<group>"; };
-		3A433F001BE9AB270005C8AE /* DeHansknoechelGooglemapsPolygonProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeHansknoechelGooglemapsPolygonProxy.h; path = Classes/DeHansknoechelGooglemapsPolygonProxy.h; sourceTree = "<group>"; };
-		3A433F011BE9AB270005C8AE /* DeHansknoechelGooglemapsPolygonProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeHansknoechelGooglemapsPolygonProxy.m; path = Classes/DeHansknoechelGooglemapsPolygonProxy.m; sourceTree = "<group>"; };
-		3A433F051BE9AE620005C8AE /* DeHansknoechelGooglemapsCircleProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeHansknoechelGooglemapsCircleProxy.h; path = Classes/DeHansknoechelGooglemapsCircleProxy.h; sourceTree = "<group>"; };
-		3A433F061BE9AE620005C8AE /* DeHansknoechelGooglemapsCircleProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeHansknoechelGooglemapsCircleProxy.m; path = Classes/DeHansknoechelGooglemapsCircleProxy.m; sourceTree = "<group>"; };
+		24DE9E0F11C5FE74003F90F6 /* TiGooglemapsModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsModuleAssets.h; path = Classes/TiGooglemapsModuleAssets.h; sourceTree = "<group>"; };
+		24DE9E1011C5FE74003F90F6 /* TiGooglemapsModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsModuleAssets.m; path = Classes/TiGooglemapsModuleAssets.m; sourceTree = "<group>"; };
+		3A433EF01BE9AAF00005C8AE /* TiGooglemapsMarkerProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsMarkerProxy.h; path = Classes/TiGooglemapsMarkerProxy.h; sourceTree = "<group>"; };
+		3A433EF11BE9AAF00005C8AE /* TiGooglemapsMarkerProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsMarkerProxy.m; path = Classes/TiGooglemapsMarkerProxy.m; sourceTree = "<group>"; };
+		3A433EF41BE9AAFE0005C8AE /* TiGooglemapsMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsMapView.h; path = Classes/TiGooglemapsMapView.h; sourceTree = "<group>"; };
+		3A433EF51BE9AAFE0005C8AE /* TiGooglemapsMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsMapView.m; path = Classes/TiGooglemapsMapView.m; sourceTree = "<group>"; };
+		3A433EF61BE9AAFE0005C8AE /* TiGooglemapsMapViewProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsMapViewProxy.h; path = Classes/TiGooglemapsMapViewProxy.h; sourceTree = "<group>"; };
+		3A433EF71BE9AAFE0005C8AE /* TiGooglemapsMapViewProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsMapViewProxy.m; path = Classes/TiGooglemapsMapViewProxy.m; sourceTree = "<group>"; };
+		3A433EFC1BE9AB0C0005C8AE /* TiGooglemapsPolylineProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsPolylineProxy.h; path = Classes/TiGooglemapsPolylineProxy.h; sourceTree = "<group>"; };
+		3A433EFD1BE9AB0C0005C8AE /* TiGooglemapsPolylineProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsPolylineProxy.m; path = Classes/TiGooglemapsPolylineProxy.m; sourceTree = "<group>"; };
+		3A433F001BE9AB270005C8AE /* TiGooglemapsPolygonProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsPolygonProxy.h; path = Classes/TiGooglemapsPolygonProxy.h; sourceTree = "<group>"; };
+		3A433F011BE9AB270005C8AE /* TiGooglemapsPolygonProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsPolygonProxy.m; path = Classes/TiGooglemapsPolygonProxy.m; sourceTree = "<group>"; };
+		3A433F051BE9AE620005C8AE /* TiGooglemapsCircleProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsCircleProxy.h; path = Classes/TiGooglemapsCircleProxy.h; sourceTree = "<group>"; };
+		3A433F061BE9AE620005C8AE /* TiGooglemapsCircleProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsCircleProxy.m; path = Classes/TiGooglemapsCircleProxy.m; sourceTree = "<group>"; };
 		3A7097E81BF1D5480044DBFB /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = platform/GoogleMaps.framework; sourceTree = "<group>"; };
-		3A7097EA1BF1D5830044DBFB /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = platform/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		3AF9009B1BC1ED7800172627 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		3AF9009C1BC1ED7800172627 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3AF9009D1BC1ED7800172627 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -112,9 +110,9 @@
 		3AF900C01BC1F05900172627 /* libicucore.A.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.A.dylib; path = ../../../../../../usr/lib/libicucore.A.dylib; sourceTree = "<group>"; };
 		3AF900C11BC1F05900172627 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = ../../../../../../usr/lib/libz.1.dylib; sourceTree = "<group>"; };
 		3AF900C51BC1F08200172627 /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "../../../../../../usr/lib/libc++.1.dylib"; sourceTree = "<group>"; };
-		AA747D9E0F9514B9006C5449 /* DeHansknoechelGooglemaps_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeHansknoechelGooglemaps_Prefix.pch; sourceTree = SOURCE_ROOT; };
+		AA747D9E0F9514B9006C5449 /* TiGooglemaps_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiGooglemaps_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		D2AAC07E0554694100DB518D /* libDeHansknoechelGooglemaps.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDeHansknoechelGooglemaps.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC07E0554694100DB518D /* libTiGooglemaps.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTiGooglemaps.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,7 +147,7 @@
 		034768DFFF38A50411DB9C8B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC07E0554694100DB518D /* libDeHansknoechelGooglemaps.a */,
+				D2AAC07E0554694100DB518D /* libTiGooglemaps.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -168,7 +166,6 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3A7097EA1BF1D5830044DBFB /* GoogleMaps.bundle */,
 				3A7097E81BF1D5480044DBFB /* GoogleMaps.framework */,
 				3AF9009B1BC1ED7800172627 /* Accelerate.framework */,
 				3AF9009C1BC1ED7800172627 /* AVFoundation.framework */,
@@ -211,7 +208,7 @@
 		32C88DFF0371C24200C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				AA747D9E0F9514B9006C5449 /* DeHansknoechelGooglemaps_Prefix.pch */,
+				AA747D9E0F9514B9006C5449 /* TiGooglemaps_Prefix.pch */,
 				24DD6D1B1134B66800162E58 /* titanium.xcconfig */,
 			);
 			name = "Other Sources";
@@ -230,8 +227,8 @@
 		3A28A4CA1BE920530004FCE9 /* Polyline */ = {
 			isa = PBXGroup;
 			children = (
-				3A433EFC1BE9AB0C0005C8AE /* DeHansknoechelGooglemapsPolylineProxy.h */,
-				3A433EFD1BE9AB0C0005C8AE /* DeHansknoechelGooglemapsPolylineProxy.m */,
+				3A433EFC1BE9AB0C0005C8AE /* TiGooglemapsPolylineProxy.h */,
+				3A433EFD1BE9AB0C0005C8AE /* TiGooglemapsPolylineProxy.m */,
 			);
 			name = Polyline;
 			sourceTree = "<group>";
@@ -239,8 +236,8 @@
 		3A433F041BE9AB2C0005C8AE /* Polygon */ = {
 			isa = PBXGroup;
 			children = (
-				3A433F001BE9AB270005C8AE /* DeHansknoechelGooglemapsPolygonProxy.h */,
-				3A433F011BE9AB270005C8AE /* DeHansknoechelGooglemapsPolygonProxy.m */,
+				3A433F001BE9AB270005C8AE /* TiGooglemapsPolygonProxy.h */,
+				3A433F011BE9AB270005C8AE /* TiGooglemapsPolygonProxy.m */,
 			);
 			name = Polygon;
 			sourceTree = "<group>";
@@ -248,8 +245,8 @@
 		3A433F091BE9AE650005C8AE /* Circle */ = {
 			isa = PBXGroup;
 			children = (
-				3A433F051BE9AE620005C8AE /* DeHansknoechelGooglemapsCircleProxy.h */,
-				3A433F061BE9AE620005C8AE /* DeHansknoechelGooglemapsCircleProxy.m */,
+				3A433F051BE9AE620005C8AE /* TiGooglemapsCircleProxy.h */,
+				3A433F061BE9AE620005C8AE /* TiGooglemapsCircleProxy.m */,
 			);
 			name = Circle;
 			sourceTree = "<group>";
@@ -257,8 +254,8 @@
 		3AF900D01BC2287A00172627 /* Module Asses */ = {
 			isa = PBXGroup;
 			children = (
-				24DE9E0F11C5FE74003F90F6 /* DeHansknoechelGooglemapsModuleAssets.h */,
-				24DE9E1011C5FE74003F90F6 /* DeHansknoechelGooglemapsModuleAssets.m */,
+				24DE9E0F11C5FE74003F90F6 /* TiGooglemapsModuleAssets.h */,
+				24DE9E1011C5FE74003F90F6 /* TiGooglemapsModuleAssets.m */,
 			);
 			name = "Module Asses";
 			sourceTree = "<group>";
@@ -267,8 +264,8 @@
 			isa = PBXGroup;
 			children = (
 				3AF900D01BC2287A00172627 /* Module Asses */,
-				24DD6CF71134B3F500162E58 /* DeHansknoechelGooglemapsModule.h */,
-				24DD6CF81134B3F500162E58 /* DeHansknoechelGooglemapsModule.m */,
+				24DD6CF71134B3F500162E58 /* TiGooglemapsModule.h */,
+				24DD6CF81134B3F500162E58 /* TiGooglemapsModule.m */,
 			);
 			name = Module;
 			sourceTree = "<group>";
@@ -276,10 +273,10 @@
 		3AF900D31BC2289C00172627 /* Map View */ = {
 			isa = PBXGroup;
 			children = (
-				3A433EF41BE9AAFE0005C8AE /* DeHansknoechelGooglemapsMapView.h */,
-				3A433EF51BE9AAFE0005C8AE /* DeHansknoechelGooglemapsMapView.m */,
-				3A433EF61BE9AAFE0005C8AE /* DeHansknoechelGooglemapsMapViewProxy.h */,
-				3A433EF71BE9AAFE0005C8AE /* DeHansknoechelGooglemapsMapViewProxy.m */,
+				3A433EF41BE9AAFE0005C8AE /* TiGooglemapsMapView.h */,
+				3A433EF51BE9AAFE0005C8AE /* TiGooglemapsMapView.m */,
+				3A433EF61BE9AAFE0005C8AE /* TiGooglemapsMapViewProxy.h */,
+				3A433EF71BE9AAFE0005C8AE /* TiGooglemapsMapViewProxy.m */,
 			);
 			name = "Map View";
 			sourceTree = "<group>";
@@ -287,8 +284,8 @@
 		3AF900D41BC228C300172627 /* Marker */ = {
 			isa = PBXGroup;
 			children = (
-				3A433EF01BE9AAF00005C8AE /* DeHansknoechelGooglemapsMarkerProxy.h */,
-				3A433EF11BE9AAF00005C8AE /* DeHansknoechelGooglemapsMarkerProxy.m */,
+				3A433EF01BE9AAF00005C8AE /* TiGooglemapsMarkerProxy.h */,
+				3A433EF11BE9AAF00005C8AE /* TiGooglemapsMarkerProxy.m */,
 			);
 			name = Marker;
 			sourceTree = "<group>";
@@ -300,15 +297,15 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A433F021BE9AB270005C8AE /* DeHansknoechelGooglemapsPolygonProxy.h in Headers */,
-				3A433EFA1BE9AAFE0005C8AE /* DeHansknoechelGooglemapsMapViewProxy.h in Headers */,
-				AA747D9F0F9514B9006C5449 /* DeHansknoechelGooglemaps_Prefix.pch in Headers */,
-				3A433EF21BE9AAF00005C8AE /* DeHansknoechelGooglemapsMarkerProxy.h in Headers */,
-				24DD6CF91134B3F500162E58 /* DeHansknoechelGooglemapsModule.h in Headers */,
-				3A433F071BE9AE620005C8AE /* DeHansknoechelGooglemapsCircleProxy.h in Headers */,
-				3A433EFE1BE9AB0C0005C8AE /* DeHansknoechelGooglemapsPolylineProxy.h in Headers */,
-				3A433EF81BE9AAFE0005C8AE /* DeHansknoechelGooglemapsMapView.h in Headers */,
-				24DE9E1111C5FE74003F90F6 /* DeHansknoechelGooglemapsModuleAssets.h in Headers */,
+				3A433F021BE9AB270005C8AE /* TiGooglemapsPolygonProxy.h in Headers */,
+				3A433EFA1BE9AAFE0005C8AE /* TiGooglemapsMapViewProxy.h in Headers */,
+				AA747D9F0F9514B9006C5449 /* TiGooglemaps_Prefix.pch in Headers */,
+				3A433EF21BE9AAF00005C8AE /* TiGooglemapsMarkerProxy.h in Headers */,
+				24DD6CF91134B3F500162E58 /* TiGooglemapsModule.h in Headers */,
+				3A433F071BE9AE620005C8AE /* TiGooglemapsCircleProxy.h in Headers */,
+				3A433EFE1BE9AB0C0005C8AE /* TiGooglemapsPolylineProxy.h in Headers */,
+				3A433EF81BE9AAFE0005C8AE /* TiGooglemapsMapView.h in Headers */,
+				24DE9E1111C5FE74003F90F6 /* TiGooglemapsModuleAssets.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,7 +326,7 @@
 			);
 			name = ti.googlemaps;
 			productName = ti.googlemaps;
-			productReference = D2AAC07E0554694100DB518D /* libDeHansknoechelGooglemaps.a */;
+			productReference = D2AAC07E0554694100DB518D /* libTiGooglemaps.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -382,15 +379,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A049B431BF3A5F30027DDBB /* GoogleMaps.bundle in Sources */,
-				24DD6CFA1134B3F500162E58 /* DeHansknoechelGooglemapsModule.m in Sources */,
-				24DE9E1211C5FE74003F90F6 /* DeHansknoechelGooglemapsModuleAssets.m in Sources */,
-				3A433F031BE9AB270005C8AE /* DeHansknoechelGooglemapsPolygonProxy.m in Sources */,
-				3A433EF91BE9AAFE0005C8AE /* DeHansknoechelGooglemapsMapView.m in Sources */,
-				3A433EFF1BE9AB0C0005C8AE /* DeHansknoechelGooglemapsPolylineProxy.m in Sources */,
-				3A433EFB1BE9AAFE0005C8AE /* DeHansknoechelGooglemapsMapViewProxy.m in Sources */,
-				3A433F081BE9AE620005C8AE /* DeHansknoechelGooglemapsCircleProxy.m in Sources */,
-				3A433EF31BE9AAF00005C8AE /* DeHansknoechelGooglemapsMarkerProxy.m in Sources */,
+				24DD6CFA1134B3F500162E58 /* TiGooglemapsModule.m in Sources */,
+				24DE9E1211C5FE74003F90F6 /* TiGooglemapsModuleAssets.m in Sources */,
+				3A433F031BE9AB270005C8AE /* TiGooglemapsPolygonProxy.m in Sources */,
+				3A433EF91BE9AAFE0005C8AE /* TiGooglemapsMapView.m in Sources */,
+				3A433EFF1BE9AB0C0005C8AE /* TiGooglemapsPolylineProxy.m in Sources */,
+				3A433EFB1BE9AAFE0005C8AE /* TiGooglemapsMapViewProxy.m in Sources */,
+				3A433F081BE9AE620005C8AE /* TiGooglemapsCircleProxy.m in Sources */,
+				3A433EF31BE9AAF00005C8AE /* TiGooglemapsMarkerProxy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,7 +407,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DSTROOT = /tmp/DeHansknoechelGooglemaps.dst;
+				DSTROOT = /tmp/TiGooglemaps.dst;
 				ENABLE_TESTABILITY = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -422,7 +418,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = DeHansknoechelGooglemaps_Prefix.pch;
+				GCC_PREFIX_HEADER = TiGooglemaps_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_VERSION = "";
@@ -442,7 +438,7 @@
 					"-DTI_POST_1_2",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = DeHansknoechelGooglemaps;
+				PRODUCT_NAME = TiGooglemaps;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = NO;
@@ -456,7 +452,7 @@
 			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				DSTROOT = /tmp/DeHansknoechelGooglemaps.dst;
+				DSTROOT = /tmp/TiGooglemaps.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoogleMaps/Frameworks",
@@ -466,7 +462,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = DeHansknoechelGooglemaps_Prefix.pch;
+				GCC_PREFIX_HEADER = TiGooglemaps_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_VERSION = "";
@@ -483,7 +479,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = "-DTI_POST_1_2";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = DeHansknoechelGooglemaps;
+				PRODUCT_NAME = TiGooglemaps;
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -497,7 +493,7 @@
 				CLANG_CXX_LIBRARY = "libstdc++";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DSTROOT = /tmp/DeHansknoechelGooglemaps.dst;
+				DSTROOT = /tmp/TiGooglemaps.dst;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -508,7 +504,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = DeHansknoechelGooglemaps_Prefix.pch;
+				GCC_PREFIX_HEADER = TiGooglemaps_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_VERSION = "";
@@ -527,7 +523,7 @@
 					"-DTI_POST_1_2",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = DeHansknoechelGooglemaps;
+				PRODUCT_NAME = TiGooglemaps;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = NO;
@@ -543,7 +539,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LIBRARY = "libstdc++";
-				DSTROOT = /tmp/DeHansknoechelGooglemaps.dst;
+				DSTROOT = /tmp/TiGooglemaps.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoogleMaps/Frameworks",
@@ -553,7 +549,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = DeHansknoechelGooglemaps_Prefix.pch;
+				GCC_PREFIX_HEADER = TiGooglemaps_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_VERSION = "";
@@ -569,7 +565,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DTI_POST_1_2";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = DeHansknoechelGooglemaps;
+				PRODUCT_NAME = TiGooglemaps;
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";

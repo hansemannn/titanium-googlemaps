@@ -4,14 +4,12 @@
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
-#import "TiProxy.h"
+#import "TiUIView.h"
 #import <GoogleMaps/GoogleMaps.h>
-#import "TiUtils.h"
+#import "TiGooglemapsMapView.h"
 
-@interface DeHansknoechelGooglemapsCircleProxy : TiProxy
+@interface TiGooglemapsMapView : TiUIView<GMSMapViewDelegate>
 
-@property(nonatomic,retain) GMSCircle *circle;
-
-@property(nonatomic,retain) GMSMutablePath *path;
+@property(nonatomic,retain) GMSMapView *mapView;
 
 @end

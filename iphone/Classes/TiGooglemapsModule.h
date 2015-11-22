@@ -6,11 +6,9 @@
  */
 
 #import "TiModule.h"
-#import "DeHansknoechelGooglemapsMarkerProxy.h"
+#import "TiGooglemapsMarkerProxy.h"
 
-@interface DeHansknoechelGooglemapsModule : TiModule {
-
-}
+@interface TiGooglemapsModule : TiModule
 
 -(void)setAPIKey:(id)value;
 -(NSString*)version;

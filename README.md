@@ -23,23 +23,25 @@ Download + Setup
 
 ### Download
   * [Stable release](https://github.com/hansemannn/Ti.GoogleMaps/releases)
-  * Install from gitTio    [![gitTio](http://gitt.io/badge.png)](http://gitt.io/component/de.hansknoechel.googlemaps)
+  * Install from gitTio    [![gitTio](http://gitt.io/badge.png)](http://gitt.io/component/ti.googlemaps)
 
 ### Setup
 Unpack the module and place it inside the ``/modules/iphone`` folder of your project.
 Edit the modules section of your ``tiapp.xml`` file to include this module:
 ```xml
 <modules>
-    <module platform="iphone">de.hansknoechel.googlemaps</module>
+    <module platform="iphone">ti.googlemaps</module>
 </modules>
 ```
 
-> **NOTE:** For now, you need to copy the ``GoogleMaps.bundle`` from ``<PROJECT_ROOT>/modules/de.hansknoechel.googlemaps/<VERSION>/platform``
+> **NOTE:** The module id changed from ``de.hansknoechel.googlemaps`` to ``ti.googlemaps`` in 2.0.0 to make it easier to include the module.
+
+> **NOTE:** For now, you need to copy the ``GoogleMaps.bundle`` from ``<PROJECT_ROOT>/modules/ti.googlemaps/<VERSION>/platform``
 to ``<PROJECT_ROOT>/platform/iphone`` to make the module run. This only needs to be done the first time you install the module.
 We are working to get this done automatically.
 
 Initialize the module by setting the Google Maps API key you can get from [here](https://developers.google.com/maps/signup).
-```javascriipt
+```javascript
 var maps = require("de.hansknoechel.googlemaps");
 maps.setAPIKey("<YOUR_API_KEY>");
 ```

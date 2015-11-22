@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D2AAC07D0554694100DB518D"
-               BuildableName = "libDeHansknoechelGooglemaps.a"
+               BuildableName = "libTiGooglemaps.a"
                BlueprintName = "ti.googlemaps"
                ReferencedContainer = "container:ti.googlemaps.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D2AAC07D0554694100DB518D"
-            BuildableName = "libDeHansknoechelGooglemaps.a"
+            BuildableName = "libTiGooglemaps.a"
             BlueprintName = "ti.googlemaps"
             ReferencedContainer = "container:ti.googlemaps.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D2AAC07D0554694100DB518D"
-            BuildableName = "libDeHansknoechelGooglemaps.a"
+            BuildableName = "libTiGooglemaps.a"
             BlueprintName = "ti.googlemaps"
             ReferencedContainer = "container:ti.googlemaps.xcodeproj">
          </BuildableReference>

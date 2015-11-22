@@ -5,17 +5,17 @@
  * Please see the LICENSE included with this distribution for details.
  */
 
-#import "DeHansknoechelGooglemapsPolylineProxy.h"
+#import "TiGooglemapsPolygonProxy.h"
 
-@implementation DeHansknoechelGooglemapsPolylineProxy
+@implementation TiGooglemapsPolygonProxy
 
-@synthesize polyline = _polyline, path = _path;
+@synthesize polygon = _polygon, path = _path;
 
--(GMSPolyline*)polyline
+-(GMSPolygon*)polygon
 {
-    if (_polyline == nil) {
+    if (_polygon == nil) {
         [self setPath:[GMSMutablePath path]];
-        [self setPolyline:[GMSPolyline polylineWithPath:_path]];
+        [self setPolygon:[GMSPolygon polygonWithPath:_path]];
     
         id points = [self valueForKey:@"points"];
         
@@ -23,8 +23,8 @@
         
         if (points != nil) {
             if ([points count] < 2) {
-                NSLog(@"[WARN] GoogleMaps: You need to specify at least 2 points to create a polyline");
-                return _polyline;
+                NSLog(@"[WARN] GoogleMaps: You need to specify at least 2 points to create a polygon");
+                return _polygon;
             }
             
             for(id point in points) {
@@ -43,13 +43,15 @@
             }
         }
         
-        _polyline.path = self.path;
-        _polyline.strokeColor = [[TiUtils colorValue:[self valueForKey:@"strokeColor"]] _color];
-        _polyline.strokeWidth = [TiUtils floatValue:[self valueForKey:@"strokeWidth"] def:1];
-        _polyline.geodesic = [TiUtils boolValue:[self valueForKey:@"geodesic"] def:NO];
+        _polygon.path = self.path;
+        _polygon.fillColor = [[TiUtils colorValue:[self valueForKey:@"fillColor"]] _color];
+        _polygon.strokeColor = [[TiUtils colorValue:[self valueForKey:@"strokeColor"]] _color];
+        _polygon.strokeWidth = [TiUtils floatValue:[self valueForKey:@"strokeWidth"] def:1];
+        _polygon.geodesic = [TiUtils boolValue:[self valueForKey:@"geodesic"] def:NO];
+
     }
     
-    return _polyline;
+    return _polygon;
 }
 
 @end

@@ -5,14 +5,14 @@
  * Copyright (c) 2015 Your Company. All rights reserved.
  */
 
-#import "DeHansknoechelGooglemapsModule.h"
 #import "TiBase.h"
 #import "TiHost.h"
 #import "TiUtils.h"
-#import "DeHansknoechelGooglemapsMapViewProxy.h"
+#import "TiGooglemapsModule.h"
+#import "TiGooglemapsMapViewProxy.h"
 #import <GoogleMaps/GoogleMaps.h>
 
-@implementation DeHansknoechelGooglemapsModule
+@implementation TiGooglemapsModule
 
 #pragma mark Internal
 

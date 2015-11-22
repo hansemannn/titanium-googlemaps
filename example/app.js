@@ -1,6 +1,6 @@
 var win = Ti.UI.createWindow();
-var maps = require("de.hansknoechel.googlemaps");
-maps.setAPIKey("AIzaSyD3aXswuFfGmyfFEpuoBn2pFu4UY0TKdgc");
+var maps = require("tigooglemaps");
+maps.setAPIKey("<YOUR_GOOGLE_MAPS_API_KEY>");
 
 /*
  *  Test data

@@ -1,11 +1,11 @@
 /**
  * This is a generated file. Do not edit or your changes will be lost
  */
-#import "DeHansknoechelGooglemapsModuleAssets.h"
+#import "TiGooglemapsModuleAssets.h"
 
 extern NSData* filterDataInRange(NSData* thedata, NSRange range);
 
-@implementation DeHansknoechelGooglemapsModuleAssets
+@implementation TiGooglemapsModuleAssets
 
 - (NSData*) moduleAsset
 {

@@ -8,9 +8,9 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "TiUtils.h"
 
-@interface DeHansknoechelGooglemapsPolylineProxy : TiProxy
+@interface TiGooglemapsCircleProxy : TiProxy
 
-@property(nonatomic,retain) GMSPolyline *polyline;
+@property(nonatomic,retain) GMSCircle *circle;
 
 @property(nonatomic,retain) GMSMutablePath *path;
 

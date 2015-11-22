@@ -5,10 +5,10 @@
  * Please see the LICENSE included with this distribution for details.
  */
 #import "TiViewProxy.h"
-#import "DeHansknoechelGooglemapsMapView.h"
+#import "TiGooglemapsMapView.h"
 
-@interface DeHansknoechelGooglemapsMapViewProxy : TiViewProxy<GMSMapViewDelegate> {
-    DeHansknoechelGooglemapsMapView* mapView;
+@interface TiGooglemapsMapViewProxy : TiViewProxy<GMSMapViewDelegate> {
+    TiGooglemapsMapViewProxy* mapView;
 }
 
 -(void)setMapView:(GMSMapView*)mapView;

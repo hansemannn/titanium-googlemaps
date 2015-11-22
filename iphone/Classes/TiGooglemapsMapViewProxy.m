@@ -5,18 +5,18 @@
  * Please see the LICENSE included with this distribution for details.
  */
 
-#import "DeHansknoechelGooglemapsMapViewProxy.h"
-#import "DeHansknoechelGooglemapsMarkerProxy.h"
-#import "DeHansknoechelGooglemapsPolylineProxy.h"
-#import "DeHansknoechelGooglemapsPolygonProxy.h"
-#import "DeHansknoechelGooglemapsCircleProxy.h"
+#import "TiGooglemapsMapViewProxy.h"
+#import "TiGooglemapsMarkerProxy.h"
+#import "TiGooglemapsPolylineProxy.h"
+#import "TiGooglemapsPolygonProxy.h"
+#import "TiGooglemapsCircleProxy.h"
 #import "TiUtils.h"
 
-@implementation DeHansknoechelGooglemapsMapViewProxy
+@implementation TiGooglemapsMapViewProxy
 
--(DeHansknoechelGooglemapsMapView*)mapView
+-(TiGooglemapsMapView*)mapView
 {
-    return (DeHansknoechelGooglemapsMapView*)[self view];
+    return (TiGooglemapsMapView*)[self view];
 }
 
 -(void)setMapView:(GMSMapView*)_mapView
@@ -28,9 +28,9 @@
 
 -(void)addMarker:(id)args
 {
-    DeHansknoechelGooglemapsMarkerProxy *marker = [args objectAtIndex:0];
+    TiGooglemapsMarkerProxy *marker = [args objectAtIndex:0];
     
-    ENSURE_TYPE(marker, DeHansknoechelGooglemapsMarkerProxy);
+    ENSURE_TYPE(marker, TiGooglemapsMarkerProxy);
     ENSURE_UI_THREAD_1_ARG(args);
     
     [[marker marker] setMap:[[self mapView] mapView]];
@@ -43,16 +43,16 @@
     ENSURE_TYPE(markers, NSArray);
     ENSURE_UI_THREAD_1_ARG(args);
     
-    for(DeHansknoechelGooglemapsMarkerProxy *marker in markers) {
+    for(TiGooglemapsMarkerProxy *marker in markers) {
         [[marker marker] setMap:[[self mapView] mapView]];
     }
 }
 
 -(void)removeMarker:(id)args
 {
-    DeHansknoechelGooglemapsMarkerProxy *marker = [args objectAtIndex:0];
+    TiGooglemapsMarkerProxy *marker = [args objectAtIndex:0];
     
-    ENSURE_TYPE(marker, DeHansknoechelGooglemapsMarkerProxy);
+    ENSURE_TYPE(marker, TiGooglemapsMarkerProxy);
     ENSURE_UI_THREAD_1_ARG(args);
     
     [[marker marker] setMap:nil];
@@ -63,7 +63,7 @@
     id polyline = [args objectAtIndex:0];
     
     ENSURE_UI_THREAD_1_ARG(args);
-    ENSURE_TYPE(polyline, DeHansknoechelGooglemapsPolylineProxy);
+    ENSURE_TYPE(polyline, TiGooglemapsPolylineProxy);
     
     [[polyline polyline] setMap:[[self mapView] mapView]];
 }
@@ -73,7 +73,7 @@
     id polyline = [args objectAtIndex:0];
     
     ENSURE_UI_THREAD_1_ARG(args);
-    ENSURE_TYPE(polyline, DeHansknoechelGooglemapsPolylineProxy);
+    ENSURE_TYPE(polyline, TiGooglemapsPolylineProxy);
     
     [[polyline polyline] setMap:nil];
 }
@@ -83,7 +83,7 @@
     id polygon = [args objectAtIndex:0];
     
     ENSURE_UI_THREAD_1_ARG(args);
-    ENSURE_TYPE(polygon, DeHansknoechelGooglemapsPolygonProxy);
+    ENSURE_TYPE(polygon, TiGooglemapsPolygonProxy);
     
     [[polygon polygon] setMap:[[self mapView] mapView]];
 }
@@ -93,7 +93,7 @@
     id polygon = [args objectAtIndex:0];
     
     ENSURE_UI_THREAD_1_ARG(args);
-    ENSURE_TYPE(polygon, DeHansknoechelGooglemapsPolygonProxy);
+    ENSURE_TYPE(polygon, TiGooglemapsPolygonProxy);
     
     [[polygon polygon] setMap:nil];
 }
@@ -103,7 +103,7 @@
     id circle = [args objectAtIndex:0];
     
     ENSURE_UI_THREAD_1_ARG(args);
-    ENSURE_TYPE(circle, DeHansknoechelGooglemapsCircleProxy);
+    ENSURE_TYPE(circle, TiGooglemapsCircleProxy);
     
     [[circle circle] setMap:[[self mapView] mapView]];
 }
@@ -113,7 +113,7 @@
     id circle = [args objectAtIndex:0];
     
     ENSURE_UI_THREAD_1_ARG(args);
-    ENSURE_TYPE(circle, DeHansknoechelGooglemapsCircleProxy);
+    ENSURE_TYPE(circle, TiGooglemapsCircleProxy);
     
     [[circle circle] setMap:nil];
 }

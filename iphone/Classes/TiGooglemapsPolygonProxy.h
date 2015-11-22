@@ -4,13 +4,14 @@
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
-#import "TiViewProxy.h"
+#import "TiProxy.h"
 #import <GoogleMaps/GoogleMaps.h>
+#import "TiUtils.h"
 
-@interface DeHansknoechelGooglemapsMarkerProxy : TiProxy<GMSMapViewDelegate> 
+@interface TiGooglemapsPolygonProxy : TiProxy
 
-@property(nonatomic,retain) GMSMarker *marker;
+@property(nonatomic,retain) GMSPolygon *polygon;
 
--(void)setMarker:(GMSMarker*)marker;
+@property(nonatomic,retain) GMSMutablePath *path;
 
 @end

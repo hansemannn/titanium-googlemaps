@@ -5,10 +5,10 @@
  * Please see the LICENSE included with this distribution for details.
  */
 
-#import "DeHansknoechelGooglemapsMarkerProxy.h"
+#import "TiGooglemapsMarkerProxy.h"
 #import "TiUtils.h"
 
-@implementation DeHansknoechelGooglemapsMarkerProxy
+@implementation TiGooglemapsMarkerProxy
 
 @synthesize marker = _marker;
 

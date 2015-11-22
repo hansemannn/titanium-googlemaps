@@ -5,11 +5,11 @@
  * Please see the LICENSE included with this distribution for details.
  */
 
-#import "DeHansknoechelGooglemapsMapView.h"
-#import "DeHansknoechelGooglemapsMarkerProxy.h"
-#import "DeHansknoechelGooglemapsMapViewProxy.h"
+#import "TiGooglemapsMapView.h"
+#import "TiGooglemapsMarkerProxy.h"
+#import "TiGooglemapsMapViewProxy.h"
 
-@implementation DeHansknoechelGooglemapsMapView
+@implementation TiGooglemapsMapView
 
 @synthesize mapView = _mapView;
 
@@ -195,7 +195,7 @@
 - (BOOL)didTapMyLocationButtonForMapView:(GMSMapView *)mapView
 {
     if ([[self proxy] _hasListeners:@"locationclick"]) {
-        DeHansknoechelGooglemapsMapViewProxy *mapViewProxy = [[DeHansknoechelGooglemapsMapViewProxy alloc] init];
+        TiGooglemapsMapViewProxy *mapViewProxy = [[TiGooglemapsMapViewProxy alloc] init];
         [mapViewProxy setMapView:mapView];
 
         NSDictionary *event = @{
@@ -236,7 +236,7 @@
         return @{};
     }
     
-    DeHansknoechelGooglemapsMapViewProxy *mapViewProxy = [[DeHansknoechelGooglemapsMapViewProxy alloc] init];
+    TiGooglemapsMapViewProxy *mapViewProxy = [[TiGooglemapsMapViewProxy alloc] init];
     [mapViewProxy setMapView:[overlay map]];
     
     return @{
@@ -247,13 +247,13 @@
     };
 }
 
--(DeHansknoechelGooglemapsMarkerProxy*)markerProxyFromMarker:(GMSMarker*)marker
+-(TiGooglemapsMarkerProxy*)markerProxyFromMarker:(GMSMarker*)marker
 {
     if (marker == nil) {
         return nil;
     }
     
-    DeHansknoechelGooglemapsMarkerProxy* markerProxy = [[DeHansknoechelGooglemapsMarkerProxy alloc] init];
+    TiGooglemapsMarkerProxy* markerProxy = [[TiGooglemapsMarkerProxy alloc] init];
     [markerProxy setMarker:marker];
     
     return markerProxy;
