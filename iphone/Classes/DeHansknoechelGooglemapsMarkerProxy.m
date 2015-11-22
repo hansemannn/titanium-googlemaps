@@ -98,7 +98,7 @@
 -(void)setDraggable:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
-    [[self marker] setDraggable:[TiUtils boolValue:value def:YES]];
+    [[self marker] setDraggable:[TiUtils boolValue:value def:NO]];
 }
 
 -(NSNumber*)draggable

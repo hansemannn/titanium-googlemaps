@@ -225,7 +225,8 @@ def package_module(manifest,mf,config):
 	zf.write(mf,'%s/manifest' % modulepath)
 	libname = 'lib%s.a' % moduleid
 	zf.write('build/%s' % libname, '%s/%s' % (modulepath,libname))
-	docs = generate_doc(config)
+	# Currently no manual docs existing
+	docs = None
 	if docs!=None:
 		for doc in docs:
 			for file, html in doc.iteritems():
