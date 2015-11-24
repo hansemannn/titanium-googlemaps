@@ -36,13 +36,11 @@ Edit the modules section of your ``tiapp.xml`` file to include this module:
 
 > **NOTE:** The module id changed from ``de.hansknoechel.googlemaps`` to ``ti.googlemaps`` in 2.0.0 to make it easier to include the module.
 
-> **NOTE:** For now, you need to copy the ``GoogleMaps.bundle`` from ``<PROJECT_ROOT>/modules/ti.googlemaps/<VERSION>/platform``
-to ``<PROJECT_ROOT>/platform/iphone`` to make the module run. This only needs to be done the first time you install the module.
-We are working to get this done automatically.
+> **NOTE:** Starting from 2.0.1, the ``GoogleMaps.bundle`` does NOT needs to be copied manually anymore to make the module run. :-)
 
 Initialize the module by setting the Google Maps API key you can get from [here](https://developers.google.com/maps/signup).
 ```javascript
-var maps = require("de.hansknoechel.googlemaps");
+var maps = require("ti.googlemaps");
 maps.setAPIKey("<YOUR_API_KEY>");
 ```
 

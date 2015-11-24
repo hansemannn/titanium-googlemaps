@@ -23,7 +23,7 @@
 
 -(NSString*)moduleId
 {
-	return @"de.hansknoechel.googlemaps";
+	return @"ti.googlemaps";
 }
 
 #pragma mark Lifecycle

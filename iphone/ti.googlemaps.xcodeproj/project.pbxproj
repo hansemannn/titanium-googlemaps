@@ -39,7 +39,7 @@
 		3A433F071BE9AE620005C8AE /* TiGooglemapsCircleProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A433F051BE9AE620005C8AE /* TiGooglemapsCircleProxy.h */; };
 		3A433F081BE9AE620005C8AE /* TiGooglemapsCircleProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A433F061BE9AE620005C8AE /* TiGooglemapsCircleProxy.m */; };
 		3A7097E21BF1CD9B0044DBFB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900A31BC1ED7800172627 /* ImageIO.framework */; };
-		3A7097E91BF1D5480044DBFB /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A7097E81BF1D5480044DBFB /* GoogleMaps.framework */; };
+		3A9E65AC1C04F9B700C26CF0 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9E65AB1C04F9B700C26CF0 /* GoogleMaps.framework */; };
 		3AF900AB1BC1ED7800172627 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF9009B1BC1ED7800172627 /* Accelerate.framework */; };
 		3AF900AC1BC1ED7800172627 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF9009C1BC1ED7800172627 /* AVFoundation.framework */; };
 		3AF900AD1BC1ED7800172627 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF9009D1BC1ED7800172627 /* CoreBluetooth.framework */; };
@@ -87,7 +87,7 @@
 		3A433F011BE9AB270005C8AE /* TiGooglemapsPolygonProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsPolygonProxy.m; path = Classes/TiGooglemapsPolygonProxy.m; sourceTree = "<group>"; };
 		3A433F051BE9AE620005C8AE /* TiGooglemapsCircleProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsCircleProxy.h; path = Classes/TiGooglemapsCircleProxy.h; sourceTree = "<group>"; };
 		3A433F061BE9AE620005C8AE /* TiGooglemapsCircleProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsCircleProxy.m; path = Classes/TiGooglemapsCircleProxy.m; sourceTree = "<group>"; };
-		3A7097E81BF1D5480044DBFB /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = platform/GoogleMaps.framework; sourceTree = "<group>"; };
+		3A9E65AB1C04F9B700C26CF0 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = platform/ios/GoogleMaps.framework; sourceTree = "<group>"; };
 		3AF9009B1BC1ED7800172627 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		3AF9009C1BC1ED7800172627 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3AF9009D1BC1ED7800172627 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -137,7 +137,7 @@
 				3AF900BA1BC1ED7800172627 /* SystemConfiguration.framework in Frameworks */,
 				3A7097E21BF1CD9B0044DBFB /* ImageIO.framework in Frameworks */,
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
-				3A7097E91BF1D5480044DBFB /* GoogleMaps.framework in Frameworks */,
+				3A9E65AC1C04F9B700C26CF0 /* GoogleMaps.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,7 +166,7 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3A7097E81BF1D5480044DBFB /* GoogleMaps.framework */,
+				3A9E65AB1C04F9B700C26CF0 /* GoogleMaps.framework */,
 				3AF9009B1BC1ED7800172627 /* Accelerate.framework */,
 				3AF9009C1BC1ED7800172627 /* AVFoundation.framework */,
 				3AF9009D1BC1ED7800172627 /* CoreBluetooth.framework */,
@@ -414,6 +414,7 @@
 					"$(PROJECT_DIR)/GoogleMaps/Frameworks",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/platform",
+					"$(PROJECT_DIR)/platform/ios",
 				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -458,6 +459,7 @@
 					"$(PROJECT_DIR)/GoogleMaps/Frameworks",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/platform",
+					"$(PROJECT_DIR)/platform/ios",
 				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_MODEL_TUNING = G5;
