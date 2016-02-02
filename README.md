@@ -77,7 +77,9 @@ var marker = maps.createMarker({
 	icon: "pin.png", // Default: null
 	tappable: true, // Default: true
 	draggable: true, // Default: false
-	flat: true, // Default: false
+	flat: true, // Default: false,
+	groundAnchor: {x:0.5, y:0.5}, // center of rotation
+	rotation: 90,
 	userData: { // Default: null
 	    id: 123,
 	    custom_key: "custom_value"
