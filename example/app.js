@@ -10,7 +10,9 @@ var companies = {
         title: "Appcelerator",
         city: "San Jose, CA",
         latitude: 37.368122,
-        longitude: -121.913653
+        longitude: -121.913653,
+		groundAnchor: {x:0.5, y:0.5},
+        rotation: 90
     },
     apple: {
         title: "Apple",
