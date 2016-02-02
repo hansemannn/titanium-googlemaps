@@ -95,6 +95,23 @@
     return NUMBOOL([[self marker] isFlat]);
 }
 
+-(void)setGroundAnchor:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    [_marker setGroundAnchor:CGPointMake([TiUtils doubleValue:[value valueForKey:@"x"]],[TiUtils doubleValue:[value valueForKey:@"y"]])];
+}
+
+-(void)setRotation:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    [[self marker] setRotation:[TiUtils doubleValue:value def:0]];
+}
+
+-(NSNumber*)rotation
+{
+    return NUMBOOL([[self marker] rotation]);
+}
+
 -(void)setDraggable:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
