@@ -1,5 +1,5 @@
 var win = Ti.UI.createWindow();
-var maps = require("tigooglemaps");
+var maps = require("ti.googlemaps");
 maps.setAPIKey("<YOUR_GOOGLE_MAPS_API_KEY>");
 
 /*
@@ -15,8 +15,8 @@ var companies = {
     apple: {
         title: "Apple",
         city: "Cupertino, CA",
-        latitude: 37.4028218,
-        longitude: -122.1675878
+        latitude: 37.331711,
+        longitude: -122.030184
     },
     facebook: {
         title: "Facebook",

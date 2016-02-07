@@ -56,12 +56,12 @@ A map view creates the view on which marker and overlays can be added to. You ca
 
 ```javascript
 var mapView = maps.createMapView({
-  mapType: maps.MAP_TYPE_TERRAIN,
-  camera: { // Camera center of the map
-    latitude: 37.368122,
-    longitude: -121.913653,
-    zoom: 10 // Zoom in points
-  }
+    mapType: maps.MAP_TYPE_TERRAIN,
+    camera: { // Camera center of the map
+        latitude: 37.368122,
+        longitude: -121.913653,
+        zoom: 10 // Zoom in points
+    }
 });
 ```
 
@@ -70,18 +70,22 @@ A marker represents a location specified by at least a ``title`` and a ``snippet
 
 ```javascript
 var marker = maps.createMarker({
-	latitude : 37.368122,
-	longitude : -121.913653,
-	title : "Appcelerator, Inc",
-	snippet : "1732 N. 1st Street, San Jose",
-	icon: "pin.png", // Default: null
-	tappable: true, // Default: true
-	draggable: true, // Default: false
-	flat: true, // Default: false
-	userData: { // Default: null
-	    id: 123,
-	    custom_key: "custom_value"
-	}
+    latitude : 37.368122,
+    longitude : -121.913653,
+    title : "Appcelerator, Inc",
+    snippet : "1732 N. 1st Street, San Jose",
+    icon: "pin.png", // Default: null
+    tappable: true, // Default: true
+    draggable: true, // Default: false
+    flat: true, // Default: false
+    infoWindowAnchor: { // Default: {x:0,y:0}
+        x: 0.5,
+        y: 0
+    },
+    userData: { // Default: undefined
+        id: 123,
+        custom_key: "custom_value"
+    }
 });
 mapView.addMarker(marker);
 ```
@@ -100,12 +104,12 @@ A polyline is a shape defined by its ``points`` property. It needs at least 2 po
 
 ```javascript
 var polyline = maps.createPolyline({
-	points : [{ // Can handle both object and array
-		latitude : -37.81319,
-		longitude : 144.96298
-	}, [-31.95285, 115.85734]],
-	strokeWidth : 3, // Default: 1
-	strokeColor : "#f00"  // Default: Black (#000000)
+    points : [{ // Can handle both object and array
+        latitude : -37.81319,
+	    longitude : 144.96298
+    }, [-31.95285, 115.85734]],
+    strokeWidth : 3, // Default: 1
+    strokeColor : "#f00"  // Default: Black (#000000)
 });
 mapView.addPolyline(polyline);
 ```
@@ -115,15 +119,15 @@ A polygon is a shape defined by its ``points`` property. It behaves similiar to 
 
 ```javascript
 var polygon = maps.createPolygon({
-	points : [{ // Can handle both object and array
-		latitude : -37.81819,
-		longitude : 144.96798
-	},
-	[-32.95785, 115.86234],
-	[-33.91785, 115.82234]],
-	strokeWidth : 3,
-	fillColor : "yellow", // Default: Blue (#0000ff)
-	strokeColor : "green"
+    points : [{ // Can handle both object and array
+        latitude : -37.81819,
+        longitude : 144.96798
+    },
+    [-32.95785, 115.86234],
+    [-33.91785, 115.82234]],
+    strokeWidth : 3,
+    fillColor : "yellow", // Default: Blue (#0000ff)
+    strokeColor : "green"
 });
 mapView.addPolygon(polygon);
 ```
@@ -133,11 +137,11 @@ A circle is a shape defined by the ``center`` property to specify its location a
 
 ```javascript
 var circle = maps.createCircle({
-	center : [-32.9689, 151.7721], // Can handle object or array
-	radius : 500 * 1000, // 500km, Default: 0
-	fillColor: "blue", // Default: transparent
-	strokeWidth : 3,
-	strokeColor : "orange"
+    center : [-32.9689, 151.7721], // Can handle object or array
+    radius : 500 * 1000, // 500km, Default: 0
+    fillColor: "blue", // Default: transparent
+    strokeWidth : 3,
+    strokeColor : "orange"
 });
 mapView.addCircle(circle);
 ````

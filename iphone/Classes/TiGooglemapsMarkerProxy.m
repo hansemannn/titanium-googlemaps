@@ -62,6 +62,20 @@
     return [[self marker] snippet];
 }
 
+-(void)setInfoWindowAnchor:(id)args
+{
+    ENSURE_UI_THREAD_1_ARG(args);
+    [[self marker] setInfoWindowAnchor:CGPointMake([TiUtils floatValue:[args valueForKey:@"x"]], [TiUtils floatValue:[args valueForKey:@"y"]])];
+}
+
+-(id)infoWindowAnchor
+{
+    return @{
+        @"x": NUMFLOAT([[self marker] infoWindowAnchor].x),
+        @"y": NUMFLOAT([[self marker] infoWindowAnchor].y)
+    };
+}
+
 -(void)setIcon:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
