@@ -186,11 +186,8 @@
 - (BOOL)didTapMyLocationButtonForMapView:(GMSMapView *)mapView
 {
     if ([[self proxy] _hasListeners:@"locationclick"]) {
-        TiGooglemapsMapViewProxy *mapViewProxy = [[TiGooglemapsMapViewProxy alloc] _initWithPageContext:[[self proxy] pageContext]];
-        [mapViewProxy setMapView:mapView];
-
         NSDictionary *event = @{
-            @"mapView" : mapViewProxy
+            @"mapView" : [self proxy]
         };
         [[self proxy] fireEvent:@"locationclick" withObject:event];
     }

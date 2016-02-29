@@ -65,6 +65,30 @@ var mapView = maps.createMapView({
 });
 ```
 
+Animate to a location:
+```javascript
+mapView.animateToLocation({
+    latitude: 36.368122,
+    longitude: -120.913653
+});
+```
+
+Animate to a zoom level:
+```javascript
+mapView.animateToZoom(5);
+```
+
+Animate to a location:
+```javascript
+mapView.animateToBearing(0);
+```
+
+Animate to a viewing angle:
+```javascript
+mapView.animateToViewingAngle(30);
+
+```
+
 #### Marker
 A marker represents a location specified by at least a ``title`` and a ``snippet`` property. It can be added to a map view:
 
@@ -74,7 +98,8 @@ var marker = maps.createMarker({
     longitude : -121.913653,
     title : "Appcelerator, Inc",
     snippet : "1732 N. 1st Street, San Jose",
-    icon: "pin.png", // Default: null
+    pinColor: "green", // Default: Undefined
+    image: "pin.png", // Default: Undefined
     tappable: true, // Default: true
     draggable: true, // Default: false
     flat: true, // Default: false
@@ -82,7 +107,7 @@ var marker = maps.createMarker({
         x: 0.5,
         y: 0
     },
-    userData: { // Default: undefined
+    userData: { // Default: Undefined
         id: 123,
         custom_key: "custom_value"
     }
@@ -94,6 +119,13 @@ You also can add multiple markers as well as remove markers again:
 ```javascript
 mapView.addMarkers([marker1,marker2,marker3]);
 mapView.removeMarker(marker4);
+```
+
+You can select and deselect marker, as well as receive the currently selected marker:
+```javascript
+mapView.selectMarker(marker1); // Select
+mapView.deselectMarker(); // Deselect
+var selectedMarker = mapView.getSelectedMarker(); // Selected marker, null if no marker selected
 ```
 
 #### Overlays

@@ -79,12 +79,32 @@
 -(void)setIcon:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
-    [[self marker] setIcon:[TiUtils image:value proxy:self]];
+    NSLog(@"[WARN] Ti.GoogleMaps: The 'icon' property is deprecated in 2.1.0. Use 'image' or 'pinColor' instead.");
+    [self setImage:value];
 }
 
 -(TiBlob*)icon
 {
+    NSLog(@"[WARN] Ti.GoogleMaps: The 'icon' property is deprecated in 2.1.0. Use 'image' or 'pinColor' instead.");
+    return [self image];
+}
+
+-(void)setImage:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    [[self marker] setIcon:[TiUtils image:value proxy:self]];
+}
+
+-(TiBlob*)image
+{
+    NSLog(@"[WARN] Ti.GoogleMaps: The 'icon' property is deprecated in 2.1.0. Use 'image' or 'pinColor' instead.");
     return [[TiBlob alloc] initWithImage:[[self marker] icon]];
+}
+
+-(void)setPinColor:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    [[self marker] setIcon:[GMSMarker markerImageWithColor:[[TiUtils colorValue:value] _color]]];
 }
 
 -(void)setTappable:(id)value

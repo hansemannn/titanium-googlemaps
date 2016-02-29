@@ -6,7 +6,6 @@
  */
 
 #import "TiGooglemapsMapViewProxy.h"
-#import "TiGooglemapsMarkerProxy.h"
 #import "TiGooglemapsPolylineProxy.h"
 #import "TiGooglemapsPolygonProxy.h"
 #import "TiGooglemapsCircleProxy.h"
@@ -14,108 +13,196 @@
 
 @implementation TiGooglemapsMapViewProxy
 
+-(void)dealloc
+{
+    RELEASE_TO_NIL(mapView);
+    RELEASE_TO_NIL(markers);
+    
+    [super dealloc];
+}
+
 -(TiGooglemapsMapView*)mapView
 {
     return (TiGooglemapsMapView*)[self view];
 }
 
--(void)setMapView:(GMSMapView*)_mapView
+-(NSMutableArray*)markers
 {
-    [self setMapView:_mapView];
+    if (markers == nil) {
+        markers = [NSMutableArray array];
+    }
 }
 
 #pragma mark Public API's
 
 -(void)addMarker:(id)args
 {
-    TiGooglemapsMarkerProxy *marker = [args objectAtIndex:0];
+    id markerProxy = [args objectAtIndex:0];
     
-    ENSURE_TYPE(marker, TiGooglemapsMarkerProxy);
+    ENSURE_TYPE(markerProxy, TiGooglemapsMarkerProxy);
     ENSURE_UI_THREAD_1_ARG(args);
     
-    [[marker marker] setMap:[[self mapView] mapView]];
+    [[markerProxy marker] setMap:[[self mapView] mapView]];
+    [markers addObject:markerProxy];
 }
 
 -(void)addMarkers:(id)args
 {
-    id markers = [args objectAtIndex:0];
+    id markerProxies = [args objectAtIndex:0];
  
-    ENSURE_TYPE(markers, NSArray);
+    ENSURE_TYPE(markerProxies, NSArray);
     ENSURE_UI_THREAD_1_ARG(args);
     
-    for(TiGooglemapsMarkerProxy *marker in markers) {
-        [[marker marker] setMap:[[self mapView] mapView]];
+    for(TiGooglemapsMarkerProxy *markerProxy in markerProxies) {
+        [[markerProxy marker] setMap:[[self mapView] mapView]];
+        [markers addObject:markerProxy];
     }
 }
 
 -(void)removeMarker:(id)args
 {
-    TiGooglemapsMarkerProxy *marker = [args objectAtIndex:0];
+    id markerProxy = [args objectAtIndex:0];
     
-    ENSURE_TYPE(marker, TiGooglemapsMarkerProxy);
+    ENSURE_TYPE(markerProxy, TiGooglemapsMarkerProxy);
     ENSURE_UI_THREAD_1_ARG(args);
     
-    [[marker marker] setMap:nil];
+    [[markerProxy marker] setMap:nil];
+    [markers removeObject:markerProxy];
 }
 
 -(void)addPolyline:(id)args
 {
-    id polyline = [args objectAtIndex:0];
+    id polylineProxy = [args objectAtIndex:0];
     
     ENSURE_UI_THREAD_1_ARG(args);
-    ENSURE_TYPE(polyline, TiGooglemapsPolylineProxy);
+    ENSURE_TYPE(polylineProxy, TiGooglemapsPolylineProxy);
     
-    [[polyline polyline] setMap:[[self mapView] mapView]];
+    [[polylineProxy polyline] setMap:[[self mapView] mapView]];
 }
 
 -(void)removePolyline:(id)args
 {
-    id polyline = [args objectAtIndex:0];
+    id polylineProxy = [args objectAtIndex:0];
     
     ENSURE_UI_THREAD_1_ARG(args);
-    ENSURE_TYPE(polyline, TiGooglemapsPolylineProxy);
+    ENSURE_TYPE(polylineProxy, TiGooglemapsPolylineProxy);
     
-    [[polyline polyline] setMap:nil];
+    [[polylineProxy polyline] setMap:nil];
 }
 
 -(void)addPolygon:(id)args
 {
-    id polygon = [args objectAtIndex:0];
+    id polygonProxy = [args objectAtIndex:0];
     
     ENSURE_UI_THREAD_1_ARG(args);
-    ENSURE_TYPE(polygon, TiGooglemapsPolygonProxy);
+    ENSURE_TYPE(polygonProxy, TiGooglemapsPolygonProxy);
     
-    [[polygon polygon] setMap:[[self mapView] mapView]];
+    [[polygonProxy polygon] setMap:[[self mapView] mapView]];
 }
 
 -(void)removePolygon:(id)args
 {
-    id polygon = [args objectAtIndex:0];
+    id polygonProxy = [args objectAtIndex:0];
     
     ENSURE_UI_THREAD_1_ARG(args);
-    ENSURE_TYPE(polygon, TiGooglemapsPolygonProxy);
+    ENSURE_TYPE(polygonProxy, TiGooglemapsPolygonProxy);
     
-    [[polygon polygon] setMap:nil];
+    [[polygonProxy polygon] setMap:nil];
 }
 
 -(void)addCircle:(id)args
 {
-    id circle = [args objectAtIndex:0];
+    id circleProxy = [args objectAtIndex:0];
     
     ENSURE_UI_THREAD_1_ARG(args);
-    ENSURE_TYPE(circle, TiGooglemapsCircleProxy);
+    ENSURE_TYPE(circleProxy, TiGooglemapsCircleProxy);
     
-    [[circle circle] setMap:[[self mapView] mapView]];
+    [[circleProxy circle] setMap:[[self mapView] mapView]];
 }
 
 -(void)removeCircle:(id)args
 {
-    id circle = [args objectAtIndex:0];
+    id circleProxy = [args objectAtIndex:0];
     
     ENSURE_UI_THREAD_1_ARG(args);
-    ENSURE_TYPE(circle, TiGooglemapsCircleProxy);
+    ENSURE_TYPE(circleProxy, TiGooglemapsCircleProxy);
     
-    [[circle circle] setMap:nil];
+    [[circleProxy circle] setMap:nil];
+}
+
+-(id)getSelectedMarker:(id)unused
+{
+    ENSURE_UI_THREAD(selectedMarker, unused);
+    GMSMarker *selectedMarker = [[[self mapView] mapView] selectedMarker];
+    
+    if (selectedMarker == nil) {
+        return [NSNull null];
+    }
+    
+    for (TiGooglemapsMarkerProxy *marker in markers) {
+        if ([marker marker] == [[[self mapView] mapView] selectedMarker]) {
+            return marker;
+        }
+    }
+    return [NSNull null];
+}
+
+-(void)selectMarker:(id)args
+{
+    ENSURE_UI_THREAD(selectMarker, args);
+    id markerProxy = [args objectAtIndex:0];
+    ENSURE_TYPE(markerProxy, TiGooglemapsMarkerProxy);
+    
+    [[[self mapView] mapView] setSelectedMarker:[markerProxy marker]];
+}
+
+-(void)deselectMarker:(id)unused
+{
+    ENSURE_UI_THREAD(selectMarker, unused);
+    
+    [[[self mapView] mapView] setSelectedMarker:nil];
+}
+
+-(void)animateToLocation:(id)args
+{
+    ENSURE_UI_THREAD(animateToLocation, args);
+    ENSURE_TYPE(args, NSArray);
+    
+    id params = [args objectAtIndex:0];
+    
+    id latitude = [params valueForKey:@"latitude"];
+    id longitude = [params valueForKey:@"longitude"];
+    
+    if (!CLLocationCoordinate2DIsValid(CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude]))) {
+        NSLog(@"[ERROR] Ti.GoogleMaps: Invalid location provided. Please check your latitude and longitude.");
+        return;
+    }
+    
+    [[[self mapView] mapView] animateToLocation:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude])];
+}
+
+-(void)animateToZoom:(id)value
+{
+    ENSURE_UI_THREAD(animateToZoom, value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[self mapView] mapView] animateToZoom:[TiUtils floatValue:value]];
+}
+
+-(void)animateToBearing:(id)value
+{
+    ENSURE_UI_THREAD(animateToBearing, value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[self mapView] mapView] animateToBearing:[TiUtils doubleValue:value]];
+}
+
+-(void)animateToViewingAngle:(id)value
+{
+    ENSURE_UI_THREAD(animateToViewingAngle, value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[self mapView] mapView] animateToViewingAngle:[TiUtils doubleValue:value]];
 }
 
 @end

@@ -131,6 +131,8 @@ for (var key in companies) {
             latitude: company.latitude,
             longitude: company.longitude,
             title: company.title,
+            // pinColor: "green",
+            // image: "myPin.png",
             snippet: company.city
         });
 
