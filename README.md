@@ -34,9 +34,7 @@ Edit the modules section of your ``tiapp.xml`` file to include this module:
 </modules>
 ```
 
-> **NOTE:** The module id changed from ``de.hansknoechel.googlemaps`` to ``ti.googlemaps`` in 2.0.0 to make it easier to include the module.
-
-> **NOTE:** Starting from 2.0.1, the ``GoogleMaps.bundle`` does NOT needs to be copied manually anymore to make the module run. :-)
+> **NOTE:** There is an issue in the Titanium Mobile SDK (5.2.0.GA) which prevents module developers from copying assets to the application. If you use Ti.SDK < 5.2.0.GA you can use the module just like before, if you use Ti.SDK 5.2.0.GA you can already use the latest module version (1.1.0) and upgrade to 5.2.1.GA asap. Until then, you need to copy the `GoogleMaps.bundle` located in `iphone/platform/ios/` manually inside the generated Xcode project. The SDK issue can be tracked [here](https://jira.appcelerator.org/browse/TIMOB-20489). Thank you!
 
 Initialize the module by setting the Google Maps API key you can get from [here](https://developers.google.com/maps/signup).
 ```javascript
