@@ -11,6 +11,7 @@
 #import "TiGooglemapsCircleProxy.h"
 #import "TiGooglemapsPolygonProxy.h"
 #import "TiGooglemapsPolylineProxy.h"
+#import "TiGooglemapsConstants.h"
 
 @implementation TiGooglemapsMapView
 
@@ -20,7 +21,7 @@
 {
     if (_mapView == nil) {
         
-        _mapView = [GMSMapView mapWithFrame:self.bounds camera:nil];
+        _mapView = [[GMSMapView alloc] initWithFrame:self.bounds];
         _mapView.delegate = self;
         _mapView.myLocationEnabled = [TiUtils boolValue:[self.proxy valueForKey:@"myLocationEnabled"] def:YES];
         _mapView.userInteractionEnabled = [TiUtils boolValue:[self.proxy valueForKey:@"userInteractionEnabled"] def:YES];
@@ -54,11 +55,6 @@
     [[self proxy] replaceValue:value forKey:@"myLocationEnabled" notification:NO];
 }
 
--(NSNumber*)myLocationEnabled
-{
-    return NUMBOOL([[self mapView] isMyLocationEnabled]);
-}
-
 -(void)setMapType_:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
@@ -66,11 +62,6 @@
     
     [[self mapView] setMapType:[TiUtils intValue:value def:kGMSTypeNormal]];
     [[self proxy] replaceValue:value forKey:@"mapType" notification:NO];
-}
-
--(NSNumber*)mapType
-{
-    return NUMINT([_mapView mapType]);
 }
 
 -(void)setCamera_:(id)args
@@ -89,8 +80,8 @@
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[TiUtils doubleValue:latitude]
                                                             longitude:[TiUtils doubleValue:longitude]
                                                                  zoom:[TiUtils floatValue:zoom def:1]];
-    [[self mapView] setCamera:camera];
     
+    [[self mapView] setCamera:camera];
     [[self proxy] replaceValue:args forKey:@"camera" notification:NO];
 }
 
@@ -227,24 +218,23 @@
 {
     ENSURE_UI_THREAD(dictionaryFromOverlay, overlay);
     
-    NSString *type = nil;
+    TiGooglemapsOverlayType overlayType = nil;
     
-    // Todo: Create constants
     if([overlay isKindOfClass:[GMSPolygon class]]) {
-        type = @"polygon";
+        overlayType = TiGooglemapsOverlayTypePolygon;
     } else if([overlay isKindOfClass:[GMSPolyline class]]) {
-        type = @"polyline";
+        overlayType = TiGooglemapsOverlayTypePolyline;
     } else if([overlay isKindOfClass:[GMSCircle class]]) {
-        type = @"circle";
+        overlayType = TiGooglemapsOverlayTypeCircle;
     }
     
     return @{
-        @"overlayType" : type,
-        @"overlay" : [self overlayProxyFromOverlay:overlay withType:type]
+        @"overlayType" : NUMINTEGER(overlayType),
+        @"overlay" : [self overlayProxyFromOverlay:overlay]
     };
 }
 
--(TiGooglemapsMarkerProxy*)markerProxyFromMarker:(GMSMarker*)marker
+-(id)markerProxyFromMarker:(GMSMarker*)marker
 {
     for (TiGooglemapsMarkerProxy* markerProxy in [[self mapViewProxy] markers]) {
         if ([markerProxy marker] == marker) {
@@ -255,7 +245,7 @@
     return [NSNull null];
 }
 
--(TiProxy*)overlayProxyFromOverlay:(GMSOverlay*)overlay withType:(NSString*)type
+-(id)overlayProxyFromOverlay:(GMSOverlay*)overlay
 {
     for (TiProxy* overlayProxy in [[self mapViewProxy] overlays]) {
         
@@ -281,5 +271,9 @@
 
     return [NSNull null];
 }
+
+MAKE_SYSTEM_PROP(OVERLAY_TYPE_POLYGON, TiGooglemapsOverlayTypePolygon);
+MAKE_SYSTEM_PROP(OVERLAY_TYPE_POLYLINE, TiGooglemapsOverlayTypePolyline);
+MAKE_SYSTEM_PROP(OVERLAY_TYPE_CIRCLE, TiGooglemapsOverlayTypeCircle);
 
 @end

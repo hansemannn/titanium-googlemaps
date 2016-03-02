@@ -5,12 +5,12 @@
  Summary
 ---------------
 Ti.GoogleMaps is an open-source project to support the Google Maps SDK for iOS on Appcelerator's Titanium Mobile. The module currently supports the following API's:
-  - Map View
-  - Marker
-  - Polygon overlay
-  - Polyline overlay
-  - Circle overlay
-  - All delegates (exposed as events)
+- [x] Map View
+- [x] Marker
+- [x] Polygon overlay
+- [x] Polyline overlay
+- [x] Circle overlay
+- [x] All delegates (exposed as events)
 
 Requirements
 ---------------
@@ -26,15 +26,15 @@ Download + Setup
   * Install from gitTio    <a href="http://gitt.io/component/ti.googlemaps" target="_blank"><img src="http://gitt.io/badge@2x.png" width="120" height="18" alt="Available on gitTio" /></a>
 
 ### Setup
-Unpack the module and place it inside the ``/modules/iphone`` folder of your project.
-Edit the modules section of your ``tiapp.xml`` file to include this module:
+Unpack the module and place it inside the `modules/iphone/` folder of your project.
+Edit the modules section of your `tiapp.xml` file to include this module:
 ```xml
 <modules>
     <module platform="iphone">ti.googlemaps</module>
 </modules>
 ```
 
-> **NOTE:** There is an issue in the Titanium Mobile SDK (5.2.0.GA) which prevents module developers from copying assets to the application. If you use Ti.SDK < 5.2.0.GA you can use the module just like before, if you use Ti.SDK 5.2.0.GA you can already use the latest module version (1.1.0) and upgrade to 5.2.1.GA asap. Until then, you need to copy the `GoogleMaps.bundle` located in `iphone/platform/ios/` manually inside the generated Xcode project. The SDK issue can be tracked [here](https://jira.appcelerator.org/browse/TIMOB-20489). Thank you!
+> **NOTE:** There is an issue in the Titanium Mobile SDK (5.2.0.GA) which prevents module developers from copying assets to the application. If you use Ti.SDK < 5.2.0.GA you can use the module just like before, if you use Ti.SDK 5.2.0.GA you can already use the latest module version (2.1.0) and upgrade to 5.2.1.GA asap. The SDK issue can be tracked [here](https://jira.appcelerator.org/browse/TIMOB-20489). Thank you!
 
 Initialize the module by setting the Google Maps API key you can get from [here](https://developers.google.com/maps/signup).
 ```javascript
@@ -45,7 +45,7 @@ maps.setAPIKey("<YOUR_API_KEY>");
 Features
 --------------------------------
 #### Map View
-A map view creates the view on which marker and overlays can be added to. You can see all possible events in the demo app. In addition, you can specify one of the following constants to the ``mapType`` property:
+A map view creates the view on which marker and overlays can be added to. You can see all possible events in the demo app. In addition, you can specify one of the following constants to the `mapType` property:
  - ``MAP_TYPE_NORMAL``
  - ``MAP_TYPE_HYBRID``
  - ``MAP_TYPE_SATELLITE``
@@ -88,7 +88,7 @@ mapView.animateToViewingAngle(30);
 ```
 
 #### Marker
-A marker represents a location specified by at least a ``title`` and a ``snippet`` property. It can be added to a map view:
+A marker represents a location specified by at least a `title` and a `snippet` property. It can be added to a map view:
 
 ```javascript
 var marker = maps.createMarker({
@@ -162,8 +162,8 @@ var polygon = maps.createPolygon({
 mapView.addPolygon(polygon);
 ```
 
-#### Circle
-A circle is a shape defined by the ``center`` property to specify its location as well as the ``radius`` in meters.
+##### Circle
+A circle is a shape defined by the `center` property to specify its location as well as the ``radius` in meters.
 
 ```javascript
 var circle = maps.createCircle({
@@ -176,7 +176,24 @@ var circle = maps.createCircle({
 mapView.addCircle(circle);
 ````
 
-For a full example, check the demo in ```example/app.js```.
+#### Events
+The module supports all native delegates - exposed as events. These are:
+
+- [x] click
+- [x] overlayclick
+- [x] locationclick
+- [x] longpress
+- [x] markerclick
+- [x] markerinfoclick
+- [x] camerachange
+- [x] willmove
+- [x] idle
+- [x] dragstart
+- [x] dragmove
+- [x] dragend
+
+#### Example
+For a full example, check the demo in `iphone/example/app.js`.
 
 Author
 ---------------

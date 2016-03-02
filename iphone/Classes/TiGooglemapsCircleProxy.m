@@ -41,8 +41,8 @@
     ENSURE_UI_THREAD(setRadius, value);
     ENSURE_TYPE(value, NSNumber);
     
-    [self replaceValue:value forKey:@"radius" notification:NO];
     [[self circle] setRadius:[TiUtils doubleValue:value]];
+    [self replaceValue:value forKey:@"radius" notification:NO];
 }
 
 -(void)setTappable:(id)value
@@ -50,36 +50,32 @@
     ENSURE_UI_THREAD(setTappable, value);
     ENSURE_TYPE(value, NSNumber);
     
-    [self replaceValue:value forKey:@"tappable" notification:NO];
-    
     [[self circle] setTappable:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"tappable" notification:NO];
 }
 
 -(void)setFillColor:(id)value
 {
     ENSURE_UI_THREAD(setFillColor, value);
     
-    [self replaceValue:value forKey:@"fillColor" notification:NO];
-    
     [[self circle] setFillColor:[[TiUtils colorValue:value] _color]];
+    [self replaceValue:value forKey:@"fillColor" notification:NO];
 }
 
 -(void)setStrokeColor:(id)value
 {
     ENSURE_UI_THREAD(setStrokeColor, value);
     
-    [self replaceValue:value forKey:@"strokeColor" notification:NO];
-    
     [[self circle] setStrokeColor:[[TiUtils colorValue:value] _color]];
+    [self replaceValue:value forKey:@"strokeColor" notification:NO];
 }
 
 -(void)setStrokeWidth:(id)value
 {
     ENSURE_UI_THREAD(setStrokeWidth, value);
     
-    [self replaceValue:value forKey:@"strokeWidth" notification:NO];
-    
     [[self circle] setStrokeWidth:[TiUtils floatValue:value def:1]];
+    [self replaceValue:value forKey:@"strokeWidth" notification:NO];
 }
 
 #pragma mark Utilities

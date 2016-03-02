@@ -44,36 +44,27 @@
 {
     ENSURE_UI_THREAD_1_ARG(value);
     [[self marker] setTitle:[TiUtils stringValue:value]];
-}
-
--(NSString*)title
-{
-    return [[self marker] title];
+    [self replaceValue:value forKey:@"title" notification:NO];
 }
 
 -(void)setSnippet:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
     [[self marker] setSnippet:[TiUtils stringValue:value]];
-}
-
--(NSString*)snippet
-{
-    return [[self marker] snippet];
+    [self replaceValue:value forKey:@"snippet" notification:NO];
 }
 
 -(void)setInfoWindowAnchor:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
-    [[self marker] setInfoWindowAnchor:CGPointMake([TiUtils floatValue:[args valueForKey:@"x"]], [TiUtils floatValue:[args valueForKey:@"y"]])];
-}
-
--(id)infoWindowAnchor
-{
-    return @{
-        @"x": NUMFLOAT([[self marker] infoWindowAnchor].x),
-        @"y": NUMFLOAT([[self marker] infoWindowAnchor].y)
-    };
+    ENSURE_TYPE([args valueForKey:@"x"], NSNumber);
+    ENSURE_TYPE([args valueForKey:@"y"], NSNumber);
+    
+    float x = [TiUtils floatValue:[args valueForKey:@"x"]];
+    float y = [TiUtils floatValue:[args valueForKey:@"y"]];
+    
+    [[self marker] setInfoWindowAnchor:CGPointMake(x, y)];
+    [self replaceValue:args forKey:@"infoWindowAnchor" notification:NO];
 }
 
 -(void)setIcon:(id)value
@@ -83,72 +74,46 @@
     [self setImage:value];
 }
 
--(TiBlob*)icon
-{
-    NSLog(@"[WARN] Ti.GoogleMaps: The 'icon' property is deprecated in 2.1.0. Use 'image' or 'pinColor' instead.");
-    return [self image];
-}
-
 -(void)setImage:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
     [[self marker] setIcon:[TiUtils image:value proxy:self]];
-}
-
--(TiBlob*)image
-{
-    NSLog(@"[WARN] Ti.GoogleMaps: The 'icon' property is deprecated in 2.1.0. Use 'image' or 'pinColor' instead.");
-    return [[TiBlob alloc] initWithImage:[[self marker] icon]];
+    [self replaceValue:value forKey:@"image" notification:NO];
 }
 
 -(void)setPinColor:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
     [[self marker] setIcon:[GMSMarker markerImageWithColor:[[TiUtils colorValue:value] _color]]];
+    [self replaceValue:value forKey:@"pinColor" notification:NO];
 }
 
 -(void)setTappable:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
     [[self marker] setTappable:[TiUtils boolValue:value def:YES]];
-}
-
--(NSNumber*)tappable
-{
-    return NUMBOOL([[self marker] isTappable]);
+    [self replaceValue:value forKey:@"tappable" notification:NO];
 }
 
 -(void)setFlat:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
     [[self marker] setFlat:[TiUtils boolValue:value def:NO]];
-}
-
--(NSNumber*)flat
-{
-    return NUMBOOL([[self marker] isFlat]);
+    [self replaceValue:value forKey:@"flat" notification:NO];
 }
 
 -(void)setDraggable:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
     [[self marker] setDraggable:[TiUtils boolValue:value def:NO]];
-}
-
--(NSNumber*)draggable
-{
-    return NUMBOOL([[self marker] isDraggable]);
+    [self replaceValue:value forKey:@"draggable" notification:NO];
 }
 
 -(void)setUserData:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
     [[self marker] setUserData:value];
-}
-
--(id)userData
-{
-    return [[self marker] userData];
+    [self replaceValue:value forKey:@"userData" notification:NO];
 }
 
 @end

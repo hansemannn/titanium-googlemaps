@@ -61,45 +61,40 @@
     ENSURE_UI_THREAD(setTappable, value);
     ENSURE_TYPE(value, NSNumber);
 
-    [self replaceValue:value forKey:@"tappable" notification:NO];
-
     [[self polygon] setTappable:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"tappable" notification:NO];
 }
 
 -(void)setFillColor:(id)value
 {
     ENSURE_UI_THREAD(setFillColor, value);
     
-    [self replaceValue:value forKey:@"fillColor" notification:NO];
-    
     [[self polygon] setFillColor:[[TiUtils colorValue:value] _color]];
+    [self replaceValue:value forKey:@"fillColor" notification:NO];
 }
 
 -(void)setStrokeColor:(id)value
 {
     ENSURE_UI_THREAD(setStrokeColor, value);
     
-    [self replaceValue:value forKey:@"strokeColor" notification:NO];
-    
     [[self polygon] setStrokeColor:[[TiUtils colorValue:value] _color]];
+    [self replaceValue:value forKey:@"strokeColor" notification:NO];
 }
 
 -(void)setStrokeWidth:(id)value
 {
     ENSURE_UI_THREAD(setStrokeWidth, value);
     
-    [self replaceValue:value forKey:@"strokeWidth" notification:NO];
-    
     [[self polygon] setStrokeWidth:[TiUtils floatValue:value def:1]];
+    [self replaceValue:value forKey:@"strokeWidth" notification:NO];
 }
 
 -(void)setGeodesic:(id)value
 {
     ENSURE_UI_THREAD(setGeodesic, value);
     
-    [self replaceValue:value forKey:@"setGeodesic" notification:NO];
-    
     [[self polygon] setGeodesic:[TiUtils boolValue:value def:NO]];
+    [self replaceValue:value forKey:@"setGeodesic" notification:NO];
 }
 
 @end

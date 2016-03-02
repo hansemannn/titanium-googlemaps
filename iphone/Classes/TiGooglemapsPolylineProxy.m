@@ -59,36 +59,32 @@
     ENSURE_UI_THREAD(setTappable, value);
     ENSURE_TYPE(value, NSNumber);
     
-    [self replaceValue:value forKey:@"tappable" notification:NO];
-    
     [[self polyline] setTappable:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"tappable" notification:NO];
 }
 
 -(void)setStrokeColor:(id)value
 {
     ENSURE_UI_THREAD(setStrokeColor, value);
     
-    [self replaceValue:value forKey:@"strokeColor" notification:NO];
-    
     [[self polyline] setStrokeColor:[[TiUtils colorValue:value] _color]];
+    [self replaceValue:value forKey:@"strokeColor" notification:NO];
 }
 
 -(void)setStrokeWidth:(id)value
 {
     ENSURE_UI_THREAD(setStrokeWidth, value);
     
-    [self replaceValue:value forKey:@"strokeWidth" notification:NO];
-    
     [[self polyline] setStrokeWidth:[TiUtils floatValue:value def:1]];
+    [self replaceValue:value forKey:@"strokeWidth" notification:NO];
 }
 
 -(void)setGeodesic:(id)value
 {
     ENSURE_UI_THREAD(setGeodesic, value);
     
+    [[self polyline] setGeodesic:[TiUtils boolValue:value def:NO]];    
     [self replaceValue:value forKey:@"setGeodesic" notification:NO];
-    
-    [[self polyline] setGeodesic:[TiUtils boolValue:value def:NO]];
 }
 
 @end
