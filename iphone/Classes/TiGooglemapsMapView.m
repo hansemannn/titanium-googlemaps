@@ -32,6 +32,11 @@
     return _mapView;
 }
 
+-(TiGooglemapsMapViewProxy*)mapViewProxy
+{
+    return (TiGooglemapsMapViewProxy*)[self proxy];
+}
+
 - (void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
 {
     [TiUtils setView:_mapView positionRect:bounds];
@@ -220,44 +225,61 @@
 
 -(NSDictionary*)dictionaryFromOverlay:(GMSOverlay*)overlay
 {
-    NSString *type = nil;
-    TiProxy *proxy = nil;
+    ENSURE_UI_THREAD(dictionaryFromOverlay, overlay);
     
+    NSString *type = nil;
+    
+    // Todo: Create constants
     if([overlay isKindOfClass:[GMSPolygon class]]) {
-        proxy = [[[TiGooglemapsPolygonProxy alloc] _initWithPageContext:[[self proxy] pageContext]] autorelease];
-        [(TiGooglemapsPolygonProxy*)proxy setPolygon: (GMSPolygon*)overlay];
         type = @"polygon";
     } else if([overlay isKindOfClass:[GMSPolyline class]]) {
-        proxy = [[TiGooglemapsPolylineProxy alloc] _initWithPageContext:[[self proxy] pageContext]];
-        [(TiGooglemapsPolylineProxy*)proxy setPolyline: (GMSPolyline*)overlay];
         type = @"polyline";
-        
     } else if([overlay isKindOfClass:[GMSCircle class]]) {
-        proxy = [[TiGooglemapsCircleProxy alloc] _initWithPageContext:[[self proxy] pageContext]];
-        [(TiGooglemapsCircleProxy*)proxy setCircle:(GMSCircle*)overlay];
         type = @"circle";
-    }
-
-    if (proxy == nil) {
-        [self throwException:@"Unknown overlay clicked" subreason:@"Overlay could not be assigned." location:CODELOCATION];
     }
     
     return @{
         @"overlayType" : type,
-        @"overlay" : proxy
+        @"overlay" : [self overlayProxyFromOverlay:overlay withType:type]
     };
 }
 
 -(TiGooglemapsMarkerProxy*)markerProxyFromMarker:(GMSMarker*)marker
 {
-    if (marker == nil) {
-        return nil;
+    for (TiGooglemapsMarkerProxy* markerProxy in [[self mapViewProxy] markers]) {
+        if ([markerProxy marker] == marker) {
+            return markerProxy;
+        }
     }
     
-    TiGooglemapsMarkerProxy* markerProxy = [[TiGooglemapsMarkerProxy alloc] _initWithPageContext:[[self proxy] pageContext]];
-    [markerProxy setMarker:marker];
-    
-    return markerProxy;
+    return [NSNull null];
+}
+
+-(TiProxy*)overlayProxyFromOverlay:(GMSOverlay*)overlay withType:(NSString*)type
+{
+    for (TiProxy* overlayProxy in [[self mapViewProxy] overlays]) {
+        
+        // Check for polygons
+        if ([overlay isKindOfClass:[GMSPolygon class]] && [overlayProxy isKindOfClass:[TiGooglemapsPolygonProxy class]]) {
+            if ([(TiGooglemapsPolygonProxy*)overlayProxy polygon] == overlay) {
+                return (TiGooglemapsPolygonProxy*)overlayProxy;
+            }
+        
+        // Check for polylines
+        } else if ([overlay isKindOfClass:[GMSPolyline class]] && [overlayProxy isKindOfClass:[TiGooglemapsPolylineProxy class]]) {
+            if ([(TiGooglemapsPolylineProxy*)overlayProxy polyline] == overlay) {
+                return (TiGooglemapsPolylineProxy*)overlayProxy;
+            }
+        
+        // Check for circles
+        } else if ([overlay isKindOfClass:[GMSCircle class]] && [overlayProxy isKindOfClass:[TiGooglemapsCircleProxy class]]) {
+            if ([(TiGooglemapsCircleProxy*)overlayProxy circle] == overlay) {
+                return (TiGooglemapsCircleProxy*)overlayProxy;
+            }
+        }
+    }
+
+    return [NSNull null];
 }
 
 @end

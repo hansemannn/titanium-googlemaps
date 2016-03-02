@@ -17,6 +17,7 @@
 {
     RELEASE_TO_NIL(mapView);
     RELEASE_TO_NIL(markers);
+    RELEASE_TO_NIL(overlays);
     
     [super dealloc];
 }
@@ -29,8 +30,19 @@
 -(NSMutableArray*)markers
 {
     if (markers == nil) {
-        markers = [NSMutableArray array];
+        markers = [[NSMutableArray alloc] initWithArray:@[]];
     }
+    
+    return markers;
+}
+
+-(NSMutableArray*)overlays
+{
+    if (overlays == nil) {
+        overlays = [[NSMutableArray alloc] initWithArray:@[]];
+    }
+    
+    return overlays;
 }
 
 #pragma mark Public API's
@@ -43,7 +55,7 @@
     ENSURE_UI_THREAD_1_ARG(args);
     
     [[markerProxy marker] setMap:[[self mapView] mapView]];
-    [markers addObject:markerProxy];
+    [[self markers] addObject:markerProxy];
 }
 
 -(void)addMarkers:(id)args
@@ -55,7 +67,7 @@
     
     for(TiGooglemapsMarkerProxy *markerProxy in markerProxies) {
         [[markerProxy marker] setMap:[[self mapView] mapView]];
-        [markers addObject:markerProxy];
+        [[self markers] addObject:markerProxy];
     }
 }
 
@@ -67,7 +79,7 @@
     ENSURE_UI_THREAD_1_ARG(args);
     
     [[markerProxy marker] setMap:nil];
-    [markers removeObject:markerProxy];
+    [[self markers] removeObject:markerProxy];
 }
 
 -(void)addPolyline:(id)args
@@ -78,6 +90,7 @@
     ENSURE_TYPE(polylineProxy, TiGooglemapsPolylineProxy);
     
     [[polylineProxy polyline] setMap:[[self mapView] mapView]];
+    [[self overlays] addObject:polylineProxy];
 }
 
 -(void)removePolyline:(id)args
@@ -88,6 +101,7 @@
     ENSURE_TYPE(polylineProxy, TiGooglemapsPolylineProxy);
     
     [[polylineProxy polyline] setMap:nil];
+    [[self overlays] removeObject:polylineProxy];
 }
 
 -(void)addPolygon:(id)args
@@ -98,6 +112,7 @@
     ENSURE_TYPE(polygonProxy, TiGooglemapsPolygonProxy);
     
     [[polygonProxy polygon] setMap:[[self mapView] mapView]];
+    [[self overlays] addObject:polygonProxy];
 }
 
 -(void)removePolygon:(id)args
@@ -108,6 +123,7 @@
     ENSURE_TYPE(polygonProxy, TiGooglemapsPolygonProxy);
     
     [[polygonProxy polygon] setMap:nil];
+    [[self overlays] removeObject:polygonProxy];
 }
 
 -(void)addCircle:(id)args
@@ -118,6 +134,7 @@
     ENSURE_TYPE(circleProxy, TiGooglemapsCircleProxy);
     
     [[circleProxy circle] setMap:[[self mapView] mapView]];
+    [[self overlays] addObject:circleProxy];
 }
 
 -(void)removeCircle:(id)args
@@ -128,18 +145,19 @@
     ENSURE_TYPE(circleProxy, TiGooglemapsCircleProxy);
     
     [[circleProxy circle] setMap:nil];
+    [[self overlays] removeObject:circleProxy];
 }
 
 -(id)getSelectedMarker:(id)unused
 {
-    ENSURE_UI_THREAD(selectedMarker, unused);
+    ENSURE_UI_THREAD(getSelectedMarker, unused);
     GMSMarker *selectedMarker = [[[self mapView] mapView] selectedMarker];
     
     if (selectedMarker == nil) {
         return [NSNull null];
     }
     
-    for (TiGooglemapsMarkerProxy *marker in markers) {
+    for (TiGooglemapsMarkerProxy *marker in [self markers]) {
         if ([marker marker] == [[[self mapView] mapView] selectedMarker]) {
             return marker;
         }

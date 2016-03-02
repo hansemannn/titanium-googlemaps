@@ -11,7 +11,25 @@
 @interface TiGooglemapsMapViewProxy : TiViewProxy<GMSMapViewDelegate> {
     TiGooglemapsMapViewProxy* mapView;
     NSMutableArray *markers;
+    NSMutableArray *overlays;
 }
+
+
+/**
+ *  An array of marker proxies.
+ *
+ *  @return The proxies
+ *  @since 2.1.0
+ */
+-(NSMutableArray*)markers;
+
+/**
+ *  An array of overlay proxies.
+ *
+ *  @return The proxies
+ *  @since 2.1.0
+ */
+-(NSMutableArray*)overlays;
 
 /**
  *  Adds a marker.
@@ -123,7 +141,7 @@
  *  @return The selected marker.
  *  @since 2.1.0
  */
--(id)selectedMarker:(id)unused;
+-(id)getSelectedMarker:(id)unused;
 
 /**
  *  Selects a marker.
