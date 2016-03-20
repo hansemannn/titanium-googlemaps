@@ -10,6 +10,9 @@
 
 @implementation TiGooglemapsMarkerProxy
 
+#define DEPRECATED(from, to, in) \
+NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, in, to);\
+
 @synthesize marker = _marker;
 
 -(GMSMarker*)marker
@@ -43,34 +46,52 @@
 -(void)setTitle:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSString);
+
     [[self marker] setTitle:[TiUtils stringValue:value]];
     [self replaceValue:value forKey:@"title" notification:NO];
 }
 
 -(void)setSnippet:(id)value
 {
+    DEPRECATED(@"Annotation.snippet", @"Annotation.subtitle", @"2.2.0");
+    [self setSubtitle:value];
+}
+
+-(void)setSubtitle:(id)value
+{
     ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSString);
+    
     [[self marker] setSnippet:[TiUtils stringValue:value]];
-    [self replaceValue:value forKey:@"snippet" notification:NO];
+    [self replaceValue:value forKey:@"subtitle" notification:NO];
 }
 
 -(void)setInfoWindowAnchor:(id)args
 {
+    DEPRECATED(@"Annotation.infoWindowAnchor", @"Annotation.centerOffset", @"2.2.0");
+    [self setCenterOffset:args];
+}
+
+-(void)setCenterOffset:(id)args
+{
     ENSURE_UI_THREAD_1_ARG(args);
-    ENSURE_TYPE([args valueForKey:@"x"], NSNumber);
-    ENSURE_TYPE([args valueForKey:@"y"], NSNumber);
     
-    float x = [TiUtils floatValue:[args valueForKey:@"x"]];
-    float y = [TiUtils floatValue:[args valueForKey:@"y"]];
+    [[self marker] setInfoWindowAnchor:[TiUtils pointValue:args]];
+    [self replaceValue:args forKey:@"centerOffset" notification:NO];
+}
+
+-(void)setGroundOffset:(id)args
+{
+    ENSURE_UI_THREAD_1_ARG(args);
     
-    [[self marker] setInfoWindowAnchor:CGPointMake(x, y)];
-    [self replaceValue:args forKey:@"infoWindowAnchor" notification:NO];
+    [[self marker] setGroundAnchor:[TiUtils pointValue:args]];
+    [self replaceValue:args forKey:@"groundOffset" notification:NO];
 }
 
 -(void)setIcon:(id)value
 {
-    ENSURE_UI_THREAD_1_ARG(value);
-    NSLog(@"[WARN] Ti.GoogleMaps: The 'icon' property is deprecated in 2.1.0. Use 'image' or 'pinColor' instead.");
+    DEPRECATED(@"Annotation.icon", @"Annotation.image", @"2.1.0");
     [self setImage:value];
 }
 
@@ -90,14 +111,24 @@
 
 -(void)setTappable:(id)value
 {
+    DEPRECATED(@"Annotation.tappable", @"Annotation.touchEnabled", @"2.2.0");
+    [self setTappable:value];
+}
+
+-(void)setTouchEnabled:(id)value
+{
     ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+
     [[self marker] setTappable:[TiUtils boolValue:value def:YES]];
-    [self replaceValue:value forKey:@"tappable" notification:NO];
+    [self replaceValue:value forKey:@"touchEnabled" notification:NO];
 }
 
 -(void)setFlat:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+
     [[self marker] setFlat:[TiUtils boolValue:value def:NO]];
     [self replaceValue:value forKey:@"flat" notification:NO];
 }
@@ -105,8 +136,28 @@
 -(void)setDraggable:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+
     [[self marker] setDraggable:[TiUtils boolValue:value def:NO]];
     [self replaceValue:value forKey:@"draggable" notification:NO];
+}
+
+-(void)setOpacity:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[self marker] setOpacity:[TiUtils floatValue:value def:1]];
+    [self replaceValue:value forKey:@"opacity" notification:NO];
+}
+
+-(void)setAnimationStyle:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[self marker] setAppearAnimation:NUMINT(value)];
+    [self replaceValue:value forKey:@"animationStyle" notification:NO];
 }
 
 -(void)setUserData:(id)value
@@ -115,5 +166,8 @@
     [[self marker] setUserData:value];
     [self replaceValue:value forKey:@"userData" notification:NO];
 }
+
+MAKE_SYSTEM_PROP(APPEAR_ANIMATION_NONE, kGMSMarkerAnimationNone);
+MAKE_SYSTEM_PROP(APPEAR_ANIMATION_POP, kGMSMarkerAnimationPop);
 
 @end

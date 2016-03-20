@@ -13,6 +13,9 @@
 
 @implementation TiGooglemapsMapViewProxy
 
+#define DEPRECATED(from, to, in) \
+NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, to, in);\
+
 -(void)dealloc
 {
     RELEASE_TO_NIL(mapView);
@@ -47,7 +50,7 @@
 
 #pragma mark Public API's
 
--(void)addMarker:(id)args
+-(void)addAnnotation:(id)args
 {
     id markerProxy = [args objectAtIndex:0];
     
@@ -58,10 +61,10 @@
     [[self markers] addObject:markerProxy];
 }
 
--(void)addMarkers:(id)args
+-(void)addAnnotations:(id)args
 {
     id markerProxies = [args objectAtIndex:0];
- 
+    
     ENSURE_TYPE(markerProxies, NSArray);
     ENSURE_UI_THREAD_1_ARG(args);
     
@@ -71,7 +74,7 @@
     }
 }
 
--(void)removeMarker:(id)args
+-(void)removeAnnotation:(id)args
 {
     id markerProxy = [args objectAtIndex:0];
     
@@ -80,6 +83,36 @@
     
     [[markerProxy marker] setMap:nil];
     [[self markers] removeObject:markerProxy];
+}
+
+-(void)setAnnotations:(id)args
+{
+    ENSURE_UI_THREAD_1_ARG(args);
+
+    for(TiGooglemapsMarkerProxy *markerProxy in [self markers]) {
+        [[markerProxy marker] setMap:nil];
+        [[self markers] removeObject:markerProxy];
+    }
+    
+    [self addAnnotations:args];
+}
+
+-(void)addMarker:(id)args
+{
+    DEPRECATED(@"addMarker", @"addAnnotation", "2.2.0");
+    [self addAnnotation:args];
+}
+
+-(void)addMarkers:(id)args
+{
+    DEPRECATED(@"addMarkers", @"addAnnotations", "2.2.0");
+    [self addAnnotations:args];
+}
+
+-(void)removeMarker:(id)args
+{
+    DEPRECATED(@"removeMarker", @"removeAnnotation", "2.2.0");
+    [self removeAnnotation:args];
 }
 
 -(void)addPolyline:(id)args

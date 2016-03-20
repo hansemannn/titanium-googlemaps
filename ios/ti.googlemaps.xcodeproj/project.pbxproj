@@ -201,7 +201,7 @@
 				3AF900D11BC2288600172627 /* Module */,
 				3A28A4C91BE9204C0004FCE9 /* Overlays */,
 				3AF900D31BC2289C00172627 /* Map View */,
-				3AF900D41BC228C300172627 /* Marker */,
+				3AF900D41BC228C300172627 /* Annotations */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -283,13 +283,13 @@
 			name = "Map View";
 			sourceTree = "<group>";
 		};
-		3AF900D41BC228C300172627 /* Marker */ = {
+		3AF900D41BC228C300172627 /* Annotations */ = {
 			isa = PBXGroup;
 			children = (
 				3A433EF01BE9AAF00005C8AE /* TiGooglemapsMarkerProxy.h */,
 				3A433EF11BE9AAF00005C8AE /* TiGooglemapsMarkerProxy.m */,
 			);
-			name = Marker;
+			name = Annotations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -32,28 +32,63 @@
 -(NSMutableArray*)overlays;
 
 /**
+ *  Adds an annotation.
+ *
+ *  @param args The annotation.
+ *  @since 2.2.0
+ */
+-(void)addAnnotation:(id)args;
+
+/**
+ *  Adds multiple annotations.
+ *
+ *  @param args The annotations.
+ *  @since 2.2.0
+ */
+-(void)addAnnotations:(id)args;
+
+/**
+ *  Set multiple annotations.
+ *
+ *  @param args The annotations.
+ *  @since 2.2.0
+ */
+-(void)setAnnotations:(id)args;
+
+/**
+ *  Remove an annotation.
+ *
+ *  @param args The annotation.
+ *  @since 2.2.0
+ */
+-(void)removeAnnotation:(id)args;
+
+/**
  *  Adds a marker.
  *
  *  @param args The marker.
+ *  @deprecated 2.2.0
  *  @since 1.0.0
  */
--(void)addMarker:(id)args;
+-(void)addMarker:(id)args __attribute((deprecated("Use addAnnotation instead.")));
 
 /**
  *  Adds multiple markers.
  *
  *  @param args The array of markers.
+ *  @deprecated 2.2.0
  *  @since 1.0.0
  */
--(void)addMarkers:(id)args;
+-(void)addMarkers:(id)args __attribute((deprecated("Use addAnnotations instead.")));
 
 /**
  *  Removes a marker.
  *
  *  @param args The marker proxy.
+ *  @deprecated 2.2.0
  *  @since 1.0.0
  */
--(void)removeMarker:(id)args;
+-(void)removeMarker:(id)args __attribute((deprecated("Use removeAnnotation instead.")));
 
 /**
  *  Adds a polyline.
