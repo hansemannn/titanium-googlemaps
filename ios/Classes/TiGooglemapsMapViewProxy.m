@@ -128,9 +128,9 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 -(void)removePolyline:(id)args
 {
-    id polylineProxy = [args objectAtIndex:0];
-    
     ENSURE_UI_THREAD_1_ARG(args);
+
+    id polylineProxy = [args objectAtIndex:0];
     ENSURE_TYPE(polylineProxy, TiGooglemapsPolylineProxy);
     
     [[polylineProxy polyline] setMap:nil];
@@ -139,9 +139,9 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 -(void)addPolygon:(id)args
 {
-    id polygonProxy = [args objectAtIndex:0];
-    
     ENSURE_UI_THREAD_1_ARG(args);
+
+    id polygonProxy = [args objectAtIndex:0];
     ENSURE_TYPE(polygonProxy, TiGooglemapsPolygonProxy);
     
     [[polygonProxy polygon] setMap:[[self mapView] mapView]];
@@ -150,9 +150,9 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 -(void)removePolygon:(id)args
 {
-    id polygonProxy = [args objectAtIndex:0];
-    
     ENSURE_UI_THREAD_1_ARG(args);
+
+    id polygonProxy = [args objectAtIndex:0];
     ENSURE_TYPE(polygonProxy, TiGooglemapsPolygonProxy);
     
     [[polygonProxy polygon] setMap:nil];
@@ -161,9 +161,9 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 -(void)addCircle:(id)args
 {
-    id circleProxy = [args objectAtIndex:0];
-    
     ENSURE_UI_THREAD_1_ARG(args);
+
+    id circleProxy = [args objectAtIndex:0];
     ENSURE_TYPE(circleProxy, TiGooglemapsCircleProxy);
     
     [[circleProxy circle] setMap:[[self mapView] mapView]];
@@ -172,9 +172,9 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 -(void)removeCircle:(id)args
 {
-    id circleProxy = [args objectAtIndex:0];
-    
     ENSURE_UI_THREAD_1_ARG(args);
+
+    id circleProxy = [args objectAtIndex:0];
     ENSURE_TYPE(circleProxy, TiGooglemapsCircleProxy);
     
     [[circleProxy circle] setMap:nil];
@@ -183,7 +183,13 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 -(id)getSelectedMarker:(id)unused
 {
-    ENSURE_UI_THREAD(getSelectedMarker, unused);
+    DEPRECATED(@"getSelectedMarker()", @"getSelectedAnnotation()", @"2.2.0");
+    [self getSelectedAnnotation:unused];
+}
+
+-(id)getSelectedAnnotation:(id)unused
+{
+    ENSURE_UI_THREAD(getSelectedAnnotation, unused);
     GMSMarker *selectedMarker = [[[self mapView] mapView] selectedMarker];
     
     if (selectedMarker == nil) {
@@ -198,10 +204,16 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     return [NSNull null];
 }
 
--(void)selectMarker:(id)args
+-(void)selectMarker:(id)value
 {
-    ENSURE_UI_THREAD(selectMarker, args);
-    id markerProxy = [args objectAtIndex:0];
+    DEPRECATED(@"selectMarker()", @"selectAnnotation()", @"2.2.0");
+    [self selectAnnotation:value];
+}
+
+-(void)selectAnnotation:(id)value
+{
+    ENSURE_UI_THREAD(selectAnnotation, value);
+    id markerProxy = [value objectAtIndex:0];
     ENSURE_TYPE(markerProxy, TiGooglemapsMarkerProxy);
     
     [[[self mapView] mapView] setSelectedMarker:[markerProxy marker]];
@@ -209,8 +221,13 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 -(void)deselectMarker:(id)unused
 {
-    ENSURE_UI_THREAD(selectMarker, unused);
-    
+    DEPRECATED(@"deselectMarker()", @"deselectAnnotation()", @"2.2.0");
+    [self deselectAnnotation:unused];
+}
+
+-(void)deselectAnnotation:(id)unused
+{
+    ENSURE_UI_THREAD(deselectAnnotation, unused);
     [[[self mapView] mapView] setSelectedMarker:nil];
 }
 

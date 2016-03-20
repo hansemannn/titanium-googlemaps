@@ -174,24 +174,49 @@
  *  Returns the currently selected marker.
  *
  *  @return The selected marker.
+ *  @deprecated 2.2.0
  *  @since 2.1.0
  */
--(id)getSelectedMarker:(id)unused;
+-(id)getSelectedMarker:(id)unused __attribute((deprecated("Use getSelectedAnnotation instead.")));
 
 /**
  *  Selects a marker.
  *
- *  @param args The marker proxy.
+ *  @param value The marker proxy.
+ *  @deprecated 2.2.0
  *  @since 2.1.0
  */
--(void)selectMarker:(id)unused;
+-(void)selectMarker:(id)value __attribute((deprecated("Use selectAnnotation instead.")));
 
 /**
  *  Deselects a marker.
  *
- *  @param args The marker proxy.
+ *  @deprecated 2.2.0
  *  @since 2.1.0
  */
--(void)deselectMarker:(id)args;
+-(void)deselectMarker:(id)unused __attribute((deprecated("Use deselectAnnotation instead.")));
+
+/**
+ *  Returns the currently selected annotation.
+ *
+ *  @return The selected annotation.
+ *  @since 2.2.0
+ */
+-(id)getSelectedAnnotation:(id)unused;
+
+/**
+ *  Selects a annotation.
+ *
+ *  @param value The annotation proxy.
+ *  @since 2.2.0
+ */
+-(void)selectAnnotation:(id)value;
+
+/**
+ *  Deselects a annotation.
+ *
+ *  @since 2.2.0
+ */
+-(void)deselectAnnotation:(id)unused;
 
 @end
