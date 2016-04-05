@@ -207,6 +207,7 @@ The module supports all native delegates - exposed as events. These are:
 - [x] dragstart
 - [x] dragmove
 - [x] dragend
+- [x] complete
 
 #### Example
 For a full example, check the demo in `iphone/example/app.js`.
