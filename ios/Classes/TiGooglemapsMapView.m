@@ -72,14 +72,20 @@
     id latitude = [args valueForKey:@"latitude"];
     id longitude = [args valueForKey:@"longitude"];
     id zoom = [args valueForKey:@"zoom"];
+    id bearing = [args valueForKey:@"zoom"];
+    id viewingAngle = [args valueForKey:@"zoom"];
     
     ENSURE_TYPE(latitude, NSNumber);
     ENSURE_TYPE(longitude, NSNumber)
     ENSURE_TYPE_OR_NIL(zoom, NSNumber);
+    ENSURE_TYPE_OR_NIL(bearing, NSNumber);
+    ENSURE_TYPE_OR_NIL(viewingAngle, NSNumber);
     
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[TiUtils doubleValue:latitude]
                                                             longitude:[TiUtils doubleValue:longitude]
-                                                                 zoom:[TiUtils floatValue:zoom def:1]];
+                                                                 zoom:[TiUtils floatValue:zoom def:1]
+                                                              bearing:[TiUtils floatValue:bearing def:0]
+                                                         viewingAngle:[TiUtils floatValue:viewingAngle def:0]];
     
     [[self mapView] setCamera:camera];
     [[self proxy] replaceValue:args forKey:@"camera" notification:NO];
@@ -186,6 +192,13 @@
             @"mapView" : [self proxy]
         };
         [[self proxy] fireEvent:@"locationclick" withObject:event];
+    }
+}
+
+- (void)mapViewDidFinishTileRendering:(GMSMapView *)mapView
+{
+    if ([[self proxy] _hasListeners:@"complete"]) {
+        [[self proxy] fireEvent:@"complete"];
     }
 }
 
