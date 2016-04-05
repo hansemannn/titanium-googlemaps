@@ -95,11 +95,38 @@
     [self replaceValue:value forKey:@"tappable" notification:NO];
 }
 
+-(NSNumber*)tappable
+{
+    return NUMBOOL([[self marker] isTappable]);
+}
+
 -(void)setFlat:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
     [[self marker] setFlat:[TiUtils boolValue:value def:NO]];
     [self replaceValue:value forKey:@"flat" notification:NO];
+}
+
+-(NSNumber*)flat
+{
+    return NUMBOOL([[self marker] isFlat]);
+}
+
+-(void)setGroundAnchor:(id)args
+{
+    ENSURE_UI_THREAD_1_ARG(args);
+    [_marker setGroundAnchor:CGPointMake([TiUtils doubleValue:[args valueForKey:@"x"]],[TiUtils doubleValue:[args valueForKey:@"y"]])];
+}
+
+-(void)setRotation:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    [[self marker] setRotation:[TiUtils doubleValue:value def:0]];
+}
+
+-(NSNumber*)rotation
+{
+    return NUMDOUBLE([[self marker] rotation]);
 }
 
 -(void)setDraggable:(id)value

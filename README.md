@@ -67,7 +67,9 @@ var mapView = maps.createMapView({
     camera: { // Camera center of the map
         latitude: 37.368122,
         longitude: -121.913653,
-        zoom: 10 // Zoom in points
+        zoom: 10, // Zoom in points
+		bearing: 0, // Map angle
+		viewingAngle: 0 // Map Tilting
     }
 });
 ```
@@ -114,6 +116,11 @@ var marker = maps.createMarker({
         x: 0.5,
         y: 0
     },
+    groundAnchor: { // Anchor point for rotations Default: {x:0,y:0}
+        x: 0.5,
+        y: 0.5
+    },
+    rotation: 90, // in degrees
     userData: { // Default: Undefined
         id: 123,
         custom_key: "custom_value"
@@ -200,6 +207,7 @@ The module supports all native delegates - exposed as events. These are:
 - [x] dragstart
 - [x] dragmove
 - [x] dragend
+- [x] complete
 
 #### Example
 For a full example, check the demo in `iphone/example/app.js`.
