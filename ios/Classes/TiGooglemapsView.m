@@ -5,15 +5,15 @@
  * Please see the LICENSE included with this distribution for details.
  */
 
-#import "TiGooglemapsMapView.h"
+#import "TiGooglemapsView.h"
+#import "TiGooglemapsViewProxy.h"
 #import "TiGooglemapsAnnotationProxy.h"
-#import "TiGooglemapsMapViewProxy.h"
 #import "TiGooglemapsCircleProxy.h"
 #import "TiGooglemapsPolygonProxy.h"
 #import "TiGooglemapsPolylineProxy.h"
 #import "TiGooglemapsConstants.h"
 
-@implementation TiGooglemapsMapView
+@implementation TiGooglemapsView
 
 @synthesize mapView = _mapView;
 
@@ -23,8 +23,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 -(GMSMapView*)mapView
 {
     if (_mapView == nil) {
-        DEPRECATED(@"MapView", @"View", @"2.2.0");
-        
+
         _mapView = [[GMSMapView alloc] initWithFrame:self.bounds];
         _mapView.delegate = self;
         _mapView.myLocationEnabled = [TiUtils boolValue:[self.proxy valueForKey:@"myLocationEnabled"] def:YES];
@@ -37,9 +36,9 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     return _mapView;
 }
 
--(TiGooglemapsMapViewProxy*)mapViewProxy
+-(TiGooglemapsViewProxy*)mapViewProxy
 {
-    return (TiGooglemapsMapViewProxy*)[self proxy];
+    return (TiGooglemapsViewProxy*)[self proxy];
 }
 
 - (void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds

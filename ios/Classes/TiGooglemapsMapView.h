@@ -6,7 +6,6 @@
  */
 #import "TiUIView.h"
 #import <GoogleMaps/GoogleMaps.h>
-#import "TiGooglemapsMapView.h"
 
 @interface TiGooglemapsMapView : TiUIView<GMSMapViewDelegate>
 

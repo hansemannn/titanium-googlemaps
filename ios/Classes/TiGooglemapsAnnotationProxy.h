@@ -1,13 +1,13 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2015 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2016 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
-#import "TiViewProxy.h"
+#import "TiProxy.h"
 #import <GoogleMaps/GoogleMaps.h>
 
-@interface TiGooglemapsMarkerProxy : TiProxy<GMSMapViewDelegate>
+@interface TiGooglemapsAnnotationProxy : TiProxy
 
 @property(nonatomic,retain) GMSMarker *marker;
 
@@ -28,30 +28,12 @@
 -(void)setTitle:(id)value;
 
 /**
- *  Sets the annotation snippet.
- *
- *  @param value The snippet
- *  @deprecated 2.2.0
- *  @since 1.0.0
- */
--(void)setSnippet:(id)value __attribute((deprecated("Use subtitle instead.")));
-
-/**
  *  Sets the annotation subtitle.
  *
  *  @param value The subtitle
  *  @since 2.2.0
  */
 -(void)setSubtitle:(id)value;
-
-/**
- *  Sets the annotation info window offset.
- *
- *  @param args The point
- *  @deprecated 2.2.0
- *  @since 1.0.0
- */
--(void)setInfoWindowAnchor:(id)args __attribute((deprecated("Use centerOffset instead.")));
 
 /**
  *  Sets the annotation center offset.
@@ -70,15 +52,6 @@
 -(void)setGroundOffset:(id)args;
 
 /**
- *  Sets the annotation icon.
- *
- *  @param value The icon
- *  @deprecated 2.2.0
- *  @since 1.0.0
- */
--(void)setIcon:(id)value __attribute((deprecated("Use image instead.")));
-
-/**
  *  Sets the annotation image.
  *
  *  @param value The image
@@ -93,15 +66,6 @@
  *  @since 2.1.0
  */
 -(void)setPinColor:(id)value;
-
-/**
- *  Sets the annotation touch-capacity.
- *
- *  @param value The boolean capacity
- *  @deprecated 2.2.0
- *  @since 1.0.0
- */
--(void)setTappable:(id)value __attribute((deprecated("Use touchEnabled instead.")));;
 
 /**
  *  Sets the annotation touch-capacity.

@@ -14,7 +14,7 @@
 -(GMSPolygon*)polygon
 {
     if (_polygon == nil) {
-        _polygon = [[GMSPolygon alloc] init];
+        _polygon = [GMSPolygon new];
         _polygon.tappable = YES;
     }
     

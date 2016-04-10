@@ -14,7 +14,7 @@
 -(GMSPolyline*)polyline
 {
     if (_polyline == nil) {
-        _polyline = [[GMSPolyline alloc] init];
+        _polyline = [GMSPolyline new];
         _polyline.tappable = YES;
     }
     

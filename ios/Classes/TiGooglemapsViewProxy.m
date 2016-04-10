@@ -5,13 +5,14 @@
  * Please see the LICENSE included with this distribution for details.
  */
 
-#import "TiGooglemapsMapViewProxy.h"
+#import "TiGooglemapsView.h"
+#import "TiGooglemapsViewProxy.h"
 #import "TiGooglemapsPolylineProxy.h"
 #import "TiGooglemapsPolygonProxy.h"
 #import "TiGooglemapsCircleProxy.h"
 #import "TiUtils.h"
 
-@implementation TiGooglemapsMapViewProxy
+@implementation TiGooglemapsViewProxy
 
 #define DEPRECATED(from, to, in) \
 NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, to, in);\
@@ -25,9 +26,9 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     [super dealloc];
 }
 
--(TiGooglemapsMapView*)mapView
+-(TiGooglemapsView*)mapView
 {
-    return (TiGooglemapsMapView*)[self view];
+    return (TiGooglemapsView*)[self view];
 }
 
 -(NSMutableArray*)markers
@@ -70,7 +71,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 -(void)setCamera:(id)args
 {
-    DEPRECATED(@"MapView.camera", @"MapView.region", @"2.2.0");
+    DEPRECATED(@"MapView.camera", @"View.region", @"2.2.0");
     [self setRegion:args];
 }
 
@@ -251,7 +252,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 -(void)selectMarker:(id)value
 {
-    DEPRECATED(@"selectMarker()", @"selectAnnotation()", @"2.2.0");
+    DEPRECATED(@"MapView.selectMarker()", @"View.selectAnnotation()", @"2.2.0");
     [self selectAnnotation:value];
 }
 

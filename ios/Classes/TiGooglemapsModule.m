@@ -9,7 +9,6 @@
 #import "TiHost.h"
 #import "TiUtils.h"
 #import "TiGooglemapsModule.h"
-#import "TiGooglemapsMapViewProxy.h"
 #import <GoogleMaps/GoogleMaps.h>
 
 @implementation TiGooglemapsModule
@@ -94,5 +93,8 @@ MAKE_SYSTEM_PROP(MAP_TYPE_NONE, kGMSTypeNone);
 MAKE_SYSTEM_PROP(MAP_TYPE_NORMAL, kGMSTypeNormal);
 MAKE_SYSTEM_PROP(MAP_TYPE_SATTELITE, kGMSTypeSatellite);
 MAKE_SYSTEM_PROP(MAP_TYPE_TERRAIN, kGMSTypeTerrain);
+
+MAKE_SYSTEM_PROP(APPEAR_ANIMATION_NONE, kGMSMarkerAnimationNone);
+MAKE_SYSTEM_PROP(APPEAR_ANIMATION_POP, kGMSMarkerAnimationPop);
 
 @end

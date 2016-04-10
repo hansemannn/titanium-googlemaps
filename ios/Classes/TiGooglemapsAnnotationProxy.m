@@ -1,27 +1,23 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2015 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2016 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
 
-#import "TiGooglemapsMarkerProxy.h"
+#import "TiGooglemapsAnnotationProxy.h"
 #import "TiUtils.h"
 
-@implementation TiGooglemapsMarkerProxy
+@implementation TiGooglemapsAnnotationProxy
 
-#define DEPRECATED(from, to, in) \
-NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, in, to);\
 
 @synthesize marker = _marker;
 
 -(GMSMarker*)marker
 {
     if (_marker == nil) {
-        DEPRECATED(@"Marker", @"Annotation", @"2.2.0");
-        
         _marker = [GMSMarker new];
-
+        
         [_marker setPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:[self valueForKey:@"latitude"]],[TiUtils doubleValue:[self valueForKey:@"longitude"]])];
     }
     
@@ -49,15 +45,9 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, i
 {
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSString);
-
+    
     [[self marker] setTitle:[TiUtils stringValue:value]];
     [self replaceValue:value forKey:@"title" notification:NO];
-}
-
--(void)setSnippet:(id)value
-{
-    DEPRECATED(@"Annotation.snippet", @"Annotation.subtitle", @"2.2.0");
-    [self setSubtitle:value];
 }
 
 -(void)setSubtitle:(id)value
@@ -67,12 +57,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, i
     
     [[self marker] setSnippet:[TiUtils stringValue:value]];
     [self replaceValue:value forKey:@"subtitle" notification:NO];
-}
-
--(void)setInfoWindowAnchor:(id)args
-{
-    DEPRECATED(@"Annotation.infoWindowAnchor", @"Annotation.centerOffset", @"2.2.0");
-    [self setCenterOffset:args];
 }
 
 -(void)setCenterOffset:(id)args
@@ -91,12 +75,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, i
     [self replaceValue:args forKey:@"groundOffset" notification:NO];
 }
 
--(void)setIcon:(id)value
-{
-    DEPRECATED(@"Annotation.icon", @"Annotation.image", @"2.1.0");
-    [self setImage:value];
-}
-
 -(void)setImage:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
@@ -111,17 +89,11 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, i
     [self replaceValue:value forKey:@"pinColor" notification:NO];
 }
 
--(void)setTappable:(id)value
-{
-    DEPRECATED(@"Annotation.tappable", @"Annotation.touchEnabled", @"2.2.0");
-    [self setTappable:value];
-}
-
 -(void)setTouchEnabled:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSNumber);
-
+    
     [[self marker] setTappable:[TiUtils boolValue:value def:YES]];
     [self replaceValue:value forKey:@"touchEnabled" notification:NO];
 }
@@ -130,7 +102,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, i
 {
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSNumber);
-
+    
     [[self marker] setFlat:[TiUtils boolValue:value def:NO]];
     [self replaceValue:value forKey:@"flat" notification:NO];
 }
@@ -139,7 +111,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, i
 {
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSNumber);
-
+    
     [[self marker] setDraggable:[TiUtils boolValue:value def:NO]];
     [self replaceValue:value forKey:@"draggable" notification:NO];
 }

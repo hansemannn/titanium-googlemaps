@@ -14,7 +14,7 @@
 -(GMSCircle*)circle
 {
     if (_circle == nil) {
-        _circle = [[GMSCircle alloc] init];
+        _circle = [GMSCircle new];
         _circle.tappable = YES;
     }
     

@@ -7,7 +7,7 @@
 ---------------
 Ti.GoogleMaps is an open-source project to support the Google Maps SDK for iOS on Appcelerator's Titanium Mobile. The module currently supports the following API's:
 - [x] Map View
-- [x] Marker
+- [x] Annotations
 - [x] Polygon overlay
 - [x] Polyline overlay
 - [x] Circle overlay
@@ -54,7 +54,7 @@ If you want to build the module from the source, you need to check some things b
 Features
 --------------------------------
 #### Map View
-A map view creates the view on which marker and overlays can be added to. You can see all possible events in the demo app. In addition, you can specify one of the following constants to the `mapType` property:
+A map view creates the view on which annotations and overlays can be added to. You can see all possible events in the demo app. In addition, you can specify one of the following constants to the `mapType` property:
  - ``MAP_TYPE_NORMAL``
  - ``MAP_TYPE_HYBRID``
  - ``MAP_TYPE_SATELLITE``
@@ -64,7 +64,7 @@ A map view creates the view on which marker and overlays can be added to. You ca
 ```javascript
 var mapView = maps.createMapView({
     mapType: maps.MAP_TYPE_TERRAIN,
-    camera: { // Camera center of the map
+    region: { // Camera center of the map
         latitude: 37.368122,
         longitude: -121.913653,
         zoom: 10 // Zoom in points
@@ -96,47 +96,53 @@ mapView.animateToViewingAngle(30);
 
 ```
 
-#### Marker
-A marker represents a location specified by at least a `title` and a `snippet` property. It can be added to a map view:
+#### Annotations
+An annotation represents a location specified by at least a `title` and a `subtitle` property. It can be added to a map view:
 
 ```javascript
-var marker = maps.createMarker({
+var annotation = maps.createAnnotation({
     latitude : 37.368122,
     longitude : -121.913653,
     title : "Appcelerator, Inc",
-    snippet : "1732 N. 1st Street, San Jose",
-    pinColor: "green", // Default: Undefined
-    image: "pin.png", // Default: Undefined
-    tappable: true, // Default: true
+    subtitle : "1732 N. 1st Street, San Jose",
+    pinColor: "green",
+    image: "pin.png",
+    touchEnabled: true, // Default: true
     draggable: true, // Default: false
     flat: true, // Default: false
-    infoWindowAnchor: { // Default: {x:0,y:0}
+    opacity: 1,
+    animationStyle: maps.APPEAR_ANIMATION_POP, // One of "APPEAR_ANIMATION_NONE" (default) and "maps.APPEAR_ANIMATION_POP"
+    centerOffset: {
         x: 0.5,
         y: 0
     },
-    userData: { // Default: Undefined
+    groundOffset: {
+        x: 0.5,
+        y: 0
+    },
+    userData: {
         id: 123,
         custom_key: "custom_value"
     }
 });
-mapView.addMarker(marker);
+mapView.addAnnotation(annotation);
 ```
 
-You also can add multiple markers as well as remove markers again:
+You also can add multiple annotations as well as remove annotations again:
 ```javascript
-mapView.addMarkers([marker1,marker2,marker3]);
-mapView.removeMarker(marker4);
+mapView.addAnnotations([anno1,anno2,anno3]);
+mapView.removeAnnotation(anno4);
 ```
 
-You can select and deselect marker, as well as receive the currently selected marker:
+You can select and deselect annotations, as well as receive the currently selected annotation:
 ```javascript
-mapView.selectMarker(marker1); // Select
-mapView.deselectMarker(); // Deselect
-var selectedMarker = mapView.getSelectedMarker(); // Selected marker, null if no marker selected
+mapView.selectAnnotation(anno1); // Select
+mapView.deselectAnnotation(); // Deselect
+var selectedAnnotation = mapView.getSelectedAnnotation(); // Selected annotation, null if no annotation is selected
 ```
 
 #### Overlays
-Overlays can be added to the map view just like markers. The module supports the methods ``addPolygon``, ``addPolyline`` and ``addCircle`` to add overlays and ``removePolygon``, ``removePolyline`` and ``removeCircle`` to remove them.
+Overlays can be added to the map view just like annotations. The module supports the methods ``addPolygon``, ``addPolyline`` and ``addCircle`` to add overlays and ``removePolygon``, ``removePolyline`` and ``removeCircle`` to remove them.
 
 ##### Polyline
 A polyline is a shape defined by its ``points`` property. It needs at least 2 points to draw a line.

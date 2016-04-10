@@ -4,12 +4,11 @@
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
+#import "TiUIView.h"
+#import <GoogleMaps/GoogleMaps.h>
 
-#import "TiModule.h"
+@interface TiGooglemapsView : TiUIView<GMSMapViewDelegate>
 
-@interface TiGooglemapsModule : TiModule
-
--(void)setAPIKey:(id)value;
--(NSString*)version;
+@property(nonatomic,retain) GMSMapView *mapView;
 
 @end
