@@ -37,7 +37,7 @@ var companies = {
  */
 var mapView = maps.createMapView({
     mapType: maps.MAP_TYPE_TERRAIN,
-    camera: {
+    region: {
         latitude: companies.appcelerator.latitude,
         longitude: companies.appcelerator.longitude,
         zoom: 10
@@ -109,7 +109,6 @@ function handleLocationClickEvent(e) {
 
 mapView.addEventListener("click", handleClickEvent);
 mapView.addEventListener("longpress", handleLongpressEvent);
-mapView.addEventListener("markerclick", handlerMarkerClickEvent);
 mapView.addEventListener("willmove", handleWillMoveEvent);
 mapView.addEventListener("camerachange", handleCameraChangeEvent);
 mapView.addEventListener("idle", handleIdleEvent);
@@ -127,16 +126,16 @@ for (var key in companies) {
     if (companies.hasOwnProperty(key)) {
         var company = companies[key];
 
-        var marker = maps.createMarker({
+        var annotation = maps.createAnnotation({
             latitude: company.latitude,
             longitude: company.longitude,
             title: company.title,
+            subtitle: company.city,
             // pinColor: "green",
-            // image: "myPin.png",
-            snippet: company.city
+            // image: "myPin.png"
         });
 
-        mapView.addMarker(marker);
+        mapView.addAnnotation(annotation);
 
         Ti.API.warn(key + ": " + company.title + " (" + company.city + ")");
     }
