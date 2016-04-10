@@ -9,7 +9,6 @@
 #import "TiHost.h"
 #import "TiUtils.h"
 #import "TiGooglemapsModule.h"
-#import "TiGooglemapsMapViewProxy.h"
 #import <GoogleMaps/GoogleMaps.h>
 
 @implementation TiGooglemapsModule

@@ -8,8 +8,8 @@
 #import "TiGooglemapsMapView.h"
 #import "TiGooglemapsAnnotationProxy.h"
 
-@interface TiGooglemapsMapViewProxy : TiViewProxy<GMSMapViewDelegate> {
-    TiGooglemapsMapViewProxy* mapView;
+@interface TiGooglemapsViewProxy : TiViewProxy<GMSMapViewDelegate> {
+    TiGooglemapsViewProxy* mapView;
     NSMutableArray *markers;
     NSMutableArray *overlays;
 }
@@ -219,12 +219,37 @@
  */
 -(void)deselectAnnotation:(id)unused;
 
+/**
+ *  Sets the state of the location-enabled button.
+ *
+ *  @param value The enabled value.
+ *  @since 1.0.0
+ */
 -(void)setMyLocationEnabled:(id)value;
 
+/**
+ *  Sets the map type.
+ *
+ *  @param value The map type.
+ *  @since 1.0.0
+ */
 -(void)setMapType:(id)value;
 
--(void)setCamera:(id)args;
+/**
+ *  Sets the camera region.
+ *
+ *  @param value The region.
+ *  @deprecated 2.2.0
+ *  @since 1.0.0
+ */
+-(void)setCamera:(id)args __attribute((deprecated("Use region instead.")));
 
+/**
+ *  Sets the camera region.
+ *
+ *  @param value The region.
+ *  @since 2.2.0
+ */
 -(void)setRegion:(id)args;
 
 @end

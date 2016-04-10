@@ -64,7 +64,7 @@ A map view creates the view on which annotations and overlays can be added to. Y
 ```javascript
 var mapView = maps.createMapView({
     mapType: maps.MAP_TYPE_TERRAIN,
-    camera: { // Camera center of the map
+    region: { // Camera center of the map
         latitude: 37.368122,
         longitude: -121.913653,
         zoom: 10 // Zoom in points
