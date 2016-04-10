@@ -62,7 +62,7 @@ A map view creates the view on which annotations and overlays can be added to. Y
  - ``MAP_TYPE_NONE``
 
 ```javascript
-var mapView = maps.createMapView({
+var mapView = maps.createView({
     mapType: maps.MAP_TYPE_TERRAIN,
     region: { // Camera center of the map
         latitude: 37.368122,
@@ -194,14 +194,11 @@ mapView.addCircle(circle);
 #### Events
 The module supports all native delegates - exposed as events. These are:
 
-- [x] click
-- [x] overlayclick
+- [x] click (map, pin, infoWindow, overlay)
 - [x] locationclick
 - [x] longpress
-- [x] markerclick
-- [x] markerinfoclick
-- [x] camerachange
-- [x] willmove
+- [x] regiondchanged
+- [x] regionwillchange
 - [x] idle
 - [x] dragstart
 - [x] dragmove
