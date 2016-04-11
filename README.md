@@ -85,9 +85,9 @@ Animate to a zoom level:
 mapView.animateToZoom(5);
 ```
 
-Animate to a location:
+Animate to a bearing:
 ```javascript
-mapView.animateToBearing(0);
+mapView.animateToBearing(45);
 ```
 
 Animate to a viewing angle:

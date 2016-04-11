@@ -298,25 +298,28 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 -(void)animateToZoom:(id)value
 {
     ENSURE_UI_THREAD(animateToZoom, value);
-    ENSURE_TYPE(value, NSNumber);
+    ENSURE_ARG_COUNT(value, 1);
+    ENSURE_TYPE([value objectAtIndex:0], NSNumber);
     
-    [[[self mapView] mapView] animateToZoom:[TiUtils floatValue:value]];
+    [[[self mapView] mapView] animateToZoom:[TiUtils floatValue:[value objectAtIndex:0]]];
 }
 
 -(void)animateToBearing:(id)value
 {
     ENSURE_UI_THREAD(animateToBearing, value);
-    ENSURE_TYPE(value, NSNumber);
+    ENSURE_ARG_COUNT(value, 1);
+    ENSURE_TYPE([value objectAtIndex:0], NSNumber);
     
-    [[[self mapView] mapView] animateToBearing:[TiUtils doubleValue:value]];
+    [[[self mapView] mapView] animateToBearing:[TiUtils doubleValue:[value objectAtIndex:0]]];
 }
 
 -(void)animateToViewingAngle:(id)value
 {
     ENSURE_UI_THREAD(animateToViewingAngle, value);
-    ENSURE_TYPE(value, NSNumber);
+    ENSURE_ARG_COUNT(value, 1);
+    ENSURE_TYPE([value objectAtIndex:0], NSNumber);
     
-    [[[self mapView] mapView] animateToViewingAngle:[TiUtils doubleValue:value]];
+    [[[self mapView] mapView] animateToViewingAngle:[TiUtils doubleValue:[value objectAtIndex:0]]];
 }
 
 @end
