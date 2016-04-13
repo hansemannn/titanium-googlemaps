@@ -197,7 +197,7 @@ The module supports all native delegates - exposed as events. These are:
 - [x] click (map, pin, infoWindow, overlay)
 - [x] locationclick
 - [x] longpress
-- [x] regiondchanged
+- [x] regionchanged
 - [x] regionwillchange
 - [x] idle
 - [x] dragstart
