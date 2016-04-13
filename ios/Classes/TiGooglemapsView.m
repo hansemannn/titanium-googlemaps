@@ -213,6 +213,13 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     }
 }
 
+- (void)mapViewDidFinishTileRendering:(GMSMapView *)mapView
+{
+    if ([[self proxy] _hasListeners:@"complete"]) {
+        [[self proxy] fireEvent:@"complete"];
+    }
+}
+
 #pragma mark Helper
 
 -(NSDictionary*)dictionaryFromCameraPosition:(GMSCameraPosition*)position

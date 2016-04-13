@@ -109,8 +109,8 @@ function handleLocationClickEvent(e) {
 
 mapView.addEventListener("click", handleClickEvent);
 mapView.addEventListener("longpress", handleLongpressEvent);
-mapView.addEventListener("willmove", handleWillMoveEvent);
-mapView.addEventListener("camerachange", handleCameraChangeEvent);
+mapView.addEventListener("regionwillchange", handleWillMoveEvent);
+mapView.addEventListener("regionchanged", handleCameraChangeEvent);
 mapView.addEventListener("idle", handleIdleEvent);
 mapView.addEventListener("markerinfoclick", handleMarkerInfoClickEvent);
 mapView.addEventListener("overlayclick", handleOverlayClickEvent);

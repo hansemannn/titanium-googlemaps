@@ -133,13 +133,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3ACF6A1F1CBA8AFC00BC765B /* GoogleMaps.framework in Frameworks */,
 				3AF900C61BC1F08200172627 /* libc++.1.dylib in Frameworks */,
 				3AF900C31BC1F05900172627 /* libicucore.A.dylib in Frameworks */,
 				3AF900C41BC1F05900172627 /* libz.1.dylib in Frameworks */,
 				3AF900AB1BC1ED7800172627 /* Accelerate.framework in Frameworks */,
 				3AF900AC1BC1ED7800172627 /* AVFoundation.framework in Frameworks */,
 				3AF900AD1BC1ED7800172627 /* CoreBluetooth.framework in Frameworks */,
-				3ACF6A1F1CBA8AFC00BC765B /* GoogleMaps.framework in Frameworks */,
 				3AF900AE1BC1ED7800172627 /* CoreData.framework in Frameworks */,
 				3AF900AF1BC1ED7800172627 /* CoreGraphics.framework in Frameworks */,
 				3AF900B01BC1ED7800172627 /* CoreLocation.framework in Frameworks */,
