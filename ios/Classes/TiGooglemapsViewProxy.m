@@ -103,7 +103,8 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[TiUtils doubleValue:latitude]
                                                             longitude:[TiUtils doubleValue:longitude]
-                                                                 zoom:[TiUtils floatValue:zoom def:1]bearing:[TiUtils floatValue:bearing def:0]
+                                                                 zoom:[TiUtils floatValue:zoom def:1]
+                                                              bearing:[TiUtils floatValue:bearing def:0]
                                                          viewingAngle:[TiUtils floatValue:viewingAngle def:0]];
     
     [[[self mapView] mapView] setCamera:camera];

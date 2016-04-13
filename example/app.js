@@ -107,6 +107,11 @@ function handleLocationClickEvent(e) {
     Ti.API.warn(e);
 }
 
+function handleMapCompleteEvent(e) {
+    Ti.API.warn("\"mapcomplete\" event fired!");
+    Ti.API.warn(e);
+}
+
 mapView.addEventListener("click", handleClickEvent);
 mapView.addEventListener("longpress", handleLongpressEvent);
 mapView.addEventListener("regionwillchange", handleWillMoveEvent);
@@ -118,6 +123,7 @@ mapView.addEventListener("dragstart", handleDragStartEvent);
 mapView.addEventListener("dragmove", handleDragMoveEvent);
 mapView.addEventListener("dragend", handleDragEndEvent);
 mapView.addEventListener("locationclick", handleLocationClickEvent);
+mapView.addEventListener("complete", handleMapCompleteEvent);
 
 /*
  *  Marker
