@@ -60,6 +60,42 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     [self replaceValue:value forKey:@"indoorEnabled" notification:NO];
 }
 
+-(void)setScrollGestures:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[self mapView] mapView].settings setScrollGestures:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"scrollGestures" notification:NO];
+}
+
+-(void)setZoomGestures:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[self mapView] mapView].settings setZoomGestures:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"zoomGestures" notification:NO];
+}
+
+-(void)setTiltGestures:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[self mapView] mapView].settings setTiltGestures:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"tiltGestures" notification:NO];
+}
+
+-(void)setRotateGestures:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[self mapView] mapView].settings setRotateGestures:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"rotateGestures" notification:NO];
+}
+
 -(void)setMyLocationEnabled:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);

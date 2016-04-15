@@ -65,6 +65,10 @@ A map view creates the view on which annotations and overlays can be added to. Y
 var mapView = maps.createView({
     mapType: maps.MAP_TYPE_TERRAIN,
     indoorEnabled: true, // shows indoor polygons of mapped indoor venues
+    indoorPicker: true, // shows the vertical floor level
+    compassButton: true, // shows the compass (top/right) when bearing is non-zero
+    myLocationEnabled: true,
+    myLocationButton: true, // shows the default My location button
     region: { // Camera center of the map
         latitude: 37.368122,
         longitude: -121.913653,
@@ -73,6 +77,14 @@ var mapView = maps.createView({
         viewingAngle: 30 // measured in degrees
     }
 });
+```
+
+Enable/Disable Gestures:
+```
+mapView.scrollGesture = true;
+mapView.zoomGestures = false;
+mapView.tiltGestures = true;
+mapView.rotateGestures = false;
 ```
 
 Animate to a location:

@@ -37,12 +37,24 @@ var companies = {
  */
 var mapView = maps.createMapView({
     mapType: maps.MAP_TYPE_TERRAIN,
+    indoorEnabled: true,
+    indoorPicker: false,
+    compassButton: true,
+    myLocationButton: true,
     region: {
         latitude: companies.appcelerator.latitude,
         longitude: companies.appcelerator.longitude,
         zoom: 10
     }
 });
+
+/*
+ * Enable/Disable Gesture
+ */
+mapView.scrollGesture = true;
+mapView.zoomGestures = true;
+mapView.tiltGestures = false;
+mapView.rotateGestures = false;
 
 /*
  * Events
