@@ -37,12 +37,34 @@ var companies = {
  */
 var mapView = maps.createMapView({
     mapType: maps.MAP_TYPE_TERRAIN,
+    indoorEnabled: true,
+    indoorPicker: false,
+    compassButton: true,
+    myLocationButton: true,
+	myLocationEnabled: true,
     region: {
         latitude: companies.appcelerator.latitude,
         longitude: companies.appcelerator.longitude,
         zoom: 10
     }
 });
+
+/*
+ * Map Controls
+ */
+mapView.indoorEnabled = true;
+mapView.indoorPicker = true;
+mapView.compassButton = false;
+mapView.myLocationButton = false;
+mapView.myLocationEnabled = true;
+
+/*
+ * Enable/Disable Gesture
+ */
+mapView.scrollGesture = true;
+mapView.zoomGestures = true;
+mapView.tiltGestures = false;
+mapView.rotateGestures = false;
 
 /*
  * Events
@@ -107,10 +129,15 @@ function handleLocationClickEvent(e) {
     Ti.API.warn(e);
 }
 
+function handleMapCompleteEvent(e) {
+    Ti.API.warn("\"mapcomplete\" event fired!");
+    Ti.API.warn(e);
+}
+
 mapView.addEventListener("click", handleClickEvent);
 mapView.addEventListener("longpress", handleLongpressEvent);
-mapView.addEventListener("willmove", handleWillMoveEvent);
-mapView.addEventListener("camerachange", handleCameraChangeEvent);
+mapView.addEventListener("regionwillchange", handleWillMoveEvent);
+mapView.addEventListener("regionchanged", handleCameraChangeEvent);
 mapView.addEventListener("idle", handleIdleEvent);
 mapView.addEventListener("markerinfoclick", handleMarkerInfoClickEvent);
 mapView.addEventListener("overlayclick", handleOverlayClickEvent);
@@ -118,6 +145,7 @@ mapView.addEventListener("dragstart", handleDragStartEvent);
 mapView.addEventListener("dragmove", handleDragMoveEvent);
 mapView.addEventListener("dragend", handleDragEndEvent);
 mapView.addEventListener("locationclick", handleLocationClickEvent);
+mapView.addEventListener("complete", handleMapCompleteEvent);
 
 /*
  *  Marker

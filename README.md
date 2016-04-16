@@ -64,12 +64,36 @@ A map view creates the view on which annotations and overlays can be added to. Y
 ```javascript
 var mapView = maps.createView({
     mapType: maps.MAP_TYPE_TERRAIN,
+    indoorEnabled: true, // shows indoor polygons of mapped indoor venues
+    indoorPicker: true, // shows the vertical floor level
+    compassButton: true, // shows the compass (top/right) when bearing is non-zero
+    myLocationEnabled: true,
+    myLocationButton: true, // shows the default My location button
     region: { // Camera center of the map
         latitude: 37.368122,
         longitude: -121.913653,
-        zoom: 10 // Zoom in points
+        zoom: 10, // Zoom in points
+        bearing: 45, // orientation measured in degrees clockwise from north
+        viewingAngle: 30 // measured in degrees
     }
 });
+```
+
+Map Controls:
+```
+mapView.indoorEnabled = false;
+mapView.indoorPicker = true;
+mapView.compassButton = true;
+mapView.myLocationEnabled = false;
+mapView.myLocationButton = false;
+```
+
+Enable/Disable Gestures:
+```
+mapView.scrollGesture = true;
+mapView.zoomGestures = false;
+mapView.tiltGestures = true;
+mapView.rotateGestures = false;
 ```
 
 Animate to a location:
@@ -112,6 +136,7 @@ var annotation = maps.createAnnotation({
     flat: true, // Default: false
     opacity: 1,
     animationStyle: maps.APPEAR_ANIMATION_POP, // One of "APPEAR_ANIMATION_NONE" (default) and "maps.APPEAR_ANIMATION_POP"
+    rotation: 30, // measured in degrees clockwise from the default position
     centerOffset: {
         x: 0.5,
         y: 0
@@ -203,6 +228,7 @@ The module supports all native delegates - exposed as events. These are:
 - [x] dragstart
 - [x] dragmove
 - [x] dragend
+- [x] complete
 
 #### Example
 For a full example, check the demo in `iphone/example/app.js`.

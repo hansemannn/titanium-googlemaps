@@ -134,6 +134,12 @@
     [self replaceValue:value forKey:@"animationStyle" notification:NO];
 }
 
+-(void)setRotation:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    [[self marker] setRotation:[TiUtils doubleValue:value def:0]];
+}
+
 -(void)setUserData:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);

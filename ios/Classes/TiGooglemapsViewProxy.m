@@ -51,6 +51,87 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 #pragma mark Public API's
 
+-(void)setUserInteractionEnabled:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[self mapView] mapView] setUserInteractionEnabled:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"userInteractionEnabled" notification:NO];
+}
+
+-(void)setMyLocationButton:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[self mapView] mapView].settings setMyLocationButton:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"myLocationButton" notification:NO];
+}
+
+-(void)setCompassButton:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[self mapView] mapView].settings setCompassButton:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"compassButton" notification:NO];
+}
+
+-(void)setIndoorPicker:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[self mapView] mapView].settings setIndoorPicker:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"indoorPicker" notification:NO];
+}
+
+-(void)setIndoorEnabled:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[self mapView] mapView] setIndoorEnabled:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"indoorEnabled" notification:NO];
+}
+
+-(void)setScrollGestures:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[self mapView] mapView].settings setScrollGestures:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"scrollGestures" notification:NO];
+}
+
+-(void)setZoomGestures:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[self mapView] mapView].settings setZoomGestures:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"zoomGestures" notification:NO];
+}
+
+-(void)setTiltGestures:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[self mapView] mapView].settings setTiltGestures:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"tiltGestures" notification:NO];
+}
+
+-(void)setRotateGestures:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[self mapView] mapView].settings setRotateGestures:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"rotateGestures" notification:NO];
+}
+
 -(void)setMyLocationEnabled:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
@@ -83,14 +164,20 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     id latitude = [args valueForKey:@"latitude"];
     id longitude = [args valueForKey:@"longitude"];
     id zoom = [args valueForKey:@"zoom"];
+    id bearing = [args valueForKey:@"bearing"];
+    id viewingAngle = [args valueForKey:@"viewingAngle"];
     
     ENSURE_TYPE(latitude, NSNumber);
     ENSURE_TYPE(longitude, NSNumber)
     ENSURE_TYPE_OR_NIL(zoom, NSNumber);
+    ENSURE_TYPE_OR_NIL(bearing, NSNumber);
+    ENSURE_TYPE_OR_NIL(viewingAngle, NSNumber);
     
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[TiUtils doubleValue:latitude]
                                                             longitude:[TiUtils doubleValue:longitude]
-                                                                 zoom:[TiUtils floatValue:zoom def:1]];
+                                                                 zoom:[TiUtils floatValue:zoom def:1]
+                                                              bearing:[TiUtils floatValue:bearing def:0]
+                                                         viewingAngle:[TiUtils floatValue:viewingAngle def:0]];
     
     [[[self mapView] mapView] setCamera:camera];
     [self replaceValue:args forKey:@"region" notification:NO];
