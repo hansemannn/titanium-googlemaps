@@ -79,6 +79,15 @@ var mapView = maps.createView({
 });
 ```
 
+Map Controls:
+```
+mapView.indoorEnabled = false;
+mapView.indoorPicker = true;
+mapView.compassButton = true;
+mapView.myLocationEnabled = false;
+mapView.myLocationButton = false;
+```
+
 Enable/Disable Gestures:
 ```
 mapView.scrollGesture = true;

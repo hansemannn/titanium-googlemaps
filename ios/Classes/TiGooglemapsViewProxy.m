@@ -51,6 +51,42 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 #pragma mark Public API's
 
+-(void)setUserInteractionEnabled:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[self mapView] mapView] setUserInteractionEnabled:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"userInteractionEnabled" notification:NO];
+}
+
+-(void)setMyLocationButton:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[self mapView] mapView].settings setMyLocationButton:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"myLocationButton" notification:NO];
+}
+
+-(void)setCompassButton:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[self mapView] mapView].settings setCompassButton:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"compassButton" notification:NO];
+}
+
+-(void)setIndoorPicker:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[self mapView] mapView].settings setIndoorPicker:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"indoorPicker" notification:NO];
+}
+
 -(void)setIndoorEnabled:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);

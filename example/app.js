@@ -41,12 +41,22 @@ var mapView = maps.createMapView({
     indoorPicker: false,
     compassButton: true,
     myLocationButton: true,
+	myLocationEnabled: true,
     region: {
         latitude: companies.appcelerator.latitude,
         longitude: companies.appcelerator.longitude,
         zoom: 10
     }
 });
+
+/*
+ * Map Controls
+ */
+mapView.indoorEnabled = true;
+mapView.indoorPicker = true;
+mapView.compassButton = false;
+mapView.myLocationButton = false;
+mapView.myLocationEnabled = true;
 
 /*
  * Enable/Disable Gesture
