@@ -24,11 +24,11 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 {
     if (_mapView == nil) {
 
-        _mapView = [[GMSMapView alloc] initWithFrame:self.bounds];
-        _mapView.delegate = self;
-        _mapView.myLocationEnabled = [TiUtils boolValue:[self.proxy valueForKey:@"myLocationEnabled"] def:YES];
-        _mapView.userInteractionEnabled = [TiUtils boolValue:[self.proxy valueForKey:@"userInteractionEnabled"] def:YES];
-        _mapView.autoresizingMask = UIViewAutoresizingNone;
+        _mapView = [[GMSMapView alloc] initWithFrame:[self bounds]];
+        [_mapView setDelegate:self];
+        [_mapView setMyLocationEnabled:[TiUtils boolValue:[self.proxy valueForKey:@"myLocationEnabled"] def:YES]];
+        [_mapView setUserInteractionEnabled:[TiUtils boolValue:[self.proxy valueForKey:@"userInteractionEnabled"] def:YES]];
+        [_mapView setAutoresizingMask:UIViewAutoresizingNone];
 
         [self addSubview:_mapView];
     }
