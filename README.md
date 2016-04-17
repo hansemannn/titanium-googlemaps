@@ -5,7 +5,7 @@
 
  Summary
 ---------------
-Ti.GoogleMaps is an open-source project to support the Google Maps SDK for iOS on Appcelerator's Titanium Mobile. The module currently supports the following API's:
+Ti.GoogleMaps is an open-source project to support the Google Maps iOS-SDK in Appcelerator's Titanium Mobile. The module currently supports the following API's:
 - [x] Map View
 - [x] Annotations
 - [x] Polygon overlay
@@ -55,11 +55,11 @@ Features
 --------------------------------
 #### Map View
 A map view creates the view on which annotations and overlays can be added to. You can see all possible events in the demo app. In addition, you can specify one of the following constants to the `mapType` property:
- - ``MAP_TYPE_NORMAL``
- - ``MAP_TYPE_HYBRID``
- - ``MAP_TYPE_SATELLITE``
- - ``MAP_TYPE_TERRAIN``
- - ``MAP_TYPE_NONE``
+ - `MAP_TYPE_NORMAL`
+ - `MAP_TYPE_HYBRID`
+ - `MAP_TYPE_SATELLITE`
+ - `MAP_TYPE_TERRAIN`
+ - `MAP_TYPE_NONE`
 
 ```javascript
 var mapView = maps.createView({
@@ -167,16 +167,16 @@ var selectedAnnotation = mapView.getSelectedAnnotation(); // Selected annotation
 ```
 
 #### Overlays
-Overlays can be added to the map view just like annotations. The module supports the methods ``addPolygon``, ``addPolyline`` and ``addCircle`` to add overlays and ``removePolygon``, ``removePolyline`` and ``removeCircle`` to remove them.
+Overlays can be added to the map view just like annotations. The module supports the methods `addPolygon`, `addPolyline` and `addCircle` to add overlays and `removePolygon`, `removePolyline` and `removeCircle` to remove them.
 
 ##### Polyline
-A polyline is a shape defined by its ``points`` property. It needs at least 2 points to draw a line.
+A polyline is a shape defined by its `points` property. It needs at least 2 points to draw a line.
 
 ```javascript
 var polyline = maps.createPolyline({
     points : [{ // Can handle both object and array
         latitude : -37.81319,
-	    longitude : 144.96298
+        longitude : 144.96298
     }, [-31.95285, 115.85734]],
     strokeWidth : 3, // Default: 1
     strokeColor : "#f00"  // Default: Black (#000000)
@@ -185,7 +185,7 @@ mapView.addPolyline(polyline);
 ```
 
 ##### Polygon
-A polygon is a shape defined by its ``points`` property. It behaves similiar to a polyline, but is meant to close its area automatically and also supports the ``fillColor`` property.
+A polygon is a shape defined by its `points` property. It behaves similiar to a polyline, but is meant to close its area automatically and also supports the `fillColor` property.
 
 ```javascript
 var polygon = maps.createPolygon({
@@ -203,7 +203,7 @@ mapView.addPolygon(polygon);
 ```
 
 ##### Circle
-A circle is a shape defined by the `center` property to specify its location as well as the ``radius` in meters.
+A circle is a shape defined by the `center` property to specify its location as well as the `radius` in meters.
 
 ```javascript
 var circle = maps.createCircle({
@@ -214,7 +214,7 @@ var circle = maps.createCircle({
     strokeColor : "orange"
 });
 mapView.addCircle(circle);
-````
+```
 
 #### Events
 The module supports all native delegates - exposed as events. These are:
@@ -239,8 +239,8 @@ Hans Knoechel ([@hansemannnn](https://twitter.com/hansemannnn) / [Web](http://ha
 
 License
 ---------------
-MIT
+Apache 2.0
 
 Contributing
 ---------------
-Code contributions are greatly appriciated, please submit a pull request!
+Code contributions are greatly appreciated, please submit a new [pull request](https://github.com/hansemannn/ti.googlemaps/pull/new/master)!
