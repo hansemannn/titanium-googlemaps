@@ -226,7 +226,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_UI_THREAD_1_ARG(args);
     
     for(TiGooglemapsAnnotationProxy *annotationProxy in annotationProxies) {
-        [[annotationProxy marker] setMap:[[self mapView] mapView]];
+        [[annotationProxy marker] setMap:nil];
         [[self markers] removeObject:annotationProxy];
     }
 }
