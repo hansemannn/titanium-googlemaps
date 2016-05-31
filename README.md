@@ -180,6 +180,12 @@ mapView.deselectAnnotation(); // Deselect
 var selectedAnnotation = mapView.getSelectedAnnotation(); // Selected annotation, null if no annotation is selected
 ```
 
+#### Map Insets
+To add padding to your map with inset values top, bottom, right, left. For example to move the logo of Google on the map upwards:
+```javascript
+$.mapview.mapInsets = { bottom:200 };
+```
+
 #### Overlays
 Overlays can be added to the map view just like annotations. The module supports the methods ``addPolygon``, ``addPolyline`` and ``addCircle`` to add overlays and ``removePolygon``, ``removePolyline`` and ``removeCircle`` to remove them.
 

@@ -150,6 +150,29 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     [self replaceValue:value forKey:@"mapType" notification:NO];
 }
 
+
+-(void)setMapInsets:(id)args
+{
+    ENSURE_UI_THREAD_1_ARG(args);
+    ENSURE_TYPE(args, NSDictionary);
+    
+    id top = [args valueForKey:@"top"];
+    id left = [args valueForKey:@"left"];
+    id bottom = [args valueForKey:@"bottom"];
+    id right = [args valueForKey:@"right"];
+    
+    ENSURE_TYPE_OR_NIL(top, NSNumber);
+    ENSURE_TYPE_OR_NIL(left, NSNumber)
+    ENSURE_TYPE_OR_NIL(bottom, NSNumber);
+    ENSURE_TYPE_OR_NIL(right, NSNumber);
+    
+    // Insets are specified in this order: top, left, bottom, right
+    UIEdgeInsets mapInsets = UIEdgeInsetsMake([TiUtils floatValue:top def:0.0], [TiUtils floatValue:left def:0.0], [TiUtils floatValue:bottom def:0.0], [TiUtils floatValue:right def:0.0]);
+    
+    [[[self mapView] mapView] setPadding:mapInsets];
+    [self replaceValue:args forKey:@"mapInsets" notification:NO];
+}
+
 -(void)setCamera:(id)args
 {
     DEPRECATED(@"MapView.camera", @"View.region", @"2.2.0");
