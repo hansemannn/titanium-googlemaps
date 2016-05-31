@@ -147,4 +147,16 @@
     [self replaceValue:value forKey:@"userData" notification:NO];
 }
 
+-(void)setLocation:(id)args
+{
+    ENSURE_UI_THREAD_1_ARG(args);
+    ENSURE_TYPE(args, NSDictionary);
+    
+    id latitude = [args valueForKey:@"latitude"];
+    id longitude = [args valueForKey:@"longitude"];
+    
+    [[self marker] setPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude],[TiUtils doubleValue:longitude])];
+    [self replaceValue:args forKey:@"setLocation" notification:NO];
+}
+
 @end

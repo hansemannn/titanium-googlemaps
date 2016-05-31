@@ -153,6 +153,11 @@ var annotation = maps.createAnnotation({
 mapView.addAnnotation(annotation);
 ```
 
+You can update the location of an Annotation by:
+```javascript
+annotation.setLocation({longitude: -125.913653, latitude: 36.368122});
+```
+
 You also can add multiple annotations as well as remove annotations again:
 ```javascript
 mapView.addAnnotations([anno1,anno2,anno3]);
