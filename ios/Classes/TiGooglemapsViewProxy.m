@@ -218,6 +218,25 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     [[self markers] removeObject:annotationProxy];
 }
 
+-(void)removeAnnotations:(id)args
+{
+    id annotationProxies = [args objectAtIndex:0];
+    
+    ENSURE_TYPE(annotationProxies, NSArray);
+    ENSURE_UI_THREAD_1_ARG(args);
+    
+    for(TiGooglemapsAnnotationProxy *annotationProxy in annotationProxies) {
+        [[annotationProxy marker] setMap:[[self mapView] mapView]];
+        [[self markers] removeObject:annotationProxy];
+    }
+}
+
+-(void)removeAllAnnotations:(id)args
+{
+    ENSURE_UI_THREAD_1_ARG(args);
+    [[[self mapView] mapView] clear];
+}
+
 -(void)setAnnotations:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);

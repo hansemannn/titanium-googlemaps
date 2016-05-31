@@ -164,6 +164,15 @@ mapView.addAnnotations([anno1,anno2,anno3]);
 mapView.removeAnnotation(anno4);
 ```
 
+Remove Annotations by passing an array of Annotations:
+```javascript
+mapView.removeAnnotations([anno1,anno2,anno3]);
+```
+Remove all annotations (one shot):
+```javascript
+mapView.removeAllAnnotations();
+```
+
 You can select and deselect annotations, as well as receive the currently selected annotation:
 ```javascript
 mapView.selectAnnotation(anno1); // Select
