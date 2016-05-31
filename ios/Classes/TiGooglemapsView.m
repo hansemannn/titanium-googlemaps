@@ -74,7 +74,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     if ([[self proxy] _hasListeners:@"regionchanged"]) {
         [[self proxy] fireEvent:@"regionchanged" withObject:@{
             @"map" : [self proxy],
-            @"latitude" : NUMDOUBLE(position.target.longitude),
+            @"latitude" : NUMDOUBLE(position.target.latitude),
             @"longitude" : NUMDOUBLE(position.target.longitude),
         }];
     }
