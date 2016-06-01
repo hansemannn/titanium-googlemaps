@@ -150,6 +150,15 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     [self replaceValue:value forKey:@"mapType" notification:NO];
 }
 
+-(void)setTrafficEnabled:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[self mapView] mapView] setTrafficEnabled:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"trafficEnabled" notification:NO];
+}
+
 
 -(void)setMapInsets:(id)args
 {

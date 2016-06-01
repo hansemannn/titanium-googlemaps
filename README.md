@@ -86,6 +86,7 @@ mapView.indoorPicker = true;
 mapView.compassButton = true;
 mapView.myLocationEnabled = false;
 mapView.myLocationButton = false;
+mapView.trafficEnabled = true; // default is false
 ```
 
 Enable/Disable Gestures:
