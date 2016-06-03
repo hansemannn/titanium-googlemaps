@@ -95,6 +95,7 @@ mapView.scrollGesture = true;
 mapView.zoomGestures = false;
 mapView.tiltGestures = true;
 mapView.rotateGestures = false;
+mapView.allowScrollGesturesDuringRotateOrZoom = false;
 ```
 
 Animate to a location:
