@@ -86,6 +86,7 @@ mapView.indoorPicker = true;
 mapView.compassButton = true;
 mapView.myLocationEnabled = false;
 mapView.myLocationButton = false;
+mapView.trafficEnabled = true; // default is false
 ```
 
 Enable/Disable Gestures:
@@ -94,6 +95,7 @@ mapView.scrollGesture = true;
 mapView.zoomGestures = false;
 mapView.tiltGestures = true;
 mapView.rotateGestures = false;
+mapView.allowScrollGesturesDuringRotateOrZoom = false;
 ```
 
 Animate to a location:
@@ -153,10 +155,24 @@ var annotation = maps.createAnnotation({
 mapView.addAnnotation(annotation);
 ```
 
+You can update the location of an Annotation by:
+```javascript
+annotation.updateLocation({longitude: -125.913653, latitude: 36.368122});
+```
+
 You also can add multiple annotations as well as remove annotations again:
 ```javascript
 mapView.addAnnotations([anno1,anno2,anno3]);
 mapView.removeAnnotation(anno4);
+```
+
+Remove Annotations by passing an array of Annotations:
+```javascript
+mapView.removeAnnotations([anno1,anno2,anno3]);
+```
+Remove all annotations (one shot):
+```javascript
+mapView.removeAllAnnotations();
 ```
 
 You can select and deselect annotations, as well as receive the currently selected annotation:
@@ -164,6 +180,12 @@ You can select and deselect annotations, as well as receive the currently select
 mapView.selectAnnotation(anno1); // Select
 mapView.deselectAnnotation(); // Deselect
 var selectedAnnotation = mapView.getSelectedAnnotation(); // Selected annotation, null if no annotation is selected
+```
+
+#### Map Insets
+To add padding to your map with inset values top, bottom, right, left. For example to move the logo of Google on the map upwards:
+```javascript
+$.mapview.mapInsets = { bottom:200 };
 ```
 
 #### Overlays

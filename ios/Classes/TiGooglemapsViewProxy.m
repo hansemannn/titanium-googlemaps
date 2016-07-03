@@ -132,6 +132,15 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     [self replaceValue:value forKey:@"rotateGestures" notification:NO];
 }
 
+-(void)setAllowScrollGesturesDuringRotateOrZoom:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[[self mapView] mapView] settings] setAllowScrollGesturesDuringRotateOrZoom:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"allowScrollGesturesDuringRotateOrZoom" notification:NO];
+}
+
 -(void)setMyLocationEnabled:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
@@ -148,6 +157,27 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     
     [[[self mapView] mapView] setMapType:[TiUtils intValue:value def:kGMSTypeNormal]];
     [self replaceValue:value forKey:@"mapType" notification:NO];
+}
+
+-(void)setTrafficEnabled:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[self mapView] mapView] setTrafficEnabled:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"trafficEnabled" notification:NO];
+}
+
+
+-(void)setMapInsets:(id)args
+{
+    ENSURE_UI_THREAD_1_ARG(args);
+    ENSURE_TYPE(args, NSDictionary);
+    
+    UIEdgeInsets mapInsets = [TiUtils contentInsets:args];
+    
+    [[[self mapView] mapView] setPadding:mapInsets];
+    [self replaceValue:args forKey:@"mapInsets" notification:NO];
 }
 
 -(void)setCamera:(id)args
@@ -216,6 +246,26 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     
     [[annotationProxy marker] setMap:nil];
     [[self markers] removeObject:annotationProxy];
+}
+
+-(void)removeAnnotations:(id)args
+{
+    id annotationProxies = [args objectAtIndex:0];
+    
+    ENSURE_TYPE(annotationProxies, NSArray);
+    ENSURE_UI_THREAD_1_ARG(args);
+    
+    for(TiGooglemapsAnnotationProxy *annotationProxy in annotationProxies) {
+        [[annotationProxy marker] setMap:nil];
+        [[self markers] removeObject:annotationProxy];
+    }
+}
+
+-(void)removeAllAnnotations:(id)args
+{
+    ENSURE_UI_THREAD_1_ARG(args);
+    [[[self mapView] mapView] clear];
+    [[self markers] removeAllObjects];
 }
 
 -(void)setAnnotations:(id)args
