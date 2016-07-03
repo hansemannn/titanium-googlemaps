@@ -74,43 +74,49 @@
     [[self dialog] setTintColor:[[TiUtils colorValue:value] color]];
 }
 
-#pragma mark Delegates
+#pragma mark - Delegates
 
-- (void)didRequestAutocompletePredictions:(GMSAutocompleteViewController *)viewController
+#pragma mark GMSAutocompleteFetcherDelegate
+
+- (void)didAutocompleteWithPredictions:(GMS_NSArrayOf(GMSAutocompletePrediction *) *)predictions
 {
-    if ([self _hasListeners:@"requestprediction"]) {
-        [self fireEvent:@"requestprediction" withObject:nil];
+    if ([self _hasListeners:@"fetch:success"]) {
+        NSMutableArray *output = [NSMutableArray arrayWithCapacity:[predictions count]];
+        
+        for (GMSAutocompletePrediction* prediction in predictions) {
+            [output addObject:[self dictionaryFromPrediction:prediction]];
+        }
+        
+        [self fireEvent:@"fetch:success" withObject:@{@"predictions": output}];
     }
 }
 
-- (BOOL)viewController:(GMSAutocompleteViewController *)viewController didSelectPrediction:(GMSAutocompletePrediction *)prediction
+- (void)didFailAutocompleteWithError:(NSError *)error
 {
-    if ([self _hasListeners:@"selectprediction"]) {
-        [self fireEvent:@"selectprediction" withObject:[self dictionaryFromPrediction:prediction]];
-    }
-}
-
-- (void)didUpdateAutocompletePredictions:(GMSAutocompleteViewController *)viewController
-{
-    if ([self _hasListeners:@"updateprediction"]) {
-        [self fireEvent:@"updateprediction" withObject:nil];
-    }
-}
-
-- (void)viewController:(GMSAutocompleteViewController *)viewController didFailAutocompleteWithError:(NSError *)error
-{
-    if ([self _hasListeners:@"error"]) {
-        [self fireEvent:@"error" withObject:@{
+    if ([self _hasListeners:@"fetch:error"]) {
+        [self fireEvent:@"fetch:error" withObject:@{
             @"error": [error localizedDescription],
             @"code": NUMINTEGER([error code])
         }];
     }
 }
 
+#pragma mark GMSAutocompleteViewControllerDelegate
+
 - (void)viewController:(GMSAutocompleteViewController *)viewController didAutocompleteWithPlace:(GMSPlace *)place
 {
-    if ([self _hasListeners:@"success"]) {
-        [self fireEvent:@"success" withObject:@{@"place": [self dictionaryFromPlace:place]}];
+    if ([self _hasListeners:@"dialog:success"]) {
+        [self fireEvent:@"dialog:success" withObject:@{@"place": [self dictionaryFromPlace:place]}];
+    }
+}
+
+- (void)viewController:(GMSAutocompleteViewController *)viewController didFailAutocompleteWithError:(NSError *)error
+{
+    if ([self _hasListeners:@"dialog:error"]) {
+        [self fireEvent:@"dialog:error" withObject:@{
+            @"error": [error localizedDescription],
+            @"code": NUMINTEGER([error code])
+        }];
     }
 }
 
@@ -118,8 +124,46 @@
 {
     [[self dialog] dismissViewControllerAnimated:YES completion:nil];
     
-    if ([self _hasListeners:@"cancel"]) {
-        [self fireEvent:@"cancel" withObject:nil];
+    if ([self _hasListeners:@"dialog:cancel"]) {
+        [self fireEvent:@"dialog:cancel" withObject:nil];
+    }
+}
+
+#pragma mark GMSAutocompleteTableDataSourceDelegate
+
+- (void)tableDataSource:(GMSAutocompleteTableDataSource *)tableDataSource didAutocompleteWithPlace:(GMSPlace *)place
+{
+    if ([self _hasListeners:@"dataSource:success"]) {
+        [self fireEvent:@"dataSource:success" withObject:@{@"place": [self dictionaryFromPlace:place]}];
+    }
+}
+
+- (void)tableDataSource:(GMSAutocompleteTableDataSource *)tableDataSource didFailAutocompleteWithError:(NSError *)error
+{
+    if ([self _hasListeners:@"dataSource:error"]) {
+        [self fireEvent:@"dataSource:error" withObject:@{
+            @"error": [error localizedDescription],
+            @"code": NUMINTEGER([error code])
+        }];
+    }
+}
+
+#pragma mark GMSAutocompleteResultsViewControllerDelegate
+
+- (void)resultsController:(GMSAutocompleteResultsViewController *)resultsController didAutocompleteWithPlace:(GMSPlace *)place
+{
+    if ([self _hasListeners:@"results:success"]) {
+        [self fireEvent:@"results:success" withObject:@{@"place": [self dictionaryFromPlace:place]}];
+    }
+}
+
+- (void)resultsController:(GMSAutocompleteResultsViewController *)resultsController didFailAutocompleteWithError:(NSError *)error
+{
+    if ([self _hasListeners:@"results:error"]) {
+        [self fireEvent:@"results:error" withObject:@{
+            @"error": [error localizedDescription],
+            @"code": NUMINTEGER([error code])
+        }];
     }
 }
 
