@@ -35,8 +35,6 @@ Edit the modules section of your `tiapp.xml` file to include this module:
 </modules>
 ```
 
-> **NOTE:** There is an issue in the Titanium Mobile SDK (5.2.0.GA) which prevents module developers from copying assets to the application. If you use Ti.SDK < 5.2.0.GA you can use the module just like before, if you use Ti.SDK 5.2.0.GA you can already use the latest module version (2.1.0) and upgrade to 5.2.1.GA asap. The SDK issue can be tracked [here](https://jira.appcelerator.org/browse/TIMOB-20489). Thank you!
-
 Initialize the module by setting the Google Maps API key you can get from [here](https://developers.google.com/maps/signup).
 ```javascript
 var maps = require("ti.googlemaps");
@@ -45,7 +43,7 @@ maps.setAPIKey("<YOUR_API_KEY>");
 
 ### Build
 If you want to build the module from the source, you need to check some things beforehand:
-- The latest GoogleMaps.framework is > 100 MB, so Github won't allow pushing it to the repository. So you need to get the [latest Google Maps iOS](https://developers.google.com /maps/documentation/ios-sdk/) and copy it into `/ios/platform/GoogleMaps.framework`. 
+- The latest GoogleMaps.framework is > 100 MB, so Github won't allow pushing it to the repository. So you need to get the [latest Google Maps iOS](https://developers.google.com/maps/documentation/ios-sdk/) and copy it into `/ios/platform/GoogleMaps.framework`. 
 - Make sure to link the framework in "Build Phases" -> "Link Binary With Libraries" -> Select "GoogleMaps.framework"
 - Set the `TITANIUM_SDK_VERSION` inside the `ios/titanium.xcconfig` file to the Ti.SDK version you want to build with.
 - Build the project using the `ios/build.py` with `python [path/to/module]/ios/build.py` for Ti.SDK < 5.2.0 and `ti build -p ios --build-only` for Ti.SDK >= 5.2.1
@@ -79,6 +77,20 @@ var mapView = maps.createView({
 });
 ```
 
+Map Events:
+The module supports all native delegates - exposed as events. These are:
+
+- [x] click (map, pin, infoWindow, overlay)
+- [x] locationclick
+- [x] longpress
+- [x] regionchanged
+- [x] regionwillchange
+- [x] idle
+- [x] dragstart
+- [x] dragmove
+- [x] dragend
+- [x] complete
+
 Map Controls:
 ```
 mapView.indoorEnabled = false;
@@ -96,6 +108,11 @@ mapView.zoomGestures = false;
 mapView.tiltGestures = true;
 mapView.rotateGestures = false;
 mapView.allowScrollGesturesDuringRotateOrZoom = false;
+```
+
+Map Insets:
+```javascript
+$.mapview.mapInsets = { bottom:200 };
 ```
 
 Animate to a location:
@@ -119,7 +136,6 @@ mapView.animateToBearing(45);
 Animate to a viewing angle:
 ```javascript
 mapView.animateToViewingAngle(30);
-
 ```
 
 #### Annotations
@@ -182,11 +198,34 @@ mapView.deselectAnnotation(); // Deselect
 var selectedAnnotation = mapView.getSelectedAnnotation(); // Selected annotation, null if no annotation is selected
 ```
 
-#### Map Insets
-To add padding to your map with inset values top, bottom, right, left. For example to move the logo of Google on the map upwards:
+#### Autocomplete Dialog
+A autocomplete dialog can be opened modally to search for places in realtime. A number of events
+helps to work with partial results and final selections. 
+
+The whole dialog can be styled (like in the following example) and the default native theming is light.
+
 ```javascript
-$.mapview.mapInsets = { bottom:200 };
+var dialog = GoogleMaps.createAutocompleteDialog({
+    tableCellBackgroundColor: "#333",
+    tableCellSeparatorColor: "#444",
+    primaryTextColor: "#fff",
+    primaryTextHighlightColor: "blue",
+    tintColor: "blue"
+});
+
+dialog.open();
 ```
+
+##### Autocomplete Events
+- [x] fetch:success
+- [x] fetch:error
+- [x] dialog:success
+- [x] dialog:error
+- [x] dialog:cancel
+- [x] dataSource:success
+- [x] dataSource:error
+- [x] results:success
+- [x] results:error
 
 #### Overlays
 Overlays can be added to the map view just like annotations. The module supports the methods `addPolygon`, `addPolyline` and `addCircle` to add overlays and `removePolygon`, `removePolyline` and `removeCircle` to remove them.
@@ -237,20 +276,6 @@ var circle = maps.createCircle({
 });
 mapView.addCircle(circle);
 ```
-
-#### Events
-The module supports all native delegates - exposed as events. These are:
-
-- [x] click (map, pin, infoWindow, overlay)
-- [x] locationclick
-- [x] longpress
-- [x] regionchanged
-- [x] regionwillchange
-- [x] idle
-- [x] dragstart
-- [x] dragmove
-- [x] dragend
-- [x] complete
 
 #### Example
 For a full example, check the demo in `iphone/example/app.js`.
