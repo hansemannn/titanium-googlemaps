@@ -5,10 +5,18 @@
  * Please see the LICENSE included with this distribution for details.
  */
 
-#import "TiGooglemapsAutocompleteDialog.h"
+#import "TiGooglemapsAutocompleteDialogProxy.h"
 #import "TiApp.h"
 
-@implementation TiGooglemapsAutocompleteDialog
+@implementation TiGooglemapsAutocompleteDialogProxy
+
+#pragma mark Memory Management
+
+- (void)dealloc
+{
+    RELEASE_TO_NIL(dialog);
+    [super dealloc];
+}
 
 #pragma mark Public APIs
 
@@ -22,14 +30,12 @@
     return dialog;
 }
 
-- (void)show:(id)args
+- (void)open:(id)args
 {
     id animated = [args valueForKey:@"animated"];
     ENSURE_TYPE_OR_NIL(animated, NSNumber);
     
-    [[[[TiApp app] controller] topPresentedController] presentViewController:[self dialog]
-                                                                    animated:[TiUtils boolValue:animated def:YES]
-                                                                  completion:nil];
+    [[TiApp app] showModalController:[self dialog] animated:[TiUtils boolValue:animated def:YES]];
 }
 
 - (void)setTableCellBackgroundColor:(id)value
@@ -110,6 +116,8 @@
 
 - (void)wasCancelled:(GMSAutocompleteViewController *)viewController
 {
+    [[self dialog] dismissViewControllerAnimated:YES completion:nil];
+    
     if ([self _hasListeners:@"cancel"]) {
         [self fireEvent:@"cancel" withObject:nil];
     }
