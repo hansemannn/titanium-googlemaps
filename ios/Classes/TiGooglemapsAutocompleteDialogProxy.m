@@ -105,6 +105,9 @@
 
 - (void)viewController:(GMSAutocompleteViewController *)viewController didAutocompleteWithPlace:(GMSPlace *)place
 {
+//    [[self dialog] dismissViewControllerAnimated:YES completion:nil];
+//    RELEASE_TO_NIL(dialog);
+
     if ([self _hasListeners:@"dialog:success"]) {
         [self fireEvent:@"dialog:success" withObject:@{@"place": [self dictionaryFromPlace:place]}];
     }
@@ -123,6 +126,7 @@
 - (void)wasCancelled:(GMSAutocompleteViewController *)viewController
 {
     [[self dialog] dismissViewControllerAnimated:YES completion:nil];
+    RELEASE_TO_NIL(dialog);
     
     if ([self _hasListeners:@"dialog:cancel"]) {
         [self fireEvent:@"dialog:cancel" withObject:nil];
