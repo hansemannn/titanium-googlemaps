@@ -65,7 +65,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSNumber);
     
-    [[[self mapView] mapView].settings setMyLocationButton:[TiUtils boolValue:value]];
+    [[[[self mapView] mapView] settings] setMyLocationButton:[TiUtils boolValue:value]];
     [self replaceValue:value forKey:@"myLocationButton" notification:NO];
 }
 
@@ -74,7 +74,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSNumber);
     
-    [[[self mapView] mapView].settings setCompassButton:[TiUtils boolValue:value]];
+    [[[[self mapView] mapView] settings] setCompassButton:[TiUtils boolValue:value]];
     [self replaceValue:value forKey:@"compassButton" notification:NO];
 }
 
@@ -83,7 +83,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSNumber);
     
-    [[[self mapView] mapView].settings setIndoorPicker:[TiUtils boolValue:value]];
+    [[[[self mapView] mapView] settings] setIndoorPicker:[TiUtils boolValue:value]];
     [self replaceValue:value forKey:@"indoorPicker" notification:NO];
 }
 
@@ -101,7 +101,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSNumber);
     
-    [[[self mapView] mapView].settings setScrollGestures:[TiUtils boolValue:value]];
+    [[[[self mapView] mapView] settings] setScrollGestures:[TiUtils boolValue:value]];
     [self replaceValue:value forKey:@"scrollGestures" notification:NO];
 }
 
@@ -110,7 +110,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSNumber);
     
-    [[[self mapView] mapView].settings setZoomGestures:[TiUtils boolValue:value]];
+    [[[[self mapView] mapView] settings] setZoomGestures:[TiUtils boolValue:value]];
     [self replaceValue:value forKey:@"zoomGestures" notification:NO];
 }
 
@@ -119,7 +119,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSNumber);
     
-    [[[self mapView] mapView].settings setTiltGestures:[TiUtils boolValue:value]];
+    [[[[self mapView] mapView] settings] setTiltGestures:[TiUtils boolValue:value]];
     [self replaceValue:value forKey:@"tiltGestures" notification:NO];
 }
 
@@ -128,7 +128,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSNumber);
     
-    [[[self mapView] mapView].settings setRotateGestures:[TiUtils boolValue:value]];
+    [[[[self mapView] mapView] settings] setRotateGestures:[TiUtils boolValue:value]];
     [self replaceValue:value forKey:@"rotateGestures" notification:NO];
 }
 
@@ -137,7 +137,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSNumber);
     
-    [[[self mapView] mapView].settings setAllowScrollGesturesDuringRotateOrZoom:[TiUtils boolValue:value]];
+    [[[[self mapView] mapView] settings] setAllowScrollGesturesDuringRotateOrZoom:[TiUtils boolValue:value]];
     [self replaceValue:value forKey:@"allowScrollGesturesDuringRotateOrZoom" notification:NO];
 }
 
@@ -174,18 +174,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_UI_THREAD_1_ARG(args);
     ENSURE_TYPE(args, NSDictionary);
     
-    id top = [args valueForKey:@"top"];
-    id left = [args valueForKey:@"left"];
-    id bottom = [args valueForKey:@"bottom"];
-    id right = [args valueForKey:@"right"];
-    
-    ENSURE_TYPE_OR_NIL(top, NSNumber);
-    ENSURE_TYPE_OR_NIL(left, NSNumber)
-    ENSURE_TYPE_OR_NIL(bottom, NSNumber);
-    ENSURE_TYPE_OR_NIL(right, NSNumber);
-    
-    // Insets are specified in this order: top, left, bottom, right
-    UIEdgeInsets mapInsets = UIEdgeInsetsMake([TiUtils floatValue:top def:0.0], [TiUtils floatValue:left def:0.0], [TiUtils floatValue:bottom def:0.0], [TiUtils floatValue:right def:0.0]);
+    UIEdgeInsets mapInsets = [TiUtils contentInsets:args];
     
     [[[self mapView] mapView] setPadding:mapInsets];
     [self replaceValue:args forKey:@"mapInsets" notification:NO];
@@ -276,6 +265,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 {
     ENSURE_UI_THREAD_1_ARG(args);
     [[[self mapView] mapView] clear];
+    [[self markers] removeAllObjects];
 }
 
 -(void)setAnnotations:(id)args
