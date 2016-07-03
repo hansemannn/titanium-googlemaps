@@ -132,6 +132,15 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     [self replaceValue:value forKey:@"rotateGestures" notification:NO];
 }
 
+-(void)setConsumesGesturesInView:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[[[self mapView] mapView] settings] setConsumesGesturesInView:[TiUtils boolValue:value]];
+    [self replaceValue:value forKey:@"consumesGesturesInView" notification:NO];
+}
+
 -(void)setAllowScrollGesturesDuringRotateOrZoom:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
