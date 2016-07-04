@@ -1,4 +1,10 @@
-var win = Ti.UI.createWindow();
+var win = Ti.UI.createWindow({
+    title: "Ti.Googlemaps",
+    includeOpaqueBars: true,
+    extendEdges: [Ti.UI.EXTEND_EDGE_ALL]
+});
+var nav = Ti.UI.iOS.createNavigationWindow({window: win});
+
 var maps = require("ti.googlemaps");
 maps.setAPIKey("<YOUR_GOOGLE_MAPS_API_KEY>");
 
@@ -170,7 +176,7 @@ var polyline = maps.createPolyline({
     points: [{ // Can handle both object and array
         latitude: companies.appcelerator.latitude,
         longitude: companies.appcelerator.longitude,
-    },{
+    }, {
         latitude: companies.microsoft.latitude,
         longitude: companies.microsoft.longitude,
     }],
@@ -215,5 +221,50 @@ var circle = maps.createCircle({
 mapView.addCircle(circle);
 // mapView.removeCircle(circle);
 
+function openAutocompleteDialog() {
+    var dialog = maps.createAutocompleteDialog({
+        /*tableCellBackgroundColor: "#333",
+         tableCellSeparatorColor: "#444",
+         primaryTextColor: "#fff",
+         primaryTextHighlightColor: "blue",
+         tintColor: "blue"*/
+    });
+
+    dialog.addEventListener("success", function(e) {
+        Ti.API.info(e.place);
+        var place = e.place;
+        var annotation = maps.createAnnotation({
+            latitude: place.latitude,
+            longitude: place.longitude,
+            title: place.name,
+            subtitle: place.formattedAddress
+        });
+        
+        mapView.addAnnotation(annotation);
+        mapView.animateToLocation({
+            latitude: place.latitude,
+            longitude: place.longitude
+        });
+        mapView.selectAnnotation(annotation);
+    });
+
+    dialog.addEventListener("error", function(e) {
+        Ti.API.error(e.error);
+    });
+
+    dialog.addEventListener("cancel", function(e) {
+        Ti.API.info("Autocompletion was cancelled");
+    });
+
+    dialog.open();
+}
+
+var searchButton = Ti.UI.createButton({
+    systemButton: Ti.UI.iPhone.SystemButton.ADD
+});
+
+searchButton.addEventListener("click", openAutocompleteDialog);
+
+win.setRightNavButton(searchButton);
 win.add(mapView);
-win.open();
+nav.open();
