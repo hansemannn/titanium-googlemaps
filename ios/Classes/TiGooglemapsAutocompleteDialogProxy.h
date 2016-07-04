@@ -7,7 +7,7 @@
 #import "TiProxy.h"
 #import <GoogleMaps/GoogleMaps.h>
 
-@interface TiGooglemapsAutocompleteDialogProxy : TiProxy<GMSAutocompleteViewControllerDelegate, GMSAutocompleteFetcherDelegate, GMSAutocompleteTableDataSourceDelegate, GMSAutocompleteResultsViewControllerDelegate> {
+@interface TiGooglemapsAutocompleteDialogProxy : TiProxy<GMSAutocompleteViewControllerDelegate> {
     GMSAutocompleteViewController *dialog;
 }
 

@@ -217,15 +217,9 @@ dialog.open();
 ```
 
 ##### Autocomplete Events
-- [x] fetch:success
-- [x] fetch:error
-- [x] dialog:success
-- [x] dialog:error
-- [x] dialog:cancel
-- [x] dataSource:success
-- [x] dataSource:error
-- [x] results:success
-- [x] results:error
+- [x] success
+- [x] error
+- [x] cancel
 
 #### Overlays
 Overlays can be added to the map view just like annotations. The module supports the methods `addPolygon`, `addPolyline` and `addCircle` to add overlays and `removePolygon`, `removePolyline` and `removeCircle` to remove them.

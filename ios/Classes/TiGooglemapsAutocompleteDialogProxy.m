@@ -14,7 +14,9 @@
 
 - (void)dealloc
 {
+    dialog.delegate = nil;
     RELEASE_TO_NIL(dialog);
+    
     [super dealloc];
 }
 
@@ -32,6 +34,9 @@
 
 - (void)open:(id)args
 {
+    [self rememberSelf];
+    ENSURE_UI_THREAD(open, args);
+
     id animated = [args valueForKey:@"animated"];
     ENSURE_TYPE_OR_NIL(animated, NSNumber);
     
@@ -76,102 +81,46 @@
 
 #pragma mark - Delegates
 
-#pragma mark GMSAutocompleteFetcherDelegate
-
-- (void)didAutocompleteWithPredictions:(GMS_NSArrayOf(GMSAutocompletePrediction *) *)predictions
-{
-    if ([self _hasListeners:@"fetch:success"]) {
-        NSMutableArray *output = [NSMutableArray arrayWithCapacity:[predictions count]];
-        
-        for (GMSAutocompletePrediction* prediction in predictions) {
-            [output addObject:[self dictionaryFromPrediction:prediction]];
-        }
-        
-        [self fireEvent:@"fetch:success" withObject:@{@"predictions": output}];
-    }
-}
-
-- (void)didFailAutocompleteWithError:(NSError *)error
-{
-    if ([self _hasListeners:@"fetch:error"]) {
-        [self fireEvent:@"fetch:error" withObject:@{
-            @"error": [error localizedDescription],
-            @"code": NUMINTEGER([error code])
-        }];
-    }
-}
-
-#pragma mark GMSAutocompleteViewControllerDelegate
-
 - (void)viewController:(GMSAutocompleteViewController *)viewController didAutocompleteWithPlace:(GMSPlace *)place
 {
-//    [[self dialog] dismissViewControllerAnimated:YES completion:nil];
-//    RELEASE_TO_NIL(dialog);
-
-    if ([self _hasListeners:@"dialog:success"]) {
-        [self fireEvent:@"dialog:success" withObject:@{@"place": [self dictionaryFromPlace:place]}];
+    if ([self _hasListeners:@"success"]) {
+        [self fireEvent:@"success" withObject:@{
+            @"place": [self dictionaryFromPlace:place]
+        }];
     }
+    
+    [self closeDialog];
 }
 
 - (void)viewController:(GMSAutocompleteViewController *)viewController didFailAutocompleteWithError:(NSError *)error
 {
-    if ([self _hasListeners:@"dialog:error"]) {
-        [self fireEvent:@"dialog:error" withObject:@{
+    if ([self _hasListeners:@"error"]) {
+        [self fireEvent:@"error" withObject:@{
             @"error": [error localizedDescription],
             @"code": NUMINTEGER([error code])
         }];
     }
+    
+    [self closeDialog];
 }
 
 - (void)wasCancelled:(GMSAutocompleteViewController *)viewController
-{
-    [[self dialog] dismissViewControllerAnimated:YES completion:nil];
-    RELEASE_TO_NIL(dialog);
+{    
+    if ([self _hasListeners:@"cancel"]) {
+        [self fireEvent:@"cancel" withObject:nil];
+    }
     
-    if ([self _hasListeners:@"dialog:cancel"]) {
-        [self fireEvent:@"dialog:cancel" withObject:nil];
-    }
-}
-
-#pragma mark GMSAutocompleteTableDataSourceDelegate
-
-- (void)tableDataSource:(GMSAutocompleteTableDataSource *)tableDataSource didAutocompleteWithPlace:(GMSPlace *)place
-{
-    if ([self _hasListeners:@"dataSource:success"]) {
-        [self fireEvent:@"dataSource:success" withObject:@{@"place": [self dictionaryFromPlace:place]}];
-    }
-}
-
-- (void)tableDataSource:(GMSAutocompleteTableDataSource *)tableDataSource didFailAutocompleteWithError:(NSError *)error
-{
-    if ([self _hasListeners:@"dataSource:error"]) {
-        [self fireEvent:@"dataSource:error" withObject:@{
-            @"error": [error localizedDescription],
-            @"code": NUMINTEGER([error code])
-        }];
-    }
-}
-
-#pragma mark GMSAutocompleteResultsViewControllerDelegate
-
-- (void)resultsController:(GMSAutocompleteResultsViewController *)resultsController didAutocompleteWithPlace:(GMSPlace *)place
-{
-    if ([self _hasListeners:@"results:success"]) {
-        [self fireEvent:@"results:success" withObject:@{@"place": [self dictionaryFromPlace:place]}];
-    }
-}
-
-- (void)resultsController:(GMSAutocompleteResultsViewController *)resultsController didFailAutocompleteWithError:(NSError *)error
-{
-    if ([self _hasListeners:@"results:error"]) {
-        [self fireEvent:@"results:error" withObject:@{
-            @"error": [error localizedDescription],
-            @"code": NUMINTEGER([error code])
-        }];
-    }
+    [self closeDialog];
 }
 
 #pragma mark Utilities
+
+- (void)closeDialog
+{
+    [[self dialog] dismissViewControllerAnimated:YES completion:nil];
+    [self forgetSelf];
+    RELEASE_TO_NIL(dialog);
+}
 
 - (NSDictionary*)dictionaryFromPlace:(GMSPlace*)place
 {
