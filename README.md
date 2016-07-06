@@ -92,7 +92,7 @@ The module supports all native delegates - exposed as events. These are:
 - [x] complete
 
 Map Controls:
-```javascript`
+```javascript
 mapView.indoorEnabled = false;
 mapView.indoorPicker = true;
 mapView.compassButton = true;
