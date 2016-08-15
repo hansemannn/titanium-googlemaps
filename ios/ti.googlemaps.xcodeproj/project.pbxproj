@@ -39,6 +39,8 @@
 		3A433F071BE9AE620005C8AE /* TiGooglemapsCircleProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A433F051BE9AE620005C8AE /* TiGooglemapsCircleProxy.h */; };
 		3A433F081BE9AE620005C8AE /* TiGooglemapsCircleProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A433F061BE9AE620005C8AE /* TiGooglemapsCircleProxy.m */; };
 		3A7097E21BF1CD9B0044DBFB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900A31BC1ED7800172627 /* ImageIO.framework */; };
+		3ACA7B111D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ACA7B0F1D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.h */; };
+		3ACA7B121D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACA7B101D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.m */; };
 		3ACF6A121CBA800600BC765B /* TiGooglemapsAnnotationProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ACF6A101CBA800600BC765B /* TiGooglemapsAnnotationProxy.h */; };
 		3ACF6A131CBA800600BC765B /* TiGooglemapsAnnotationProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF6A111CBA800600BC765B /* TiGooglemapsAnnotationProxy.m */; };
 		3ACF6A1A1CBA874700BC765B /* TiGooglemapsView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ACF6A161CBA874700BC765B /* TiGooglemapsView.h */; };
@@ -94,6 +96,8 @@
 		3A433F011BE9AB270005C8AE /* TiGooglemapsPolygonProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsPolygonProxy.m; path = Classes/TiGooglemapsPolygonProxy.m; sourceTree = "<group>"; };
 		3A433F051BE9AE620005C8AE /* TiGooglemapsCircleProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsCircleProxy.h; path = Classes/TiGooglemapsCircleProxy.h; sourceTree = "<group>"; };
 		3A433F061BE9AE620005C8AE /* TiGooglemapsCircleProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsCircleProxy.m; path = Classes/TiGooglemapsCircleProxy.m; sourceTree = "<group>"; };
+		3ACA7B0F1D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsAutocompleteDialogProxy.h; path = Classes/TiGooglemapsAutocompleteDialogProxy.h; sourceTree = "<group>"; };
+		3ACA7B101D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsAutocompleteDialogProxy.m; path = Classes/TiGooglemapsAutocompleteDialogProxy.m; sourceTree = "<group>"; };
 		3ACF6A101CBA800600BC765B /* TiGooglemapsAnnotationProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsAnnotationProxy.h; path = Classes/TiGooglemapsAnnotationProxy.h; sourceTree = "<group>"; };
 		3ACF6A111CBA800600BC765B /* TiGooglemapsAnnotationProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsAnnotationProxy.m; path = Classes/TiGooglemapsAnnotationProxy.m; sourceTree = "<group>"; };
 		3ACF6A161CBA874700BC765B /* TiGooglemapsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsView.h; path = Classes/TiGooglemapsView.h; sourceTree = "<group>"; };
@@ -210,6 +214,7 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3ACA7B0E1D2986C400847EBF /* Autocompletion */,
 				3AF900D11BC2288600172627 /* Module */,
 				3A28A4C91BE9204C0004FCE9 /* Overlays */,
 				3AF900D31BC2289C00172627 /* View */,
@@ -262,6 +267,15 @@
 				3A433F061BE9AE620005C8AE /* TiGooglemapsCircleProxy.m */,
 			);
 			name = Circle;
+			sourceTree = "<group>";
+		};
+		3ACA7B0E1D2986C400847EBF /* Autocompletion */ = {
+			isa = PBXGroup;
+			children = (
+				3ACA7B0F1D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.h */,
+				3ACA7B101D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.m */,
+			);
+			name = Autocompletion;
 			sourceTree = "<group>";
 		};
 		3ACF6A141CBA809600BC765B /* Marker - Deprecated in 2.2.0 */ = {
@@ -343,6 +357,7 @@
 				3A433F071BE9AE620005C8AE /* TiGooglemapsCircleProxy.h in Headers */,
 				3A433EFE1BE9AB0C0005C8AE /* TiGooglemapsPolylineProxy.h in Headers */,
 				3A433EF81BE9AAFE0005C8AE /* TiGooglemapsMapView.h in Headers */,
+				3ACA7B111D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.h in Headers */,
 				24DE9E1111C5FE74003F90F6 /* TiGooglemapsModuleAssets.h in Headers */,
 				3ACF6A1A1CBA874700BC765B /* TiGooglemapsView.h in Headers */,
 			);
@@ -422,6 +437,7 @@
 				3ACF6A1B1CBA874700BC765B /* TiGooglemapsView.m in Sources */,
 				24DE9E1211C5FE74003F90F6 /* TiGooglemapsModuleAssets.m in Sources */,
 				3A433F031BE9AB270005C8AE /* TiGooglemapsPolygonProxy.m in Sources */,
+				3ACA7B121D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.m in Sources */,
 				3A433EF91BE9AAFE0005C8AE /* TiGooglemapsMapView.m in Sources */,
 				3A433EFF1BE9AB0C0005C8AE /* TiGooglemapsPolylineProxy.m in Sources */,
 				3A433EFB1BE9AAFE0005C8AE /* TiGooglemapsMapViewProxy.m in Sources */,
