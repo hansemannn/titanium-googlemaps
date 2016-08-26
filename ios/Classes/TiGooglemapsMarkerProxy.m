@@ -10,6 +10,8 @@
 
 @implementation TiGooglemapsMarkerProxy
 
+@synthesize marker = _marker;
+
 #define DEPRECATED(from, to, in) \
 NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, in, to);\
 

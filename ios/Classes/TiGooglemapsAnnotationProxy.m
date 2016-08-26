@@ -10,6 +10,8 @@
 
 @implementation TiGooglemapsAnnotationProxy
 
+@synthesize marker = _marker;
+
 -(GMSMarker*)marker
 {
     if (_marker == nil) {
