@@ -265,7 +265,22 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 {
     for (TiGooglemapsAnnotationProxy* annotationProxy in [[self mapViewProxy] markers]) {
         if ([annotationProxy marker] == marker) {
-            return annotationProxy;
+            // Replace the location attributes in the array of annotation-proxies
+            NSLock* arrayLock = [NSLock new];
+            [arrayLock lock];
+            TiGooglemapsAnnotationProxy *newAnnotation = [annotationProxy mutableCopy];
+            [newAnnotation updateLocation:@{
+                @"latitude": NUMDOUBLE([marker position].latitude),
+                @"longitude": NUMDOUBLE([marker position].longitude)
+            }];
+            NSMutableArray *newMarkers = [NSMutableArray arrayWithArray:[[self mapViewProxy] markers]];
+            [newMarkers replaceObjectAtIndex:[newMarkers indexOfObject:annotationProxy] withObject:newAnnotation];
+            [[self mapViewProxy] setMarkers:newMarkers];
+            [arrayLock unlock];
+            RELEASE_TO_NIL(newAnnotation);
+            RELEASE_TO_NIL(arrayLock);
+            
+            return newAnnotation;
         }
     }
 

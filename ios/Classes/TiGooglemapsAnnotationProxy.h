@@ -115,4 +115,12 @@
  */
 -(void)setUserData:(id)value;
 
+/**
+ *  Updates the annotation location (latitude, longitude)
+ *
+ *  @param value The locations data
+ *  @since 2.4.0
+ */
+-(void)updateLocation:(id)args;
+
 @end
