@@ -1,0 +1,19 @@
+language: objective-c
+osx_image: xcode7.1
+env:
+ global:
+   - "ARTIFACTS_AWS_REGION=us-east-1"
+   - "ARTIFACTS_S3_BUCKET=builds.appcelerator.com"
+   - "MODULE_NAME=ti.goglemaps"
+before_install:
+    - MODULE_ROOT=$PWD
+install:
+    - cd $MODULE_ROOT
+    - curl -o install.sh https://raw.githubusercontent.com/hansemannn/ci/master/travis/install.sh
+    - source install.sh -s "--branch 5_4_X"
+script:
+    - curl -o script.sh https://raw.githubusercontent.com/hansemannn/ci/master/travis/script.sh
+    - source script.sh
+after_success: # and this only on success
+  - curl -o deploy.sh https://raw.githubusercontent.com/hansemannn/ci/master/travis/deploy.sh
+  - source deploy.sh
