@@ -9,8 +9,6 @@
 
 @implementation TiGooglemapsPolylineProxy
 
-@synthesize polyline = _polyline;
-
 -(GMSPolyline*)polyline
 {
     if (_polyline == nil) {
@@ -19,6 +17,12 @@
     }
     
     return _polyline;
+}
+
+-(void)dealloc
+{
+    RELEASE_TO_NIL(_polyline);
+    [super dealloc];
 }
 
 -(void)setPoints:(id)points

@@ -9,8 +9,6 @@
 
 @implementation TiGooglemapsCircleProxy
 
-@synthesize circle = _circle;
-
 -(GMSCircle*)circle
 {
     if (_circle == nil) {
@@ -19,6 +17,12 @@
     }
     
     return _circle;
+}
+
+-(void)dealloc
+{
+    RELEASE_TO_NIL(_circle);
+    [super dealloc];
 }
 
 #pragma mark Public APIs

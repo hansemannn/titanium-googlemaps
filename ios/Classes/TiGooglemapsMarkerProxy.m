@@ -13,8 +13,6 @@
 #define DEPRECATED(from, to, in) \
 NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, in, to);\
 
-@synthesize marker = _marker;
-
 -(GMSMarker*)marker
 {
     if (_marker == nil) {
@@ -40,6 +38,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, i
 
 -(void)dealloc
 {
+    RELEASE_TO_NIL(_marker);
     [super dealloc];
 }
 

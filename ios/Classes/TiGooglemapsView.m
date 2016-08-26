@@ -15,8 +15,6 @@
 
 @implementation TiGooglemapsView
 
-@synthesize mapView = _mapView;
-
 #define DEPRECATED(from, to, in) \
 NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, to, in);\
 
@@ -34,6 +32,12 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     }
 
     return _mapView;
+}
+
+-(void)dealloc
+{
+    RELEASE_TO_NIL(_mapView);
+    [super dealloc];
 }
 
 -(TiGooglemapsViewProxy*)mapViewProxy

@@ -10,9 +10,6 @@
 
 @implementation TiGooglemapsAnnotationProxy
 
-
-@synthesize marker = _marker;
-
 -(GMSMarker*)marker
 {
     if (_marker == nil) {
@@ -36,6 +33,7 @@
 
 -(void)dealloc
 {
+    RELEASE_TO_NIL(_marker)
     [super dealloc];
 }
 

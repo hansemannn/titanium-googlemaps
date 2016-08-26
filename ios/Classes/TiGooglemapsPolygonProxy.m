@@ -9,8 +9,6 @@
 
 @implementation TiGooglemapsPolygonProxy
 
-@synthesize polygon = _polygon;
-
 -(GMSPolygon*)polygon
 {
     if (_polygon == nil) {
@@ -19,6 +17,12 @@
     }
     
     return _polygon;
+}
+
+-(void)dealloc
+{
+    RELEASE_TO_NIL(_polygon);
+    [super dealloc];
 }
 
 #pragma mark Public API's

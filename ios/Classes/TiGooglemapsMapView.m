@@ -15,8 +15,6 @@
 
 @implementation TiGooglemapsMapView
 
-@synthesize mapView = _mapView;
-
 #define DEPRECATED(from, to, in) \
 NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, to, in);\
 
@@ -35,6 +33,12 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     }
 
     return _mapView;
+}
+
+-(void)dealloc
+{
+    RELEASE_TO_NIL(_mapView);
+    [super dealloc];
 }
 
 -(TiGooglemapsMapViewProxy*)mapViewProxy
@@ -249,9 +253,10 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
         return TiGooglemapsOverlayTypePolyline;
     } else if([overlay isKindOfClass:[GMSCircle class]]) {
         return TiGooglemapsOverlayTypeCircle;
+    } else {
+        NSLog(@"[WARN] Unknown overlay provided: %@", [overlay class])
     }
     
-    NSLog(@"[WARN] Unknown overlay provided: %@", [overlay class])
     return [NSNull null];
 }
 
