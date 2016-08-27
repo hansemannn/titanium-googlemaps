@@ -4,13 +4,13 @@ env:
  global:
    - "ARTIFACTS_AWS_REGION=us-east-1"
    - "ARTIFACTS_S3_BUCKET=builds.appcelerator.com"
-   - "MODULE_NAME=ti.goglemaps"
+   - "MODULE_NAME=ti.googlemaps"
 before_install:
     - MODULE_ROOT=$PWD
 install:
     - cd $MODULE_ROOT
     - curl -o install.sh https://raw.githubusercontent.com/hansemannn/ci/master/travis/install.sh
-    - source install.sh -s "--branch 5_4_X"
+    - source install.sh -s "--branch 5_2_X"
 script:
     - curl -o script.sh https://raw.githubusercontent.com/hansemannn/ci/master/travis/script.sh
     - source script.sh
