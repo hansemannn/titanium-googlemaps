@@ -5,7 +5,7 @@
  * Please see the LICENSE included with this distribution for details.
  */
 #import "TiProxy.h"
-#import <GoogleMaps/GoogleMaps.h>
+#import <GooglePlaces/GooglePlaces.h>
 
 @interface TiGooglemapsAutocompleteDialogProxy : TiProxy<GMSAutocompleteViewControllerDelegate> {
     GMSAutocompleteViewController *dialog;
