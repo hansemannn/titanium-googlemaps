@@ -46,7 +46,7 @@ If you want to build the module from the source, you need to check some things b
 - The latest GoogleMaps.framework is > 100 MB, so Github won't allow pushing it to the repository. So you need to get the [latest Google Maps iOS](https://developers.google.com/maps/documentation/ios-sdk/) and copy it into `/ios/platform/GoogleMaps.framework`. 
 - Make sure to link the framework in "Build Phases" -> "Link Binary With Libraries" -> Select "GoogleMaps.framework"
 - Set the `TITANIUM_SDK_VERSION` inside the `ios/titanium.xcconfig` file to the Ti.SDK version you want to build with.
-- Build the project using the `ios/build.py` with `python [path/to/module]/ios/build.py` for Ti.SDK < 5.2.0 and `ti build -p ios --build-only` for Ti.SDK >= 5.2.1
+- Build the project using the `ios/build.py` with `python [path/to/module]/ios/build.py` for Ti.SDK < 5.2.0 and `appc ti build -p ios --build-only` for Ti.SDK >= 5.2.1
 - Check the [releases tab](https://github.com/hansemannn/ti.googlemaps/releases) for stable pre-packaged versions of the module
 
 Features
