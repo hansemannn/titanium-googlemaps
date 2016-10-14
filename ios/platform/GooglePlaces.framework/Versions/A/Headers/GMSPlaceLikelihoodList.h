@@ -27,8 +27,8 @@ GMS_ASSUME_NONNULL_BEGIN
  */
 @interface GMSPlaceLikelihoodList : NSObject
 
-/** An array of |GMSPlaceLikelihood|s containing the likelihoods in the list. */
-@property(nonatomic, copy) GMS_NSArrayOf(GMSPlaceLikelihood *) * likelihoods;
+/** An array of likelihoods, sorted in descending order. */
+@property(nonatomic, copy) GMS_NSArrayOf(GMSPlaceLikelihood *) *likelihoods;
 
 /**
  * The data provider attribution strings for the likelihood list.

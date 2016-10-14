@@ -9,6 +9,7 @@
 //
 
 #import <CoreLocation/CoreLocation.h>
+#import <UIKit/UIKit.h>
 
 #if __has_feature(modules)
 @import GoogleMapsBase;
