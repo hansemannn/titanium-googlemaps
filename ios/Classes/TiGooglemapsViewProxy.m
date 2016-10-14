@@ -235,14 +235,8 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_TYPE(annotationProxy, TiGooglemapsAnnotationProxy);
     ENSURE_UI_THREAD_1_ARG(args);
     
-    NSLock *lock = [NSLock new];
-    [lock lock];
-
     [[annotationProxy marker] setMap:[[self mapView] mapView]];
     [[self markers] addObject:annotationProxy];
-    
-    [lock unlock];
-    RELEASE_TO_NIL(lock);
 }
 
 -(void)addAnnotations:(id)args
@@ -251,17 +245,11 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     
     ENSURE_TYPE(annotationProxies, NSArray);
     ENSURE_UI_THREAD_1_ARG(args);
- 
-    NSLock *lock = [NSLock new];
-    [lock lock];
-
+    
     for(TiGooglemapsAnnotationProxy *annotationProxy in annotationProxies) {
         [[annotationProxy marker] setMap:[[self mapView] mapView]];
         [[self markers] addObject:annotationProxy];
     }
-    
-    [lock unlock];
-    RELEASE_TO_NIL(lock);
 }
 
 -(void)removeAnnotation:(id)args
@@ -271,14 +259,8 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_TYPE(annotationProxy, TiGooglemapsAnnotationProxy);
     ENSURE_UI_THREAD_1_ARG(args);
     
-    NSLock *lock = [NSLock new];
-    [lock lock];
-
     [[annotationProxy marker] setMap:nil];
     [[self markers] removeObject:annotationProxy];
-    
-    [lock unlock];
-    RELEASE_TO_NIL(lock);
 }
 
 -(void)removeAnnotations:(id)args
@@ -288,46 +270,27 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_TYPE(annotationProxies, NSArray);
     ENSURE_UI_THREAD_1_ARG(args);
     
-    NSLock *lock = [NSLock new];
-    [lock lock];
-
     for(TiGooglemapsAnnotationProxy *annotationProxy in annotationProxies) {
         [[annotationProxy marker] setMap:nil];
         [[self markers] removeObject:annotationProxy];
     }
-    
-    [lock unlock];
-    RELEASE_TO_NIL(lock);
 }
 
 -(void)removeAllAnnotations:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
-    
-    NSLock *lock = [NSLock new];
-    [lock lock];
-
     [[[self mapView] mapView] clear];
     [[self markers] removeAllObjects];
-    
-    [lock unlock];
-    RELEASE_TO_NIL(lock);
 }
 
 -(void)setAnnotations:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
 
-    NSLock *lock = [NSLock new];
-    [lock lock];
-
     for(TiGooglemapsAnnotationProxy *annotationProxy in [self markers]) {
         [[annotationProxy marker] setMap:nil];
         [[self markers] removeObject:annotationProxy];
     }
-    
-    [lock unlock];
-    RELEASE_TO_NIL(lock);
     
     [self addAnnotations:args];
 }
@@ -357,14 +320,8 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_UI_THREAD_1_ARG(args);
     ENSURE_TYPE(polylineProxy, TiGooglemapsPolylineProxy);
     
-    NSLock *lock = [NSLock new];
-    [lock lock];
-
     [[polylineProxy polyline] setMap:[[self mapView] mapView]];
     [[self overlays] addObject:polylineProxy];
-    
-    [lock unlock];
-    RELEASE_TO_NIL(lock);
 }
 
 -(void)removePolyline:(id)args
@@ -374,14 +331,8 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     id polylineProxy = [args objectAtIndex:0];
     ENSURE_TYPE(polylineProxy, TiGooglemapsPolylineProxy);
     
-    NSLock *lock = [NSLock new];
-    [lock lock];
-
     [[polylineProxy polyline] setMap:nil];
     [[self overlays] removeObject:polylineProxy];
-    
-    [lock unlock];
-    RELEASE_TO_NIL(lock);
 }
 
 -(void)addPolygon:(id)args
@@ -391,14 +342,8 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     id polygonProxy = [args objectAtIndex:0];
     ENSURE_TYPE(polygonProxy, TiGooglemapsPolygonProxy);
     
-    NSLock *lock = [NSLock new];
-    [lock lock];
-
     [[polygonProxy polygon] setMap:[[self mapView] mapView]];
     [[self overlays] addObject:polygonProxy];
-    
-    [lock unlock];
-    RELEASE_TO_NIL(lock);
 }
 
 -(void)removePolygon:(id)args
@@ -408,14 +353,8 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     id polygonProxy = [args objectAtIndex:0];
     ENSURE_TYPE(polygonProxy, TiGooglemapsPolygonProxy);
     
-    NSLock *lock = [NSLock new];
-    [lock lock];
-
     [[polygonProxy polygon] setMap:nil];
     [[self overlays] removeObject:polygonProxy];
-    
-    [lock unlock];
-    RELEASE_TO_NIL(lock);
 }
 
 -(void)addCircle:(id)args
@@ -425,14 +364,8 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     id circleProxy = [args objectAtIndex:0];
     ENSURE_TYPE(circleProxy, TiGooglemapsCircleProxy);
     
-    NSLock *lock = [NSLock new];
-    [lock lock];
-
     [[circleProxy circle] setMap:[[self mapView] mapView]];
     [[self overlays] addObject:circleProxy];
-
-    [lock unlock];
-    RELEASE_TO_NIL(lock);
 }
 
 -(void)removeCircle:(id)args
@@ -442,14 +375,8 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     id circleProxy = [args objectAtIndex:0];
     ENSURE_TYPE(circleProxy, TiGooglemapsCircleProxy);
     
-    NSLock *lock = [NSLock new];
-    [lock lock];
-
     [[circleProxy circle] setMap:nil];
     [[self overlays] removeObject:circleProxy];
-    
-    [lock unlock];
-    RELEASE_TO_NIL(lock);
 }
 
 -(id)getSelectedMarker:(id)unused
