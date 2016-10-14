@@ -229,6 +229,24 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     [self replaceValue:args forKey:@"region" notification:NO];
 }
 
+-(void)setMapStyle:(id)value
+{
+    ENSURE_UI_THREAD(setMapStyle, value);
+        
+    if (value == nil) {
+        [[[self mapView] mapView] setMapStyle:nil];
+    } else {
+        NSError *error = nil;
+        [[[self mapView] mapView] setMapStyle:[GMSMapStyle styleWithJSONString:[TiUtils stringValue:value] error:&error]];
+        
+        if (error) {
+            NSLog(@"[ERROR] Ti.GoogleMaps: Could not apply map style: %@", [error localizedDescription]);
+        }
+        
+        RELEASE_TO_NIL(error);
+    }
+}
+
 -(void)addAnnotation:(id)args
 {
     id annotationProxy = [args objectAtIndex:0];

@@ -259,4 +259,12 @@
  */
 -(void)setRegion:(id)args;
 
+/**
+ *  Sets the JSOn-based map style.
+ *
+ *  @param value The map style.
+ *  @since 2.6.0
+ */
+-(void)setMapStyle:(id)value;
+
 @end

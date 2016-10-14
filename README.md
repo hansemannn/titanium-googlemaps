@@ -112,8 +112,14 @@ mapView.allowScrollGesturesDuringRotateOrZoom = false;
 
 Map Insets:
 ```javascript
-$.mapview.mapInsets = { bottom:200 };
+mapView.mapInsets = { bottom:200 };
 ```
+
+Map Style:
+```javascript
+mapView.mapStyle = "JSON_STYLE_GOES_HERE";
+```
+See [this link](https://developers.google.com/maps/documentation/ios-sdk/hiding-features) for more infos on map styling.
 
 Animate to a location:
 ```javascript
