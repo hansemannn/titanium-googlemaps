@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2015 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-Present by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -162,12 +162,12 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 {
     if ([[self proxy] _hasListeners:@"overlayclick"]) {
         [[self proxy] fireEvent:@"overlayclick" withObject:@{
-            @"overlay": [self overlayProxyFromOverlay:overlay]
+            @"overlay": NUMINT([self overlayProxyFromOverlay:overlay])
         }];
     }
     if ([[self proxy] _hasListeners:@"click"]) {
         [[self proxy] fireEvent:@"click" withObject:@{
-            @"clicksource": NUMINT([self overlayTypeFromOverlay:overlay]),
+            @"clicksource": [self overlayTypeFromOverlay:overlay],
             @"map": [self proxy],
             @"overlay": [self overlayProxyFromOverlay:overlay]
         }];
@@ -249,20 +249,21 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     };
 }
 
--(TiGooglemapsOverlayType)overlayTypeFromOverlay:(GMSOverlay*)overlay
+-(id)overlayTypeFromOverlay:(GMSOverlay*)overlay
 {
     ENSURE_UI_THREAD(overlayTypeFromOverlay, overlay);
 
     if([overlay isKindOfClass:[GMSPolygon class]]) {
-        return TiGooglemapsOverlayTypePolygon;
+        return NUMINTEGER(TiGooglemapsOverlayTypePolygon);
     } else if([overlay isKindOfClass:[GMSPolyline class]]) {
-        return TiGooglemapsOverlayTypePolyline;
+        return NUMINTEGER(TiGooglemapsOverlayTypePolyline);
     } else if([overlay isKindOfClass:[GMSCircle class]]) {
-        return TiGooglemapsOverlayTypeCircle;
+        return NUMINTEGER(TiGooglemapsOverlayTypeCircle);
     }
     
-    NSLog(@"[WARN] Unknown overlay provided: %@", [overlay class])
-    return [NSNull null];
+    NSLog(@"[ERROR] Unknown overlay provided: %@", [overlay class])
+    
+    return NUMINTEGER(TiGooglemapsOverlayTypeUnknown);
 }
 
 -(id)annotationProxyFromMarker:(GMSMarker*)marker
@@ -270,7 +271,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     for (TiGooglemapsAnnotationProxy* annotationProxy in [[self mapViewProxy] markers]) {
         if ([annotationProxy marker] == marker) {
             // Replace the location attributes in the array of annotation-proxies
-            TiGooglemapsAnnotationProxy *newAnnotation = [annotationProxy mutableCopy];
+            TiGooglemapsAnnotationProxy *newAnnotation = [[annotationProxy mutableCopy] autorelease];
             [newAnnotation updateLocation:@{
                 @"latitude": NUMDOUBLE([marker position].latitude),
                 @"longitude": NUMDOUBLE([marker position].longitude)
@@ -278,7 +279,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
             NSMutableArray *newMarkers = [NSMutableArray arrayWithArray:[[self mapViewProxy] markers]];
             [newMarkers replaceObjectAtIndex:[newMarkers indexOfObject:annotationProxy] withObject:newAnnotation];
             [[self mapViewProxy] setMarkers:newMarkers];
-            RELEASE_TO_NIL(newAnnotation);
             
             return newAnnotation;
         }
@@ -290,7 +290,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 -(id)overlayProxyFromOverlay:(GMSOverlay*)overlay
 {
     for (TiProxy* overlayProxy in [[self mapViewProxy] overlays]) {
-
         // Check for polygons
         if ([overlay isKindOfClass:[GMSPolygon class]] && [overlayProxy isKindOfClass:[TiGooglemapsPolygonProxy class]]) {
             if ([(TiGooglemapsPolygonProxy*)overlayProxy polygon] == overlay) {
@@ -313,6 +312,8 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
     return [NSNull null];
 }
+
+#pragma mark Constants
 
 MAKE_SYSTEM_PROP(OVERLAY_TYPE_POLYGON, TiGooglemapsOverlayTypePolygon);
 MAKE_SYSTEM_PROP(OVERLAY_TYPE_POLYLINE, TiGooglemapsOverlayTypePolyline);

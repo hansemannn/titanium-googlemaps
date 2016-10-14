@@ -9,5 +9,5 @@ typedef NS_ENUM(NSUInteger, TiGooglemapsOverlayType) {
     TiGooglemapsOverlayTypeUnknown = 0,
     TiGooglemapsOverlayTypePolygon,
     TiGooglemapsOverlayTypePolyline,
-    TiGooglemapsOverlayTypeCircle,
+    TiGooglemapsOverlayTypeCircle
 };
