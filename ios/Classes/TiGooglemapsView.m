@@ -177,9 +177,10 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 - (void)mapView:(GMSMapView *)mapView didBeginDraggingMarker:(GMSMarker *)marker
 {
     if ([[self proxy] _hasListeners:@"dragstart"]) {
+        TiGooglemapsAnnotationProxy *annotationProxy = [self annotationProxyFromMarker:marker];
         NSDictionary *event = @{
-            @"marker" : [self annotationProxyFromMarker:marker], // Deprecated
-            @"annotation" : [self annotationProxyFromMarker:marker]
+            @"marker" : annotationProxy, // Deprecated
+            @"annotation" : annotationProxy
         };
         [[self proxy] fireEvent:@"dragstart" withObject:event];
     }
@@ -188,20 +189,23 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 - (void)mapView:(GMSMapView *)mapView didEndDraggingMarker:(GMSMarker *)marker
 {
     if ([[self proxy] _hasListeners:@"dragend"]) {
+        TiGooglemapsAnnotationProxy *annotationProxy = [self annotationProxyFromMarker:marker];
+
         NSDictionary *event = @{
-            @"marker" : [self annotationProxyFromMarker:marker], // Deprecated
-            @"annotation" : [self annotationProxyFromMarker:marker]
+            @"marker" : annotationProxy, // Deprecated
+            @"annotation" : annotationProxy
         };
-        [[self proxy] fireEvent:@"dragend" withObject:event];
+      [[self proxy] fireEvent:@"dragend" withObject:event];
     }
 }
 
 - (void)mapView:(GMSMapView *)mapView didDragMarker:(GMSMarker *)marker
 {
     if ([[self proxy] _hasListeners:@"dragmove"]) {
+        TiGooglemapsAnnotationProxy *annotationProxy = [self annotationProxyFromMarker:marker];
         NSDictionary *event = @{
-            @"marker" : [self annotationProxyFromMarker:marker], // Deprecated
-            @"annotation" : [self annotationProxyFromMarker:marker]
+            @"marker" : annotationProxy, // Deprecated
+            @"annotation" : annotationProxy
         };
         [[self proxy] fireEvent:@"dragmove" withObject:event];
     }
@@ -268,19 +272,20 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 -(id)annotationProxyFromMarker:(GMSMarker*)marker
 {
-    for (TiGooglemapsAnnotationProxy* annotationProxy in [[self mapViewProxy] markers]) {
-        if ([annotationProxy marker] == marker) {
+    for (NSUInteger i = 0; i < [[[self mapViewProxy] markers] count]; i++) {
+        TiGooglemapsAnnotationProxy *annotationProxy = [[[[self mapViewProxy] markers] objectAtIndex:i] retain];
+        
+        if ([[[[annotationProxy marker] userData] valueForKey:@"uuid"] isEqualToString:[[marker userData] valueForKey:@"uuid"]]) {
             // Replace the location attributes in the array of annotation-proxies
-            TiGooglemapsAnnotationProxy *newAnnotation = [[annotationProxy mutableCopy] autorelease];
+            TiGooglemapsAnnotationProxy *newAnnotation = [annotationProxy retain];
+            [annotationProxy release];
             [newAnnotation updateLocation:@{
                 @"latitude": NUMDOUBLE([marker position].latitude),
                 @"longitude": NUMDOUBLE([marker position].longitude)
             }];
-            NSMutableArray *newMarkers = [NSMutableArray arrayWithArray:[[self mapViewProxy] markers]];
-            [newMarkers replaceObjectAtIndex:[newMarkers indexOfObject:annotationProxy] withObject:newAnnotation];
-            [[self mapViewProxy] setMarkers:newMarkers];
+            [[[self mapViewProxy] markers] replaceObjectAtIndex:i withObject:newAnnotation];
             
-            return newAnnotation;
+            return [newAnnotation autorelease];
         }
     }
 

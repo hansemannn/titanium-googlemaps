@@ -18,6 +18,7 @@
         _marker = [GMSMarker new];
         
         [_marker setPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:[self valueForKey:@"latitude"]],[TiUtils doubleValue:[self valueForKey:@"longitude"]])];
+        [_marker setUserData:@{@"uuid": [[NSUUID UUID] UUIDString]}];
     }
     
     return _marker;
@@ -143,8 +144,15 @@
 -(void)setUserData:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
-    [[self marker] setUserData:value];
-    [self replaceValue:value forKey:@"userData" notification:NO];
+    NSMutableDictionary *result = value;
+    
+    // Hook in internal uuid
+    if ([[self marker] userData] != value) {
+        [result setObject:[[[self marker] userData] valueForKey:@"uuid"] forKey:@"uuid"];
+    }
+    
+    [[self marker] setUserData:result];
+    [self replaceValue:result forKey:@"userData" notification:NO];
 }
 
 -(void)updateLocation:(id)args
