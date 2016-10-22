@@ -91,7 +91,7 @@
 {
     if ([self _hasListeners:@"success"]) {
         [self fireEvent:@"success" withObject:@{
-            @"place": [self dictionaryFromPlace:place]
+            @"place": [TiGooglemapsAutocompleteDialogProxy dictionaryFromPlace:place]
         }];
     }
     
@@ -129,19 +129,41 @@
     RELEASE_TO_NIL(dialog);
 }
 
-- (NSDictionary*)dictionaryFromPlace:(GMSPlace*)place
++ (NSDictionary*)dictionaryFromPlace:(GMSPlace*)place
 {
     return @{
         @"name": [place name],
         @"placeID": [place placeID],
         @"latitude": NUMDOUBLE([place coordinate].latitude),
         @"longitude": NUMDOUBLE([place coordinate].longitude),
-        @"formattedAddress": [place formattedAddress]
+        @"formattedAddress": [place formattedAddress],
+        @"addressComponents": [TiGooglemapsAutocompleteDialogProxy arrayFromAddressComponents:[place addressComponents]]
     };
 }
 
-- (NSDictionary*)dictionaryFromPrediction:(GMSAutocompletePrediction*)prediction
++ (id)arrayFromAddressComponents:(NSArray<GMSAddressComponent*>*)addressComponents
 {
+    if (addressComponents == nil) {
+        return [NSNull null];
+    }
+    
+    NSMutableArray *result = [NSMutableArray new];
+    for (GMSAddressComponent *addressComponent in addressComponents) {
+        [result addObject:@{
+            @"type": addressComponent.type,
+            @"name":addressComponent.name
+        }];
+    }
+    
+    return result;
+}
+
++ (id)dictionaryFromPrediction:(GMSAutocompletePrediction*)prediction
+{
+    if (prediction == nil) {
+        return nil;
+    }
+    
     return @{
         @"attributedFullText": [[prediction attributedFullText] string],
         @"attributedPrimaryText": [[prediction attributedPrimaryText] string],
