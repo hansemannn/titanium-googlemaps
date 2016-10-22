@@ -32,6 +32,12 @@
     return dialog;
 }
 
+- (void)configure:(id)value
+{
+    ENSURE_SINGLE_ARG(value, NSString);
+    [GMSPlacesClient provideAPIKey:value];
+}
+
 - (void)open:(id)args
 {
     [self rememberSelf];
@@ -117,6 +123,7 @@
 
 - (void)closeDialog
 {
+    [[self dialog] setDelegate:nil];
     [[self dialog] dismissViewControllerAnimated:YES completion:nil];
     [self forgetSelf];
     RELEASE_TO_NIL(dialog);

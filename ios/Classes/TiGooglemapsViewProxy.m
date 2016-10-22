@@ -17,11 +17,19 @@
 #define DEPRECATED(from, to, in) \
 NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, to, in);\
 
+-(id)_initWithPageContext:(id<TiEvaluator>)context
+{
+    q = dispatch_queue_create("ti.googlemaps.annotationqueue", NULL);
+    return [super _initWithPageContext:context];
+}
+
 -(void)dealloc
 {
     RELEASE_TO_NIL(mapView);
     RELEASE_TO_NIL(markers);
     RELEASE_TO_NIL(overlays);
+    
+    dispatch_release(q);
     
     [super dealloc];
 }
@@ -249,67 +257,76 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 -(void)addAnnotation:(id)args
 {
-    id annotationProxy = [args objectAtIndex:0];
-    
-    ENSURE_TYPE(annotationProxy, TiGooglemapsAnnotationProxy);
     ENSURE_UI_THREAD_1_ARG(args);
+
+    TiGooglemapsAnnotationProxy *annotationProxy;
+    ENSURE_ARG_AT_INDEX(annotationProxy, args, 0, TiGooglemapsAnnotationProxy);
     
-    [[annotationProxy marker] setMap:[[self mapView] mapView]];
-    [[self markers] addObject:annotationProxy];
+    dispatch_sync(q, ^{
+        [[annotationProxy marker] setMap:[[self mapView] mapView]];
+        [[self markers] addObject:annotationProxy];
+    });
 }
 
 -(void)addAnnotations:(id)args
 {
-    id annotationProxies = [args objectAtIndex:0];
-    
-    ENSURE_TYPE(annotationProxies, NSArray);
     ENSURE_UI_THREAD_1_ARG(args);
+    ENSURE_SINGLE_ARG(args, NSArray);
     
-    for(TiGooglemapsAnnotationProxy *annotationProxy in annotationProxies) {
-        [[annotationProxy marker] setMap:[[self mapView] mapView]];
-        [[self markers] addObject:annotationProxy];
-    }
+    dispatch_sync(q, ^{
+        for(TiGooglemapsAnnotationProxy *annotationProxy in args) {
+            [[annotationProxy marker] setMap:[[self mapView] mapView]];
+            [[self markers] addObject:annotationProxy];
+        }
+    });
 }
 
 -(void)removeAnnotation:(id)args
 {
-    id annotationProxy = [args objectAtIndex:0];
-    
-    ENSURE_TYPE(annotationProxy, TiGooglemapsAnnotationProxy);
     ENSURE_UI_THREAD_1_ARG(args);
+
+    TiGooglemapsAnnotationProxy *annotationProxy;
+    ENSURE_ARG_AT_INDEX(annotationProxy, args, 0, TiGooglemapsAnnotationProxy);
     
-    [[annotationProxy marker] setMap:nil];
-    [[self markers] removeObject:annotationProxy];
+    dispatch_sync(q, ^{
+        [[annotationProxy marker] setMap:nil];
+        [[self markers] removeObject:annotationProxy];
+    });
 }
 
 -(void)removeAnnotations:(id)args
 {
-    id annotationProxies = [args objectAtIndex:0];
-    
-    ENSURE_TYPE(annotationProxies, NSArray);
     ENSURE_UI_THREAD_1_ARG(args);
-    
-    for(TiGooglemapsAnnotationProxy *annotationProxy in annotationProxies) {
-        [[annotationProxy marker] setMap:nil];
-        [[self markers] removeObject:annotationProxy];
-    }
+    ENSURE_SINGLE_ARG(args, NSArray);
+
+    dispatch_sync(q, ^{
+        for(TiGooglemapsAnnotationProxy *annotationProxy in args) {
+            [[annotationProxy marker] setMap:nil];
+            [[self markers] removeObject:annotationProxy];
+        }
+    });
 }
 
 -(void)removeAllAnnotations:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
-    [[[self mapView] mapView] clear];
-    [[self markers] removeAllObjects];
+    
+    dispatch_sync(q, ^{
+        [[[self mapView] mapView] clear];
+        [[self markers] removeAllObjects];
+    });
 }
 
 -(void)setAnnotations:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
 
-    for(TiGooglemapsAnnotationProxy *annotationProxy in [self markers]) {
-        [[annotationProxy marker] setMap:nil];
-        [[self markers] removeObject:annotationProxy];
-    }
+    dispatch_sync(q, ^{
+        for(TiGooglemapsAnnotationProxy *annotationProxy in [self markers]) {
+            [[annotationProxy marker] setMap:nil];
+            [[self markers] removeObject:annotationProxy];
+        }
+    });
     
     [self addAnnotations:args];
 }
