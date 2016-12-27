@@ -40,7 +40,7 @@ GMS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *GMS_NULLABLE_PTR phoneNumber;
 
 /** List of types of the place as an array of NSStrings, like the GMSPlace.types property.
-* Only <a href="/places/supported_types#table1">table 1 types</a>
+* Only <a href="/places/ios-api/supported_types#table1">table 1 types</a>
 * are valid.
 */
 @property(nonatomic, copy) GMS_NSArrayOf(NSString *) * GMS_NULLABLE_PTR types;

@@ -79,7 +79,7 @@ extern NSString *const kGMSAutocompleteMatchAttribute;
 
 /**
  * The types of this autocomplete result.  Types are NSStrings, valid values are any types
- * documented at <https://developers.google.com/places/supported_types>.
+ * documented at <https://developers.google.com/places/ios-api/supported_types>.
  */
 @property(nonatomic, copy, readonly) GMS_NSArrayOf(NSString *) *types;
 

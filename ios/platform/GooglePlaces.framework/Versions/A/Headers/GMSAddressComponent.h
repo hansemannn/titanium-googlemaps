@@ -23,8 +23,8 @@ GMS_ASSUME_NONNULL_BEGIN
 
 /**
  * Type of the address component. For a list of supported types, see
- * https://developers.google.com/places/supported_types#table2. This string will be one of the
- * constants defined in GMSPlaceTypes.h.
+ * https://developers.google.com/places/ios-api/supported_types#table2. This string will be one
+ * of the constants defined in GMSPlaceTypes.h.
  */
 @property(nonatomic, readonly, copy) NSString *type;
 
