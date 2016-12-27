@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2015 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-Present by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -10,10 +10,10 @@
 
 @implementation TiGooglemapsMarkerProxy
 
+@synthesize marker = _marker;
+
 #define DEPRECATED(from, to, in) \
 NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, in, to);\
-
-@synthesize marker = _marker;
 
 -(GMSMarker*)marker
 {
@@ -40,6 +40,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, i
 
 -(void)dealloc
 {
+    RELEASE_TO_NIL(_marker);
     [super dealloc];
 }
 

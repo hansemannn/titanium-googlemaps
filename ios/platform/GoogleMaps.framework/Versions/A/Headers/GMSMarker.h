@@ -68,7 +68,7 @@ typedef enum {
  * Note that the view behaves as if |clipsToBounds| is set to YES, regardless of its actual
  * value.
  */
-@property(nonatomic, strong) UIView *iconView;
+@property(nonatomic, strong) UIView *GMS_NULLABLE_PTR iconView;
 
 /**
  * Controls whether the icon for this marker should be redrawn every frame.

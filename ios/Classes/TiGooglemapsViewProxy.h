@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2015 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-Present by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -12,8 +12,10 @@
     TiGooglemapsViewProxy* mapView;
     NSMutableArray *markers;
     NSMutableArray *overlays;
+    
+    @private
+    dispatch_queue_t q;
 }
-
 
 /**
  *  An array of marker proxies.
@@ -30,6 +32,13 @@
  *  @since 2.1.0
  */
 -(NSMutableArray*)overlays;
+
+/**
+ *  Sets the new annotations error, e.g. for position updates
+ *
+ *  @since 2.5.1
+ */
+-(void)setMarkers:(NSMutableArray*)_markers;
 
 /**
  *  Adds an annotation.
@@ -251,5 +260,13 @@
  *  @since 2.2.0
  */
 -(void)setRegion:(id)args;
+
+/**
+ *  Sets the JSOn-based map style.
+ *
+ *  @param value The map style.
+ *  @since 2.6.0
+ */
+-(void)setMapStyle:(id)value;
 
 @end

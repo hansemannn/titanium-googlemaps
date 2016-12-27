@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2015 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-Present by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -14,8 +14,6 @@
 #import "TiGooglemapsConstants.h"
 
 @implementation TiGooglemapsMapView
-
-@synthesize mapView = _mapView;
 
 #define DEPRECATED(from, to, in) \
 NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, to, in);\
@@ -35,6 +33,12 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     }
 
     return _mapView;
+}
+
+-(void)dealloc
+{
+    RELEASE_TO_NIL(_mapView);
+    [super dealloc];
 }
 
 -(TiGooglemapsMapViewProxy*)mapViewProxy
@@ -75,7 +79,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     if ([[self proxy] _hasListeners:@"regionchanged"]) {
         [[self proxy] fireEvent:@"regionchanged" withObject:@{
             @"map" : [self proxy],
-            @"latitude" : NUMDOUBLE(position.target.longitude),
+            @"latitude" : NUMDOUBLE(position.target.latitude),
             @"longitude" : NUMDOUBLE(position.target.longitude),
         }];
     }
@@ -164,7 +168,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     }
     if ([[self proxy] _hasListeners:@"click"]) {
         [[self proxy] fireEvent:@"click" withObject:@{
-            @"clicksource": NUMINT([self overlayTypeFromOverlay:overlay]),
+            @"clicksource": [self overlayTypeFromOverlay:overlay],
             @"map": [self proxy],
             @"overlay": [self overlayProxyFromOverlay:overlay]
         }];
@@ -239,20 +243,21 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     };
 }
 
--(TiGooglemapsOverlayType)overlayTypeFromOverlay:(GMSOverlay*)overlay
+-(id)overlayTypeFromOverlay:(GMSOverlay*)overlay
 {
     ENSURE_UI_THREAD(overlayTypeFromOverlay, overlay);
-
+    
     if([overlay isKindOfClass:[GMSPolygon class]]) {
-        return TiGooglemapsOverlayTypePolygon;
+        return NUMINTEGER(TiGooglemapsOverlayTypePolygon);
     } else if([overlay isKindOfClass:[GMSPolyline class]]) {
-        return TiGooglemapsOverlayTypePolyline;
+        return NUMINTEGER(TiGooglemapsOverlayTypePolyline);
     } else if([overlay isKindOfClass:[GMSCircle class]]) {
-        return TiGooglemapsOverlayTypeCircle;
+        return NUMINTEGER(TiGooglemapsOverlayTypeCircle);
     }
     
-    NSLog(@"[WARN] Unknown overlay provided: %@", [overlay class])
-    return [NSNull null];
+    NSLog(@"[ERROR] Unknown overlay provided: %@", [overlay class])
+    
+    return NUMINTEGER(TiGooglemapsOverlayTypeUnknown);
 }
 
 -(id)annotationProxyFromMarker:(GMSMarker*)marker

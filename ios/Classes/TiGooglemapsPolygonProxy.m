@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2015 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-Present by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -8,8 +8,6 @@
 #import "TiGooglemapsPolygonProxy.h"
 
 @implementation TiGooglemapsPolygonProxy
-
-@synthesize polygon = _polygon;
 
 -(GMSPolygon*)polygon
 {
@@ -19,6 +17,12 @@
     }
     
     return _polygon;
+}
+
+-(void)dealloc
+{
+    RELEASE_TO_NIL(_polygon);
+    [super dealloc];
 }
 
 #pragma mark Public API's

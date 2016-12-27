@@ -25,6 +25,7 @@
 @class GMSCoordinateBounds;
 @class GMSIndoorDisplay;
 @class GMSMapLayer;
+@class GMSMapStyle;
 @class GMSMapView;
 @class GMSMarker;
 @class GMSOverlay;
@@ -70,16 +71,16 @@ GMS_ASSUME_NONNULL_BEGIN
 /**
  * Called after a long-press gesture at a particular coordinate.
  *
- * @param mapView The map view that was pressed.
- * @param coordinate The location that was pressed.
+ * @param mapView The map view that was tapped.
+ * @param coordinate The location that was tapped.
  */
 - (void)mapView:(GMSMapView *)mapView didLongPressAtCoordinate:(CLLocationCoordinate2D)coordinate;
 
 /**
  * Called after a marker has been tapped.
  *
- * @param mapView The map view that was pressed.
- * @param marker The marker that was pressed.
+ * @param mapView The map view that was tapped.
+ * @param marker The marker that was tapped.
  * @return YES if this delegate handled the tap event, which prevents the map
  *         from performing its default selection behavior, and NO if the map
  *         should continue with its default selection behavior.
@@ -100,10 +101,23 @@ GMS_ASSUME_NONNULL_BEGIN
  * Called after an overlay has been tapped.
  * This method is not called for taps on markers.
  *
- * @param mapView The map view that was pressed.
- * @param overlay The overlay that was pressed.
+ * @param mapView The map view that was tapped.
+ * @param overlay The overlay that was tapped.
  */
 - (void)mapView:(GMSMapView *)mapView didTapOverlay:(GMSOverlay *)overlay;
+
+/**
+ *  Called after a POI has been tapped.
+ *
+ * @param mapView The map view that was tapped.
+ * @param placeID The placeID of the POI that was tapped.
+ * @param name The name of the POI that was tapped.
+ * @param location The location of the POI that was tapped.
+ */
+- (void)mapView:(GMSMapView *)mapView
+    didTapPOIWithPlaceID:(NSString *)placeID
+                    name:(NSString *)name
+                location:(CLLocationCoordinate2D)location;
 
 /**
  * Called when a marker is about to become selected, and provides an optional
@@ -292,6 +306,13 @@ typedef enum {
 @property(nonatomic, assign) GMSMapViewType mapType;
 
 /**
+ * Controls the style of the map.
+ *
+ * A non-nil mapStyle will only apply if mapType is Normal.
+ */
+@property(nonatomic, strong, nullable) GMSMapStyle *mapStyle;
+
+/**
  * Minimum zoom (the farthest the camera may be zoomed out). Defaults to
  * kGMSMinZoomLevel. Modified with -setMinZoom:maxZoom:.
  */
@@ -415,6 +436,13 @@ typedef enum {
  * The camera change is instantaneous (with no animation).
  */
 - (void)moveCamera:(GMSCameraUpdate *)update;
+
+/**
+ * Check whether the given camera positions would practically cause the camera to be rendered the
+ * same, taking into account the level of precision and transformations used internally.
+ */
+- (BOOL)areEqualForRenderingPosition:(GMSCameraPosition *)position
+                            position:(GMSCameraPosition *)otherPosition;
 
 @end
 

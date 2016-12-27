@@ -3,7 +3,6 @@ var win = Ti.UI.createWindow({
     includeOpaqueBars: true,
     extendEdges: [Ti.UI.EXTEND_EDGE_ALL]
 });
-var nav = Ti.UI.iOS.createNavigationWindow({window: win});
 
 var maps = require("ti.googlemaps");
 maps.setAPIKey("<YOUR_GOOGLE_MAPS_API_KEY>");
@@ -41,7 +40,7 @@ var companies = {
 /*
  *  MapView
  */
-var mapView = maps.createMapView({
+var mapView = maps.createView({
     mapType: maps.MAP_TYPE_TERRAIN,
     indoorEnabled: true,
     indoorPicker: false,
@@ -229,6 +228,9 @@ function openAutocompleteDialog() {
          primaryTextHighlightColor: "blue",
          tintColor: "blue"*/
     });
+    
+    
+    dialog.configure("<YOUR_GOOGLE_PLACES_API_KEY>");
 
     dialog.addEventListener("success", function(e) {
         Ti.API.info(e.place);
@@ -267,4 +269,9 @@ searchButton.addEventListener("click", openAutocompleteDialog);
 
 win.setRightNavButton(searchButton);
 win.add(mapView);
+
+var nav = Ti.UI.iOS.createNavigationWindow({
+    window: win
+});
+
 nav.open();

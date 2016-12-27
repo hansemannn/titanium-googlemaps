@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2015 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-Present by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -8,8 +8,6 @@
 #import "TiGooglemapsPolylineProxy.h"
 
 @implementation TiGooglemapsPolylineProxy
-
-@synthesize polyline = _polyline;
 
 -(GMSPolyline*)polyline
 {
@@ -19,6 +17,12 @@
     }
     
     return _polyline;
+}
+
+-(void)dealloc
+{
+    RELEASE_TO_NIL(_polyline);
+    [super dealloc];
 }
 
 -(void)setPoints:(id)points
