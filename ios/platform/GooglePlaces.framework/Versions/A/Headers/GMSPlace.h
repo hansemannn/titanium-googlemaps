@@ -95,7 +95,7 @@ typedef NS_ENUM(NSInteger, GMSPlacesPriceLevel) {
 
 /**
  * The types of this place.  Types are NSStrings, valid values are any types documented at
- * <https://developers.google.com/places/supported_types>.
+ * <https://developers.google.com/places/ios-api/supported_types>.
  */
 @property(nonatomic, copy, readonly) GMS_NSArrayOf(NSString *) *types;
 
