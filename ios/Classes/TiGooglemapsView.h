@@ -6,6 +6,7 @@
  */
 #import "TiUIView.h"
 #import <GoogleMaps/GoogleMaps.h>
+#import "GMUMarkerClustering.h"
 
 @interface TiGooglemapsView : TiUIView<GMSMapViewDelegate>
 
