@@ -1,5 +1,4 @@
-# Ti.GoogleMaps
-
+# Ti.GoogleMaps [![Build Status](https://travis-ci.org/hansemannn/ti.googlemaps.svg?branch=master)](https://travis-ci.org/hansemannn/ti.googlemaps)
 
 <img width="1094" src="http://abload.de/img/showcase3vron.png">
 
