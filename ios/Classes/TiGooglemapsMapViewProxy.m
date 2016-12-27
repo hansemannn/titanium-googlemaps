@@ -29,6 +29,8 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     RELEASE_TO_NIL(markers);
     RELEASE_TO_NIL(overlays);
     
+    dispatch_release(q);
+    
     [super dealloc];
 }
 
@@ -110,8 +112,11 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_UI_THREAD_1_ARG(args);
   
     dispatch_barrier_async(q, ^{
-        [[annotationProxy marker] setMap:[[self mapView] mapView]];
         [[self markers] addObject:annotationProxy];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[annotationProxy marker] setMap:[[self mapView] mapView]];
+        });
     });
 }
 
@@ -135,8 +140,11 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_UI_THREAD_1_ARG(args);
     
     dispatch_barrier_async(q, ^{
-        [[annotationProxy marker] setMap:nil];
         [[self markers] removeObject:annotationProxy];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[annotationProxy marker] setMap:nil];
+        });
     });
 }
 
@@ -177,8 +185,11 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_TYPE(polylineProxy, TiGooglemapsPolylineProxy);
     
     dispatch_barrier_async(q, ^{
-        [[polylineProxy polyline] setMap:[[self mapView] mapView]];
         [[self overlays] addObject:polylineProxy];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[polylineProxy polyline] setMap:[[self mapView] mapView]];
+        });
     });
 }
 
@@ -190,8 +201,11 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_TYPE(polylineProxy, TiGooglemapsPolylineProxy);
     
     dispatch_barrier_async(q, ^{
-        [[polylineProxy polyline] setMap:nil];
         [[self overlays] removeObject:polylineProxy];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[polylineProxy polyline] setMap:nil];
+        });
     });
 }
 
@@ -203,8 +217,11 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_TYPE(polygonProxy, TiGooglemapsPolygonProxy);
     
     dispatch_barrier_async(q, ^{
-        [[polygonProxy polygon] setMap:[[self mapView] mapView]];
         [[self overlays] addObject:polygonProxy];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[polygonProxy polygon] setMap:[[self mapView] mapView]];
+        });
     });
 }
 
@@ -216,8 +233,11 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_TYPE(polygonProxy, TiGooglemapsPolygonProxy);
     
     dispatch_barrier_async(q, ^{
-        [[polygonProxy polygon] setMap:nil];
         [[self overlays] removeObject:polygonProxy];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[polygonProxy polygon] setMap:nil];
+        });
     });
 }
 
@@ -229,8 +249,11 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_TYPE(circleProxy, TiGooglemapsCircleProxy);
     
     dispatch_barrier_async(q, ^{
-        [[circleProxy circle] setMap:[[self mapView] mapView]];
         [[self overlays] addObject:circleProxy];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[circleProxy circle] setMap:[[self mapView] mapView]];
+        });
     });
 }
 
@@ -242,8 +265,11 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_TYPE(circleProxy, TiGooglemapsCircleProxy);
     
     dispatch_barrier_async(q, ^{
-        [[circleProxy circle] setMap:nil];
         [[self overlays] removeObject:circleProxy];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[circleProxy circle] setMap:nil];
+        });
     });
 }
 

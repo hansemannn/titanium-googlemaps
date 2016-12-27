@@ -40,7 +40,7 @@ var companies = {
 /*
  *  MapView
  */
-var mapView = maps.createMapView({
+var mapView = maps.createView({
     mapType: maps.MAP_TYPE_TERRAIN,
     indoorEnabled: true,
     indoorPicker: false,
