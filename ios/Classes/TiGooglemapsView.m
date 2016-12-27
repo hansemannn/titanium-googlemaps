@@ -34,6 +34,19 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     return _mapView;
 }
 
+-(GMUClusterManager*)clusterManager
+{
+    if (_clusterManager == nil) {
+        _clusterManager = [[GMUClusterManager alloc] initWithMap:[self mapView]
+                                                       algorithm:[[GMUNonHierarchicalDistanceBasedAlgorithm alloc] init]
+                                                        renderer:[[GMUDefaultClusterRenderer alloc] initWithMapView:[self mapView] clusterIconGenerator:[[GMUDefaultClusterIconGenerator alloc] init]]];
+        
+        [_clusterManager setDelegate:self mapDelegate:self];
+    }
+    
+    return _clusterManager;
+}
+
 -(void)dealloc
 {
     RELEASE_TO_NIL(_mapView);
@@ -51,7 +64,30 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     [super frameSizeChanged:frame bounds:bounds];
 }
 
-#pragma mark Delegates
+#pragma mark Map Cluster Delegates
+
+- (void)clusterManager:(GMUClusterManager *)clusterManager didTapCluster:(id<GMUCluster>)cluster
+{
+    if ([[self proxy] _hasListeners:@"clusterclick"]) {
+        [[self proxy] fireEvent:@"clusterclick" withObject:@{
+            @"latitude": NUMDOUBLE(cluster.position.latitude),
+            @"longitude": NUMDOUBLE(cluster.position.longitude),
+            @"count": NUMUINTEGER(cluster.count)
+        }];
+    }
+}
+
+- (void)clusterManager:(GMUClusterManager *)clusterManager didTapClusterItem:(id<GMUClusterItem>)clusterItem
+{
+    if ([[self proxy] _hasListeners:@"clusteritemclick"]) {
+        [[self proxy] fireEvent:@"clusteritemclick" withObject:@{
+            @"latitude": NUMDOUBLE(clusterItem.position.latitude),
+            @"longitude": NUMDOUBLE(clusterItem.position.longitude),
+        }];
+    }
+}
+
+#pragma mark Map View Delegates
 
 - (void)mapView:(GMSMapView *)mapView willMove:(BOOL)gesture
 {

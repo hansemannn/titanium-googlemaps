@@ -10,7 +10,9 @@
 #import "TiGooglemapsPolylineProxy.h"
 #import "TiGooglemapsPolygonProxy.h"
 #import "TiGooglemapsCircleProxy.h"
+#import "TiGooglemapsClusterItemProxy.h"
 #import "TiUtils.h"
+#import "GMUMarkerClustering.h"
 
 @implementation TiGooglemapsViewProxy
 
@@ -253,6 +255,36 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
         
         RELEASE_TO_NIL(error);
     }
+}
+
+- (void)cluster:(id)unused
+{
+    ENSURE_UI_THREAD(cluster, unused);
+    
+    [[[self mapView] clusterManager] cluster];
+}
+
+-(void)addClusterItem:(id)args
+{
+    ENSURE_SINGLE_ARG(args, TiGooglemapsClusterItemProxy);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[[self mapView] clusterManager] addItem:[(TiGooglemapsClusterItemProxy *)args clusterItem]];
+    });
+}
+
+-(void)removeClusterItem:(id)args
+{
+    ENSURE_SINGLE_ARG(args, TiGooglemapsClusterItemProxy);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[[self mapView] clusterManager] removeItem:[(TiGooglemapsClusterItemProxy *)args clusterItem]];
+    });
+}
+
+-(void)clearClusterItems:(id)unused
+{
+    [[[self mapView] clusterManager] clearItems];
 }
 
 -(void)addAnnotation:(id)args

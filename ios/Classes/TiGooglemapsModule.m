@@ -9,6 +9,7 @@
 #import "TiHost.h"
 #import "TiUtils.h"
 #import "TiGooglemapsModule.h"
+#import "TiGooglemapsClusterItemProxy.h"
 #import <GoogleMaps/GoogleMaps.h>
 
 @implementation TiGooglemapsModule
@@ -44,6 +45,19 @@
 -(NSString*)version
 {
     return [TiUtils stringValue:[GMSServices version]];
+}
+
+-(TiGooglemapsClusterItemProxy *)createClusterItem:(id)args
+{
+    ENSURE_SINGLE_ARG(args, NSDictionary);
+    
+    id latitude = [args objectForKey:@"latitude"];
+    id longitude = [args objectForKey:@"longitude"];
+    id title = [args objectForKey:@"title"];
+    
+    return [[TiGooglemapsClusterItemProxy alloc] _initWithPageContext:[self pageContext]
+                                                          andPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude])
+                                                                title:[TiUtils stringValue:title]];
 }
 
 #pragma mark Constants

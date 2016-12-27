@@ -96,6 +96,8 @@
 		DB0A81301E13111600F03FE9 /* GQTPointQuadTreeChild.h in Headers */ = {isa = PBXBuildFile; fileRef = DB0A81291E13111600F03FE9 /* GQTPointQuadTreeChild.h */; };
 		DB0A81311E13111600F03FE9 /* GQTPointQuadTreeChild.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0A812A1E13111600F03FE9 /* GQTPointQuadTreeChild.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		DB0A81321E13111600F03FE9 /* GQTPointQuadTreeItem.h in Headers */ = {isa = PBXBuildFile; fileRef = DB0A812B1E13111600F03FE9 /* GQTPointQuadTreeItem.h */; };
+		DB0A81361E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = DB0A81341E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.h */; };
+		DB0A81371E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0A81351E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.m */; };
 		DBA037041DB1125D004279F0 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBA037001DB1125D004279F0 /* GoogleMaps.framework */; };
 		DBA037051DB1125D004279F0 /* GoogleMapsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBA037011DB1125D004279F0 /* GoogleMapsBase.framework */; };
 		DBA037061DB1125D004279F0 /* GoogleMapsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBA037021DB1125D004279F0 /* GoogleMapsCore.framework */; };
@@ -196,6 +198,8 @@
 		DB0A81291E13111600F03FE9 /* GQTPointQuadTreeChild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTreeChild.h; sourceTree = "<group>"; };
 		DB0A812A1E13111600F03FE9 /* GQTPointQuadTreeChild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GQTPointQuadTreeChild.m; sourceTree = "<group>"; };
 		DB0A812B1E13111600F03FE9 /* GQTPointQuadTreeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTreeItem.h; sourceTree = "<group>"; };
+		DB0A81341E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsClusterItemProxy.h; path = Classes/TiGooglemapsClusterItemProxy.h; sourceTree = "<group>"; };
+		DB0A81351E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsClusterItemProxy.m; path = Classes/TiGooglemapsClusterItemProxy.m; sourceTree = "<group>"; };
 		DBA037001DB1125D004279F0 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = platform/GoogleMaps.framework; sourceTree = "<group>"; };
 		DBA037011DB1125D004279F0 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsBase.framework; path = platform/GoogleMapsBase.framework; sourceTree = "<group>"; };
 		DBA037021DB1125D004279F0 /* GoogleMapsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsCore.framework; path = platform/GoogleMapsCore.framework; sourceTree = "<group>"; };
@@ -295,6 +299,7 @@
 				3A28A4C91BE9204C0004FCE9 /* Overlays */,
 				3AF900D31BC2289C00172627 /* View */,
 				3AF900D41BC228C300172627 /* Annotations */,
+				DB0A81331E1315BE00F03FE9 /* ClusterItem */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -482,6 +487,15 @@
 			path = Classes/QuadTree;
 			sourceTree = SOURCE_ROOT;
 		};
+		DB0A81331E1315BE00F03FE9 /* ClusterItem */ = {
+			isa = PBXGroup;
+			children = (
+				DB0A81341E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.h */,
+				DB0A81351E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.m */,
+			);
+			name = ClusterItem;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -523,6 +537,7 @@
 				DB0A81321E13111600F03FE9 /* GQTPointQuadTreeItem.h in Headers */,
 				24DE9E1111C5FE74003F90F6 /* TiGooglemapsModuleAssets.h in Headers */,
 				3ACF6A1A1CBA874700BC765B /* TiGooglemapsView.h in Headers */,
+				DB0A81361E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.h in Headers */,
 				DB0A812C1E13111600F03FE9 /* GQTBounds.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -609,6 +624,7 @@
 				DB0A81311E13111600F03FE9 /* GQTPointQuadTreeChild.m in Sources */,
 				24DD6CFA1134B3F500162E58 /* TiGooglemapsModule.m in Sources */,
 				3ACF6A1B1CBA874700BC765B /* TiGooglemapsView.m in Sources */,
+				DB0A81371E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.m in Sources */,
 				24DE9E1211C5FE74003F90F6 /* TiGooglemapsModuleAssets.m in Sources */,
 				3A433F031BE9AB270005C8AE /* TiGooglemapsPolygonProxy.m in Sources */,
 				3ACA7B121D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.m in Sources */,
