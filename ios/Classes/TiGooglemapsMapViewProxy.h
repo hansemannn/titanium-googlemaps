@@ -12,6 +12,9 @@
     TiGooglemapsMapViewProxy* mapView;
     NSMutableArray *markers;
     NSMutableArray *overlays;
+    
+@private
+    dispatch_queue_t q;
 }
 
 
