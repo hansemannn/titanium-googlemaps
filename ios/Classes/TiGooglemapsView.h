@@ -8,8 +8,9 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "GMUMarkerClustering.h"
 
-@interface TiGooglemapsView : TiUIView<GMSMapViewDelegate>
+@interface TiGooglemapsView : TiUIView<GMSMapViewDelegate, GMUClusterManagerDelegate>
 
-@property(nonatomic,retain) GMSMapView *mapView;
+@property(nonatomic, retain) GMSMapView *mapView;
+@property(nonatomic, retain) GMUClusterManager *clusterManager;
 
 @end
