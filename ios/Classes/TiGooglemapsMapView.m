@@ -18,7 +18,7 @@
 #define DEPRECATED(from, to, in) \
 NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, to, in);\
 
--(GMSMapView*)mapView
+-(GMSMapView *)mapView
 {
     if (_mapView == nil) {
         DEPRECATED(@"MapView", @"View", @"2.2.0");
@@ -41,9 +41,9 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     [super dealloc];
 }
 
--(TiGooglemapsMapViewProxy*)mapViewProxy
+-(TiGooglemapsMapViewProxy *)mapViewProxy
 {
-    return (TiGooglemapsMapViewProxy*)[self proxy];
+    return (TiGooglemapsMapViewProxy *)[self proxy];
 }
 
 - (void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
@@ -220,7 +220,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 #pragma mark Helper
 
--(NSDictionary*)dictionaryFromCameraPosition:(GMSCameraPosition*)position
+-(NSDictionary *)dictionaryFromCameraPosition:(GMSCameraPosition *)position
 {
     if (position == nil) {
         return @{};
@@ -235,7 +235,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     };
 }
 
--(NSDictionary*)dictionaryFromCoordinate:(CLLocationCoordinate2D)coordinate
+-(NSDictionary *)dictionaryFromCoordinate:(CLLocationCoordinate2D)coordinate
 {
     return @{
         @"latitude": NUMDOUBLE(coordinate.latitude),
@@ -243,7 +243,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     };
 }
 
--(id)overlayTypeFromOverlay:(GMSOverlay*)overlay
+-(id)overlayTypeFromOverlay:(GMSOverlay *)overlay
 {
     ENSURE_UI_THREAD(overlayTypeFromOverlay, overlay);
     
@@ -260,7 +260,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     return NUMINTEGER(TiGooglemapsOverlayTypeUnknown);
 }
 
--(id)annotationProxyFromMarker:(GMSMarker*)marker
+-(id)annotationProxyFromMarker:(GMSMarker *)marker
 {
     for (TiGooglemapsAnnotationProxy* annotationProxy in [[self mapViewProxy] markers]) {
         if ([annotationProxy marker] == marker) {
@@ -271,26 +271,26 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     return [NSNull null];
 }
 
--(id)overlayProxyFromOverlay:(GMSOverlay*)overlay
+-(id)overlayProxyFromOverlay:(GMSOverlay *)overlay
 {
     for (TiProxy* overlayProxy in [[self mapViewProxy] overlays]) {
 
         // Check for polygons
         if ([overlay isKindOfClass:[GMSPolygon class]] && [overlayProxy isKindOfClass:[TiGooglemapsPolygonProxy class]]) {
-            if ([(TiGooglemapsPolygonProxy*)overlayProxy polygon] == overlay) {
-                return (TiGooglemapsPolygonProxy*)overlayProxy;
+            if ([(TiGooglemapsPolygonProxy *)overlayProxy polygon] == overlay) {
+                return (TiGooglemapsPolygonProxy *)overlayProxy;
             }
 
         // Check for polylines
         } else if ([overlay isKindOfClass:[GMSPolyline class]] && [overlayProxy isKindOfClass:[TiGooglemapsPolylineProxy class]]) {
-            if ([(TiGooglemapsPolylineProxy*)overlayProxy polyline] == overlay) {
-                return (TiGooglemapsPolylineProxy*)overlayProxy;
+            if ([(TiGooglemapsPolylineProxy *)overlayProxy polyline] == overlay) {
+                return (TiGooglemapsPolylineProxy *)overlayProxy;
             }
 
         // Check for circles
         } else if ([overlay isKindOfClass:[GMSCircle class]] && [overlayProxy isKindOfClass:[TiGooglemapsCircleProxy class]]) {
-            if ([(TiGooglemapsCircleProxy*)overlayProxy circle] == overlay) {
-                return (TiGooglemapsCircleProxy*)overlayProxy;
+            if ([(TiGooglemapsCircleProxy *)overlayProxy circle] == overlay) {
+                return (TiGooglemapsCircleProxy *)overlayProxy;
             }
         }
     }

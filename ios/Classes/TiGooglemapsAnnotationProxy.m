@@ -12,7 +12,7 @@
 
 @synthesize marker = _marker;
 
--(GMSMarker*)marker
+-(GMSMarker *)marker
 {
     if (_marker == nil) {
         _marker = [GMSMarker new];
@@ -24,7 +24,7 @@
     return _marker;
 }
 
--(void)setMarker:(GMSMarker*)marker
+-(void)setMarker:(GMSMarker *)marker
 {
     if (_marker) {
         RELEASE_TO_NIL(_marker);

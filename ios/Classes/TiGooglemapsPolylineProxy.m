@@ -9,7 +9,7 @@
 
 @implementation TiGooglemapsPolylineProxy
 
--(GMSPolyline*)polyline
+-(GMSPolyline *)polyline
 {
     if (_polyline == nil) {
         _polyline = [GMSPolyline new];

@@ -9,7 +9,7 @@
 
 @implementation TiGooglemapsPolygonProxy
 
--(GMSPolygon*)polygon
+-(GMSPolygon *)polygon
 {
     if (_polygon == nil) {
         _polygon = [GMSPolygon new];

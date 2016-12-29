@@ -17,7 +17,7 @@
  *  @param marker The marker
  *  @since 1.0.0
  */
--(void)setMarker:(GMSMarker*)marker;
+-(void)setMarker:(GMSMarker *)marker;
 
 /**
  *  Sets the annotation title.
