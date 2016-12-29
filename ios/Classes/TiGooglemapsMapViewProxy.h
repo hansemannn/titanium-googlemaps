@@ -24,7 +24,7 @@
  *  @return The proxies
  *  @since 2.1.0
  */
--(NSMutableArray*)markers;
+-(NSMutableArray *)markers;
 
 /**
  *  An array of overlay proxies.
@@ -32,7 +32,7 @@
  *  @return The proxies
  *  @since 2.1.0
  */
--(NSMutableArray*)overlays;
+-(NSMutableArray *)overlays;
 
 /**
  *  Adds an annotation.

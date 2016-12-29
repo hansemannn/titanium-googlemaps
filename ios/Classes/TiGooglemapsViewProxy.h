@@ -23,7 +23,7 @@
  *  @return The proxies
  *  @since 2.1.0
  */
--(NSMutableArray*)markers;
+-(NSMutableArray *)markers;
 
 /**
  *  An array of overlay proxies.
@@ -31,14 +31,14 @@
  *  @return The proxies
  *  @since 2.1.0
  */
--(NSMutableArray*)overlays;
+-(NSMutableArray *)overlays;
 
 /**
  *  Sets the new annotations error, e.g. for position updates
  *
  *  @since 2.5.1
  */
--(void)setMarkers:(NSMutableArray*)_markers;
+-(void)setMarkers:(NSMutableArray *)_markers;
 
 /**
  *  Adds an annotation.

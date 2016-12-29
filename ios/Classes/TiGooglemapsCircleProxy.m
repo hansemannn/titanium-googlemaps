@@ -9,7 +9,7 @@
 
 @implementation TiGooglemapsCircleProxy
 
--(GMSCircle*)circle
+-(GMSCircle *)circle
 {
     if (_circle == nil) {
         _circle = [GMSCircle new];

@@ -22,7 +22,7 @@
 
 #pragma mark Public APIs
 
-- (GMSAutocompleteViewController*)dialog
+- (GMSAutocompleteViewController *)dialog
 {
     if (dialog == nil) {
         dialog = [GMSAutocompleteViewController new];
@@ -129,7 +129,7 @@
     RELEASE_TO_NIL(dialog);
 }
 
-+ (NSDictionary*)dictionaryFromPlace:(GMSPlace*)place
++ (NSDictionary *)dictionaryFromPlace:(GMSPlace *)place
 {
     return @{
         @"name": [place name],
@@ -141,7 +141,7 @@
     };
 }
 
-+ (id)arrayFromAddressComponents:(NSArray<GMSAddressComponent*>*)addressComponents
++ (id)arrayFromAddressComponents:(NSArray<GMSAddressComponent *> *)addressComponents
 {
     if (addressComponents == nil) {
         return [NSNull null];
@@ -158,7 +158,7 @@
     return result;
 }
 
-+ (id)dictionaryFromPrediction:(GMSAutocompletePrediction*)prediction
++ (id)dictionaryFromPrediction:(GMSAutocompletePrediction *)prediction
 {
     if (prediction == nil) {
         return nil;

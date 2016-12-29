@@ -37,12 +37,12 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     [super dealloc];
 }
 
--(TiGooglemapsView*)mapView
+-(TiGooglemapsView *)mapView
 {
-    return (TiGooglemapsView*)[self view];
+    return (TiGooglemapsView *)[self view];
 }
 
--(NSMutableArray*)markers
+-(NSMutableArray *)markers
 {
     if (markers == nil) {
         markers = [[NSMutableArray alloc] initWithArray:@[]];
@@ -51,7 +51,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     return markers;
 }
 
--(NSMutableArray*)overlays
+-(NSMutableArray *)overlays
 {
     if (overlays == nil) {
         overlays = [[NSMutableArray alloc] initWithArray:@[]];
@@ -60,7 +60,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     return overlays;
 }
 
--(void)setMarkers:(NSMutableArray*)_markers
+-(void)setMarkers:(NSMutableArray *)_markers
 {
     [markers removeAllObjects];
     RELEASE_TO_NIL(markers);
