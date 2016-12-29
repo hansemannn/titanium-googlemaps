@@ -1,5 +1,5 @@
-# Ti.GoogleMaps
-
+# Ti.GoogleMaps 
+[![Build Status](https://travis-ci.org/hansemannn/ti.googlemaps.svg?branch=master)](https://travis-ci.org/hansemannn/ti.googlemaps)  [![License](http://hans-knoechel.de/shields/shield-license.svg)](./LICENSE)  [![Support](http://hans-knoechel.de/shields/shield-slack.svg)](http://tislack.org)
 
 <img width="1094" src="http://abload.de/img/showcase3vron.png">
 
@@ -25,7 +25,7 @@ Download + Setup
 
 ### Download
   * [Stable release](https://github.com/hansemannn/Ti.GoogleMaps/releases)
-  * Install from gitTio    <a href="http://gitt.io/component/ti.googlemaps" target="_blank"><img src="http://gitt.io/badge@2x.png" width="120" height="18" alt="Available on gitTio" /></a>
+  * [![gitTio](http://hans-knoechel.de/shields/shield-gittio.svg)](http://gitt.io/component/ti.googlemaps)
 
 ### Setup
 Unpack the module and place it inside the `modules/iphone/` folder of your project.
