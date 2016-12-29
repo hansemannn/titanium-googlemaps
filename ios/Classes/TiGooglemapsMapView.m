@@ -262,7 +262,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 -(id)annotationProxyFromMarker:(GMSMarker *)marker
 {
-    for (TiGooglemapsAnnotationProxy* annotationProxy in [[self mapViewProxy] markers]) {
+    for (TiGooglemapsAnnotationProxy *annotationProxy in [[self mapViewProxy] markers]) {
         if ([annotationProxy marker] == marker) {
             return annotationProxy;
         }
@@ -273,7 +273,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 -(id)overlayProxyFromOverlay:(GMSOverlay *)overlay
 {
-    for (TiProxy* overlayProxy in [[self mapViewProxy] overlays]) {
+    for (TiProxy *overlayProxy in [[self mapViewProxy] overlays]) {
 
         // Check for polygons
         if ([overlay isKindOfClass:[GMSPolygon class]] && [overlayProxy isKindOfClass:[TiGooglemapsPolygonProxy class]]) {
