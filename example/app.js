@@ -1,11 +1,20 @@
+
+var maps = require("ti.googlemaps");
+
+/**
+ *  SET YOUR API-KEY BEFORE USING THIS MODULE
+ */
+maps.setAPIKey("<YOUR_GOOGLE_MAPS_API_KEY>");
+
 var win = Ti.UI.createWindow({
     title: "Ti.Googlemaps",
     includeOpaqueBars: true,
     extendEdges: [Ti.UI.EXTEND_EDGE_ALL]
 });
 
-var maps = require("ti.googlemaps");
-maps.setAPIKey("<YOUR_GOOGLE_MAPS_API_KEY>");
+var nav = Ti.UI.iOS.createNavigationWindow({
+    window: win
+});
 
 /*
  *  Test data
@@ -269,9 +278,4 @@ searchButton.addEventListener("click", openAutocompleteDialog);
 
 win.setRightNavButton(searchButton);
 win.add(mapView);
-
-var nav = Ti.UI.iOS.createNavigationWindow({
-    window: win
-});
-
 nav.open();
