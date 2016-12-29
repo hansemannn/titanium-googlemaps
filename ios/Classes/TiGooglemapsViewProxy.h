@@ -9,7 +9,7 @@
 #import "TiGooglemapsAnnotationProxy.h"
 
 @interface TiGooglemapsViewProxy : TiViewProxy<GMSMapViewDelegate> {
-    TiGooglemapsViewProxy* mapView;
+    TiGooglemapsViewProxy *mapView;
     NSMutableArray *markers;
     NSMutableArray *overlays;
     

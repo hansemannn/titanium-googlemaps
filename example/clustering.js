@@ -28,6 +28,14 @@ var location = {
  *  MapView
  */
 var mapView = maps.createView({
+    clusterRanges: [10,50,100,200,500],
+    clusterBackgrounds: [
+        'buckets/m1.png',
+        'buckets/m2.png',
+        'buckets/m3.png',
+        'buckets/m4.png',
+        'buckets/m5.png'
+    ],
     region: {
         latitude: location.latitude,
         longitude: location.longitude

@@ -359,7 +359,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 -(id)overlayProxyFromOverlay:(GMSOverlay *)overlay
 {
-    for (TiProxy* overlayProxy in [[self mapViewProxy] overlays]) {
+    for (TiProxy *overlayProxy in [[self mapViewProxy] overlays]) {
         // Check for polygons
         if ([overlay isKindOfClass:[GMSPolygon class]] && [overlayProxy isKindOfClass:[TiGooglemapsPolygonProxy class]]) {
             if ([(TiGooglemapsPolygonProxy *)overlayProxy polygon] == overlay) {
