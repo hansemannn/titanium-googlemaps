@@ -12,6 +12,9 @@
 #import "TiGooglemapsPolygonProxy.h"
 #import "TiGooglemapsPolylineProxy.h"
 #import "TiGooglemapsConstants.h"
+#import "TiClusterIconGenerator.h"
+#import "TiClusterRenderer.h"
+#import "TiPOIItem.h"
 
 @implementation TiGooglemapsView
 
@@ -39,20 +42,29 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     if (_clusterManager == nil) {
         // Set up the cluster manager with default icon generator and renderer.
         id<GMUClusterAlgorithm> algorithm = [[GMUNonHierarchicalDistanceBasedAlgorithm alloc] init];
-        id<GMUClusterIconGenerator> iconGenerator = [self createIconGenerator];
-        id<GMUClusterRenderer> renderer =
-        [[GMUDefaultClusterRenderer alloc] initWithMapView:_mapView
-                                      clusterIconGenerator:iconGenerator];
-        _clusterManager =
-        [[GMUClusterManager alloc] initWithMap:[self mapView] algorithm:algorithm renderer:renderer];
         
+        TiClusterIconGenerator *iconGenerator = [self createIconGenerator];
+        
+        TiClusterRenderer *renderer = [[TiClusterRenderer alloc] initWithMapView:_mapView clusterIconGenerator:iconGenerator];
+        renderer.delegate = self;
+        
+        _clusterManager = [[GMUClusterManager alloc] initWithMap:[self mapView] algorithm:algorithm renderer:renderer];
         [_clusterManager setDelegate:self mapDelegate:self];
     }
     
     return _clusterManager;
 }
 
-- (GMUDefaultClusterIconGenerator *)createIconGenerator
+- (void)renderer:(id<GMUClusterRenderer>)renderer willRenderMarker:(GMSMarker *)marker
+{
+    if ([[marker userData] isKindOfClass:[TiPOIItem class]]) {
+        TiPOIItem *item = (TiPOIItem *)[marker userData];
+        
+        [marker setTitle:item.name];
+    }
+}
+
+- (TiClusterIconGenerator *)createIconGenerator
 {
     id clusterRanges = [[self proxy] valueForKey:@"clusterRanges"];
     id clusterBackgrounds = [[self proxy] valueForKey:@"clusterBackgrounds"];
@@ -65,12 +77,12 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
             [backgrounds addObject:[TiUtils image:background proxy:self.proxy]];
         }
         
-        return [[GMUDefaultClusterIconGenerator alloc] initWithBuckets:clusterRanges backgroundImages:backgrounds];
+        return [[TiClusterIconGenerator alloc] initWithBuckets:clusterRanges backgroundImages:backgrounds];
     } else if (clusterRanges) {
-        return [[GMUDefaultClusterIconGenerator alloc] initWithBuckets:clusterRanges];
+        return [[TiClusterIconGenerator alloc] initWithBuckets:clusterRanges];
     }
     
-    return [[GMUDefaultClusterIconGenerator alloc] init];
+    return [[TiClusterIconGenerator alloc] init];
 }
 
 -(void)dealloc

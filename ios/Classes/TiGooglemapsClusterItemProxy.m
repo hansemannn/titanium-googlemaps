@@ -7,30 +7,18 @@
 
 #import "TiGooglemapsClusterItemProxy.h"
 
-@implementation POIItem
-
-- (instancetype)initWithPosition:(CLLocationCoordinate2D)position name:(NSString *)name {
-    if (self = [super init]) {
-        _position = position;
-        _name = [name copy];
-    }
-    return self;
-}
-
-@end
-
 @implementation TiGooglemapsClusterItemProxy
 
 - (id)_initWithPageContext:(id<TiEvaluator>)context andPosition:(CLLocationCoordinate2D)position title:(NSString *)title
 {
     if (self = [super _initWithPageContext:context]) {
-        clusterItem = [[POIItem alloc] initWithPosition:position name:title];
+        clusterItem = [[TiPOIItem alloc] initWithPosition:position name:title];
     }
     
     return self;
 }
 
-- (POIItem *)clusterItem
+- (TiPOIItem *)clusterItem
 {
     return clusterItem;
 }
