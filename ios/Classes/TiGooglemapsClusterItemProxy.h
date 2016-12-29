@@ -6,21 +6,13 @@
  */
 #import "TiProxy.h"
 #import "GMUMarkerClustering.h"
-
-@interface POIItem : NSObject<GMUClusterItem>
-
-@property(nonatomic, readonly) CLLocationCoordinate2D position;
-@property(nonatomic, readonly) NSString *name;
-
-- (instancetype)initWithPosition:(CLLocationCoordinate2D)position name:(NSString *)name;
-
-@end
+#import "TiPOIItem.h"
 
 @interface TiGooglemapsClusterItemProxy : TiProxy {
-    POIItem *clusterItem;
+    TiPOIItem *clusterItem;
 }
 
 - (id)_initWithPageContext:(id<TiEvaluator>)context andPosition:(CLLocationCoordinate2D)position title:(NSString *)title;
-- (POIItem *)clusterItem;
+- (TiPOIItem *)clusterItem;
 
 @end
