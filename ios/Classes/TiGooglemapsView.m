@@ -37,9 +37,14 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 -(GMUClusterManager*)clusterManager
 {
     if (_clusterManager == nil) {
-        _clusterManager = [[GMUClusterManager alloc] initWithMap:[self mapView]
-                                                       algorithm:[[GMUNonHierarchicalDistanceBasedAlgorithm alloc] init]
-                                                        renderer:[[GMUDefaultClusterRenderer alloc] initWithMapView:[self mapView] clusterIconGenerator:[[GMUDefaultClusterIconGenerator alloc] init]]];
+        // Set up the cluster manager with default icon generator and renderer.
+        id<GMUClusterAlgorithm> algorithm = [[GMUNonHierarchicalDistanceBasedAlgorithm alloc] init];
+        id<GMUClusterIconGenerator> iconGenerator = [[GMUDefaultClusterIconGenerator alloc] init];
+        id<GMUClusterRenderer> renderer =
+        [[GMUDefaultClusterRenderer alloc] initWithMapView:_mapView
+                                      clusterIconGenerator:iconGenerator];
+        _clusterManager =
+        [[GMUClusterManager alloc] initWithMap:[self mapView] algorithm:algorithm renderer:renderer];
         
         [_clusterManager setDelegate:self mapDelegate:self];
     }
@@ -75,6 +80,9 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
             @"count": NUMUINTEGER(cluster.count)
         }];
     }
+    
+    GMSCameraPosition *newCamera = [GMSCameraPosition cameraWithTarget:cluster.position zoom:_mapView.camera.zoom + 1];
+    [_mapView moveCamera:[GMSCameraUpdate setCamera:newCamera]];
 }
 
 - (void)clusterManager:(GMUClusterManager *)clusterManager didTapClusterItem:(id<GMUClusterItem>)clusterItem

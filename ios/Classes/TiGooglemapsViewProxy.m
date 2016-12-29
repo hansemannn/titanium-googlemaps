@@ -273,6 +273,34 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     });
 }
 
+-(void)addClusterItems:(id)args
+{
+    ENSURE_SINGLE_ARG(args, NSArray);
+    
+    NSMutableArray *items = [NSMutableArray array];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        for (id clusterItem in args) {
+            ENSURE_TYPE(clusterItem, TiGooglemapsClusterItemProxy);
+            [items addObject:[(TiGooglemapsClusterItemProxy *)clusterItem clusterItem]];
+        }
+        [[[self mapView] clusterManager] addItems:items];
+    });
+}
+
+-(void)setClusterItems:(id)args
+{
+    ENSURE_SINGLE_ARG(args, NSArray);
+    
+    [[[self mapView] clusterManager] clearItems];
+    NSMutableArray *items = [NSMutableArray array];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[[self mapView] clusterManager] clearItems];
+        [self addClusterItems:args];
+    });
+}
+
 -(void)removeClusterItem:(id)args
 {
     ENSURE_SINGLE_ARG(args, TiGooglemapsClusterItemProxy);
