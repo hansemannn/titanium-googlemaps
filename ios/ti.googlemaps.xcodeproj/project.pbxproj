@@ -98,6 +98,8 @@
 		DB0A81321E13111600F03FE9 /* GQTPointQuadTreeItem.h in Headers */ = {isa = PBXBuildFile; fileRef = DB0A812B1E13111600F03FE9 /* GQTPointQuadTreeItem.h */; };
 		DB0A81361E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = DB0A81341E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.h */; };
 		DB0A81371E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0A81351E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.m */; };
+		DB11CE291E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = DB11CE271E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.h */; };
+		DB11CE2A1E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = DB11CE281E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.m */; };
 		DB37298D1E15BF65009CD6B7 /* TiClusterIconGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = DB37298B1E15BF65009CD6B7 /* TiClusterIconGenerator.h */; };
 		DB37298E1E15BF65009CD6B7 /* TiClusterIconGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = DB37298C1E15BF65009CD6B7 /* TiClusterIconGenerator.m */; };
 		DB91F9991E15C28400DFA78B /* TiClusterRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = DB91F9971E15C28400DFA78B /* TiClusterRenderer.h */; };
@@ -206,6 +208,8 @@
 		DB0A812B1E13111600F03FE9 /* GQTPointQuadTreeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTreeItem.h; sourceTree = "<group>"; };
 		DB0A81341E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsClusterItemProxy.h; path = Classes/TiGooglemapsClusterItemProxy.h; sourceTree = "<group>"; };
 		DB0A81351E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsClusterItemProxy.m; path = Classes/TiGooglemapsClusterItemProxy.m; sourceTree = "<group>"; };
+		DB11CE271E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsCameraUpdateProxy.h; path = Classes/TiGooglemapsCameraUpdateProxy.h; sourceTree = "<group>"; };
+		DB11CE281E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsCameraUpdateProxy.m; path = Classes/TiGooglemapsCameraUpdateProxy.m; sourceTree = "<group>"; };
 		DB37298B1E15BF65009CD6B7 /* TiClusterIconGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiClusterIconGenerator.h; sourceTree = "<group>"; };
 		DB37298C1E15BF65009CD6B7 /* TiClusterIconGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiClusterIconGenerator.m; sourceTree = "<group>"; };
 		DB91F9971E15C28400DFA78B /* TiClusterRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiClusterRenderer.h; sourceTree = "<group>"; };
@@ -310,6 +314,7 @@
 				3AF900D11BC2288600172627 /* Module */,
 				3A28A4C91BE9204C0004FCE9 /* Overlays */,
 				3AF900D31BC2289C00172627 /* View */,
+				DB11CE2B1E1704DC006D0FB2 /* CameraUpdate */,
 				3AF900D41BC228C300172627 /* Annotations */,
 				DB0A81331E1315BE00F03FE9 /* ClusterItem */,
 			);
@@ -514,6 +519,15 @@
 			name = ClusterItem;
 			sourceTree = "<group>";
 		};
+		DB11CE2B1E1704DC006D0FB2 /* CameraUpdate */ = {
+			isa = PBXGroup;
+			children = (
+				DB11CE271E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.h */,
+				DB11CE281E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.m */,
+			);
+			name = CameraUpdate;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -527,6 +541,7 @@
 				DB0A810C1E1310BE00F03FE9 /* GMUGridBasedClusterAlgorithm.h in Headers */,
 				DB91F99D1E15C8B400DFA78B /* TiPOIItem.h in Headers */,
 				DB0A810E1E1310BE00F03FE9 /* GMUNonHierarchicalDistanceBasedAlgorithm.h in Headers */,
+				DB11CE291E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.h in Headers */,
 				DB0A81101E1310BE00F03FE9 /* GMUSimpleClusterAlgorithm.h in Headers */,
 				DB0A811F1E1310BE00F03FE9 /* GMUDefaultClusterIconGenerator.h in Headers */,
 				DB91F9991E15C28400DFA78B /* TiClusterRenderer.h in Headers */,
@@ -634,6 +649,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB0A811B1E1310BE00F03FE9 /* GMUStaticCluster.m in Sources */,
+				DB11CE2A1E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.m in Sources */,
 				DB0A81201E1310BE00F03FE9 /* GMUDefaultClusterIconGenerator.m in Sources */,
 				DB0A81131E1310BE00F03FE9 /* GMUWrappingDictionaryKey.m in Sources */,
 				DB0A81231E1310BE00F03FE9 /* GMUDefaultClusterRenderer.m in Sources */,
