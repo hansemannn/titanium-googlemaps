@@ -11,6 +11,7 @@
 #import "TiGooglemapsPolygonProxy.h"
 #import "TiGooglemapsCircleProxy.h"
 #import "TiGooglemapsClusterItemProxy.h"
+#import "TiGooglemapsCameraUpdateProxy.h"
 #import "TiUtils.h"
 #import "GMUMarkerClustering.h"
 
@@ -255,6 +256,20 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
         
         RELEASE_TO_NIL(error);
     }
+}
+
+- (void)moveCamera:(id)value
+{
+    ENSURE_SINGLE_ARG(value, TiGooglemapsCameraUpdateProxy);
+    
+    [[[self mapView] mapView] moveCamera:[(TiGooglemapsCameraUpdateProxy *)value cameraUpdate]];
+}
+
+- (void)animateWithCameraUpdate:(id)value
+{
+    ENSURE_SINGLE_ARG(value, TiGooglemapsCameraUpdateProxy);
+    
+    [[[self mapView] mapView] animateWithCameraUpdate:[(TiGooglemapsCameraUpdateProxy *)value cameraUpdate]];
 }
 
 - (void)cluster:(id)unused

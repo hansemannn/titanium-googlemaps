@@ -269,4 +269,20 @@
  */
 -(void)setMapStyle:(id)value;
 
+/**
+ *  Moves the camera with the specified camera update.
+ *
+ *  @param value The camera update.
+ *  @since 2.7.0
+ */
+- (void)moveCamera:(id)value;
+
+/**
+ *  Animates the camera with the specified camera update.
+ *
+ *  @param value The camera update.
+ *  @since 2.7.0
+ */
+- (void)animateWithCameraUpdate:(id)value;
+
 @end
