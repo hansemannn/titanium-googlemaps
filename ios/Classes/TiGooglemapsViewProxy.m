@@ -22,9 +22,11 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 -(id)_initWithPageContext:(id<TiEvaluator>)context
 {
-    q = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    if (self = [super _initWithPageContext:context]) {
+        q = dispatch_queue_create("ti.googlemaps-annotation-queue", DISPATCH_QUEUE_CONCURRENT);
+    }
 
-    return [super _initWithPageContext:context];
+    return self;
 }
 
 -(void)dealloc
