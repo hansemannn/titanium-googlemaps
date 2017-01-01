@@ -15,6 +15,7 @@
 #import "TiClusterIconGenerator.h"
 #import "TiClusterRenderer.h"
 #import "TiPOIItem.h"
+#import "TiGooglemapsClusterItemProxy.h"
 
 @implementation TiGooglemapsView
 
@@ -115,7 +116,8 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
         [[self proxy] fireEvent:@"clusterclick" withObject:@{
             @"latitude": NUMDOUBLE(cluster.position.latitude),
             @"longitude": NUMDOUBLE(cluster.position.longitude),
-            @"count": NUMUINTEGER(cluster.count)
+            @"count": NUMUINTEGER(cluster.count),
+            @"clusterItems": [self arrayFromClusterItems:cluster.items]
         }];
     }
     
@@ -129,6 +131,8 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
         [[self proxy] fireEvent:@"clusteritemclick" withObject:@{
             @"latitude": NUMDOUBLE(clusterItem.position.latitude),
             @"longitude": NUMDOUBLE(clusterItem.position.longitude),
+            @"title": [(TiPOIItem *)clusterItem name] ?: [NSNull null],
+            @"userData": [(TiPOIItem *)clusterItem userData] ?: [NSNull null]
         }];
     }
 }
@@ -422,6 +426,20 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     }
 
     return [NSNull null];
+}
+
+- (NSArray *)arrayFromClusterItems:(NSArray<id<GMUClusterItem>> *)clusterItems
+{
+    NSMutableArray *result = [NSMutableArray arrayWithCapacity:clusterItems.count];
+    
+    for (id<GMUClusterItem> clusterItem in clusterItems) {
+        [result addObject:[[[TiGooglemapsClusterItemProxy alloc] _initWithPageContext:[[self proxy] pageContext]
+                                                                         andPosition:clusterItem.position
+                                                                               title:[(TiPOIItem *)clusterItem name]
+                                                                            userData:[(TiPOIItem *)clusterItem userData]] autorelease]];
+    }
+    
+    return result;
 }
 
 #pragma mark Constants

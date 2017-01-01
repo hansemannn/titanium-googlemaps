@@ -12,7 +12,7 @@
     TiPOIItem *clusterItem;
 }
 
-- (id)_initWithPageContext:(id<TiEvaluator>)context andPosition:(CLLocationCoordinate2D)position title:(NSString *)title;
+- (id)_initWithPageContext:(id<TiEvaluator>)context andPosition:(CLLocationCoordinate2D)position title:(NSString *)title userData:(NSDictionary *)userData;
 - (TiPOIItem *)clusterItem;
 
 @end

@@ -13,8 +13,9 @@
 
 @property(nonatomic, readonly) CLLocationCoordinate2D position;
 @property(nonatomic, readonly) NSString *name;
+@property(nonatomic, readonly) NSDictionary *userData;
 
-- (instancetype)initWithPosition:(CLLocationCoordinate2D)position name:(NSString *)name;
+- (instancetype)initWithPosition:(CLLocationCoordinate2D)position name:(NSString *)name userData:(NSDictionary *)userData;
 
 @end
 
