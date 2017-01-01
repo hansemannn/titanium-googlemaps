@@ -310,7 +310,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_SINGLE_ARG(args, NSArray);
     
     [[[self mapView] clusterManager] clearItems];
-    NSMutableArray *items = [NSMutableArray array];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [[[self mapView] clusterManager] clearItems];
@@ -336,7 +335,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 {
     ENSURE_UI_THREAD_1_ARG(args);
 
-    TiGooglemapsAnnotationProxy *annotationProxy;
+    TiGooglemapsAnnotationProxy *annotationProxy = nil;
     ENSURE_ARG_AT_INDEX(annotationProxy, args, 0, TiGooglemapsAnnotationProxy);
     
     dispatch_barrier_async(q, ^{
@@ -362,7 +361,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 {
     ENSURE_UI_THREAD_1_ARG(args);
 
-    TiGooglemapsAnnotationProxy *annotationProxy;
+    TiGooglemapsAnnotationProxy *annotationProxy = nil;
     ENSURE_ARG_AT_INDEX(annotationProxy, args, 0, TiGooglemapsAnnotationProxy);
     
     dispatch_barrier_async(q, ^{

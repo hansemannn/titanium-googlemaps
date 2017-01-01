@@ -10,6 +10,13 @@
 
 @implementation TiGooglemapsCameraUpdateProxy
 
+- (void)dealloc
+{
+    RELEASE_TO_NIL(cameraUpdate);
+    
+    [super dealloc];
+}
+
 - (GMSCameraUpdate *)cameraUpdate
 {
     if (!cameraUpdate) {
@@ -90,10 +97,10 @@
     ENSURE_TYPE(bearing, NSNumber);
     ENSURE_TYPE(viewingAngle, NSNumber);
     
-    cameraUpdate = [GMSCameraUpdate setCamera:[[GMSCameraPosition alloc] initWithTarget:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude])
+    cameraUpdate = [GMSCameraUpdate setCamera:[[[GMSCameraPosition alloc] initWithTarget:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude])
                                                                                    zoom:[TiUtils floatValue:zoom]
                                                                                 bearing:[TiUtils doubleValue:bearing]
-                                                                           viewingAngle:[TiUtils doubleValue:viewingAngle]]];
+                                                                           viewingAngle:[TiUtils doubleValue:viewingAngle]] autorelease]];
 }
 
 - (void)fitBounds:(id)args
@@ -108,7 +115,7 @@
     id _coordinate2 = [_bounds objectForKey:@"coordinate2"];
     
     CLLocationCoordinate2D coordinate1 = CLLocationCoordinate2DMake([TiUtils doubleValue:[_coordinate1 objectForKey:@"latitude"]], [TiUtils doubleValue:[_coordinate1 objectForKey:@"longitude"]]);
-    CLLocationCoordinate2D coordinate2 = CLLocationCoordinate2DMake([TiUtils doubleValue:[_coordinate1 objectForKey:@"latitude"]], [TiUtils doubleValue:[_coordinate1 objectForKey:@"longitude"]]);
+    CLLocationCoordinate2D coordinate2 = CLLocationCoordinate2DMake([TiUtils doubleValue:[_coordinate2 objectForKey:@"latitude"]], [TiUtils doubleValue:[_coordinate2 objectForKey:@"longitude"]]);
     
     GMSCoordinateBounds *coordinateBounds = [[GMSCoordinateBounds alloc] initWithCoordinate:coordinate1
                                                                                  coordinate:coordinate2];
@@ -116,20 +123,24 @@
     
     if (_padding && _insets) {
         NSLog(@"[ERROR] Cannot use both `padding` and `insets` in the `fitBounds` method. Check the Google Maps docs for more infos: https://developers.google.com/maps/documentation/ios-sdk/reference/interface_g_m_s_camera_update.html#abd6fdfa8800f8b2d9ba00af5e44fa385");
+        RELEASE_TO_NIL(coordinateBounds);
         return;
     }
     
     if (_padding) {
         cameraUpdate = [GMSCameraUpdate fitBounds:coordinateBounds withPadding:[TiUtils floatValue:_padding]];
+        RELEASE_TO_NIL(coordinateBounds);
         return;
     }
     
     if (_insets) {
         cameraUpdate = [GMSCameraUpdate fitBounds:coordinateBounds withEdgeInsets:[TiUtils contentInsets:_insets]];
+        RELEASE_TO_NIL(coordinateBounds);
         return;
     }
 
     cameraUpdate = [GMSCameraUpdate fitBounds:coordinateBounds];
+    RELEASE_TO_NIL(coordinateBounds);
 }
 
 - (void)scrollBy:(id)args
