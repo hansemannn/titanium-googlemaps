@@ -10,10 +10,12 @@
 
 @implementation TiPOIItem
 
-- (instancetype)initWithPosition:(CLLocationCoordinate2D)position name:(NSString *)name {
+- (instancetype)initWithPosition:(CLLocationCoordinate2D)position name:(NSString *)name userData:(NSDictionary *)userData
+{
     if (self = [super init]) {
         _position = position;
         _name = [name copy];
+        _userData = [userData retain];
     }
     return self;
 }

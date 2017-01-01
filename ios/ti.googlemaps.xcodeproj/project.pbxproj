@@ -310,8 +310,8 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				3ACA7B0E1D2986C400847EBF /* Autocompletion */,
 				3AF900D11BC2288600172627 /* Module */,
+				3ACA7B0E1D2986C400847EBF /* Autocompletion */,
 				3A28A4C91BE9204C0004FCE9 /* Overlays */,
 				3AF900D31BC2289C00172627 /* View */,
 				DB11CE2B1E1704DC006D0FB2 /* CameraUpdate */,

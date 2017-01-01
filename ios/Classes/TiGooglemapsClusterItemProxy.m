@@ -9,10 +9,10 @@
 
 @implementation TiGooglemapsClusterItemProxy
 
-- (id)_initWithPageContext:(id<TiEvaluator>)context andPosition:(CLLocationCoordinate2D)position title:(NSString *)title
+- (id)_initWithPageContext:(id<TiEvaluator>)context andPosition:(CLLocationCoordinate2D)position title:(NSString *)title userData:(NSDictionary *)userData
 {
     if (self = [super _initWithPageContext:context]) {
-        clusterItem = [[TiPOIItem alloc] initWithPosition:position name:title];
+        clusterItem = [[TiPOIItem alloc] initWithPosition:position name:title userData:userData];
     }
     
     return self;

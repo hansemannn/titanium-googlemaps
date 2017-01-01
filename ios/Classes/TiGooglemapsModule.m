@@ -52,12 +52,21 @@
     ENSURE_SINGLE_ARG(args, NSDictionary);
     
     id latitude = [args objectForKey:@"latitude"];
+    ENSURE_TYPE(latitude, NSNumber);
+    
     id longitude = [args objectForKey:@"longitude"];
+    ENSURE_TYPE(longitude, NSNumber);
+    
     id title = [args objectForKey:@"title"];
+    ENSURE_TYPE_OR_NIL(title, NSString);
+    
+    id userData = [args objectForKey:@"userData"];
+    ENSURE_TYPE_OR_NIL(userData, NSDictionary);
     
     return [[[TiGooglemapsClusterItemProxy alloc] _initWithPageContext:[self pageContext]
                                                           andPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude])
-                                                                title:[TiUtils stringValue:title]] autorelease];
+                                                                title:title
+                                                              userData:userData] autorelease];
 }
 
 #pragma mark Constants
