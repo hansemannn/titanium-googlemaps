@@ -155,7 +155,7 @@
         }];
     }
     
-    return result;
+    return [result autorelease];
 }
 
 + (id)dictionaryFromPrediction:(GMSAutocompletePrediction *)prediction

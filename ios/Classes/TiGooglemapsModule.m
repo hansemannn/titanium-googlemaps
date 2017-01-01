@@ -55,9 +55,9 @@
     id longitude = [args objectForKey:@"longitude"];
     id title = [args objectForKey:@"title"];
     
-    return [[TiGooglemapsClusterItemProxy alloc] _initWithPageContext:[self pageContext]
+    return [[[TiGooglemapsClusterItemProxy alloc] _initWithPageContext:[self pageContext]
                                                           andPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude])
-                                                                title:[TiUtils stringValue:title]];
+                                                                title:[TiUtils stringValue:title]] autorelease];
 }
 
 #pragma mark Constants

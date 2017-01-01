@@ -45,11 +45,14 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
         
         TiClusterIconGenerator *iconGenerator = [self createIconGenerator];
         
-        TiClusterRenderer *renderer = [[TiClusterRenderer alloc] initWithMapView:_mapView clusterIconGenerator:iconGenerator];
+        TiClusterRenderer *renderer = [[[TiClusterRenderer alloc] initWithMapView:_mapView clusterIconGenerator:iconGenerator] retain];
         renderer.delegate = self;
         
-        _clusterManager = [[GMUClusterManager alloc] initWithMap:[self mapView] algorithm:algorithm renderer:renderer];
+        _clusterManager = [[[GMUClusterManager alloc] initWithMap:[self mapView] algorithm:algorithm renderer:renderer] retain];
         [_clusterManager setDelegate:self mapDelegate:self];
+        
+        [renderer release];
+        [algorithm release];
     }
     
     return _clusterManager;
@@ -77,17 +80,19 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
             [backgrounds addObject:[TiUtils image:background proxy:self.proxy]];
         }
         
-        return [[TiClusterIconGenerator alloc] initWithBuckets:clusterRanges backgroundImages:backgrounds];
+        return [[[TiClusterIconGenerator alloc] initWithBuckets:clusterRanges backgroundImages:backgrounds] autorelease];
     } else if (clusterRanges) {
-        return [[TiClusterIconGenerator alloc] initWithBuckets:clusterRanges];
+        return [[[TiClusterIconGenerator alloc] initWithBuckets:clusterRanges] autorelease];
     }
     
-    return [[TiClusterIconGenerator alloc] init];
+    return [[[TiClusterIconGenerator alloc] init] autorelease];
 }
 
 -(void)dealloc
 {
     RELEASE_TO_NIL(_mapView);
+    RELEASE_TO_NIL(_clusterManager);
+    
     [super dealloc];
 }
 
@@ -213,6 +218,28 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
             @"longitude": NUMDOUBLE(marker.position.longitude)
         }];
     }
+}
+    
+- (UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker
+{
+    TiGooglemapsAnnotationProxy *proxy = [self annotationProxyFromMarker:marker];
+    
+    if (!proxy) {
+        NSLog(@"[ERROR] Trying to create an infoWindow from an annotation that is not recognized.");
+        return nil;
+    }
+    
+    id infoWindow = [proxy valueForKey:@"infoWindow"];
+    ENSURE_TYPE_OR_NIL(infoWindow, TiViewProxy);
+    
+    if (infoWindow == nil) {
+        return nil;
+    }
+    
+    [[self proxy] rememberProxy:proxy];
+    UIView *value = [(TiViewProxy*)[proxy valueForKey:@"infoWindow"] view];
+
+    return value;
 }
 
 - (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker
@@ -364,6 +391,8 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
             
             return [newAnnotation autorelease];
         }
+        
+        RELEASE_TO_NIL(annotationProxy);
     }
 
     return [NSNull null];
