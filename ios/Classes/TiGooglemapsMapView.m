@@ -81,6 +81,9 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
             @"map" : [self proxy],
             @"latitude" : NUMDOUBLE(position.target.latitude),
             @"longitude" : NUMDOUBLE(position.target.longitude),
+            @"zoom": NUMFLOAT(position.zoom),
+            @"bearing": NUMDOUBLE(position.bearing),
+            @"viewingAngle": NUMDOUBLE(position.viewingAngle)
         }];
     }
 }
