@@ -126,14 +126,14 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     if ([[self proxy] _hasListeners:@"markerclick"]) {
         DEPRECATED(@"Event.markerclick", @"Event.click", @"2.2.0");
         NSDictionary *event = @{
-            @"marker" : [self annotationProxyFromMarker:marker]
+            @"marker" : [self dictionaryFromMarker:marker]
         };
         [[self proxy] fireEvent:@"markerclick" withObject:event];
     }
     if ([[self proxy] _hasListeners:@"click"]) {
         [[self proxy] fireEvent:@"click" withObject:@{
             @"clicksource": @"pin",
-            @"annotation": [self annotationProxyFromMarker:marker],
+            @"annotation": [self dictionaryFromMarker:marker],
             @"map": [self proxy],
             @"latitude": NUMDOUBLE(marker.position.latitude),
             @"longitude": NUMDOUBLE(marker.position.longitude)
@@ -146,14 +146,14 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     if ([[self proxy] _hasListeners:@"markerinfoclick"]) {
         DEPRECATED(@"Event.markerinfoclick", @"Event.click", @"2.2.0");
         NSDictionary *event = @{
-            @"marker" : [self annotationProxyFromMarker:marker]
+            @"marker" : [self dictionaryFromMarker:marker]
         };
         [[self proxy] fireEvent:@"markerinfoclick" withObject:event];
     }
     if ([[self proxy] _hasListeners:@"click"]) {
         [[self proxy] fireEvent:@"click" withObject:@{
             @"clicksource": @"infoWindow",
-            @"annotation": [self annotationProxyFromMarker:marker],
+            @"annotation": [self dictionaryFromMarker:marker],
             @"map": [self proxy],
             @"latitude": NUMDOUBLE(marker.position.latitude),
             @"longitude": NUMDOUBLE(marker.position.longitude)
@@ -165,7 +165,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 {
     if ([[self proxy] _hasListeners:@"overlayclick"]) {
         [[self proxy] fireEvent:@"overlayclick" withObject:@{
-            @"overlay": NUMINT([self overlayProxyFromOverlay:overlay])
+            @"overlay": [self overlayProxyFromOverlay:overlay]
         }];
     }
     if ([[self proxy] _hasListeners:@"click"]) {
@@ -180,10 +180,9 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 - (void)mapView:(GMSMapView *)mapView didBeginDraggingMarker:(GMSMarker *)marker
 {
     if ([[self proxy] _hasListeners:@"dragstart"]) {
-        TiGooglemapsAnnotationProxy *annotationProxy = [self annotationProxyFromMarker:marker];
         NSDictionary *event = @{
-            @"marker" : annotationProxy, // Deprecated
-            @"annotation" : annotationProxy
+            @"marker" : [self dictionaryFromMarker:marker], // Deprecated
+            @"annotation" : [self dictionaryFromMarker:marker]
         };
         [[self proxy] fireEvent:@"dragstart" withObject:event];
     }
@@ -192,11 +191,9 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 - (void)mapView:(GMSMapView *)mapView didEndDraggingMarker:(GMSMarker *)marker
 {
     if ([[self proxy] _hasListeners:@"dragend"]) {
-        TiGooglemapsAnnotationProxy *annotationProxy = [self annotationProxyFromMarker:marker];
-
         NSDictionary *event = @{
-            @"marker" : annotationProxy, // Deprecated
-            @"annotation" : annotationProxy
+            @"marker" : [self dictionaryFromMarker:marker], // Deprecated
+            @"annotation" : [self dictionaryFromMarker:marker]
         };
       [[self proxy] fireEvent:@"dragend" withObject:event];
     }
@@ -205,10 +202,9 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 - (void)mapView:(GMSMapView *)mapView didDragMarker:(GMSMarker *)marker
 {
     if ([[self proxy] _hasListeners:@"dragmove"]) {
-        TiGooglemapsAnnotationProxy *annotationProxy = [self annotationProxyFromMarker:marker];
         NSDictionary *event = @{
-            @"marker" : annotationProxy, // Deprecated
-            @"annotation" : annotationProxy
+            @"marker" : [self dictionaryFromMarker:marker], // Deprecated
+            @"annotation" : [self dictionaryFromMarker:marker]
         };
         [[self proxy] fireEvent:@"dragmove" withObject:event];
     }
@@ -256,6 +252,21 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     };
 }
 
+-(NSDictionary *)dictionaryFromMarker:(GMSMarker *)marker
+{
+    if (!marker) {
+        return @{};
+    }
+    
+    return @{
+        @"latitude": NUMDOUBLE(marker.position.latitude),
+        @"longitude": NUMDOUBLE(marker.position.longitude),
+        @"userData": marker.userData ?: [NSNull null],
+        @"title": marker.title ?: [NSNull null],
+        @"subtitle": marker.snippet ?: [NSNull null]
+    };
+}
+
 -(id)overlayTypeFromOverlay:(GMSOverlay*)overlay
 {
     ENSURE_UI_THREAD(overlayTypeFromOverlay, overlay);
@@ -271,28 +282,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     NSLog(@"[ERROR] Unknown overlay provided: %@", [overlay class])
     
     return NUMINTEGER(TiGooglemapsOverlayTypeUnknown);
-}
-
--(id)annotationProxyFromMarker:(GMSMarker*)marker
-{
-    for (NSUInteger i = 0; i < [[[self mapViewProxy] markers] count]; i++) {
-        TiGooglemapsAnnotationProxy *annotationProxy = [[[[self mapViewProxy] markers] objectAtIndex:i] retain];
-        
-        if ([[[[annotationProxy marker] userData] valueForKey:@"uuid"] isEqualToString:[[marker userData] valueForKey:@"uuid"]]) {
-            // Replace the location attributes in the array of annotation-proxies
-            TiGooglemapsAnnotationProxy *newAnnotation = [annotationProxy retain];
-            [annotationProxy release];
-            [newAnnotation updateLocation:@{
-                @"latitude": NUMDOUBLE([marker position].latitude),
-                @"longitude": NUMDOUBLE([marker position].longitude)
-            }];
-            [[[self mapViewProxy] markers] replaceObjectAtIndex:i withObject:newAnnotation];
-            
-            return [newAnnotation autorelease];
-        }
-    }
-
-    return [NSNull null];
 }
 
 -(id)overlayProxyFromOverlay:(GMSOverlay*)overlay
