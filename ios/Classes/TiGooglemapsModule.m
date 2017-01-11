@@ -41,9 +41,9 @@
     [GMSServices provideAPIKey:[TiUtils stringValue:value]];
 }
 
--(NSString*)version
+-(NSNumber *)version
 {
-    return [TiUtils stringValue:[GMSServices version]];
+    return NUMINTEGER([GMSServices version]);
 }
 
 #pragma mark Constants

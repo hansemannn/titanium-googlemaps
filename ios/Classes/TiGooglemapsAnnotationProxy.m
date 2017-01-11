@@ -131,7 +131,7 @@
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSNumber);
     
-    [[self marker] setAppearAnimation:NUMINT(value)];
+    [[self marker] setAppearAnimation:[TiUtils intValue:value def:kGMSMarkerAnimationNone]];
     [self replaceValue:value forKey:@"animationStyle" notification:NO];
 }
 
