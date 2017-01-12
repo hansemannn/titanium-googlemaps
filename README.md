@@ -51,7 +51,8 @@ If you want to build the module from the source, you need to check some things b
 Features
 --------------------------------
 #### Map View
-A map view creates the view on which annotations and overlays can be added to. You can see all possible events in the demo app. In addition, you can specify one of the following constants to the `mapType` property:
+A map view creates the view on which annotations and overlays can be added to. You can see all possible events in the demo app. 
+In addition, you can specify one of the following constants to the `mapType` property:
  - `MAP_TYPE_NORMAL`
  - `MAP_TYPE_HYBRID`
  - `MAP_TYPE_SATELLITE`
@@ -89,6 +90,10 @@ The module supports all native delegates - exposed as events. These are:
 - [x] dragmove
 - [x] dragend
 - [x] complete
+
+> Note: For annotations, the latitude, longitude and userData is returned, not the whole annotation proxy to keep the 
+> performance at it's best. If you want to identify an annotation, either use the generated UUID string in the `userData` 
+> or set an own key in the `userData` property of your annotation.
 
 Map Controls:
 ```javascript
