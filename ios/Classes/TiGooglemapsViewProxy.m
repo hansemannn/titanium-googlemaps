@@ -258,9 +258,9 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 -(void)addAnnotation:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
+    ENSURE_SINGLE_ARG(args, TiGooglemapsAnnotationProxy);
 
-    TiGooglemapsAnnotationProxy *annotationProxy;
-    ENSURE_ARG_AT_INDEX(annotationProxy, args, 0, TiGooglemapsAnnotationProxy);
+    TiGooglemapsAnnotationProxy *annotationProxy = args;
     
     dispatch_barrier_async(q, ^{
         [[self markers] addObject:annotationProxy];
@@ -284,9 +284,9 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 -(void)removeAnnotation:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
-
-    TiGooglemapsAnnotationProxy *annotationProxy;
-    ENSURE_ARG_AT_INDEX(annotationProxy, args, 0, TiGooglemapsAnnotationProxy);
+    ENSURE_SINGLE_ARG(args, TiGooglemapsAnnotationProxy);
+    
+    TiGooglemapsAnnotationProxy *annotationProxy = args;
     
     dispatch_barrier_async(q, ^{
         [[self markers] removeObject:annotationProxy];

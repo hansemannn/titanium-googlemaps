@@ -76,14 +76,20 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
         [[self proxy] fireEvent:@"camerachange" withObject:[self dictionaryFromCameraPosition:position]];
     }
     if ([[self proxy] _hasListeners:@"regionchanged"]) {
-        [[self proxy] fireEvent:@"regionchanged" withObject:@{
-            @"map" : [self proxy],
+        NSMutableDictionary *updatedRegion = [NSMutableDictionary dictionaryWithDictionary:@{
             @"latitude" : NUMDOUBLE(position.target.latitude),
             @"longitude" : NUMDOUBLE(position.target.longitude),
             @"zoom": NUMFLOAT(position.zoom),
             @"bearing": NUMDOUBLE(position.bearing),
             @"viewingAngle": NUMDOUBLE(position.viewingAngle)
         }];
+        
+        [(TiGooglemapsViewProxy *)[self proxy] replaceValue:updatedRegion forKey:@"region" notification:NO];
+        
+        NSMutableDictionary *event = [NSMutableDictionary dictionaryWithDictionary:updatedRegion];
+        [event setObject:[self proxy] forKey:@"map"];
+        
+        [[self proxy] fireEvent:@"regionchanged" withObject:event];
     }
 }
 
