@@ -12,27 +12,29 @@
 
 @synthesize marker = _marker;
 
-- (GMSMarker *)marker
+-(GMSMarker*)marker
 {
-    if (!_marker) {
-        _marker = [[[GMSMarker alloc] init] retain];
+    if (_marker == nil) {
+        _marker = [GMSMarker new];
         
-        CLLocationDegrees latitude = [TiUtils doubleValue:[self valueForKey:@"latitude"]];
-        CLLocationDegrees longitude = [TiUtils doubleValue:[self valueForKey:@"longitude"]];
-        
-        [_marker setPosition:CLLocationCoordinate2DMake(latitude,longitude)];
+        [_marker setPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:[self valueForKey:@"latitude"]],[TiUtils doubleValue:[self valueForKey:@"longitude"]])];
         [_marker setUserData:@{@"uuid": [[NSUUID UUID] UUIDString]}];
     }
     
     return _marker;
 }
 
-- (NSArray *)keySequence
+-(void)setMarker:(GMSMarker*)marker
 {
-    return @[@"latitude", @"longitude"];
+    if (_marker) {
+        RELEASE_TO_NIL(_marker);
+    }
+    
+    _marker = marker;
+    [self marker];
 }
 
-- (void)dealloc
+-(void)dealloc
 {
     RELEASE_TO_NIL(_marker)
     [super dealloc];
@@ -40,19 +42,7 @@
 
 #pragma mark Public API's
 
-- (void)setLatitude:(id)value
-{
-    ENSURE_TYPE(value, NSNumber);
-    [self replaceValue:value forKey:@"latitude" notification:NO];
-}
-
-- (void)setLongitude:(id)value
-{
-    ENSURE_TYPE(value, NSNumber);
-    [self replaceValue:value forKey:@"longitude" notification:NO];
-}
-
-- (void)setTitle:(id)value
+-(void)setTitle:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSString);
@@ -61,7 +51,7 @@
     [self replaceValue:value forKey:@"title" notification:NO];
 }
 
-- (void)setSubtitle:(id)value
+-(void)setSubtitle:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSString);
@@ -70,7 +60,7 @@
     [self replaceValue:value forKey:@"subtitle" notification:NO];
 }
 
-- (void)setCenterOffset:(id)args
+-(void)setCenterOffset:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
     
@@ -78,7 +68,7 @@
     [self replaceValue:args forKey:@"centerOffset" notification:NO];
 }
 
-- (void)setGroundOffset:(id)args
+-(void)setGroundOffset:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
     
@@ -86,21 +76,21 @@
     [self replaceValue:args forKey:@"groundOffset" notification:NO];
 }
 
-- (void)setImage:(id)value
+-(void)setImage:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
     [[self marker] setIcon:[TiUtils image:value proxy:self]];
     [self replaceValue:value forKey:@"image" notification:NO];
 }
 
-- (void)setPinColor:(id)value
+-(void)setPinColor:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
     [[self marker] setIcon:[GMSMarker markerImageWithColor:[[TiUtils colorValue:value] _color]]];
     [self replaceValue:value forKey:@"pinColor" notification:NO];
 }
 
-- (void)setTouchEnabled:(id)value
+-(void)setTouchEnabled:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSNumber);
@@ -109,7 +99,7 @@
     [self replaceValue:value forKey:@"touchEnabled" notification:NO];
 }
 
-- (void)setFlat:(id)value
+-(void)setFlat:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSNumber);
@@ -118,7 +108,7 @@
     [self replaceValue:value forKey:@"flat" notification:NO];
 }
 
-- (void)setDraggable:(id)value
+-(void)setDraggable:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSNumber);
@@ -127,7 +117,7 @@
     [self replaceValue:value forKey:@"draggable" notification:NO];
 }
 
-- (void)setOpacity:(id)value
+-(void)setOpacity:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSNumber);
@@ -136,7 +126,7 @@
     [self replaceValue:value forKey:@"opacity" notification:NO];
 }
 
-- (void)setAnimationStyle:(id)value
+-(void)setAnimationStyle:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSNumber);
@@ -145,13 +135,13 @@
     [self replaceValue:value forKey:@"animationStyle" notification:NO];
 }
 
-- (void)setRotation:(id)value
+-(void)setRotation:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
     [[self marker] setRotation:[TiUtils doubleValue:value def:0]];
 }
 
-- (void)setUserData:(id)value
+-(void)setUserData:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
     NSMutableDictionary *result = value;
@@ -165,7 +155,7 @@
     [self replaceValue:result forKey:@"userData" notification:NO];
 }
 
-- (void)updateLocation:(id)args
+-(void)updateLocation:(id)args
 {
     ENSURE_UI_THREAD(updateLocation, args);
     ENSURE_SINGLE_ARG(args, NSDictionary);
