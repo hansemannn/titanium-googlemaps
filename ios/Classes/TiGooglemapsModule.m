@@ -16,19 +16,19 @@
 
 #pragma mark Internal
 
-- (id)moduleGUID
+-(id)moduleGUID
 {
 	return @"81fe0326-e874-4843-b902-51bbd46f9283";
 }
 
-- (NSString *)moduleId
+-(NSString*)moduleId
 {
 	return @"ti.googlemaps";
 }
 
 #pragma mark Lifecycle
 
-- (void)startup
+-(void)startup
 {
 	[super startup];
 
@@ -37,12 +37,12 @@
 
 #pragma Public APIs
 
-- (void)setAPIKey:(id)value
+-(void)setAPIKey:(id)value
 {
     [GMSServices provideAPIKey:[TiUtils stringValue:value]];
 }
 
-- (NSNumber *)version
+-(NSNumber *)version
 {
     return NUMINTEGER([GMSServices version]);
 }

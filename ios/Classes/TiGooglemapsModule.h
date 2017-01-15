@@ -9,7 +9,7 @@
 
 @interface TiGooglemapsModule : TiModule
 
-- (void)setAPIKey:(id)value;
-- (NSString *)version;
+-(void)setAPIKey:(id)value;
+-(NSString*)version;
 
 @end
