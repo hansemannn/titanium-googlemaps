@@ -34,13 +34,6 @@
 -(NSMutableArray*)overlays;
 
 /**
- *  Sets the new annotations error, e.g. for position updates
- *
- *  @since 2.5.1
- */
--(void)setMarkers:(NSMutableArray*)_markers;
-
-/**
  *  Adds an annotation.
  *
  *  @param args The annotation.
