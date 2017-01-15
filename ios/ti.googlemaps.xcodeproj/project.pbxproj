@@ -420,6 +420,7 @@
 			children = (
 				DB0A81241E13111600F03FE9 /* QuadTree */,
 				DB0A80F01E1310BE00F03FE9 /* Algo */,
+				DB0A81021E1310BE00F03FE9 /* View */,
 				DB37298B1E15BF65009CD6B7 /* TiClusterIconGenerator.h */,
 				DB37298C1E15BF65009CD6B7 /* TiClusterIconGenerator.m */,
 				DB91F9971E15C28400DFA78B /* TiClusterRenderer.h */,
@@ -434,7 +435,6 @@
 				DB0A80FF1E1310BE00F03FE9 /* GMUMarkerClustering.h */,
 				DB0A81001E1310BE00F03FE9 /* GMUStaticCluster.h */,
 				DB0A81011E1310BE00F03FE9 /* GMUStaticCluster.m */,
-				DB0A81021E1310BE00F03FE9 /* View */,
 			);
 			name = Clustering;
 			path = Classes/Clustering;

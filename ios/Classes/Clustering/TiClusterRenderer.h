@@ -1,10 +1,9 @@
-//
-//  TiClusterRenderer.h
-//  ti.googlemaps
-//
-//  Created by Hans Knoechel on 29/12/2016.
-//
-//
+/**
+ * Ti.GoogleMaps
+ * Copyright (c) 2009-Present by Hans Knoechel, Inc. All Rights Reserved.
+ * Licensed under the terms of the Apache Public License
+ * Please see the LICENSE included with this distribution for details.
+ */
 
 #import "GMUMarkerClustering.h"
 #import "GMUStaticCluster.h"
