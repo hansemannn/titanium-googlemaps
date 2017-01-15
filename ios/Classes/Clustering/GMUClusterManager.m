@@ -125,14 +125,12 @@ static const double kGMUClusterWaitIntervalSeconds = 0.2;
       [marker.userData conformsToProtocol:@protocol(GMUCluster)]) {
     id<GMUCluster> cluster = marker.userData;
     [_delegate clusterManager:self didTapCluster:cluster];
-    return YES;
   }
 
   if ([_delegate respondsToSelector:@selector(clusterManager:didTapClusterItem:)] &&
       [marker.userData conformsToProtocol:@protocol(GMUClusterItem)]) {
     id<GMUClusterItem> clusterItem = marker.userData;
     [_delegate clusterManager:self didTapClusterItem:clusterItem];
-    return YES;
   }
 
   // Forward to _mapDelegate as a fallback.

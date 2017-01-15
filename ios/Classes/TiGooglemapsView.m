@@ -64,7 +64,9 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     if ([[marker userData] isKindOfClass:[TiPOIItem class]]) {
         TiPOIItem *item = (TiPOIItem *)[marker userData];
         
-        [marker setTitle:item.name];
+        if (item.name) {
+            [marker setTitle:item.name];
+        }
     }
 }
 
@@ -231,6 +233,8 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
             @"longitude": NUMDOUBLE(marker.position.longitude)
         }];
     }
+    
+    return NO;
 }
 
 - (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker
