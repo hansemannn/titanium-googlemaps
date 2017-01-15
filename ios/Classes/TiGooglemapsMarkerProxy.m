@@ -159,13 +159,14 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, i
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSNumber);
     
-    [[self marker] setAppearAnimation:NUMINT(value)];
+    [[self marker] setAppearAnimation:[TiUtils intValue:value def:kGMSMarkerAnimationNone]];
     [self replaceValue:value forKey:@"animationStyle" notification:NO];
 }
 
 -(void)setUserData:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
+    
     [[self marker] setUserData:value];
     [self replaceValue:value forKey:@"userData" notification:NO];
 }

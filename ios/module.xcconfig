@@ -8,4 +8,4 @@
 //
 FRAMEWORK_SEARCH_PATHS=$(SRCROOT)/../../modules/iphone/ti.googlemaps/2.7.0/platform "~/Library/Application\ Support/Titanium/modules/iphone/ti.googlemaps/2.7.0/platform"
 
-OTHER_LDFLAGS =$(inherited) -framework Accelerate -framework AVFoundation -framework CoreBluetooth -framework CoreData -framework CoreGraphics -framework CoreLocation -framework CoreText -framework GLKit -framework ImageIO /usr/lib/libz.dylib /usr/lib/libc++.dylib /usr/lib/libicucore.dylib /usr/lib/libobjc.A.dylib -framework OpenGLES -framework QuartzCore -framework Security -framework SystemConfiguration -framework GoogleMaps -framework GoogleMapsBase -framework GoogleMapsCore -framework GooglePlaces
+OTHER_LDFLAGS =$(inherited) -framework Accelerate -framework AVFoundation -framework CoreBluetooth -framework CoreData -framework CoreGraphics -framework CoreLocation -framework CoreText -framework GLKit -framework ImageIO -lobjc -lc++ -lz -licucore -framework OpenGLES -framework QuartzCore -framework Security -framework SystemConfiguration -framework GoogleMaps -framework GoogleMapsBase -framework GoogleMapsCore -framework GooglePlaces
