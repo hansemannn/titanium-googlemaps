@@ -14,10 +14,13 @@
 
 -(GMSMarker*)marker
 {
-    if (_marker == nil) {
-        _marker = [GMSMarker new];
+    if (!_marker) {
+        _marker = [[[GMSMarker alloc] init] retain];
         
-        [_marker setPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:[self valueForKey:@"latitude"]],[TiUtils doubleValue:[self valueForKey:@"longitude"]])];
+        CLLocationDegrees latitude = [TiUtils doubleValue:[self valueForKey:@"latitude"]];
+        CLLocationDegrees longitude = [TiUtils doubleValue:[self valueForKey:@"longitude"]];
+        
+        [_marker setPosition:CLLocationCoordinate2DMake(latitude,longitude)];
         [_marker setUserData:@{@"uuid": [[NSUUID UUID] UUIDString]}];
     }
     
@@ -34,6 +37,11 @@
     [self marker];
 }
 
+-(NSArray *)keySequence
+{
+    return @[@"latitude", @"longitude"];
+}
+
 -(void)dealloc
 {
     RELEASE_TO_NIL(_marker)
@@ -41,6 +49,18 @@
 }
 
 #pragma mark Public API's
+
+-(void)setLatitude:(id)value
+{
+    ENSURE_TYPE(value, NSNumber);
+    [self replaceValue:value forKey:@"latitude" notification:NO];
+}
+
+-(void)setLongitude:(id)value
+{
+    ENSURE_TYPE(value, NSNumber);
+    [self replaceValue:value forKey:@"longitude" notification:NO];
+}
 
 -(void)setTitle:(id)value
 {
