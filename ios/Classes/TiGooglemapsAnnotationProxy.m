@@ -157,14 +157,25 @@
 
 -(void)updateLocation:(id)args
 {
-    ENSURE_UI_THREAD_1_ARG(args);
-    ENSURE_TYPE(args, NSDictionary);
+    ENSURE_UI_THREAD(updateLocation, args);
+    ENSURE_SINGLE_ARG(args, NSDictionary);
     
     id latitude = [args valueForKey:@"latitude"];
     id longitude = [args valueForKey:@"longitude"];
+    id animated = [args valueForKey:@"animated"];
+    id duration = [args valueForKey:@"duration"];
     
-    [[self marker] setPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude],[TiUtils doubleValue:longitude])];
-    [self replaceValue:args forKey:@"updateLocation" notification:NO];
+    if ([TiUtils boolValue:animated def:NO]) {
+        [CATransaction begin];
+        [CATransaction setAnimationDuration:[TiUtils floatValue:duration def:2000] / 1000];
+            [[self marker] setPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude],[TiUtils doubleValue:longitude])];
+        [CATransaction commit];
+    } else {
+        [[self marker] setPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude],[TiUtils doubleValue:longitude])];
+    }
+    
+    [self replaceValue:latitude forKey:@"latitude" notification:NO];
+    [self replaceValue:longitude forKey:@"longitude" notification:NO];
 }
 
 @end
