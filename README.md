@@ -149,8 +149,33 @@ Animate to a viewing angle:
 mapView.animateToViewingAngle(30);
 ```
 
+#### Camera Update
+You can perform camera updates to your map view instance by creating an instance of the `CameraUpdate` API:
+```js
+var cameraUpdate = maps.createCameraUpdate();
+```
+Before you can use the camera update, you must specify one of this actions:
+- [x] `zoomIn`
+- [x] `zoomOut`
+- [x] `zoom(value, point)` The parameter 'point' is optional
+- [x] `setTarget({latitude: xxx, longitude: xxx, zoom: xxx})` The parameter 'zoom' is optional
+- [x] `setCamera({latitude: xxx, longitude: xxx, zoom: xxx, bearing: xxx, viewingAngle: xxx})`
+- [x] `fitBounds({padding: xxx, insets: xxx, bounds: xxx, coordinate1: xxx, coordinate2: xxx})`
+- [x] `scrollBy({x: xxx, y: xxx})`
+
+After creating the camera update, you can use it in one of the following methods:
+**moveCamera**
+```js
+mapView.moveCamera(cameraUpdate);
+```
+**animateWithCameraUpdate**
+```js
+mapView.animateWithCameraUpdate(cameraUpdate);
+```
+
 #### Annotations
-An annotation represents a location specified by at least a `title` and a `subtitle` property. It can be added to a map view:
+An annotation represents a location specified by at least a `title` and a `subtitle` property. 
+It can be added to a map view:
 
 ```javascript
 var annotation = maps.createAnnotation({
