@@ -16,14 +16,14 @@
 #define DEPRECATED(from, to, in) \
 NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, to, in);\
 
--(id)_initWithPageContext:(id<TiEvaluator>)context
+- (id)_initWithPageContext:(id<TiEvaluator>)context
 {
     q = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     
     return [super _initWithPageContext:context];
 }
 
--(void)dealloc
+- (void)dealloc
 {
     RELEASE_TO_NIL(mapView);
     RELEASE_TO_NIL(markers);
@@ -34,12 +34,12 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     [super dealloc];
 }
 
--(TiGooglemapsMapView*)mapView
+- (TiGooglemapsMapView *)mapView
 {
-    return (TiGooglemapsMapView*)[self view];
+    return (TiGooglemapsMapView *)[self view];
 }
 
--(NSMutableArray*)markers
+- (NSMutableArray *)markers
 {
     if (markers == nil) {
         markers = [[NSMutableArray alloc] initWithArray:@[]];
@@ -48,7 +48,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     return markers;
 }
 
--(NSMutableArray*)overlays
+- (NSMutableArray *)overlays
 {
     if (overlays == nil) {
         overlays = [[NSMutableArray alloc] initWithArray:@[]];
@@ -59,7 +59,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 #pragma mark Public API's
 
--(void)setMyLocationEnabled:(id)value
+- (void)setMyLocationEnabled:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSNumber);
@@ -68,7 +68,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     [self replaceValue:value forKey:@"myLocationEnabled" notification:NO];
 }
 
--(void)setMapType:(id)value
+- (void)setMapType:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
     ENSURE_TYPE(value, NSNumber);
@@ -77,13 +77,13 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     [self replaceValue:value forKey:@"mapType" notification:NO];
 }
 
--(void)setCamera:(id)args
+- (void)setCamera:(id)args
 {
     DEPRECATED(@"MapView.camera", @"MapView.region", @"2.2.0");
     [self setRegion:args];
 }
 
--(void)setRegion:(id)args
+- (void)setRegion:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
     ENSURE_TYPE(args, NSDictionary);
@@ -104,7 +104,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     [self replaceValue:args forKey:@"region" notification:NO];
 }
 
--(void)addAnnotation:(id)args
+- (void)addAnnotation:(id)args
 {
     id annotationProxy = [args objectAtIndex:0];
     
@@ -120,7 +120,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     });
 }
 
--(void)addAnnotations:(id)args
+- (void)addAnnotations:(id)args
 {
     id annotationProxies = [args objectAtIndex:0];
     
@@ -132,7 +132,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     }
 }
 
--(void)removeAnnotation:(id)args
+- (void)removeAnnotation:(id)args
 {
     id annotationProxy = [args objectAtIndex:0];
     
@@ -148,7 +148,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     });
 }
 
--(void)setAnnotations:(id)args
+- (void)setAnnotations:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
 
@@ -159,25 +159,25 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     [self addAnnotations:args];
 }
 
--(void)addMarker:(id)args
+- (void)addMarker:(id)args
 {
     DEPRECATED(@"addMarker", @"addAnnotation", "2.2.0");
     [self addAnnotation:args];
 }
 
--(void)addMarkers:(id)args
+- (void)addMarkers:(id)args
 {
     DEPRECATED(@"addMarkers", @"addAnnotations", "2.2.0");
     [self addAnnotations:args];
 }
 
--(void)removeMarker:(id)args
+- (void)removeMarker:(id)args
 {
     DEPRECATED(@"removeMarker", @"removeAnnotation", "2.2.0");
     [self removeAnnotation:args];
 }
 
--(void)addPolyline:(id)args
+- (void)addPolyline:(id)args
 {
     id polylineProxy = [args objectAtIndex:0];
     
@@ -193,7 +193,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     });
 }
 
--(void)removePolyline:(id)args
+- (void)removePolyline:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
 
@@ -209,7 +209,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     });
 }
 
--(void)addPolygon:(id)args
+- (void)addPolygon:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
 
@@ -225,7 +225,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     });
 }
 
--(void)removePolygon:(id)args
+- (void)removePolygon:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
 
@@ -241,7 +241,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     });
 }
 
--(void)addCircle:(id)args
+- (void)addCircle:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
 
@@ -257,7 +257,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     });
 }
 
--(void)removeCircle:(id)args
+- (void)removeCircle:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
 
@@ -273,13 +273,13 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     });
 }
 
--(id)getSelectedMarker:(id)unused
+- (id)getSelectedMarker:(id)unused
 {
     DEPRECATED(@"getSelectedMarker()", @"getSelectedAnnotation()", @"2.2.0");
     [self getSelectedAnnotation:unused];
 }
 
--(id)getSelectedAnnotation:(id)unused
+- (id)getSelectedAnnotation:(id)unused
 {
     ENSURE_UI_THREAD(getSelectedAnnotation, unused);
     GMSMarker *selectedMarker = [[[self mapView] mapView] selectedMarker];
@@ -296,13 +296,13 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     return [NSNull null];
 }
 
--(void)selectMarker:(id)value
+- (void)selectMarker:(id)value
 {
     DEPRECATED(@"selectMarker()", @"selectAnnotation()", @"2.2.0");
     [self selectAnnotation:value];
 }
 
--(void)selectAnnotation:(id)value
+- (void)selectAnnotation:(id)value
 {
     ENSURE_UI_THREAD(selectAnnotation, value);
     id annotationProxy = [value objectAtIndex:0];
@@ -311,19 +311,19 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     [[[self mapView] mapView] setSelectedMarker:[annotationProxy marker]];
 }
 
--(void)deselectMarker:(id)unused
+- (void)deselectMarker:(id)unused
 {
     DEPRECATED(@"deselectMarker()", @"deselectAnnotation()", @"2.2.0");
     [self deselectAnnotation:unused];
 }
 
--(void)deselectAnnotation:(id)unused
+- (void)deselectAnnotation:(id)unused
 {
     ENSURE_UI_THREAD(deselectAnnotation, unused);
     [[[self mapView] mapView] setSelectedMarker:nil];
 }
 
--(void)animateToLocation:(id)args
+- (void)animateToLocation:(id)args
 {
     ENSURE_UI_THREAD(animateToLocation, args);
     ENSURE_TYPE(args, NSArray);
@@ -341,7 +341,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     [[[self mapView] mapView] animateToLocation:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude])];
 }
 
--(void)animateToZoom:(id)value
+- (void)animateToZoom:(id)value
 {
     ENSURE_UI_THREAD(animateToZoom, value);
     ENSURE_TYPE(value, NSNumber);
@@ -349,7 +349,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     [[[self mapView] mapView] animateToZoom:[TiUtils floatValue:value]];
 }
 
--(void)animateToBearing:(id)value
+- (void)animateToBearing:(id)value
 {
     ENSURE_UI_THREAD(animateToBearing, value);
     ENSURE_TYPE(value, NSNumber);
@@ -357,7 +357,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     [[[self mapView] mapView] animateToBearing:[TiUtils doubleValue:value]];
 }
 
--(void)animateToViewingAngle:(id)value
+- (void)animateToViewingAngle:(id)value
 {
     ENSURE_UI_THREAD(animateToViewingAngle, value);
     ENSURE_TYPE(value, NSNumber);

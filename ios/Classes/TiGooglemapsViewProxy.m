@@ -274,7 +274,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     [[[self mapView] clusterManager] cluster];
 }
 
--(void)addClusterItem:(id)args
+- (void)addClusterItem:(id)args
 {
     ENSURE_SINGLE_ARG(args, TiGooglemapsClusterItemProxy);
     
@@ -283,7 +283,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     });
 }
 
--(void)addClusterItems:(id)args
+- (void)addClusterItems:(id)args
 {
     ENSURE_SINGLE_ARG(args, NSArray);
     
@@ -298,7 +298,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     });
 }
 
--(void)setClusterItems:(id)args
+- (void)setClusterItems:(id)args
 {
     ENSURE_SINGLE_ARG(args, NSArray);
     
@@ -310,7 +310,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     });
 }
 
--(void)removeClusterItem:(id)args
+- (void)removeClusterItem:(id)args
 {
     ENSURE_SINGLE_ARG(args, TiGooglemapsClusterItemProxy);
     
@@ -319,12 +319,12 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     });
 }
 
--(void)clearClusterItems:(id)unused
+- (void)clearClusterItems:(id)unused
 {
     [[[self mapView] clusterManager] clearItems];
 }
 
--(void)addAnnotation:(id)args
+- (void)addAnnotation:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
     ENSURE_SINGLE_ARG(args, TiGooglemapsAnnotationProxy);
