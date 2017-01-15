@@ -58,6 +58,13 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     return overlays;
 }
 
+-(void)setMarkers:(NSMutableArray*)_markers
+{
+    [markers removeAllObjects];
+    RELEASE_TO_NIL(markers);
+    markers = [[_markers mutableCopy] retain];
+}
+
 #pragma mark Public API's
 
 - (void)setUserInteractionEnabled:(id)value
