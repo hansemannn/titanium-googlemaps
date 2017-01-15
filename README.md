@@ -12,6 +12,7 @@ Ti.GoogleMaps is an open-source project to support the Google Maps iOS-SDK in Ap
 - [x] Polyline overlay
 - [x] Circle overlay
 - [x] Autocompletion dialog
+- [x] Clustering
 - [x] All delegates (exposed as events)
 
 Requirements
@@ -38,8 +39,8 @@ Edit the modules section of your `tiapp.xml` file to include this module:
 
 Initialize the module by setting the Google Maps API key you can get from [here](https://developers.google.com/maps/signup).
 ```javascript
-var maps = require("ti.googlemaps");
-maps.setAPIKey("<YOUR_GOOGLE_MAPS_API_KEY>");
+var maps = require('ti.googlemaps');
+maps.setAPIKey('<YOUR_GOOGLE_MAPS_API_KEY>');
 ```
 
 ### Build
@@ -121,7 +122,7 @@ mapView.mapInsets = { bottom:200 };
 
 Map Style:
 ```javascript
-mapView.mapStyle = "JSON_STYLE_GOES_HERE";
+mapView.mapStyle = 'JSON_STYLE_GOES_HERE';
 ```
 See [this link](https://developers.google.com/maps/documentation/ios-sdk/hiding-features) for more infos on map styling.
 
@@ -155,15 +156,15 @@ An annotation represents a location specified by at least a `title` and a `subti
 var annotation = maps.createAnnotation({
     latitude : 37.368122,
     longitude : -121.913653,
-    title : "Appcelerator, Inc",
-    subtitle : "1732 N. 1st Street, San Jose",
-    pinColor: "green",
-    image: "pin.png",
+    title : 'Appcelerator, Inc',
+    subtitle : '1732 N. 1st Street, San Jose',
+    pinColor: 'green',
+    image: 'pin.png',
     touchEnabled: true, // Default: true
     draggable: true, // Default: false
     flat: true, // Default: false
     opacity: 1,
-    animationStyle: maps.APPEAR_ANIMATION_POP, // One of "APPEAR_ANIMATION_NONE" (default) and "maps.APPEAR_ANIMATION_POP"
+    animationStyle: maps.APPEAR_ANIMATION_POP, // One of 'APPEAR_ANIMATION_NONE' (default) and 'APPEAR_ANIMATION_POP'
     rotation: 30, // measured in degrees clockwise from the default position
     centerOffset: {
         x: 0.5,
@@ -175,7 +176,7 @@ var annotation = maps.createAnnotation({
     },
     userData: {
         id: 123,
-        custom_key: "custom_value"
+        custom_key: 'custom_value'
     }
 });
 mapView.addAnnotation(annotation);
@@ -224,15 +225,16 @@ The whole dialog can be styled (like in the following example) and the default n
 
 ```javascript
 var dialog = GoogleMaps.createAutocompleteDialog({
-    tableCellBackgroundColor: "#333",
-    tableCellSeparatorColor: "#444",
-    primaryTextColor: "#fff",
-    primaryTextHighlightColor: "blue",
-    tintColor: "blue"
+    tableCellBackgroundColor: '#333',
+    tableCellSeparatorColor: '#444',
+    primaryTextColor: '#fff',
+    primaryTextHighlightColor: 'blue',
+    tintColor: 'blue'
 });
 
 // You need a Google Places API key from the Google Developer Console
-dialog.configure("<YOUR_GOOGLE_PLACES_API_KEY>");
+// This is not the same one like your Google Maps API key
+dialog.configure('<YOUR_GOOGLE_PLACES_API_KEY>');
 
 dialog.open();
 ```
@@ -255,7 +257,7 @@ var polyline = maps.createPolyline({
         longitude : 144.96298
     }, [-31.95285, 115.85734]],
     strokeWidth : 3, // Default: 1
-    strokeColor : "#f00"  // Default: Black (#000000)
+    strokeColor : '#f00'  // Default: Black (#000000)
 });
 mapView.addPolyline(polyline);
 ```
@@ -272,8 +274,8 @@ var polygon = maps.createPolygon({
     [-32.95785, 115.86234],
     [-33.91785, 115.82234]],
     strokeWidth : 3,
-    fillColor : "yellow", // Default: Blue (#0000ff)
-    strokeColor : "green"
+    fillColor : 'yellow', // Default: Blue (#0000ff)
+    strokeColor : 'green'
 });
 mapView.addPolygon(polygon);
 ```
@@ -284,16 +286,65 @@ A circle is a shape defined by the `center` property to specify its location as 
 ```javascript
 var circle = maps.createCircle({
     center : [-32.9689, 151.7721], // Can handle object or array
-    radius : 500 * 1000, // 500km, Default: 0
-    fillColor: "blue", // Default: transparent
+    radius : 500 * 1000, // 500 km, Default: 0
+    fillColor: 'blue', // Default: transparent
     strokeWidth : 3,
-    strokeColor : "orange"
+    strokeColor : 'orange'
 });
 mapView.addCircle(circle);
 ```
 
+#### Clustering
+You can cluster multiple items by using the Clustering API. 
+
+First, create a few cluster items using the `ClusterItem`:
+```js
+var items = [];
+
+var clusterItem = maps.createClusterItem({
+    // Required
+    latitude: 37.368122,
+    longitude: -121.913653,
+    
+    // Optional - for now only this three properties available
+    title: 'My Annotation',
+    subtitle: 'Hello World!',
+    icon: 'marker.png' // either a String, Ti.Blob or Ti.File
+});
+
+// Create some more items here ...
+
+items.push(clusterItem);
+```
+Then add the cluster items to a map:
+```js
+mapView.addClusterItems(items);
+```
+Finally, call `cluster()` to generate a new cluster:
+```js
+mapView.cluster();
+```
+That's it! Optionally, you can also set your own cluster ranges and define custom
+images for each cluster range in your `mapView` instance:
+```js
+var mapView = maps.createView({
+    clusterRanges: [10, 50, 100, 200, 500],
+    clusterBackgrounds: [
+        'buckets/m1.png',
+        'buckets/m2.png',
+        'buckets/m3.png',
+        'buckets/m4.png',
+        'buckets/m5.png'
+    ],
+    region: {
+        latitude: 37.368122,
+        longitude: -121.913653,
+    }
+});
+```
+
 #### Example
-For a full example, check the demo in `iphone/example/app.js`.
+For a full example, check the demos in `example/app.js` and `example/clustering.js`.
 
 Author
 ---------------
