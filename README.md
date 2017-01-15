@@ -368,6 +368,14 @@ var mapView = maps.createView({
 });
 ```
 
+#### License Info
+Google requires you to link the Open Source license somewhere in your map.
+Use the following API to receive the Google Maps license:
+
+```js
+var license = maps.getOpenSourceLicenseInfo()
+```
+
 #### Example
 For a full example, check the demos in `example/app.js` and `example/clustering.js`.
 
