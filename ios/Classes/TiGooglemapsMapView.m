@@ -18,7 +18,7 @@
 #define DEPRECATED(from, to, in) \
 NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, to, in);\
 
--(GMSMapView *)mapView
+- (GMSMapView *)mapView
 {
     if (_mapView == nil) {
         DEPRECATED(@"MapView", @"View", @"2.2.0");
@@ -35,13 +35,13 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     return _mapView;
 }
 
--(void)dealloc
+- (void)dealloc
 {
     RELEASE_TO_NIL(_mapView);
     [super dealloc];
 }
 
--(TiGooglemapsMapViewProxy *)mapViewProxy
+- (TiGooglemapsMapViewProxy *)mapViewProxy
 {
     return (TiGooglemapsMapViewProxy *)[self proxy];
 }
@@ -223,7 +223,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 #pragma mark Helper
 
--(NSDictionary *)dictionaryFromCameraPosition:(GMSCameraPosition *)position
+- (NSDictionary *)dictionaryFromCameraPosition:(GMSCameraPosition *)position
 {
     if (position == nil) {
         return @{};
@@ -238,7 +238,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     };
 }
 
--(NSDictionary *)dictionaryFromCoordinate:(CLLocationCoordinate2D)coordinate
+- (NSDictionary *)dictionaryFromCoordinate:(CLLocationCoordinate2D)coordinate
 {
     return @{
         @"latitude": NUMDOUBLE(coordinate.latitude),
@@ -246,7 +246,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     };
 }
 
--(NSDictionary *)dictionaryFromMarker:(GMSMarker *)marker
+- (NSDictionary *)dictionaryFromMarker:(GMSMarker *)marker
 {
     if (!marker) {
         return @{};
@@ -261,15 +261,15 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     };
 }
 
--(id)overlayTypeFromOverlay:(GMSOverlay*)overlay
+- (id)overlayTypeFromOverlay:(GMSOverlay *)overlay
 {
     ENSURE_UI_THREAD(overlayTypeFromOverlay, overlay);
     
-    if([overlay isKindOfClass:[GMSPolygon class]]) {
+    if ([overlay isKindOfClass:[GMSPolygon class]]) {
         return NUMINTEGER(TiGooglemapsOverlayTypePolygon);
-    } else if([overlay isKindOfClass:[GMSPolyline class]]) {
+    } else if ([overlay isKindOfClass:[GMSPolyline class]]) {
         return NUMINTEGER(TiGooglemapsOverlayTypePolyline);
-    } else if([overlay isKindOfClass:[GMSCircle class]]) {
+    } else if ([overlay isKindOfClass:[GMSCircle class]]) {
         return NUMINTEGER(TiGooglemapsOverlayTypeCircle);
     }
     
@@ -278,7 +278,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     return NUMINTEGER(TiGooglemapsOverlayTypeUnknown);
 }
 
--(id)overlayProxyFromOverlay:(GMSOverlay*)overlay
+- (id)overlayProxyFromOverlay:(GMSOverlay *)overlay
 {
     for (TiProxy *overlayProxy in [[self mapViewProxy] overlays]) {
 
