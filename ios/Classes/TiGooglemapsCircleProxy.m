@@ -9,7 +9,7 @@
 
 @implementation TiGooglemapsCircleProxy
 
--(GMSCircle*)circle
+- (GMSCircle *)circle
 {
     if (_circle == nil) {
         _circle = [GMSCircle new];
@@ -19,7 +19,7 @@
     return _circle;
 }
 
--(void)dealloc
+- (void)dealloc
 {
     RELEASE_TO_NIL(_circle);
     [super dealloc];
@@ -27,12 +27,12 @@
 
 #pragma mark Public APIs
 
--(void)setCenter:(id)args
+- (void)setCenter:(id)args
 {
     ENSURE_UI_THREAD(setCenter, args);
     [self replaceValue:args forKey:@"center" notification:NO];
     
-    if(![args isKindOfClass:[NSArray class]] && ![args isKindOfClass:[NSDictionary class]]) {
+    if (![args isKindOfClass:[NSArray class]] && ![args isKindOfClass:[NSDictionary class]]) {
         NSLog(@"[WARN] Ti.GoogleMaps: You need to specify the center either using an array or object.");
         return;
     }
@@ -40,7 +40,7 @@
     [[self circle] setPosition:[self positionFromPoint:args]];
 }
 
--(void)setRadius:(id)value
+- (void)setRadius:(id)value
 {
     ENSURE_UI_THREAD(setRadius, value);
     ENSURE_TYPE(value, NSNumber);
@@ -49,7 +49,7 @@
     [self replaceValue:value forKey:@"radius" notification:NO];
 }
 
--(void)setTappable:(id)value
+- (void)setTappable:(id)value
 {
     ENSURE_UI_THREAD(setTappable, value);
     ENSURE_TYPE(value, NSNumber);
@@ -58,7 +58,7 @@
     [self replaceValue:value forKey:@"tappable" notification:NO];
 }
 
--(void)setFillColor:(id)value
+- (void)setFillColor:(id)value
 {
     ENSURE_UI_THREAD(setFillColor, value);
     
@@ -66,7 +66,7 @@
     [self replaceValue:value forKey:@"fillColor" notification:NO];
 }
 
--(void)setStrokeColor:(id)value
+- (void)setStrokeColor:(id)value
 {
     ENSURE_UI_THREAD(setStrokeColor, value);
     
@@ -74,7 +74,7 @@
     [self replaceValue:value forKey:@"strokeColor" notification:NO];
 }
 
--(void)setStrokeWidth:(id)value
+- (void)setStrokeWidth:(id)value
 {
     ENSURE_UI_THREAD(setStrokeWidth, value);
     
@@ -84,7 +84,7 @@
 
 #pragma mark Utilities
 
--(CLLocationCoordinate2D)positionFromPoint:(id)point
+- (CLLocationCoordinate2D)positionFromPoint:(id)point
 {
     if ([point isKindOfClass:[NSDictionary class]]) {
         CLLocationDegrees latitude = [TiUtils doubleValue:[point valueForKey:@"latitude"]];
