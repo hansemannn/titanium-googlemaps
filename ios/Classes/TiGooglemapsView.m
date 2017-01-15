@@ -64,9 +64,13 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     if ([[marker userData] isKindOfClass:[TiPOIItem class]]) {
         TiPOIItem *item = (TiPOIItem *)[marker userData];
         
-        if (item.name) {
-            [marker setTitle:item.name];
-        }
+        // Note: All native props are nullable, so we don't need to check against nil here
+        
+        [marker setTitle:item.title];
+        
+        [marker setSnippet:item.subtitle];
+        
+        [marker setIcon:item.icon];
     }
 }
 
@@ -133,7 +137,8 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
         [[self proxy] fireEvent:@"clusteritemclick" withObject:@{
             @"latitude": NUMDOUBLE(clusterItem.position.latitude),
             @"longitude": NUMDOUBLE(clusterItem.position.longitude),
-            @"title": [(TiPOIItem *)clusterItem name] ?: [NSNull null],
+            @"title": [(TiPOIItem *)clusterItem title] ?: [NSNull null],
+            @"subtitle": [(TiPOIItem *)clusterItem subtitle] ?: [NSNull null],
             @"userData": [(TiPOIItem *)clusterItem userData] ?: [NSNull null]
         }];
     }
@@ -412,9 +417,11 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     
     for (id<GMUClusterItem> clusterItem in clusterItems) {
         [result addObject:[[[TiGooglemapsClusterItemProxy alloc] _initWithPageContext:[[self proxy] pageContext]
-                                                                         andPosition:clusterItem.position
-                                                                               title:[(TiPOIItem *)clusterItem name]
-                                                                            userData:[(TiPOIItem *)clusterItem userData]] autorelease]];
+                                                                          andPosition:clusterItem.position
+                                                                                title:[(TiPOIItem *)clusterItem title]
+                                                                             subtitle:[(TiPOIItem *)clusterItem subtitle]
+                                                                                 icon:[(TiPOIItem *)clusterItem icon]
+                                                                             userData:[(TiPOIItem *)clusterItem userData]] autorelease]];
     }
     
     return result;
