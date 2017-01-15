@@ -9,11 +9,13 @@
 
 @implementation TiPOIItem
 
-- (instancetype)initWithPosition:(CLLocationCoordinate2D)position name:(NSString *)name userData:(NSDictionary *)userData
+- (instancetype)initWithPosition:(CLLocationCoordinate2D)position andTitle:(NSString *)title subtitle:(NSString *)subtitle icon:(UIImage *)icon userData:(NSDictionary *)userData;
 {
     if (self = [super init]) {
         _position = position;
-        _name = [name copy];
+        _title = [title copy];
+        _subtitle = [subtitle copy];
+        _icon = [icon retain];
         _userData = [userData retain];
     }
     return self;

@@ -6,13 +6,34 @@
  */
 
 #import "TiGooglemapsClusterItemProxy.h"
+#import "TiBlob.h"
+#import "TiUtils.h"
 
 @implementation TiGooglemapsClusterItemProxy
 
-- (id)_initWithPageContext:(id<TiEvaluator>)context andPosition:(CLLocationCoordinate2D)position title:(NSString *)title userData:(NSDictionary *)userData
+- (id)_initWithPageContext:(id<TiEvaluator>)context
+               andPosition:(CLLocationCoordinate2D)position
+                     title:(NSString *)title
+                     subtitle:(NSString *)subtitle
+                     icon:(id)icon
+                  userData:(NSDictionary *)userData
 {
     if (self = [super _initWithPageContext:context]) {
-        clusterItem = [[TiPOIItem alloc] initWithPosition:position name:title userData:userData];
+        UIImage *nativeIcon = nil;
+        
+        if ([icon isKindOfClass:[UIImage class]]) {
+            nativeIcon = [icon retain];
+        } else {
+            nativeIcon = [[TiUtils toImage:icon proxy:self] retain];
+        }
+        
+        clusterItem = [[TiPOIItem alloc] initWithPosition:position
+                                                 andTitle:title
+                                                 subtitle:subtitle
+                                                     icon:nativeIcon
+                                                 userData:userData];
+        
+        RELEASE_TO_NIL(nativeIcon);
     }
     
     return self;
