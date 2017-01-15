@@ -28,16 +28,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, i
     return _marker;
 }
 
--(void)setMarker:(GMSMarker*)marker
-{
-    if (_marker) {
-        RELEASE_TO_NIL(_marker);
-    }
-    
-    _marker = marker;
-    [self marker];
-}
-
 -(void)dealloc
 {
     RELEASE_TO_NIL(_marker);
