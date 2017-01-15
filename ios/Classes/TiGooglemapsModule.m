@@ -42,6 +42,11 @@
     [GMSServices provideAPIKey:[TiUtils stringValue:value]];
 }
 
+- (NSString *)openSourceLicenseInfo
+{
+    return [GMSServices openSourceLicenseInfo];
+}
+
 - (NSNumber *)version
 {
     return NUMINTEGER([GMSServices version]);
