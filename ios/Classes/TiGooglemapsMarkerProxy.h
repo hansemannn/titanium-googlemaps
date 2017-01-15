@@ -12,6 +12,14 @@
 @property(nonatomic,retain) GMSMarker *marker;
 
 /**
+ *  Sets the native marker.
+ *
+ *  @param marker The marker
+ *  @since 1.0.0
+ */
+-(void)setMarker:(GMSMarker*)marker;
+
+/**
  *  Sets the annotation title.
  *
  *  @param value The title
