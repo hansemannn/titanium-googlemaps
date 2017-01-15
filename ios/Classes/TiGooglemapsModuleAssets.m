@@ -14,7 +14,7 @@ extern NSData* filterDataInRange(NSData* thedata, NSRange range);
 	return nil;
 }
 
-- (NSData*) resolveModuleAsset:(NSString*)path
+- (NSData*) resolveModuleAsset:(NSString *)path
 {
 	
 

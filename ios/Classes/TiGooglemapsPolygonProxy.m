@@ -9,7 +9,7 @@
 
 @implementation TiGooglemapsPolygonProxy
 
--(GMSPolygon*)polygon
+- (GMSPolygon *)polygon
 {
     if (_polygon == nil) {
         _polygon = [GMSPolygon new];
@@ -19,7 +19,7 @@
     return _polygon;
 }
 
--(void)dealloc
+- (void)dealloc
 {
     RELEASE_TO_NIL(_polygon);
     [super dealloc];
@@ -27,7 +27,7 @@
 
 #pragma mark Public API's
 
--(void)setPoints:(id)points
+- (void)setPoints:(id)points
 {
     ENSURE_UI_THREAD(setPoints, points);
     ENSURE_TYPE_OR_NIL(points, NSArray);
@@ -60,7 +60,7 @@
     [[self polygon] setPath:path];
 }
 
--(void)setTappable:(id)value
+- (void)setTappable:(id)value
 {
     ENSURE_UI_THREAD(setTappable, value);
     ENSURE_TYPE(value, NSNumber);
@@ -69,7 +69,7 @@
     [self replaceValue:value forKey:@"tappable" notification:NO];
 }
 
--(void)setFillColor:(id)value
+- (void)setFillColor:(id)value
 {
     ENSURE_UI_THREAD(setFillColor, value);
     
@@ -77,7 +77,7 @@
     [self replaceValue:value forKey:@"fillColor" notification:NO];
 }
 
--(void)setStrokeColor:(id)value
+- (void)setStrokeColor:(id)value
 {
     ENSURE_UI_THREAD(setStrokeColor, value);
     
@@ -85,7 +85,7 @@
     [self replaceValue:value forKey:@"strokeColor" notification:NO];
 }
 
--(void)setStrokeWidth:(id)value
+- (void)setStrokeWidth:(id)value
 {
     ENSURE_UI_THREAD(setStrokeWidth, value);
     
@@ -93,7 +93,7 @@
     [self replaceValue:value forKey:@"strokeWidth" notification:NO];
 }
 
--(void)setGeodesic:(id)value
+- (void)setGeodesic:(id)value
 {
     ENSURE_UI_THREAD(setGeodesic, value);
     
