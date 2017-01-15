@@ -1,6 +1,6 @@
 /**
- * Appcelerator Titanium Mobile
- * Copyright (c) 2009-Present by Appcelerator, Inc. All Rights Reserved.
+ * Ti.GoogleMaps
+ * Copyright (c) 2009-Present by Hans Knoechel, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -9,6 +9,7 @@
 #import "TiHost.h"
 #import "TiUtils.h"
 #import "TiGooglemapsModule.h"
+#import "TiGooglemapsClusterItemProxy.h"
 #import <GoogleMaps/GoogleMaps.h>
 
 @implementation TiGooglemapsModule
@@ -44,6 +45,35 @@
 -(NSNumber *)version
 {
     return NUMINTEGER([GMSServices version]);
+}
+
+- (TiGooglemapsClusterItemProxy *)createClusterItem:(id)args
+{
+    ENSURE_SINGLE_ARG(args, NSDictionary);
+    
+    id latitude = [args objectForKey:@"latitude"];
+    ENSURE_TYPE(latitude, NSNumber);
+    
+    id longitude = [args objectForKey:@"longitude"];
+    ENSURE_TYPE(longitude, NSNumber);
+    
+    id title = [args objectForKey:@"title"];
+    ENSURE_TYPE_OR_NIL(title, NSString);
+
+    id subtitle = [args objectForKey:@"subtitle"];
+    ENSURE_TYPE_OR_NIL(subtitle, NSString);
+
+    id icon = [args objectForKey:@"icon"];
+
+    id userData = [args objectForKey:@"userData"];
+    ENSURE_TYPE_OR_NIL(userData, NSDictionary);
+    
+    return [[[TiGooglemapsClusterItemProxy alloc] _initWithPageContext:[self pageContext]
+                                                          andPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude])
+                                                                title:title
+                                                             subtitle:subtitle
+                                                                 icon:icon
+                                                             userData:userData] autorelease];
 }
 
 #pragma mark Constants

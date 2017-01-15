@@ -1,6 +1,6 @@
 /**
- * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2016 by Appcelerator, Inc. All Rights Reserved.
+ * Ti.GoogleMaps
+ * Copyright (c) 2009-Present by Hans Knoechel, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -10,14 +10,6 @@
 @interface TiGooglemapsAnnotationProxy : TiProxy
 
 @property(nonatomic,retain) GMSMarker *marker;
-
-/**
- *  Sets the native marker.
- *
- *  @param marker The marker
- *  @since 1.0.0
- */
--(void)setMarker:(GMSMarker*)marker;
 
 /**
  *  Sets the annotation title.
