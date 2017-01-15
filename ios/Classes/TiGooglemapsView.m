@@ -232,28 +232,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
         }];
     }
 }
-    
-- (UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker
-{
-    TiGooglemapsAnnotationProxy *proxy = [self annotationProxyFromMarker:marker];
-    
-    if (!proxy) {
-        NSLog(@"[ERROR] Trying to create an infoWindow from an annotation that is not recognized.");
-        return nil;
-    }
-    
-    id infoWindow = [proxy valueForKey:@"infoWindow"];
-    ENSURE_TYPE_OR_NIL(infoWindow, TiViewProxy);
-    
-    if (infoWindow == nil) {
-        return nil;
-    }
-    
-    [[self proxy] rememberProxy:proxy];
-    UIView *value = [(TiViewProxy*)[proxy valueForKey:@"infoWindow"] view];
-
-    return value;
-}
 
 - (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker
 {
@@ -396,30 +374,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     NSLog(@"[ERROR] Unknown overlay provided: %@", [overlay class])
     
     return NUMINTEGER(TiGooglemapsOverlayTypeUnknown);
-}
-
--(id)annotationProxyFromMarker:(GMSMarker *)marker
-{
-    for (NSUInteger i = 0; i < [[[self mapViewProxy] markers] count]; i++) {
-        TiGooglemapsAnnotationProxy *annotationProxy = [[[[self mapViewProxy] markers] objectAtIndex:i] retain];
-        
-        if ([[[[annotationProxy marker] userData] valueForKey:@"uuid"] isEqualToString:[[marker userData] valueForKey:@"uuid"]]) {
-            // Replace the location attributes in the array of annotation-proxies
-            TiGooglemapsAnnotationProxy *newAnnotation = [annotationProxy retain];
-            [annotationProxy release];
-            [newAnnotation updateLocation:@{
-                @"latitude": NUMDOUBLE([marker position].latitude),
-                @"longitude": NUMDOUBLE([marker position].longitude)
-            }];
-            [[[self mapViewProxy] markers] replaceObjectAtIndex:i withObject:newAnnotation];
-            
-            return [newAnnotation autorelease];
-        }
-        
-        RELEASE_TO_NIL(annotationProxy);
-    }
-
-    return [NSNull null];
 }
 
 -(id)overlayProxyFromOverlay:(GMSOverlay *)overlay
