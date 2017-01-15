@@ -1,6 +1,6 @@
 /**
- * Appcelerator Titanium Mobile
- * Copyright (c) 2009-Present by Appcelerator, Inc. All Rights Reserved.
+ * Ti.GoogleMaps
+ * Copyright (c) 2009-Present by Hans Knoechel, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -26,16 +26,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, i
     }
     
     return _marker;
-}
-
--(void)setMarker:(GMSMarker*)marker
-{
-    if (_marker) {
-        RELEASE_TO_NIL(_marker);
-    }
-    
-    _marker = marker;
-    [self marker];
 }
 
 -(void)dealloc

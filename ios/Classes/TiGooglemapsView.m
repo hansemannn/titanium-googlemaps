@@ -1,6 +1,6 @@
 /**
- * Appcelerator Titanium Mobile
- * Copyright (c) 2009-Present by Appcelerator, Inc. All Rights Reserved.
+ * Ti.GoogleMaps
+ * Copyright (c) 2009-Present by Hans Knoechel, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -12,13 +12,17 @@
 #import "TiGooglemapsPolygonProxy.h"
 #import "TiGooglemapsPolylineProxy.h"
 #import "TiGooglemapsConstants.h"
+#import "TiClusterIconGenerator.h"
+#import "TiClusterRenderer.h"
+#import "TiPOIItem.h"
+#import "TiGooglemapsClusterItemProxy.h"
 
 @implementation TiGooglemapsView
 
 #define DEPRECATED(from, to, in) \
 NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, to, in);\
 
--(GMSMapView*)mapView
+- (GMSMapView *)mapView
 {
     if (_mapView == nil) {
 
@@ -34,15 +38,74 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     return _mapView;
 }
 
+-(GMUClusterManager *)clusterManager
+{
+    if (_clusterManager == nil) {
+        // Set up the cluster manager with default icon generator and renderer.
+        id<GMUClusterAlgorithm> algorithm = [[GMUNonHierarchicalDistanceBasedAlgorithm alloc] init];
+        
+        TiClusterIconGenerator *iconGenerator = [self createIconGenerator];
+        
+        TiClusterRenderer *renderer = [[[TiClusterRenderer alloc] initWithMapView:_mapView clusterIconGenerator:iconGenerator] retain];
+        renderer.delegate = self;
+        
+        _clusterManager = [[[GMUClusterManager alloc] initWithMap:[self mapView] algorithm:algorithm renderer:renderer] retain];
+        [_clusterManager setDelegate:self mapDelegate:self];
+        
+        [renderer release];
+        [algorithm release];
+    }
+    
+    return _clusterManager;
+}
+
+- (void)renderer:(id<GMUClusterRenderer>)renderer willRenderMarker:(GMSMarker *)marker
+{
+    if ([[marker userData] isKindOfClass:[TiPOIItem class]]) {
+        TiPOIItem *item = (TiPOIItem *)[marker userData];
+        
+        // Note: All native props are nullable, so we don't need to check against nil here
+        
+        [marker setTitle:item.title];
+        
+        [marker setSnippet:item.subtitle];
+        
+        [marker setIcon:item.icon];
+    }
+}
+
+- (TiClusterIconGenerator *)createIconGenerator
+{
+    id clusterRanges = [[self proxy] valueForKey:@"clusterRanges"];
+    id clusterBackgrounds = [[self proxy] valueForKey:@"clusterBackgrounds"];
+    
+    if (clusterRanges && clusterBackgrounds) {
+        NSMutableArray *backgrounds = [NSMutableArray array];
+        
+        for (id background in clusterBackgrounds) {
+            ENSURE_TYPE(background, NSString);
+            [backgrounds addObject:[TiUtils image:background proxy:self.proxy]];
+        }
+        
+        return [[[TiClusterIconGenerator alloc] initWithBuckets:clusterRanges backgroundImages:backgrounds] autorelease];
+    } else if (clusterRanges) {
+        return [[[TiClusterIconGenerator alloc] initWithBuckets:clusterRanges] autorelease];
+    }
+    
+    return [[[TiClusterIconGenerator alloc] init] autorelease];
+}
+
 -(void)dealloc
 {
     RELEASE_TO_NIL(_mapView);
+    RELEASE_TO_NIL(_clusterManager);
+    
     [super dealloc];
 }
 
--(TiGooglemapsViewProxy*)mapViewProxy
+- (TiGooglemapsViewProxy *)mapViewProxy
 {
-    return (TiGooglemapsViewProxy*)[self proxy];
+    return (TiGooglemapsViewProxy *)[self proxy];
 }
 
 - (void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
@@ -51,7 +114,37 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     [super frameSizeChanged:frame bounds:bounds];
 }
 
-#pragma mark Delegates
+#pragma mark Cluster Delegates
+
+- (void)clusterManager:(GMUClusterManager *)clusterManager didTapCluster:(id<GMUCluster>)cluster
+{
+    if ([[self proxy] _hasListeners:@"clusterclick"]) {
+        [[self proxy] fireEvent:@"clusterclick" withObject:@{
+            @"latitude": NUMDOUBLE(cluster.position.latitude),
+            @"longitude": NUMDOUBLE(cluster.position.longitude),
+            @"count": NUMUINTEGER(cluster.count),
+            @"clusterItems": [self arrayFromClusterItems:cluster.items]
+        }];
+    }
+    
+    GMSCameraPosition *newCamera = [GMSCameraPosition cameraWithTarget:cluster.position zoom:_mapView.camera.zoom + 1];
+    [_mapView moveCamera:[GMSCameraUpdate setCamera:newCamera]];
+}
+
+- (void)clusterManager:(GMUClusterManager *)clusterManager didTapClusterItem:(id<GMUClusterItem>)clusterItem
+{
+    if ([[self proxy] _hasListeners:@"clusteritemclick"]) {
+        [[self proxy] fireEvent:@"clusteritemclick" withObject:@{
+            @"latitude": NUMDOUBLE(clusterItem.position.latitude),
+            @"longitude": NUMDOUBLE(clusterItem.position.longitude),
+            @"title": [(TiPOIItem *)clusterItem title] ?: [NSNull null],
+            @"subtitle": [(TiPOIItem *)clusterItem subtitle] ?: [NSNull null],
+            @"userData": [(TiPOIItem *)clusterItem userData] ?: [NSNull null]
+        }];
+    }
+}
+
+#pragma mark Map View Delegates
 
 - (void)mapView:(GMSMapView *)mapView willMove:(BOOL)gesture
 {
@@ -145,6 +238,8 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
             @"longitude": NUMDOUBLE(marker.position.longitude)
         }];
     }
+    
+    return NO;
 }
 
 - (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker
@@ -235,7 +330,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 #pragma mark Helper
 
--(NSDictionary*)dictionaryFromCameraPosition:(GMSCameraPosition*)position
+- (NSDictionary *)dictionaryFromCameraPosition:(GMSCameraPosition *)position
 {
     if (position == nil) {
         return @{};
@@ -250,7 +345,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     };
 }
 
--(NSDictionary*)dictionaryFromCoordinate:(CLLocationCoordinate2D)coordinate
+- (NSDictionary *)dictionaryFromCoordinate:(CLLocationCoordinate2D)coordinate
 {
     return @{
         @"latitude": NUMDOUBLE(coordinate.latitude),
@@ -258,7 +353,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     };
 }
 
--(NSDictionary *)dictionaryFromMarker:(GMSMarker *)marker
+- (NSDictionary *)dictionaryFromMarker:(GMSMarker *)marker
 {
     if (!marker) {
         return @{};
@@ -273,15 +368,15 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     };
 }
 
--(id)overlayTypeFromOverlay:(GMSOverlay*)overlay
+- (id)overlayTypeFromOverlay:(GMSOverlay *)overlay
 {
     ENSURE_UI_THREAD(overlayTypeFromOverlay, overlay);
 
-    if([overlay isKindOfClass:[GMSPolygon class]]) {
+    if ([overlay isKindOfClass:[GMSPolygon class]]) {
         return NUMINTEGER(TiGooglemapsOverlayTypePolygon);
-    } else if([overlay isKindOfClass:[GMSPolyline class]]) {
+    } else if ([overlay isKindOfClass:[GMSPolyline class]]) {
         return NUMINTEGER(TiGooglemapsOverlayTypePolyline);
-    } else if([overlay isKindOfClass:[GMSCircle class]]) {
+    } else if ([overlay isKindOfClass:[GMSCircle class]]) {
         return NUMINTEGER(TiGooglemapsOverlayTypeCircle);
     }
     
@@ -290,30 +385,46 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     return NUMINTEGER(TiGooglemapsOverlayTypeUnknown);
 }
 
--(id)overlayProxyFromOverlay:(GMSOverlay*)overlay
+- (id)overlayProxyFromOverlay:(GMSOverlay *)overlay
 {
-    for (TiProxy* overlayProxy in [[self mapViewProxy] overlays]) {
+    for (TiProxy *overlayProxy in [[self mapViewProxy] overlays]) {
         // Check for polygons
         if ([overlay isKindOfClass:[GMSPolygon class]] && [overlayProxy isKindOfClass:[TiGooglemapsPolygonProxy class]]) {
-            if ([(TiGooglemapsPolygonProxy*)overlayProxy polygon] == overlay) {
-                return (TiGooglemapsPolygonProxy*)overlayProxy;
+            if ([(TiGooglemapsPolygonProxy *)overlayProxy polygon] == overlay) {
+                return (TiGooglemapsPolygonProxy *)overlayProxy;
             }
 
         // Check for polylines
         } else if ([overlay isKindOfClass:[GMSPolyline class]] && [overlayProxy isKindOfClass:[TiGooglemapsPolylineProxy class]]) {
-            if ([(TiGooglemapsPolylineProxy*)overlayProxy polyline] == overlay) {
-                return (TiGooglemapsPolylineProxy*)overlayProxy;
+            if ([(TiGooglemapsPolylineProxy *)overlayProxy polyline] == overlay) {
+                return (TiGooglemapsPolylineProxy *)overlayProxy;
             }
 
         // Check for circles
         } else if ([overlay isKindOfClass:[GMSCircle class]] && [overlayProxy isKindOfClass:[TiGooglemapsCircleProxy class]]) {
-            if ([(TiGooglemapsCircleProxy*)overlayProxy circle] == overlay) {
-                return (TiGooglemapsCircleProxy*)overlayProxy;
+            if ([(TiGooglemapsCircleProxy *)overlayProxy circle] == overlay) {
+                return (TiGooglemapsCircleProxy *)overlayProxy;
             }
         }
     }
 
     return [NSNull null];
+}
+
+- (NSArray *)arrayFromClusterItems:(NSArray<id<GMUClusterItem>> *)clusterItems
+{
+    NSMutableArray *result = [NSMutableArray arrayWithCapacity:clusterItems.count];
+    
+    for (id<GMUClusterItem> clusterItem in clusterItems) {
+        [result addObject:[[[TiGooglemapsClusterItemProxy alloc] _initWithPageContext:[[self proxy] pageContext]
+                                                                          andPosition:clusterItem.position
+                                                                                title:[(TiPOIItem *)clusterItem title]
+                                                                             subtitle:[(TiPOIItem *)clusterItem subtitle]
+                                                                                 icon:[(TiPOIItem *)clusterItem icon]
+                                                                             userData:[(TiPOIItem *)clusterItem userData]] autorelease]];
+    }
+    
+    return result;
 }
 
 #pragma mark Constants

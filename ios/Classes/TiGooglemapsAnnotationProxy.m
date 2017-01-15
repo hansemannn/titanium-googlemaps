@@ -1,6 +1,6 @@
 /**
- * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2016 by Appcelerator, Inc. All Rights Reserved.
+ * Ti.GoogleMaps
+ * Copyright (c) 2009-Present by Hans Knoechel, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -14,24 +14,22 @@
 
 -(GMSMarker*)marker
 {
-    if (_marker == nil) {
-        _marker = [GMSMarker new];
+    if (!_marker) {
+        _marker = [[[GMSMarker alloc] init] retain];
         
-        [_marker setPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:[self valueForKey:@"latitude"]],[TiUtils doubleValue:[self valueForKey:@"longitude"]])];
+        CLLocationDegrees latitude = [TiUtils doubleValue:[self valueForKey:@"latitude"]];
+        CLLocationDegrees longitude = [TiUtils doubleValue:[self valueForKey:@"longitude"]];
+        
+        [_marker setPosition:CLLocationCoordinate2DMake(latitude,longitude)];
         [_marker setUserData:@{@"uuid": [[NSUUID UUID] UUIDString]}];
     }
     
     return _marker;
 }
 
--(void)setMarker:(GMSMarker*)marker
+-(NSArray *)keySequence
 {
-    if (_marker) {
-        RELEASE_TO_NIL(_marker);
-    }
-    
-    _marker = marker;
-    [self marker];
+    return @[@"latitude", @"longitude"];
 }
 
 -(void)dealloc
@@ -41,6 +39,18 @@
 }
 
 #pragma mark Public API's
+
+-(void)setLatitude:(id)value
+{
+    ENSURE_TYPE(value, NSNumber);
+    [self replaceValue:value forKey:@"latitude" notification:NO];
+}
+
+-(void)setLongitude:(id)value
+{
+    ENSURE_TYPE(value, NSNumber);
+    [self replaceValue:value forKey:@"longitude" notification:NO];
+}
 
 -(void)setTitle:(id)value
 {
@@ -157,14 +167,25 @@
 
 -(void)updateLocation:(id)args
 {
-    ENSURE_UI_THREAD_1_ARG(args);
-    ENSURE_TYPE(args, NSDictionary);
+    ENSURE_UI_THREAD(updateLocation, args);
+    ENSURE_SINGLE_ARG(args, NSDictionary);
     
     id latitude = [args valueForKey:@"latitude"];
     id longitude = [args valueForKey:@"longitude"];
+    id animated = [args valueForKey:@"animated"];
+    id duration = [args valueForKey:@"duration"];
     
-    [[self marker] setPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude],[TiUtils doubleValue:longitude])];
-    [self replaceValue:args forKey:@"updateLocation" notification:NO];
+    if ([TiUtils boolValue:animated def:NO]) {
+        [CATransaction begin];
+        [CATransaction setAnimationDuration:[TiUtils floatValue:duration def:2000] / 1000];
+            [[self marker] setPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude],[TiUtils doubleValue:longitude])];
+        [CATransaction commit];
+    } else {
+        [[self marker] setPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude],[TiUtils doubleValue:longitude])];
+    }
+    
+    [self replaceValue:latitude forKey:@"latitude" notification:NO];
+    [self replaceValue:longitude forKey:@"longitude" notification:NO];
 }
 
 @end
