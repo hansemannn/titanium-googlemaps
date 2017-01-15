@@ -38,7 +38,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     return _mapView;
 }
 
--(GMUClusterManager *)clusterManager
+- (GMUClusterManager *)clusterManager
 {
     if (_clusterManager == nil) {
         // Set up the cluster manager with default icon generator and renderer.
@@ -95,7 +95,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     return [[[TiClusterIconGenerator alloc] init] autorelease];
 }
 
--(void)dealloc
+- (void)dealloc
 {
     RELEASE_TO_NIL(_mapView);
     RELEASE_TO_NIL(_clusterManager);

@@ -9,7 +9,7 @@
 
 @implementation TiGooglemapsPolylineProxy
 
--(GMSPolyline*)polyline
+- (GMSPolyline*)polyline
 {
     if (_polyline == nil) {
         _polyline = [GMSPolyline new];
@@ -19,13 +19,13 @@
     return _polyline;
 }
 
--(void)dealloc
+- (void)dealloc
 {
     RELEASE_TO_NIL(_polyline);
     [super dealloc];
 }
 
--(void)setPoints:(id)points
+- (void)setPoints:(id)points
 {
     ENSURE_UI_THREAD(setPoints, points);
     ENSURE_TYPE_OR_NIL(points, NSArray);
@@ -58,7 +58,7 @@
     [[self polyline] setPath:path];
 }
 
--(void)setTappable:(id)value
+- (void)setTappable:(id)value
 {
     ENSURE_UI_THREAD(setTappable, value);
     ENSURE_TYPE(value, NSNumber);
@@ -67,7 +67,7 @@
     [self replaceValue:value forKey:@"tappable" notification:NO];
 }
 
--(void)setStrokeColor:(id)value
+- (void)setStrokeColor:(id)value
 {
     ENSURE_UI_THREAD(setStrokeColor, value);
     
@@ -75,7 +75,7 @@
     [self replaceValue:value forKey:@"strokeColor" notification:NO];
 }
 
--(void)setStrokeWidth:(id)value
+- (void)setStrokeWidth:(id)value
 {
     ENSURE_UI_THREAD(setStrokeWidth, value);
     
@@ -83,7 +83,7 @@
     [self replaceValue:value forKey:@"strokeWidth" notification:NO];
 }
 
--(void)setGeodesic:(id)value
+- (void)setGeodesic:(id)value
 {
     ENSURE_UI_THREAD(setGeodesic, value);
     
