@@ -8,6 +8,6 @@
 #import "GMUMarkerClustering.h"
 #import "GMUStaticCluster.h"
 
-@interface TiClusterRenderer : GMUDefaultClusterRenderer<GMUClusterRenderer>
+@interface TiClusterRenderer : GMUDefaultClusterRenderer
 
 @end
