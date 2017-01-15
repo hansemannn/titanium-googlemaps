@@ -27,16 +27,6 @@
     return _marker;
 }
 
--(void)setMarker:(GMSMarker *)marker
-{
-    if (_marker) {
-        RELEASE_TO_NIL(_marker);
-    }
-    
-    _marker = marker;
-    [self marker];
-}
-
 -(NSArray *)keySequence
 {
     return @[@"latitude", @"longitude"];
