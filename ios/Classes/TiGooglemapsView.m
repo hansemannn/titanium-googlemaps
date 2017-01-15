@@ -398,7 +398,31 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     return NUMINTEGER(TiGooglemapsOverlayTypeUnknown);
 }
 
--(id)overlayProxyFromOverlay:(GMSOverlay*)overlay
+-(id)annotationProxyFromMarker:(GMSMarker *)marker
+{
+    for (NSUInteger i = 0; i < [[[self mapViewProxy] markers] count]; i++) {
+        TiGooglemapsAnnotationProxy *annotationProxy = [[[[self mapViewProxy] markers] objectAtIndex:i] retain];
+        
+        if ([[[[annotationProxy marker] userData] valueForKey:@"uuid"] isEqualToString:[[marker userData] valueForKey:@"uuid"]]) {
+            // Replace the location attributes in the array of annotation-proxies
+            TiGooglemapsAnnotationProxy *newAnnotation = [annotationProxy retain];
+            [annotationProxy release];
+            [newAnnotation updateLocation:@{
+                @"latitude": NUMDOUBLE([marker position].latitude),
+                @"longitude": NUMDOUBLE([marker position].longitude)
+            }];
+            [[[self mapViewProxy] markers] replaceObjectAtIndex:i withObject:newAnnotation];
+            
+            return [newAnnotation autorelease];
+        }
+        
+        RELEASE_TO_NIL(annotationProxy);
+    }
+
+    return [NSNull null];
+}
+
+-(id)overlayProxyFromOverlay:(GMSOverlay *)overlay
 {
     for (TiProxy *overlayProxy in [[self mapViewProxy] overlays]) {
         // Check for polygons

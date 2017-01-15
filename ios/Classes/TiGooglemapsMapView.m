@@ -246,7 +246,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     };
 }
 
-
 -(NSDictionary *)dictionaryFromMarker:(GMSMarker *)marker
 {
     if (!marker) {
