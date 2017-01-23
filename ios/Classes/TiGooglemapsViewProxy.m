@@ -290,8 +290,10 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     NSMutableArray *items = [NSMutableArray array];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        for (id clusterItem in args) {
+        for (NSUInteger i = 0; i < [args count]; i++) {
+            TiGooglemapsClusterItemProxy *clusterItem = [args objectAtIndex:i];
             ENSURE_TYPE(clusterItem, TiGooglemapsClusterItemProxy);
+            
             [items addObject:[(TiGooglemapsClusterItemProxy *)clusterItem clusterItem]];
         }
         [[[self mapView] clusterManager] addItems:items];
@@ -345,8 +347,9 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_UI_THREAD_1_ARG(args);
     ENSURE_SINGLE_ARG(args, NSArray);
     
-    for(TiGooglemapsAnnotationProxy *annotationProxy in args) {
-        [self addAnnotation:@[annotationProxy]];
+    for (NSUInteger i = 0; i < [args count]; i++) {
+        [self addAnnotation:@[[args objectAtIndex:i]]];
+        
     }
 }
 
@@ -371,8 +374,8 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_UI_THREAD_1_ARG(args);
     ENSURE_SINGLE_ARG(args, NSArray);
 
-    for(TiGooglemapsAnnotationProxy *annotationProxy in args) {
-        [self removeAnnotation:@[annotationProxy]];
+    for (NSUInteger i = 0; i < [args count]; i++) {
+        [self removeAnnotation:@[[args objectAtIndex:i]]];
     }
 }
 
@@ -394,8 +397,8 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     ENSURE_UI_THREAD_1_ARG(args);
 
     dispatch_barrier_async(q, ^{
-        for(TiGooglemapsAnnotationProxy *annotationProxy in [self markers]) {
-            [self removeAnnotation:@[annotationProxy]];
+        for (NSUInteger i = 0; i < [[self markers] count]; i++) {
+            [self removeAnnotation:@[[[self markers] objectAtIndex:i]]];
         }
     });
     
@@ -531,7 +534,8 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
         return [NSNull null];
     }
     
-    for (TiGooglemapsAnnotationProxy *annotation in [self markers]) {
+    for (NSUInteger i = 0; i < [[self markers] count]; i++) {
+        TiGooglemapsAnnotationProxy *annotation = [[self markers] objectAtIndex:i];
         if ([annotation marker] == [[[self mapView] mapView] selectedMarker]) {
             return annotation;
         }
