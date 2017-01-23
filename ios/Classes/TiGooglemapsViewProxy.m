@@ -344,12 +344,10 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 - (void)addAnnotations:(id)args
 {
-    ENSURE_UI_THREAD_1_ARG(args);
     ENSURE_SINGLE_ARG(args, NSArray);
     
     for (NSUInteger i = 0; i < [args count]; i++) {
         [self addAnnotation:@[[args objectAtIndex:i]]];
-        
     }
 }
 
@@ -371,7 +369,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 - (void)removeAnnotations:(id)args
 {
-    ENSURE_UI_THREAD_1_ARG(args);
     ENSURE_SINGLE_ARG(args, NSArray);
 
     for (NSUInteger i = 0; i < [args count]; i++) {
@@ -394,7 +391,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 - (void)setAnnotations:(id)args
 {
-    ENSURE_UI_THREAD_1_ARG(args);
+    ENSURE_SINGLE_ARG(args, NSArray);
 
     dispatch_barrier_async(q, ^{
         for (NSUInteger i = 0; i < [[self markers] count]; i++) {
