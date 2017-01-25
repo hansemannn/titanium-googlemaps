@@ -1,6 +1,6 @@
 /**
  * Ti.GoogleMaps
- * Copyright (c) 2009-Present by Hans Knoechel, Inc. All Rights Reserved.
+ * Copyright (c) 2015-Present by Hans Knoechel, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -255,6 +255,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 - (void)moveCamera:(id)value
 {
+    ENSURE_UI_THREAD(moveCamera, value);
     ENSURE_SINGLE_ARG(value, TiGooglemapsCameraUpdateProxy);
     
     [[[self mapView] mapView] moveCamera:[(TiGooglemapsCameraUpdateProxy *)value cameraUpdate]];
@@ -262,6 +263,7 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 - (void)animateWithCameraUpdate:(id)value
 {
+    ENSURE_UI_THREAD(animateWithCameraUpdate, value);
     ENSURE_SINGLE_ARG(value, TiGooglemapsCameraUpdateProxy);
     
     [[[self mapView] mapView] animateWithCameraUpdate:[(TiGooglemapsCameraUpdateProxy *)value cameraUpdate]];
