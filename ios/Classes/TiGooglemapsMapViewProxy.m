@@ -23,17 +23,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     return [super _initWithPageContext:context];
 }
 
-- (void)dealloc
-{
-    RELEASE_TO_NIL(mapView);
-    RELEASE_TO_NIL(markers);
-    RELEASE_TO_NIL(overlays);
-    
-    dispatch_release(q);
-    
-    [super dealloc];
-}
-
 - (TiGooglemapsMapView *)mapView
 {
     return (TiGooglemapsMapView *)[self view];
