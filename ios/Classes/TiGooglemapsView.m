@@ -19,9 +19,6 @@
 
 @implementation TiGooglemapsView
 
-#define DEPRECATED(from, to, in) \
-NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, to, in);\
-
 - (GMSMapView *)mapView
 {
     if (_mapView == nil) {
@@ -137,10 +134,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 - (void)mapView:(GMSMapView *)mapView willMove:(BOOL)gesture
 {
-    if ([[self proxy] _hasListeners:@"willmove"]) {
-        DEPRECATED(@"Event.willmove", @"Event.regionwillchange", @"2.2.0");
-        [[self proxy] fireEvent:@"willmove" withObject:@{@"gesture" : NUMBOOL(gesture)}];
-    }
     if ([[self proxy] _hasListeners:@"regionwillchange"]) {
         [[self proxy] fireEvent:@"regionwillchange" withObject:@{
             @"map" : [self proxy],
@@ -153,10 +146,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 - (void)mapView:(GMSMapView *)mapView didChangeCameraPosition:(GMSCameraPosition *)position
 {
-    if ([[self proxy] _hasListeners:@"camerachange"]) {
-        DEPRECATED(@"Event.camerachange", @"Event.regionchanged", @"2.2.0");
-        [[self proxy] fireEvent:@"camerachange" withObject:[self dictionaryFromCameraPosition:position]];
-    }
     if ([[self proxy] _hasListeners:@"regionchanged"]) {
         NSMutableDictionary *updatedRegion = [NSMutableDictionary dictionaryWithDictionary:@{
             @"latitude" : NUMDOUBLE(position.target.latitude),
@@ -196,10 +185,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 - (void)mapView:(GMSMapView *)mapView didLongPressAtCoordinate:(CLLocationCoordinate2D)coordinate
 {
-    if ([[self proxy] _hasListeners:@"longpress"]) {
-        DEPRECATED(@"Event.longpress", @"Event.longclick", @"2.2.0");
-        [[self proxy] fireEvent:@"longpress" withObject:[self dictionaryFromCoordinate:coordinate]];
-    }
     if ([[self proxy] _hasListeners:@"longclick"]) {
         [[self proxy] fireEvent:@"longclick" withObject:@{
             @"map": [self proxy],
@@ -211,13 +196,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker
 {
-    if ([[self proxy] _hasListeners:@"markerclick"]) {
-        DEPRECATED(@"Event.markerclick", @"Event.click", @"2.2.0");
-        NSDictionary *event = @{
-            @"marker" : [self dictionaryFromMarker:marker]
-        };
-        [[self proxy] fireEvent:@"markerclick" withObject:event];
-    }
     if ([[self proxy] _hasListeners:@"click"]) {
         [[self proxy] fireEvent:@"click" withObject:@{
             @"clicksource": @"pin",
@@ -233,13 +211,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 - (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker
 {
-    if ([[self proxy] _hasListeners:@"markerinfoclick"]) {
-        DEPRECATED(@"Event.markerinfoclick", @"Event.click", @"2.2.0");
-        NSDictionary *event = @{
-            @"marker" : [self dictionaryFromMarker:marker]
-        };
-        [[self proxy] fireEvent:@"markerinfoclick" withObject:event];
-    }
     if ([[self proxy] _hasListeners:@"click"]) {
         [[self proxy] fireEvent:@"click" withObject:@{
             @"clicksource": @"infoWindow",
@@ -271,7 +242,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 {
     if ([[self proxy] _hasListeners:@"dragstart"]) {
         NSDictionary *event = @{
-            @"marker" : [self dictionaryFromMarker:marker], // Deprecated
             @"annotation" : [self dictionaryFromMarker:marker]
         };
         [[self proxy] fireEvent:@"dragstart" withObject:event];
@@ -282,7 +252,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 {
     if ([[self proxy] _hasListeners:@"dragend"]) {
         NSDictionary *event = @{
-            @"marker" : [self dictionaryFromMarker:marker], // Deprecated
             @"annotation" : [self dictionaryFromMarker:marker]
         };
       [[self proxy] fireEvent:@"dragend" withObject:event];
@@ -293,7 +262,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 {
     if ([[self proxy] _hasListeners:@"dragmove"]) {
         NSDictionary *event = @{
-            @"marker" : [self dictionaryFromMarker:marker], // Deprecated
             @"annotation" : [self dictionaryFromMarker:marker]
         };
         [[self proxy] fireEvent:@"dragmove" withObject:event];
