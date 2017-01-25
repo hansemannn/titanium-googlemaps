@@ -1,6 +1,6 @@
 /**
  * Ti.GoogleMaps
- * Copyright (c) 2009-Present by Hans Knoechel, Inc. All Rights Reserved.
+ * Copyright (c) 2015-Present by Hans Knoechel, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -28,18 +28,23 @@
 
 - (void)zoomIn:(id)unused
 {
+    ENSURE_UI_THREAD_0_ARGS
     RELEASE_TO_NIL(cameraUpdate);
-    cameraUpdate = [GMSCameraUpdate zoomIn];
+    
+    cameraUpdate = [[GMSCameraUpdate zoomIn] retain];
 }
 
 - (void)zoomOut:(id)unused
 {
+    ENSURE_UI_THREAD_0_ARGS
     RELEASE_TO_NIL(cameraUpdate);
-    cameraUpdate = [GMSCameraUpdate zoomOut];
+    
+    cameraUpdate = [[GMSCameraUpdate zoomOut] retain];
 }
 
 - (void)zoom:(id)args
 {
+    ENSURE_UI_THREAD(zoom, args);
     ENSURE_SINGLE_ARG(args, NSDictionary);
     RELEASE_TO_NIL(cameraUpdate);
     
@@ -52,15 +57,16 @@
         point = [args objectAtIndex:1];
         ENSURE_TYPE(value, NSDictionary);
 
-        cameraUpdate = [GMSCameraUpdate zoomBy:[TiUtils floatValue:value]
-                                       atPoint:[TiUtils pointValue:point]];
+        cameraUpdate = [[GMSCameraUpdate zoomBy:[TiUtils floatValue:value]
+                                        atPoint:[TiUtils pointValue:point]] retain];
     } else {        
-        cameraUpdate = [GMSCameraUpdate zoomBy:[TiUtils floatValue:value]];
+        cameraUpdate = [[GMSCameraUpdate zoomBy:[TiUtils floatValue:value]] retain];
     }
 }
 
 - (void)setTarget:(id)args
 {
+    ENSURE_UI_THREAD(setTarget, args);
     ENSURE_SINGLE_ARG(args, NSDictionary);
     RELEASE_TO_NIL(cameraUpdate);
     
@@ -73,15 +79,16 @@
     
     if (zoom) {
         ENSURE_TYPE(zoom, NSNumber);
-        cameraUpdate = [GMSCameraUpdate setTarget:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude])
-                                             zoom:[TiUtils floatValue:zoom]];
+        cameraUpdate = [[GMSCameraUpdate setTarget:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude])
+                                              zoom:[TiUtils floatValue:zoom]] retain];
     } else {
-        cameraUpdate = [GMSCameraUpdate setTarget:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude])];
+        cameraUpdate = [[GMSCameraUpdate setTarget:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude])] retain];
     }
 }
 
 - (void)setCamera:(id)args
 {
+    ENSURE_UI_THREAD(setCamera, args);
     ENSURE_SINGLE_ARG(args, NSDictionary);
     RELEASE_TO_NIL(cameraUpdate);
     
@@ -97,14 +104,19 @@
     ENSURE_TYPE(bearing, NSNumber);
     ENSURE_TYPE(viewingAngle, NSNumber);
     
-    cameraUpdate = [GMSCameraUpdate setCamera:[[[GMSCameraPosition alloc] initWithTarget:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude])
-                                                                                   zoom:[TiUtils floatValue:zoom]
-                                                                                bearing:[TiUtils doubleValue:bearing]
-                                                                           viewingAngle:[TiUtils doubleValue:viewingAngle]] autorelease]];
+    CLLocationCoordinate2D target = CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude]);
+    GMSCameraPosition *cameraPosition = [[GMSCameraPosition alloc] initWithTarget:target
+                                                                             zoom:[TiUtils floatValue:zoom]
+                                                                          bearing:[TiUtils doubleValue:bearing]
+                                                                     viewingAngle:[TiUtils doubleValue:viewingAngle]];
+    
+    cameraUpdate = [[GMSCameraUpdate setCamera:cameraPosition] retain];
+    RELEASE_TO_NIL(cameraPosition);
 }
 
 - (void)fitBounds:(id)args
 {
+    ENSURE_UI_THREAD(fitBounds, args);
     ENSURE_SINGLE_ARG(args, NSDictionary);
     RELEASE_TO_NIL(cameraUpdate);
     
@@ -128,31 +140,34 @@
     }
     
     if (_padding) {
-        cameraUpdate = [GMSCameraUpdate fitBounds:coordinateBounds withPadding:[TiUtils floatValue:_padding]];
+        cameraUpdate = [[GMSCameraUpdate fitBounds:coordinateBounds
+                                       withPadding:[TiUtils floatValue:_padding]] retain];
         RELEASE_TO_NIL(coordinateBounds);
         return;
     }
     
     if (_insets) {
-        cameraUpdate = [GMSCameraUpdate fitBounds:coordinateBounds withEdgeInsets:[TiUtils contentInsets:_insets]];
+        cameraUpdate = [[GMSCameraUpdate fitBounds:coordinateBounds
+                                    withEdgeInsets:[TiUtils contentInsets:_insets]] retain];
         RELEASE_TO_NIL(coordinateBounds);
         return;
     }
 
-    cameraUpdate = [GMSCameraUpdate fitBounds:coordinateBounds];
+    cameraUpdate = [[GMSCameraUpdate fitBounds:coordinateBounds] retain];
     RELEASE_TO_NIL(coordinateBounds);
 }
 
 - (void)scrollBy:(id)args
 {
+    ENSURE_UI_THREAD(scrollBy, args);
     ENSURE_SINGLE_ARG(args, NSDictionary);
     RELEASE_TO_NIL(cameraUpdate);
     
     id x = [args objectForKey:@"x"];
     id y = [args objectForKey:@"y"];
     
-    cameraUpdate = [GMSCameraUpdate scrollByX:[TiUtils floatValue:x]
-                                            Y:[TiUtils floatValue:y]];
+    cameraUpdate = [[GMSCameraUpdate scrollByX:[TiUtils floatValue:x]
+                                             Y:[TiUtils floatValue:y]] retain];
 }
 
 @end
