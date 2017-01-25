@@ -28,12 +28,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, i
     return _marker;
 }
 
-- (void)dealloc
-{
-    RELEASE_TO_NIL(_marker);
-    [super dealloc];
-}
-
 #pragma mark Public API's
 
 - (void)setTitle:(id)value

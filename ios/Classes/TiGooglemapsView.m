@@ -46,14 +46,11 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
         
         TiClusterIconGenerator *iconGenerator = [self createIconGenerator];
         
-        TiClusterRenderer *renderer = [[[TiClusterRenderer alloc] initWithMapView:_mapView clusterIconGenerator:iconGenerator] retain];
+        TiClusterRenderer *renderer = [[TiClusterRenderer alloc] initWithMapView:_mapView clusterIconGenerator:iconGenerator];
         renderer.delegate = self;
         
-        _clusterManager = [[[GMUClusterManager alloc] initWithMap:[self mapView] algorithm:algorithm renderer:renderer] retain];
-        [_clusterManager setDelegate:self mapDelegate:self];
-        
-        [renderer release];
-        [algorithm release];
+        _clusterManager = [[GMUClusterManager alloc] initWithMap:[self mapView] algorithm:algorithm renderer:renderer];
+        [_clusterManager setDelegate:self mapDelegate:self];        
     }
     
     return _clusterManager;
@@ -87,20 +84,12 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
             [backgrounds addObject:[TiUtils image:background proxy:self.proxy]];
         }
         
-        return [[[TiClusterIconGenerator alloc] initWithBuckets:clusterRanges backgroundImages:backgrounds] autorelease];
+        return [[TiClusterIconGenerator alloc] initWithBuckets:clusterRanges backgroundImages:backgrounds];
     } else if (clusterRanges) {
-        return [[[TiClusterIconGenerator alloc] initWithBuckets:clusterRanges] autorelease];
+        return [[TiClusterIconGenerator alloc] initWithBuckets:clusterRanges];
     }
     
-    return [[[TiClusterIconGenerator alloc] init] autorelease];
-}
-
-- (void)dealloc
-{
-    RELEASE_TO_NIL(_mapView);
-    RELEASE_TO_NIL(_clusterManager);
-    
-    [super dealloc];
+    return [[TiClusterIconGenerator alloc] init];
 }
 
 - (TiGooglemapsViewProxy *)mapViewProxy
@@ -416,12 +405,12 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     NSMutableArray *result = [NSMutableArray arrayWithCapacity:clusterItems.count];
     
     for (id<GMUClusterItem> clusterItem in clusterItems) {
-        [result addObject:[[[TiGooglemapsClusterItemProxy alloc] _initWithPageContext:[[self proxy] pageContext]
+        [result addObject:[[TiGooglemapsClusterItemProxy alloc] _initWithPageContext:[[self proxy] pageContext]
                                                                           andPosition:clusterItem.position
                                                                                 title:[(TiPOIItem *)clusterItem title]
                                                                              subtitle:[(TiPOIItem *)clusterItem subtitle]
                                                                                  icon:[(TiPOIItem *)clusterItem icon]
-                                                                             userData:[(TiPOIItem *)clusterItem userData]] autorelease]];
+                                                                             userData:[(TiPOIItem *)clusterItem userData]]];
     }
     
     return result;

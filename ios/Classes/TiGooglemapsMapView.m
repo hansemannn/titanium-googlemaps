@@ -35,12 +35,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     return _mapView;
 }
 
-- (void)dealloc
-{
-    RELEASE_TO_NIL(_mapView);
-    [super dealloc];
-}
-
 - (TiGooglemapsMapViewProxy *)mapViewProxy
 {
     return (TiGooglemapsMapViewProxy *)[self proxy];

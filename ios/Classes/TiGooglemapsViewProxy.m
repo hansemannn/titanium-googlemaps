@@ -29,17 +29,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     return self;
 }
 
-- (void)dealloc
-{
-    RELEASE_TO_NIL(mapView);
-    RELEASE_TO_NIL(markers);
-    RELEASE_TO_NIL(overlays);
-    
-    dispatch_release(q);
-    
-    [super dealloc];
-}
-
 - (TiGooglemapsView *)mapView
 {
     return (TiGooglemapsView *)[self view];
@@ -248,8 +237,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
         if (error) {
             NSLog(@"[ERROR] Ti.GoogleMaps: Could not apply map style: %@", [error localizedDescription]);
         }
-        
-        RELEASE_TO_NIL(error);
     }
 }
 

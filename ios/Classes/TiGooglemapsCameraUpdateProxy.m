@@ -10,13 +10,6 @@
 
 @implementation TiGooglemapsCameraUpdateProxy
 
-- (void)dealloc
-{
-    RELEASE_TO_NIL(cameraUpdate);
-    
-    [super dealloc];
-}
-
 - (GMSCameraUpdate *)cameraUpdate
 {
     if (!cameraUpdate) {
@@ -29,24 +22,21 @@
 - (void)zoomIn:(id)unused
 {
     ENSURE_UI_THREAD_0_ARGS
-    RELEASE_TO_NIL(cameraUpdate);
     
-    cameraUpdate = [[GMSCameraUpdate zoomIn] retain];
+    cameraUpdate = [GMSCameraUpdate zoomIn];
 }
 
 - (void)zoomOut:(id)unused
 {
     ENSURE_UI_THREAD_0_ARGS
-    RELEASE_TO_NIL(cameraUpdate);
     
-    cameraUpdate = [[GMSCameraUpdate zoomOut] retain];
+    cameraUpdate = [GMSCameraUpdate zoomOut];
 }
 
 - (void)zoom:(id)args
 {
     ENSURE_UI_THREAD(zoom, args);
     ENSURE_SINGLE_ARG(args, NSDictionary);
-    RELEASE_TO_NIL(cameraUpdate);
     
     id value = [args objectAtIndex:0];
     id point = nil;
@@ -57,10 +47,10 @@
         point = [args objectAtIndex:1];
         ENSURE_TYPE(value, NSDictionary);
 
-        cameraUpdate = [[GMSCameraUpdate zoomBy:[TiUtils floatValue:value]
-                                        atPoint:[TiUtils pointValue:point]] retain];
+        cameraUpdate = [GMSCameraUpdate zoomBy:[TiUtils floatValue:value]
+                                        atPoint:[TiUtils pointValue:point]];
     } else {        
-        cameraUpdate = [[GMSCameraUpdate zoomBy:[TiUtils floatValue:value]] retain];
+        cameraUpdate = [GMSCameraUpdate zoomBy:[TiUtils floatValue:value]];
     }
 }
 
@@ -68,7 +58,6 @@
 {
     ENSURE_UI_THREAD(setTarget, args);
     ENSURE_SINGLE_ARG(args, NSDictionary);
-    RELEASE_TO_NIL(cameraUpdate);
     
     id latitude = [args objectForKey:@"latitude"];
     id longitude = [args objectForKey:@"longitude"];
@@ -79,10 +68,10 @@
     
     if (zoom) {
         ENSURE_TYPE(zoom, NSNumber);
-        cameraUpdate = [[GMSCameraUpdate setTarget:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude])
-                                              zoom:[TiUtils floatValue:zoom]] retain];
+        cameraUpdate = [GMSCameraUpdate setTarget:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude])
+                                              zoom:[TiUtils floatValue:zoom]];
     } else {
-        cameraUpdate = [[GMSCameraUpdate setTarget:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude])] retain];
+        cameraUpdate = [GMSCameraUpdate setTarget:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude])];
     }
 }
 
@@ -90,7 +79,6 @@
 {
     ENSURE_UI_THREAD(setCamera, args);
     ENSURE_SINGLE_ARG(args, NSDictionary);
-    RELEASE_TO_NIL(cameraUpdate);
     
     id latitude = [args objectForKey:@"latitude"];
     id longitude = [args objectForKey:@"longitude"];
@@ -110,15 +98,13 @@
                                                                           bearing:[TiUtils doubleValue:bearing]
                                                                      viewingAngle:[TiUtils doubleValue:viewingAngle]];
     
-    cameraUpdate = [[GMSCameraUpdate setCamera:cameraPosition] retain];
-    RELEASE_TO_NIL(cameraPosition);
+    cameraUpdate = [GMSCameraUpdate setCamera:cameraPosition];
 }
 
 - (void)fitBounds:(id)args
 {
     ENSURE_UI_THREAD(fitBounds, args);
     ENSURE_SINGLE_ARG(args, NSDictionary);
-    RELEASE_TO_NIL(cameraUpdate);
     
     id _padding = [args objectForKey:@"padding"];
     id _insets = [args objectForKey:@"insets"];
@@ -135,39 +121,34 @@
     
     if (_padding && _insets) {
         NSLog(@"[ERROR] Cannot use both `padding` and `insets` in the `fitBounds` method. Check the Google Maps docs for more infos: https://developers.google.com/maps/documentation/ios-sdk/reference/interface_g_m_s_camera_update.html#abd6fdfa8800f8b2d9ba00af5e44fa385");
-        RELEASE_TO_NIL(coordinateBounds);
         return;
     }
     
     if (_padding) {
-        cameraUpdate = [[GMSCameraUpdate fitBounds:coordinateBounds
-                                       withPadding:[TiUtils floatValue:_padding]] retain];
-        RELEASE_TO_NIL(coordinateBounds);
+        cameraUpdate = [GMSCameraUpdate fitBounds:coordinateBounds
+                                      withPadding:[TiUtils floatValue:_padding]];
         return;
     }
     
     if (_insets) {
-        cameraUpdate = [[GMSCameraUpdate fitBounds:coordinateBounds
-                                    withEdgeInsets:[TiUtils contentInsets:_insets]] retain];
-        RELEASE_TO_NIL(coordinateBounds);
+        cameraUpdate = [GMSCameraUpdate fitBounds:coordinateBounds
+                                   withEdgeInsets:[TiUtils contentInsets:_insets]];
         return;
     }
 
-    cameraUpdate = [[GMSCameraUpdate fitBounds:coordinateBounds] retain];
-    RELEASE_TO_NIL(coordinateBounds);
+    cameraUpdate = [GMSCameraUpdate fitBounds:coordinateBounds];
 }
 
 - (void)scrollBy:(id)args
 {
     ENSURE_UI_THREAD(scrollBy, args);
     ENSURE_SINGLE_ARG(args, NSDictionary);
-    RELEASE_TO_NIL(cameraUpdate);
     
     id x = [args objectForKey:@"x"];
     id y = [args objectForKey:@"y"];
     
-    cameraUpdate = [[GMSCameraUpdate scrollByX:[TiUtils floatValue:x]
-                                             Y:[TiUtils floatValue:y]] retain];
+    cameraUpdate = [GMSCameraUpdate scrollByX:[TiUtils floatValue:x]
+                                            Y:[TiUtils floatValue:y]];
 }
 
 @end
