@@ -155,14 +155,65 @@ You can perform camera updates to your map view instance by creating an instance
 var cameraUpdate = maps.createCameraUpdate();
 ```
 Before you can use the camera update, you must specify one of this actions:
-- [x] `zoomIn`
-- [x] `zoomOut`
-- [x] `zoom(value, point)` The parameter 'point' is optional
-- [x] `setTarget({latitude: xxx, longitude: xxx, zoom: xxx})` The parameter 'zoom' is optional
-- [x] `setCamera({latitude: xxx, longitude: xxx, zoom: xxx, bearing: xxx, viewingAngle: xxx})`
-- [x] `fitBounds({padding: xxx, insets: xxx, bounds: xxx, coordinate1: xxx, coordinate2: xxx})`
-- [x] `scrollBy({x: xxx, y: xxx})`
-
+- [x] **zoomIn**
+```js
+cameraUpdate.zoomIn();
+```
+- [x] **zoomOut**
+```js
+cameraUpdate.zoomOut();
+```
+- [x] **zoom**
+```js
+cameraUpdate.zoom(4 /* optional, skip argument when not used */, {
+    x: 100, 
+    y: 100
+});
+```
+- [x] **setTarget**
+```js
+cameraUpdate.setTarget({
+    latitude: 10.0,
+    longitude: 10.0,
+    zoom: 4 // optional
+});
+```
+- [x] **setCamera**
+```js
+cameraUpdate.setTarget({
+    latitude: 10.0,
+    longitude: 10.0,
+    zoom: 4,
+    bearing: 1,
+    viewingAngle: 45
+});
+```
+- [x] **fitBounds**
+```js
+cameraUpdate.fitBounds({
+    // IMPORTANT: Use either `padding` or `insets`, not both together
+    padding: 20,
+    insets: {top: 10, left: 10, bottom: 10, right: 10},
+    bounds: {
+        coordinate1: {
+            latitude: 10.0, 
+            longitude: 10.0
+        }, 
+        coordinate2: {
+            latitude: 12.0, 
+            longitude: 12.0
+        }
+    }
+});`
+```
+- [x] **scrollBy**
+```js
+cameraUpdate.scrollBy({
+    x: 100, 
+    y: 100
+});
+```
+-
 After creating the camera update, you can use it in one of the following methods:
 **moveCamera**
 ```js
