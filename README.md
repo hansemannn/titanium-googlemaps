@@ -165,7 +165,8 @@ cameraUpdate.zoomOut();
 ```
 - [x] **zoom**
 ```js
-cameraUpdate.zoom(4 /* optional, skip argument when not used */, {
+// The second parameter is optional
+cameraUpdate.zoom(4, {
     x: 100, 
     y: 100
 });
