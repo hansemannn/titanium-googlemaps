@@ -36,7 +36,6 @@
 - (void)zoom:(id)args
 {
     ENSURE_UI_THREAD(zoom, args);
-    ENSURE_SINGLE_ARG(args, NSDictionary);
     
     id value = [args objectAtIndex:0];
     id point = nil;
