@@ -15,7 +15,7 @@
 - (GMSMarker *)marker
 {
     if (!_marker) {
-        _marker = [[[GMSMarker alloc] init] retain];
+        _marker = [[GMSMarker alloc] init];
         
         CLLocationDegrees latitude = [TiUtils doubleValue:[self valueForKey:@"latitude"]];
         CLLocationDegrees longitude = [TiUtils doubleValue:[self valueForKey:@"longitude"]];
@@ -30,12 +30,6 @@
 - (NSArray *)keySequence
 {
     return @[@"latitude", @"longitude"];
-}
-
-- (void)dealloc
-{
-    RELEASE_TO_NIL(_marker)
-    [super dealloc];
 }
 
 #pragma mark Public API's

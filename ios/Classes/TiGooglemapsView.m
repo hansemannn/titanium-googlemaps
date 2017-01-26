@@ -19,9 +19,6 @@
 
 @implementation TiGooglemapsView
 
-#define DEPRECATED(from, to, in) \
-NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, to, in);\
-
 - (GMSMapView *)mapView
 {
     if (_mapView == nil) {
@@ -46,14 +43,11 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
         
         TiClusterIconGenerator *iconGenerator = [self createIconGenerator];
         
-        TiClusterRenderer *renderer = [[[TiClusterRenderer alloc] initWithMapView:_mapView clusterIconGenerator:iconGenerator] retain];
+        TiClusterRenderer *renderer = [[TiClusterRenderer alloc] initWithMapView:_mapView clusterIconGenerator:iconGenerator];
         renderer.delegate = self;
         
-        _clusterManager = [[[GMUClusterManager alloc] initWithMap:[self mapView] algorithm:algorithm renderer:renderer] retain];
-        [_clusterManager setDelegate:self mapDelegate:self];
-        
-        [renderer release];
-        [algorithm release];
+        _clusterManager = [[GMUClusterManager alloc] initWithMap:[self mapView] algorithm:algorithm renderer:renderer];
+        [_clusterManager setDelegate:self mapDelegate:self];        
     }
     
     return _clusterManager;
@@ -87,20 +81,12 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
             [backgrounds addObject:[TiUtils image:background proxy:self.proxy]];
         }
         
-        return [[[TiClusterIconGenerator alloc] initWithBuckets:clusterRanges backgroundImages:backgrounds] autorelease];
+        return [[TiClusterIconGenerator alloc] initWithBuckets:clusterRanges backgroundImages:backgrounds];
     } else if (clusterRanges) {
-        return [[[TiClusterIconGenerator alloc] initWithBuckets:clusterRanges] autorelease];
+        return [[TiClusterIconGenerator alloc] initWithBuckets:clusterRanges];
     }
     
-    return [[[TiClusterIconGenerator alloc] init] autorelease];
-}
-
-- (void)dealloc
-{
-    RELEASE_TO_NIL(_mapView);
-    RELEASE_TO_NIL(_clusterManager);
-    
-    [super dealloc];
+    return [[TiClusterIconGenerator alloc] init];
 }
 
 - (TiGooglemapsViewProxy *)mapViewProxy
@@ -148,10 +134,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 - (void)mapView:(GMSMapView *)mapView willMove:(BOOL)gesture
 {
-    if ([[self proxy] _hasListeners:@"willmove"]) {
-        DEPRECATED(@"Event.willmove", @"Event.regionwillchange", @"2.2.0");
-        [[self proxy] fireEvent:@"willmove" withObject:@{@"gesture" : NUMBOOL(gesture)}];
-    }
     if ([[self proxy] _hasListeners:@"regionwillchange"]) {
         [[self proxy] fireEvent:@"regionwillchange" withObject:@{
             @"map" : [self proxy],
@@ -164,10 +146,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 - (void)mapView:(GMSMapView *)mapView didChangeCameraPosition:(GMSCameraPosition *)position
 {
-    if ([[self proxy] _hasListeners:@"camerachange"]) {
-        DEPRECATED(@"Event.camerachange", @"Event.regionchanged", @"2.2.0");
-        [[self proxy] fireEvent:@"camerachange" withObject:[self dictionaryFromCameraPosition:position]];
-    }
     if ([[self proxy] _hasListeners:@"regionchanged"]) {
         NSMutableDictionary *updatedRegion = [NSMutableDictionary dictionaryWithDictionary:@{
             @"latitude" : NUMDOUBLE(position.target.latitude),
@@ -207,10 +185,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 - (void)mapView:(GMSMapView *)mapView didLongPressAtCoordinate:(CLLocationCoordinate2D)coordinate
 {
-    if ([[self proxy] _hasListeners:@"longpress"]) {
-        DEPRECATED(@"Event.longpress", @"Event.longclick", @"2.2.0");
-        [[self proxy] fireEvent:@"longpress" withObject:[self dictionaryFromCoordinate:coordinate]];
-    }
     if ([[self proxy] _hasListeners:@"longclick"]) {
         [[self proxy] fireEvent:@"longclick" withObject:@{
             @"map": [self proxy],
@@ -222,13 +196,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker
 {
-    if ([[self proxy] _hasListeners:@"markerclick"]) {
-        DEPRECATED(@"Event.markerclick", @"Event.click", @"2.2.0");
-        NSDictionary *event = @{
-            @"marker" : [self dictionaryFromMarker:marker]
-        };
-        [[self proxy] fireEvent:@"markerclick" withObject:event];
-    }
     if ([[self proxy] _hasListeners:@"click"]) {
         [[self proxy] fireEvent:@"click" withObject:@{
             @"clicksource": @"pin",
@@ -244,13 +211,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 
 - (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker
 {
-    if ([[self proxy] _hasListeners:@"markerinfoclick"]) {
-        DEPRECATED(@"Event.markerinfoclick", @"Event.click", @"2.2.0");
-        NSDictionary *event = @{
-            @"marker" : [self dictionaryFromMarker:marker]
-        };
-        [[self proxy] fireEvent:@"markerinfoclick" withObject:event];
-    }
     if ([[self proxy] _hasListeners:@"click"]) {
         [[self proxy] fireEvent:@"click" withObject:@{
             @"clicksource": @"infoWindow",
@@ -282,7 +242,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 {
     if ([[self proxy] _hasListeners:@"dragstart"]) {
         NSDictionary *event = @{
-            @"marker" : [self dictionaryFromMarker:marker], // Deprecated
             @"annotation" : [self dictionaryFromMarker:marker]
         };
         [[self proxy] fireEvent:@"dragstart" withObject:event];
@@ -293,7 +252,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 {
     if ([[self proxy] _hasListeners:@"dragend"]) {
         NSDictionary *event = @{
-            @"marker" : [self dictionaryFromMarker:marker], // Deprecated
             @"annotation" : [self dictionaryFromMarker:marker]
         };
       [[self proxy] fireEvent:@"dragend" withObject:event];
@@ -304,7 +262,6 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
 {
     if ([[self proxy] _hasListeners:@"dragmove"]) {
         NSDictionary *event = @{
-            @"marker" : [self dictionaryFromMarker:marker], // Deprecated
             @"annotation" : [self dictionaryFromMarker:marker]
         };
         [[self proxy] fireEvent:@"dragmove" withObject:event];
@@ -416,12 +373,12 @@ NSLog(@"[WARN] Ti.GoogleMaps: %@ is deprecated since %@ in favor of %@", from, t
     NSMutableArray *result = [NSMutableArray arrayWithCapacity:clusterItems.count];
     
     for (id<GMUClusterItem> clusterItem in clusterItems) {
-        [result addObject:[[[TiGooglemapsClusterItemProxy alloc] _initWithPageContext:[[self proxy] pageContext]
+        [result addObject:[[TiGooglemapsClusterItemProxy alloc] _initWithPageContext:[[self proxy] pageContext]
                                                                           andPosition:clusterItem.position
                                                                                 title:[(TiPOIItem *)clusterItem title]
                                                                              subtitle:[(TiPOIItem *)clusterItem subtitle]
                                                                                  icon:[(TiPOIItem *)clusterItem icon]
-                                                                             userData:[(TiPOIItem *)clusterItem userData]] autorelease]];
+                                                                             userData:[(TiPOIItem *)clusterItem userData]]];
     }
     
     return result;

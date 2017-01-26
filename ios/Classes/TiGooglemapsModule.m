@@ -73,12 +73,12 @@
     id userData = [args objectForKey:@"userData"];
     ENSURE_TYPE_OR_NIL(userData, NSDictionary);
     
-    return [[[TiGooglemapsClusterItemProxy alloc] _initWithPageContext:[self pageContext]
+    return [[TiGooglemapsClusterItemProxy alloc] _initWithPageContext:[self pageContext]
                                                           andPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude])
                                                                 title:title
                                                              subtitle:subtitle
                                                                  icon:icon
-                                                             userData:userData] autorelease];
+                                                             userData:userData];
 }
 
 #pragma mark Constants

@@ -10,16 +10,6 @@
 
 @implementation TiGooglemapsAutocompleteDialogProxy
 
-#pragma mark Memory Management
-
-- (void)dealloc
-{
-    dialog.delegate = nil;
-    RELEASE_TO_NIL(dialog);
-    
-    [super dealloc];
-}
-
 #pragma mark Public APIs
 
 - (GMSAutocompleteViewController *)dialog
@@ -126,7 +116,6 @@
     [[self dialog] setDelegate:nil];
     [[self dialog] dismissViewControllerAnimated:YES completion:nil];
     [self forgetSelf];
-    RELEASE_TO_NIL(dialog);
 }
 
 + (NSDictionary *)dictionaryFromPlace:(GMSPlace*)place
@@ -155,7 +144,7 @@
         }];
     }
     
-    return [result autorelease];
+    return result;
 }
 
 + (id)dictionaryFromPrediction:(GMSAutocompletePrediction*)prediction
