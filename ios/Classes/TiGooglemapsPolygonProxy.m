@@ -19,12 +19,6 @@
     return _polygon;
 }
 
-- (void)dealloc
-{
-    RELEASE_TO_NIL(_polygon);
-    [super dealloc];
-}
-
 #pragma mark Public API's
 
 - (void)setPoints:(id)points

@@ -13,10 +13,10 @@
 {
     if (self = [super init]) {
         _position = position;
-        _title = [title copy];
-        _subtitle = [subtitle copy];
-        _icon = [icon retain];
-        _userData = [userData retain];
+        _title = title;
+        _subtitle = subtitle;
+        _icon = icon;
+        _userData = userData;
     }
     return self;
 }

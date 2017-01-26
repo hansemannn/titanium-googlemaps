@@ -19,12 +19,6 @@
     return _polyline;
 }
 
-- (void)dealloc
-{
-    RELEASE_TO_NIL(_polyline);
-    [super dealloc];
-}
-
 - (void)setPoints:(id)points
 {
     ENSURE_UI_THREAD(setPoints, points);

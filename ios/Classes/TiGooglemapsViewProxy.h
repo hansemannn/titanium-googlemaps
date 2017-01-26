@@ -5,7 +5,6 @@
  * Please see the LICENSE included with this distribution for details.
  */
 #import "TiViewProxy.h"
-#import "TiGooglemapsMapView.h"
 #import "TiGooglemapsAnnotationProxy.h"
 
 @interface TiGooglemapsViewProxy : TiViewProxy<GMSMapViewDelegate> {
@@ -64,33 +63,6 @@
  *  @since 2.2.0
  */
 - (void)removeAnnotation:(id)args;
-
-/**
- *  Adds a marker.
- *
- *  @param args The marker.
- *  @deprecated 2.2.0
- *  @since 1.0.0
- */
-- (void)addMarker:(id)args __attribute((deprecated("Use addAnnotation instead.")));
-
-/**
- *  Adds multiple markers.
- *
- *  @param args The array of markers.
- *  @deprecated 2.2.0
- *  @since 1.0.0
- */
-- (void)addMarkers:(id)args __attribute((deprecated("Use addAnnotations instead.")));
-
-/**
- *  Removes a marker.
- *
- *  @param args The marker proxy.
- *  @deprecated 2.2.0
- *  @since 1.0.0
- */
-- (void)removeMarker:(id)args __attribute((deprecated("Use removeAnnotation instead.")));
 
 /**
  *  Adds a polyline.
@@ -173,32 +145,6 @@
 - (void)animateToViewingAngle:(id)value;
 
 /**
- *  Returns the currently selected marker.
- *
- *  @return The selected marker.
- *  @deprecated 2.2.0
- *  @since 2.1.0
- */
-- (id)getSelectedMarker:(id)unused __attribute((deprecated("Use getSelectedAnnotation instead.")));
-
-/**
- *  Selects a marker.
- *
- *  @param value The marker proxy.
- *  @deprecated 2.2.0
- *  @since 2.1.0
- */
-- (void)selectMarker:(id)value __attribute((deprecated("Use selectAnnotation instead.")));
-
-/**
- *  Deselects a marker.
- *
- *  @deprecated 2.2.0
- *  @since 2.1.0
- */
-- (void)deselectMarker:(id)unused __attribute((deprecated("Use deselectAnnotation instead.")));
-
-/**
  *  Returns the currently selected annotation.
  *
  *  @return The selected annotation.
@@ -236,15 +182,6 @@
  *  @since 1.0.0
  */
 - (void)setMapType:(id)value;
-
-/**
- *  Sets the camera region.
- *
- *  @param value The region.
- *  @deprecated 2.2.0
- *  @since 1.0.0
- */
-- (void)setCamera:(id)args __attribute((deprecated("Use region instead.")));
 
 /**
  *  Sets the camera region.

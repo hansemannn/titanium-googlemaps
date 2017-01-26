@@ -22,18 +22,16 @@
         UIImage *nativeIcon = nil;
         
         if ([icon isKindOfClass:[UIImage class]]) {
-            nativeIcon = [icon retain];
+            nativeIcon = icon;
         } else {
-            nativeIcon = [[TiUtils toImage:icon proxy:self] retain];
+            nativeIcon = [TiUtils toImage:icon proxy:self];
         }
         
         clusterItem = [[TiPOIItem alloc] initWithPosition:position
                                                  andTitle:title
                                                  subtitle:subtitle
                                                      icon:nativeIcon
-                                                 userData:userData];
-        
-        RELEASE_TO_NIL(nativeIcon);
+                                                 userData:userData];        
     }
     
     return self;
