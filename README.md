@@ -426,14 +426,10 @@ to receive infos about your current cluster or cluster item.
 ### Reverse Geocoder
 Use the reverse geocoder to search a location based on a `latitude` and `longitude`:
 ```
-maps.reverseGeocoder({
-    latitude: 36.368122,
-    longitude: -120.913653
-}, function(e) {
+maps.reverseGeocoder(36.368122, -120.913653, function(e) {
     alert('Address found!');
 
-    Ti.API.info(e.firstResult);
-    Ti.API.info(e.results);
+    Ti.API.info(e.places);
 });
 
 ### Google License Info
