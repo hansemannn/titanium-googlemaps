@@ -1,5 +1,5 @@
 # Ti.GoogleMaps 
-[![Build Status](https://travis-ci.org/hansemannn/ti.googlemaps.svg?branch=master)](https://travis-ci.org/hansemannn/ti.googlemaps)  [![License](http://hans-knoechel.de/shields/shield-license.svg)](./LICENSE)  [![Support](http://hans-knoechel.de/shields/shield-slack.svg)](http://tislack.org)
+[![Build Status](https://travis-ci.org/hansemannn/ti.googlemaps.svg?branch=master)](https://travis-ci.org/hansemannn/ti.googlemaps)  [![License](http://hans-knoechel.de/shields/shield-license.svg)](./LICENSE)  [![Contact](http://hans-knoechel.de/shields/shield-twitter.svg)](http://twitter.com/hansemannnn)
 
 <img width="1094" src="http://abload.de/img/showcase3vron.png">
 
@@ -419,6 +419,8 @@ var mapView = maps.createView({
     }
 });
 ```
+Use the `clusterclick` and `clusteritemclick` events on your map view instance
+to receive infos about your current cluster or cluster item.
 
 #### License Info
 Google requires you to link the Open Source license somewhere in your map.
