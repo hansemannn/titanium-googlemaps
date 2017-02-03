@@ -420,6 +420,9 @@ var mapView = maps.createView({
 });
 ```
 
+Use the `clusterclick` and `clusteritemclick` events on your map view instance
+to receive infos about your current cluster or cluster item.
+
 ### Reverse Geocoder
 Use the reverse geocoder to search a location based on a `latitude` and `longitude`:
 ```
