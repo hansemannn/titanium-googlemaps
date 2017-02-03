@@ -13,7 +13,7 @@
 
 - (void)setAPIKey:(id)value;
 - (NSNumber *)version;
-- (void)reverseGeocodeCoordinate:(id)args;
+- (void)reverseGeocoder:(id)args;
 - (TiGooglemapsClusterItemProxy *)createClusterItem:(id)args;
 
 @end

@@ -52,25 +52,35 @@
     return NUMINTEGER([GMSServices version]);
 }
 
-- (void)reverseGeocodeCoordinate:(id)args
+- (void)reverseGeocoder:(id)args
 {
-    ENSURE_ARG_COUNT(args, 2);
+    ENSURE_ARG_COUNT(args, 3);
     
-    NSDictionary *coordinate;
     KrollCallback *callback;
+    NSNumber *latitude;
+    NSNumber *longitude;
     
-    ENSURE_ARG_AT_INDEX(coordinate, args, 0, NSDictionary);
-    ENSURE_ARG_AT_INDEX(callback, args, 1, KrollCallback);
+    ENSURE_ARG_AT_INDEX(latitude, args, 0, NSNumber);
+    ENSURE_ARG_AT_INDEX(longitude, args, 1, NSNumber);
+    ENSURE_ARG_AT_INDEX(callback, args, 2, KrollCallback);
     
-    CLLocationDegrees latitude = [TiUtils doubleValue:[coordinate valueForKey:@"latitude"]];
-    CLLocationDegrees longitude = [TiUtils doubleValue:[coordinate objectForKey:@"longitude"]];
     
-    [[GMSGeocoder geocoder] reverseGeocodeCoordinate:CLLocationCoordinate2DMake(latitude, longitude)
+    [[GMSGeocoder geocoder] reverseGeocodeCoordinate:CLLocationCoordinate2DMake(latitude.doubleValue, longitude.doubleValue)
                                    completionHandler:^(GMSReverseGeocodeResponse *response, NSError *error) {
-                                       NSDictionary *propertiesDict = @{
-                                           @"firstResult": NULL_IF_NIL([self dictionaryFromAddress:response.firstResult]),
-                                           @"results": [self arrayFromAddresses:response.results] ?: @[]
-                                       };
+                                       NSMutableDictionary *propertiesDict = [NSMutableDictionary dictionaryWithDictionary:@{
+                                           @"firstPlace": NULL_IF_NIL([self dictionaryFromAddress:response.firstResult]),
+                                           @"places": [self arrayFromAddresses:response.results] ?: @[]
+                                       }];
+                                       
+                                       if (!response.results || response.results.count == 0) {
+                                           [propertiesDict setValue:@"No places found" forKey:@"error"];
+                                           [propertiesDict setValue:NUMINT(1) forKey:@"code"];
+                                           [propertiesDict setValue:NUMBOOL(NO) forKey:@"success"];
+                                       } else {
+                                           [propertiesDict setValue:NUMINT(0) forKey:@"code"];
+                                           [propertiesDict setValue:NUMBOOL(YES) forKey:@"success"];
+                                       }
+                                       
                                        NSArray *invocationArray = [[NSArray alloc] initWithObjects:&propertiesDict count:1];
                                        
                                        [callback call:invocationArray thisObject:self];
@@ -115,10 +125,8 @@
     }
     
     return @{
-        @"coordinate": @{
-            @"latitude": NUMDOUBLE(address.coordinate.latitude),
-            @"longitude": NUMDOUBLE(address.coordinate.longitude)
-        },
+        @"latitude": NUMDOUBLE(address.coordinate.latitude),
+        @"longitude": NUMDOUBLE(address.coordinate.longitude),
         @"thoroughfare": NULL_IF_NIL(address.thoroughfare),
         @"locality": NULL_IF_NIL(address.locality),
         @"subLocality": NULL_IF_NIL(address.subLocality),
