@@ -7,9 +7,13 @@
 
 #import "TiModule.h"
 
+@class TiGooglemapsClusterItemProxy;
+
 @interface TiGooglemapsModule : TiModule
 
 - (void)setAPIKey:(id)value;
 - (NSNumber *)version;
+- (void)reverseGeocodeCoordinate:(id)args;
+- (TiGooglemapsClusterItemProxy *)createClusterItem:(id)args;
 
 @end

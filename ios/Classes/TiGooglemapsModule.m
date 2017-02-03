@@ -52,6 +52,31 @@
     return NUMINTEGER([GMSServices version]);
 }
 
+- (void)reverseGeocodeCoordinate:(id)args
+{
+    ENSURE_ARG_COUNT(args, 2);
+    
+    NSDictionary *coordinate;
+    KrollCallback *callback;
+    
+    ENSURE_ARG_AT_INDEX(coordinate, args, 0, NSDictionary);
+    ENSURE_ARG_AT_INDEX(callback, args, 1, KrollCallback);
+    
+    CLLocationDegrees latitude = [TiUtils doubleValue:[coordinate valueForKey:@"latitude"]];
+    CLLocationDegrees longitude = [TiUtils doubleValue:[coordinate objectForKey:@"longitude"]];
+    
+    [[GMSGeocoder geocoder] reverseGeocodeCoordinate:CLLocationCoordinate2DMake(latitude, longitude)
+                                   completionHandler:^(GMSReverseGeocodeResponse *response, NSError *error) {
+                                       NSDictionary *propertiesDict = @{
+                                           @"firstResult": NULL_IF_NIL([self dictionaryFromAddress:response.firstResult]),
+                                           @"results": [self arrayFromAddresses:response.results] ?: @[]
+                                       };
+                                       NSArray *invocationArray = [[NSArray alloc] initWithObjects:&propertiesDict count:1];
+                                       
+                                       [callback call:invocationArray thisObject:self];
+                                   }];
+}
+
 - (TiGooglemapsClusterItemProxy *)createClusterItem:(id)args
 {
     ENSURE_SINGLE_ARG(args, NSDictionary);
@@ -79,6 +104,44 @@
                                                              subtitle:subtitle
                                                                  icon:icon
                                                              userData:userData];
+}
+
+#pragma mark Utilities
+
+- (NSDictionary * _Nullable)dictionaryFromAddress:(GMSAddress *)address
+{
+    if (!address) {
+        return nil;
+    }
+    
+    return @{
+        @"coordinate": @{
+            @"latitude": NUMDOUBLE(address.coordinate.latitude),
+            @"longitude": NUMDOUBLE(address.coordinate.longitude)
+        },
+        @"thoroughfare": NULL_IF_NIL(address.thoroughfare),
+        @"locality": NULL_IF_NIL(address.locality),
+        @"subLocality": NULL_IF_NIL(address.subLocality),
+        @"administrativeArea": NULL_IF_NIL(address.administrativeArea),
+        @"postalCode": NULL_IF_NIL(address.postalCode),
+        @"country": NULL_IF_NIL(address.country),
+        @"lines": NULL_IF_NIL(address.lines),
+    };
+}
+
+- (NSArray * _Nullable)arrayFromAddresses:(NSArray<GMSAddress *> *)addresses
+{
+    if (!addresses) {
+        return nil;
+    }
+    
+    NSMutableArray *result = [NSMutableArray arrayWithCapacity:[addresses count]];
+    
+    for (GMSAddress *address in addresses) {
+        [result addObject:[self dictionaryFromAddress:address]];
+    }
+    
+    return result;
 }
 
 #pragma mark Constants

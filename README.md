@@ -419,10 +419,21 @@ var mapView = maps.createView({
     }
 });
 ```
-Use the `clusterclick` and `clusteritemclick` events on your map view instance
-to receive infos about your current cluster or cluster item.
 
-#### License Info
+### Reverse Geocoder
+Use the reverse geocoder to search a location based on a `latitude` and `longitude`:
+```
+maps.reverseGeocoder({
+    latitude: 36.368122,
+    longitude: -120.913653
+}, function(e) {
+    alert('Address found!');
+
+    Ti.API.info(e.firstResult);
+    Ti.API.info(e.results);
+});
+
+### Google License Info
 Google requires you to link the Open Source license somewhere in your map.
 Use the following API to receive the Google Maps license:
 
@@ -430,7 +441,10 @@ Use the following API to receive the Google Maps license:
 var license = maps.getOpenSourceLicenseInfo()
 ```
 
-#### Example
+
+
+Example
+---------------
 For a full example, check the demos in `example/app.js` and `example/clustering.js`.
 
 Author
