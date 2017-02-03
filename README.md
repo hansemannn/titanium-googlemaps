@@ -401,7 +401,7 @@ Finally, call `cluster()` to generate a new cluster:
 ```js
 mapView.cluster();
 ```
-That's it! Optionally, you can also set your own cluster ranges and define custom
+You are all set! Optionally, you can also set your own cluster ranges and define custom
 images for each cluster range in your `mapView` instance:
 ```js
 var mapView = maps.createView({
