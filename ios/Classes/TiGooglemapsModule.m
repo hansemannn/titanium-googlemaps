@@ -64,7 +64,6 @@
     ENSURE_ARG_AT_INDEX(longitude, args, 1, NSNumber);
     ENSURE_ARG_AT_INDEX(callback, args, 2, KrollCallback);
     
-    
     [[GMSGeocoder geocoder] reverseGeocodeCoordinate:CLLocationCoordinate2DMake(latitude.doubleValue, longitude.doubleValue)
                                    completionHandler:^(GMSReverseGeocodeResponse *response, NSError *error) {
                                        NSMutableDictionary *propertiesDict = [NSMutableDictionary dictionaryWithDictionary:@{
