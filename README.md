@@ -401,7 +401,7 @@ Finally, call `cluster()` to generate a new cluster:
 ```js
 mapView.cluster();
 ```
-That's it! Optionally, you can also set your own cluster ranges and define custom
+You are all set! Optionally, you can also set your own cluster ranges and define custom
 images for each cluster range in your `mapView` instance:
 ```js
 var mapView = maps.createView({
@@ -419,10 +419,20 @@ var mapView = maps.createView({
     }
 });
 ```
+
 Use the `clusterclick` and `clusteritemclick` events on your map view instance
 to receive infos about your current cluster or cluster item.
 
-#### License Info
+### Reverse Geocoder
+Use the reverse geocoder to search a location based on a `latitude` and `longitude`:
+```
+maps.reverseGeocoder(36.368122, -120.913653, function(e) {
+    alert('Address found!');
+
+    Ti.API.info(e.places);
+});
+
+### Google License Info
 Google requires you to link the Open Source license somewhere in your map.
 Use the following API to receive the Google Maps license:
 
@@ -430,7 +440,10 @@ Use the following API to receive the Google Maps license:
 var license = maps.getOpenSourceLicenseInfo()
 ```
 
-#### Example
+
+
+Example
+---------------
 For a full example, check the demos in `example/app.js` and `example/clustering.js`.
 
 Author
