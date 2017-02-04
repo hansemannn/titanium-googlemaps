@@ -52,6 +52,40 @@
     return NUMINTEGER([GMSServices version]);
 }
 
+- (void)reverseGeocoder:(id)args
+{
+    ENSURE_ARG_COUNT(args, 3);
+    
+    KrollCallback *callback;
+    NSNumber *latitude;
+    NSNumber *longitude;
+    
+    ENSURE_ARG_AT_INDEX(latitude, args, 0, NSNumber);
+    ENSURE_ARG_AT_INDEX(longitude, args, 1, NSNumber);
+    ENSURE_ARG_AT_INDEX(callback, args, 2, KrollCallback);
+    
+    [[GMSGeocoder geocoder] reverseGeocodeCoordinate:CLLocationCoordinate2DMake(latitude.doubleValue, longitude.doubleValue)
+                                   completionHandler:^(GMSReverseGeocodeResponse *response, NSError *error) {
+                                       NSMutableDictionary *propertiesDict = [NSMutableDictionary dictionaryWithDictionary:@{
+                                           @"firstPlace": NULL_IF_NIL([self dictionaryFromAddress:response.firstResult]),
+                                           @"places": [self arrayFromAddresses:response.results] ?: @[]
+                                       }];
+                                       
+                                       if (!response.results || response.results.count == 0) {
+                                           [propertiesDict setValue:@"No places found" forKey:@"error"];
+                                           [propertiesDict setValue:NUMINT(1) forKey:@"code"];
+                                           [propertiesDict setValue:NUMBOOL(NO) forKey:@"success"];
+                                       } else {
+                                           [propertiesDict setValue:NUMINT(0) forKey:@"code"];
+                                           [propertiesDict setValue:NUMBOOL(YES) forKey:@"success"];
+                                       }
+                                       
+                                       NSArray *invocationArray = [[NSArray alloc] initWithObjects:&propertiesDict count:1];
+                                       
+                                       [callback call:invocationArray thisObject:self];
+                                   }];
+}
+
 - (TiGooglemapsClusterItemProxy *)createClusterItem:(id)args
 {
     ENSURE_SINGLE_ARG(args, NSDictionary);
@@ -79,6 +113,42 @@
                                                              subtitle:subtitle
                                                                  icon:icon
                                                              userData:userData];
+}
+
+#pragma mark Utilities
+
+- (NSDictionary * _Nullable)dictionaryFromAddress:(GMSAddress *)address
+{
+    if (!address) {
+        return nil;
+    }
+    
+    return @{
+        @"latitude": NUMDOUBLE(address.coordinate.latitude),
+        @"longitude": NUMDOUBLE(address.coordinate.longitude),
+        @"thoroughfare": NULL_IF_NIL(address.thoroughfare),
+        @"locality": NULL_IF_NIL(address.locality),
+        @"subLocality": NULL_IF_NIL(address.subLocality),
+        @"administrativeArea": NULL_IF_NIL(address.administrativeArea),
+        @"postalCode": NULL_IF_NIL(address.postalCode),
+        @"country": NULL_IF_NIL(address.country),
+        @"lines": NULL_IF_NIL(address.lines),
+    };
+}
+
+- (NSArray * _Nullable)arrayFromAddresses:(NSArray<GMSAddress *> *)addresses
+{
+    if (!addresses) {
+        return nil;
+    }
+    
+    NSMutableArray *result = [NSMutableArray arrayWithCapacity:[addresses count]];
+    
+    for (GMSAddress *address in addresses) {
+        [result addObject:[self dictionaryFromAddress:address]];
+    }
+    
+    return result;
 }
 
 #pragma mark Constants
