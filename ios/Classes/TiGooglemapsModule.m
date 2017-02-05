@@ -44,16 +44,29 @@
 
 - (NSString *)openSourceLicenseInfo
 {
-    return [GMSServices openSourceLicenseInfo];
+    __block NSString *openSourceLicenseInfo;
+    
+    TiThreadPerformOnMainThread(^{
+        openSourceLicenseInfo = [GMSServices openSourceLicenseInfo];
+    }, YES);
+    
+    return openSourceLicenseInfo;
 }
 
-- (NSNumber *)version
+- (NSString *)version
 {
-    return NUMINTEGER([GMSServices version]);
+    __block NSString *version;
+    
+    TiThreadPerformOnMainThread(^{
+        version = [GMSServices SDKVersion];
+    }, YES);
+    
+    return version;
 }
 
 - (void)reverseGeocoder:(id)args
 {
+    ENSURE_UI_THREAD(reverseGeocoder, args);
     ENSURE_ARG_COUNT(args, 3);
     
     KrollCallback *callback;
@@ -68,7 +81,7 @@
                                    completionHandler:^(GMSReverseGeocodeResponse *response, NSError *error) {
                                        NSMutableDictionary *propertiesDict = [NSMutableDictionary dictionaryWithDictionary:@{
                                            @"firstPlace": NULL_IF_NIL([self dictionaryFromAddress:response.firstResult]),
-                                           @"places": [self arrayFromAddresses:response.results] ?: @[]
+                                           @"places": [self arrayFromAddresses:response.results]
                                        }];
                                        
                                        if (!response.results || response.results.count == 0) {
@@ -123,23 +136,48 @@
         return nil;
     }
     
-    return @{
-        @"latitude": NUMDOUBLE(address.coordinate.latitude),
-        @"longitude": NUMDOUBLE(address.coordinate.longitude),
-        @"thoroughfare": NULL_IF_NIL(address.thoroughfare),
-        @"locality": NULL_IF_NIL(address.locality),
-        @"subLocality": NULL_IF_NIL(address.subLocality),
-        @"administrativeArea": NULL_IF_NIL(address.administrativeArea),
-        @"postalCode": NULL_IF_NIL(address.postalCode),
-        @"country": NULL_IF_NIL(address.country),
-        @"lines": NULL_IF_NIL(address.lines),
-    };
+    NSMutableDictionary *result = [NSMutableDictionary dictionary];
+    
+    if (address.coordinate.latitude && address.coordinate.longitude) {
+        [result setObject:NUMDOUBLE(address.coordinate.latitude) forKey:@"latitude"];
+        [result setObject:NUMDOUBLE(address.coordinate.longitude) forKey:@"longitude"];
+    }
+    
+    if (address.thoroughfare) {
+        [result setObject:address.thoroughfare forKey:@"thoroughfare"];
+    }
+    
+    if (address.locality) {
+        [result setObject:address.locality forKey:@"locality"];
+    }
+    
+    if (address.subLocality) {
+        [result setObject:address.subLocality forKey:@"subLocality"];
+    }
+    
+    if (address.administrativeArea) {
+        [result setObject:address.administrativeArea forKey:@"administrativeArea"];
+    }
+    
+    if (address.postalCode) {
+        [result setObject:address.postalCode forKey:@"postalCode"];
+    }
+    
+    if (address.country) {
+        [result setObject:address.country forKey:@"country"];
+    }
+    
+    if (address.lines) {
+        [result setObject:address.lines forKey:@"lines"];
+    }
+    
+    return result;
 }
 
-- (NSArray * _Nullable)arrayFromAddresses:(NSArray<GMSAddress *> *)addresses
+- (NSArray *)arrayFromAddresses:(NSArray<GMSAddress *> *)addresses
 {
     if (!addresses) {
-        return nil;
+        return @[];
     }
     
     NSMutableArray *result = [NSMutableArray arrayWithCapacity:[addresses count]];

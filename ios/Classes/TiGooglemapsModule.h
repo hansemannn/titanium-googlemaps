@@ -12,7 +12,7 @@
 @interface TiGooglemapsModule : TiModule
 
 - (void)setAPIKey:(id)value;
-- (NSNumber *)version;
+- (NSString *)version;
 - (void)reverseGeocoder:(id)args;
 - (TiGooglemapsClusterItemProxy *)createClusterItem:(id)args;
 
