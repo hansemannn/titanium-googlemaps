@@ -452,17 +452,18 @@ to receive infos about your current cluster or cluster item.
 
 #### Tile Layers
 
-You can create URL-based tile layers that use the x, y, z pattern to determine the location pattern:
+You can create URL-based tile layers that use the x / y / z (zoom level) pattern to determine the location pattern:
 ```js
 var tile = maps.createTile({
     // Required
-    url: "ttp://c.tile.openstreetmap.org/{z}/{x}/{y}.png",
+	// z is for zoom level
+    url: "http://c.tile.openstreetmap.org/{z}/{x}/{y}.png",
 
     // Optional
     userAgent: "Titanium rocks!",
     zIndex: 100,
     size: 200,
-    opacity: 1
+    opacity: 1,
     fadeIn: true
 });
 
@@ -475,6 +476,7 @@ mapView.addTile(tile);
 // Remove tile
 mapView.removeTile(tile);
 ```
+For more information on Tile Layers: https://developers.google.com/maps/documentation/ios-sdk/tiles
 
 In future releases you will also be able to specify local images, but that is not scheduled so far.
 
