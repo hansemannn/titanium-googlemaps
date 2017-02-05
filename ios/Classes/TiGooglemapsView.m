@@ -268,6 +268,24 @@
     }
 }
 
+- (UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker
+{
+    TiGooglemapsAnnotationProxy *annotation = nil;
+    
+    for (TiGooglemapsAnnotationProxy *proxy in [(TiGooglemapsViewProxy *)[self proxy] markers]) {
+        if ([[[[proxy marker] userData] objectForKey:@"uuid"] isEqualToString:[[marker userData] objectForKey:@"uuid"]]) {
+            annotation = proxy;
+            [annotation rememberSelf];
+        }
+    }
+    
+    if (!annotation) {
+        return nil;
+    }
+        
+    return [[annotation infoWindow] view];
+}
+
 - (BOOL)didTapMyLocationButtonForMapView:(GMSMapView *)mapView
 {
     if ([[self proxy] _hasListeners:@"locationclick"]) {

@@ -259,6 +259,32 @@ var annotation = maps.createAnnotation({
 mapView.addAnnotation(annotation);
 ```
 
+You can set an info window of the annotation. Note that you have to specify a width / height for subviews,
+otherwise the SDK will not set a proper frame for the subview:
+```js
+var view = Ti.UI.createView({
+    backgroundColor: "red",
+    width: 200,
+    height: 30
+});
+
+var label = Ti.UI.createLabel({
+    text: key,
+    width: 200,
+    height: 30,
+    color: '#fff',
+    textAlign: 'center'
+});
+
+view.add(label);
+
+var annotation = maps.createAnnotation({
+    latitude: 37.4748624,
+    longitude: -122.1490817
+    infoWindow: view
+});
+```
+
 You can update the location of an Annotation by using:
 ```javascript
 annotation.updateLocation({

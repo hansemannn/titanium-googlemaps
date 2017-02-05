@@ -5,11 +5,22 @@
  * Please see the LICENSE included with this distribution for details.
  */
 #import "TiProxy.h"
+#import "TiViewProxy.h"
 #import <GoogleMaps/GoogleMaps.h>
 
 @interface TiGooglemapsAnnotationProxy : TiProxy
 
 @property(nonatomic,retain) GMSMarker *marker;
+
+- (TiViewProxy *)infoWindow;
+
+/**
+ *  Sets the annotation info window.
+ *
+ *  @param value The info window
+ *  @since 3.2.0
+ */
+- (void)setInfoWindow:(id)value;
 
 /**
  *  Sets the annotation title.
