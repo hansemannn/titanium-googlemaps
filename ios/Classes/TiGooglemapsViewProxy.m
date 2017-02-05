@@ -5,6 +5,7 @@
  * Please see the LICENSE included with this distribution for details.
  */
 
+#import "TiUtils.h"
 #import "TiGooglemapsView.h"
 #import "TiGooglemapsViewProxy.h"
 #import "TiGooglemapsPolylineProxy.h"
@@ -12,8 +13,8 @@
 #import "TiGooglemapsCircleProxy.h"
 #import "TiGooglemapsClusterItemProxy.h"
 #import "TiGooglemapsCameraUpdateProxy.h"
-#import "TiUtils.h"
 #import "GMUMarkerClustering.h"
+#import "TiGooglemapsTileProxy.h"
 
 @implementation TiGooglemapsViewProxy
 
@@ -476,6 +477,26 @@
             [[circleProxy circle] setMap:nil];
         });
     });
+}
+
+- (void)addTile:(id)args
+{
+    ENSURE_UI_THREAD_1_ARG(args);
+    
+    id tileProxy = [args objectAtIndex:0];
+    ENSURE_TYPE(tileProxy, TiGooglemapsTileProxy);
+    
+    [[tileProxy tile] setMap:[[self mapView] mapView]];
+}
+
+- (void)removeTile:(id)args
+{
+    ENSURE_UI_THREAD_1_ARG(args);
+    
+    id tileProxy = [args objectAtIndex:0];
+    ENSURE_TYPE(tileProxy, TiGooglemapsTileProxy);
+    
+    [[tileProxy tile] setMap:nil];
 }
 
 - (id)getSelectedAnnotation:(id)unused

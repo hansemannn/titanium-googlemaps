@@ -423,7 +423,36 @@ var mapView = maps.createView({
 Use the `clusterclick` and `clusteritemclick` events on your map view instance
 to receive infos about your current cluster or cluster item.
 
-### Reverse Geocoder
+
+#### Tile Layers
+
+You can create URL-based tile layers that use the x, y, z pattern to determine the location pattern:
+```js
+var tile = maps.createTile({
+    // Required
+    url: "ttp://c.tile.openstreetmap.org/{z}/{x}/{y}.png",
+
+    // Optional
+    userAgent: "Titanium rocks!",
+    zIndex: 100,
+    size: 200,
+    opacity: 1
+    fadeIn: true
+});
+
+// Clear previous tile cache from this URL
+tile.clearTileCache();
+
+// Add tile
+mapView.addTile(tile);
+
+// Remove tile
+mapView.removeTile(tile);
+```
+
+In future releases you will also be able to specify local images, but that is not scheduled so far.
+
+#### Reverse Geocoder
 Use the reverse geocoder to search a location based on a `latitude` and `longitude`:
 ```
 maps.reverseGeocoder(36.368122, -120.913653, function(e) {
@@ -439,8 +468,6 @@ Use the following API to receive the Google Maps license:
 ```js
 var license = maps.getOpenSourceLicenseInfo()
 ```
-
-
 
 Example
 ---------------
