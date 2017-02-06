@@ -12,6 +12,8 @@
 #import "TiGooglemapsClusterItemProxy.h"
 #import <GoogleMaps/GoogleMaps.h>
 
+NSString *const kTiGoogleMapsDirectionsBasePath = @"https://maps.googleapis.com/maps/api/directions/json";
+
 @implementation TiGooglemapsModule
 
 #pragma mark Internal
@@ -39,7 +41,8 @@
 
 - (void)setAPIKey:(id)value
 {
-    [GMSServices provideAPIKey:[TiUtils stringValue:value]];
+    apiKey = [TiUtils stringValue:value];
+    [GMSServices provideAPIKey:apiKey];
 }
 
 - (NSString *)openSourceLicenseInfo
@@ -99,6 +102,60 @@
                                    }];
 }
 
+- (void)getDirections:(id)args
+{
+    ENSURE_SINGLE_ARG(args, NSDictionary);
+    
+    id successCallback = [args objectForKey:@"success"];
+    id errorCallback = [args objectForKey:@"error"];
+    id origin = [args objectForKey:@"origin"];
+    id destination = [args objectForKey:@"destination"];
+    id waypoints = [args objectForKey:@"waypoints"];
+    
+    ENSURE_TYPE(successCallback, KrollCallback);
+    ENSURE_TYPE(errorCallback, KrollCallback);
+    ENSURE_TYPE(origin, NSString);
+    ENSURE_TYPE(destination, NSString);
+    ENSURE_TYPE_OR_NIL(waypoints, NSArray);
+    
+    NSMutableDictionary *options = [NSMutableDictionary dictionaryWithDictionary:@{
+        @"origin": origin,
+        @"destination": destination,
+    }];
+
+    if (waypoints) {
+        [options setObject:[self formattedWaypointsFromArray:waypoints] forKey:@"waypoints"];
+    }
+    
+    NSURLSession *mapsSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSURLSessionDataTask *mapsDataTask = [mapsSession dataTaskWithURL:[self entitledURLFromOptions:options] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            NSDictionary *errorObject = [TiUtils dictionaryWithCode:1 message:[error localizedDescription]];
+            NSArray *invocationArray = [[NSArray alloc] initWithObjects:&errorObject count:1];
+
+            [errorCallback call:invocationArray thisObject:self];
+            return;
+        }
+        
+        NSDictionary *json  = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        
+        // TODO: I don't like to write this twice. The GoogleMaps SDK should just throw an error HTTP code ...
+        if ([json objectForKey:@"error_message"]) {
+            NSDictionary *errorObject = [TiUtils dictionaryWithCode:1 message:[json objectForKey:@"error_message"]];
+            NSArray *invocationArray = [[NSArray alloc] initWithObjects:&errorObject count:1];
+            
+            [errorCallback call:invocationArray thisObject:self];
+            return;
+        }
+        
+        NSArray *invocationArray = [[NSArray alloc] initWithObjects:&json count:1];
+        
+        [successCallback call:invocationArray thisObject:self];
+    }];
+    
+    [mapsDataTask resume];
+}
+
 - (TiGooglemapsClusterItemProxy *)createClusterItem:(id)args
 {
     ENSURE_SINGLE_ARG(args, NSDictionary);
@@ -129,6 +186,35 @@
 }
 
 #pragma mark Utilities
+
+- (NSString *)formattedWaypointsFromArray:(NSArray *)array
+{    
+    NSString *waypoints = [NSString string];
+    
+    // Generate a string like "city1|city2|
+    for (NSString *destination in array) {
+        waypoints = [waypoints stringByAppendingString:[NSString stringWithFormat:@"%@|", destination]];
+    }
+    
+    // Remove the last "|"
+    waypoints = [waypoints substringWithRange:NSMakeRange(0, waypoints.length -1)];
+    
+    return waypoints;
+}
+
+- (NSURL *)entitledURLFromOptions:(NSDictionary *)options
+{
+    NSURLComponents *url = [NSURLComponents componentsWithString:kTiGoogleMapsDirectionsBasePath];
+    NSMutableArray<NSURLQueryItem *> *queryItems = [NSMutableArray arrayWithCapacity:options.count];
+    
+    for (NSString *option in options) {
+        [queryItems addObject:[NSURLQueryItem queryItemWithName:option value:[options objectForKey:option]]];
+    }
+    
+    [url setQueryItems:queryItems];
+    
+    return [NSURL URLWithString:[[[url URL] absoluteString] stringByAppendingString:[NSString stringWithFormat:@"&key=%@", apiKey]]];
+}
 
 - (NSDictionary * _Nullable)dictionaryFromAddress:(GMSAddress *)address
 {

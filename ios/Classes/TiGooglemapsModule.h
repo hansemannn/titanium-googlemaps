@@ -9,11 +9,20 @@
 
 @class TiGooglemapsClusterItemProxy;
 
-@interface TiGooglemapsModule : TiModule
+FOUNDATION_EXPORT NSString *const kTiGoogleMapsDirectionsBasePath;
+
+@interface TiGooglemapsModule : TiModule {
+    NSString *apiKey;
+}
 
 - (void)setAPIKey:(id)value;
+
 - (NSString *)version;
+
 - (void)reverseGeocoder:(id)args;
+
+- (void)getDirections:(id)args;
+
 - (TiGooglemapsClusterItemProxy *)createClusterItem:(id)args;
 
 @end

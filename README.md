@@ -478,7 +478,7 @@ mapView.removeTile(tile);
 
 In future releases you will also be able to specify local images, but that is not scheduled so far.
 
-#### Reverse Geocoder
+### Reverse Geocoder
 Use the reverse geocoder to search a location based on a `latitude` and `longitude`:
 ```
 maps.reverseGeocoder(36.368122, -120.913653, function(e) {
@@ -486,6 +486,25 @@ maps.reverseGeocoder(36.368122, -120.913653, function(e) {
 
     Ti.API.info(e.places);
 });
+
+### Directions
+Use the Directions API to calculate advanced directions:
+```js
+maps.getDirections({
+    origin: 'Mountain View, CA',
+    destination: 'San Francisco, CA',
+    success: function(e) {
+        Ti.API.info(e.routes);
+    },
+    error: function(e) {
+        Ti.API.error('Error: ' + e.error);
+    },
+    waypoints: ['Cupertino, CA', 'via:Sunnyvale, CA'] // Optional
+});
+```
+Note that this is not officially supported in the Google Maps iOS SDK. It has been exposed
+by using the REST-API in combination with the `NSURLSession` API and the provided API key.
+
 
 ### Google License Info
 Google requires you to link the Open Source license somewhere in your map.
