@@ -482,7 +482,7 @@ In future releases you will also be able to specify local images, but that is no
 
 ### Reverse Geocoder
 Use the reverse geocoder to search a location based on a `latitude` and `longitude`:
-```
+```js
 maps.reverseGeocoder(36.368122, -120.913653, function(e) {
     alert('Address found!');
 
@@ -504,9 +504,16 @@ maps.getDirections({
     waypoints: ['Cupertino, CA', 'via:Sunnyvale, CA'] // Optional
 });
 ```
+The polyline points will be received encoded:
+```js
+"polyline": {
+    "points": "a}dcF~nchVPLXLHQhAsCDKzAyDPe@fAqC`@aAh@sARc@pCoHJUj@yAj@{AL]`@cAd@iAbAiCnC_HjAsCvAqDL_@l@mB`@sA^kAJ[h@aBPi@DSJWDMHSFS@GXaABIBI\\eAHW?ATy@HSPo@"
+}
+```
+To decode the polyline points, use the `maps.decodePolylinePoints(points)` utility method.
+                                                                                                                   
 Note that this is not officially supported in the Google Maps iOS SDK. It has been exposed
 by using the REST-API in combination with the `NSURLSession` API and the provided API key.
-
 
 ### Google License Info
 Google requires you to link the Open Source license somewhere in your map.

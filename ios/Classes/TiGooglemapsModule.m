@@ -187,6 +187,19 @@ NSString *const kTiGoogleMapsDirectionsBasePath = @"https://maps.googleapis.com/
 
 #pragma mark Utilities
 
++ (NSArray *)decodePolylinePoints:(NSString *)points
+{
+    GMSPath *path = [GMSPath pathFromEncodedPath:points];
+    NSMutableArray *coordinates = [NSMutableArray arrayWithCapacity:path.count];
+    
+    for (NSUInteger i = 0; i < path.count; i++) {
+        CLLocationCoordinate2D location = [path coordinateAtIndex:i];
+        [coordinates addObject:@{@"latitude": NUMDOUBLE(location.latitude), @"longitude": NUMDOUBLE(location.longitude)}];
+    }
+    
+    return coordinates;
+}
+
 - (NSString *)formattedWaypointsFromArray:(NSArray *)array
 {    
     NSString *waypoints = [NSString string];
