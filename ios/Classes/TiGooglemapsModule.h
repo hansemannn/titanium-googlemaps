@@ -21,6 +21,8 @@
 
 - (void)getDirections:(id)args;
 
+- (id)decodePolylinePoints:(id)args;
+
 - (TiGooglemapsClusterItemProxy *)createClusterItem:(id)args;
 
 @end

@@ -12,7 +12,9 @@ NSString *const kTiGoogleMapsBasePath = @"https://maps.googleapis.com/maps/api";
 
 @implementation TiGMSHTTPClient
 
-- (instancetype)initWithApiKey:(NSString * _Nonnull)apiKey
+#pragma mark Public API
+
+- (instancetype)initWithApiKey:(NSString *)apiKey;
 {
     if (self = [super init]) {
         _apiKey = apiKey;
@@ -21,7 +23,9 @@ NSString *const kTiGoogleMapsBasePath = @"https://maps.googleapis.com/maps/api";
     return self;
 }
 
-- (void)loadWithRequestPath:(NSString *)path andOptions:(NSDictionary *)options completionHandler:(void (^)(NSDictionary *json, NSError * _Nullable error))completionHandler
+- (void)loadWithRequestPath:(NSString *)path
+                 andOptions:(NSDictionary<NSString *, id> *)options
+          completionHandler:(void (^)(NSDictionary<NSString *, id> * _Nullable json, NSError * _Nullable error))completionHandler
 {
     NSURLSession *mapsSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     NSURLSessionDataTask *mapsDataTask = [mapsSession dataTaskWithURL:[self entitledURLWithPath:path andOptions:options] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -45,7 +49,7 @@ NSString *const kTiGoogleMapsBasePath = @"https://maps.googleapis.com/maps/api";
     [mapsDataTask resume];
 }
 
-- (NSURL *)entitledURLWithPath:(NSString *)path andOptions:(NSDictionary *)options
+- (NSURL *)entitledURLWithPath:(NSString *)path andOptions:(NSDictionary * _Nullable)options
 {
     NSURLComponents *url = [NSURLComponents componentsWithString:[NSString stringWithFormat:@"%@/%@", kTiGoogleMapsBasePath, path]];
     NSMutableArray<NSURLQueryItem *> *queryItems = [NSMutableArray arrayWithCapacity:options.count];
@@ -57,6 +61,27 @@ NSString *const kTiGoogleMapsBasePath = @"https://maps.googleapis.com/maps/api";
     [url setQueryItems:queryItems];
     
     return [NSURL URLWithString:[[[url URL] absoluteString] stringByAppendingString:[NSString stringWithFormat:@"&key=%@", _apiKey]]];
+}
+
+#pragma mark Utilities
+
++ (NSString * _Nullable)formattedWaypointsFromArray:(NSArray<NSString *> * _Nullable)array
+{
+    if (!array) {
+        return nil;
+    }
+    
+    NSString *waypoints = [NSString string];
+    
+    // Generate a string like "city1|city2|
+    for (NSString *destination in array) {
+        waypoints = [waypoints stringByAppendingString:[NSString stringWithFormat:@"%@|", destination]];
+    }
+    
+    // Remove the last "|"
+    waypoints = [waypoints substringWithRange:NSMakeRange(0, waypoints.length -1)];
+    
+    return waypoints;
 }
 
 @end

@@ -117,16 +117,18 @@
     ENSURE_TYPE(destination, NSString);
     ENSURE_TYPE_OR_NIL(waypoints, NSArray);
     
+    
+    TiGMSHTTPClient *httpClient = [[TiGMSHTTPClient alloc] initWithApiKey:apiKey];
+
     NSMutableDictionary *options = [NSMutableDictionary dictionaryWithDictionary:@{
         @"origin": origin,
         @"destination": destination,
     }];
 
     if (waypoints) {
-        [options setObject:[self formattedWaypointsFromArray:waypoints] forKey:@"waypoints"];
+        [options setObject:[TiGMSHTTPClient formattedWaypointsFromArray:waypoints] forKey:@"waypoints"];
     }
     
-    TiGMSHTTPClient *httpClient = [[TiGMSHTTPClient alloc] initWithApiKey:apiKey];
     [httpClient loadWithRequestPath:@"directions/json"
                          andOptions:options
                   completionHandler:^(NSDictionary *json, NSError *error) {
@@ -188,21 +190,6 @@
 }
 
 #pragma mark Utilities
-
-- (NSString *)formattedWaypointsFromArray:(NSArray *)array
-{    
-    NSString *waypoints = [NSString string];
-    
-    // Generate a string like "city1|city2|
-    for (NSString *destination in array) {
-        waypoints = [waypoints stringByAppendingString:[NSString stringWithFormat:@"%@|", destination]];
-    }
-    
-    // Remove the last "|"
-    waypoints = [waypoints substringWithRange:NSMakeRange(0, waypoints.length -1)];
-    
-    return waypoints;
-}
 
 - (NSDictionary * _Nullable)dictionaryFromAddress:(GMSAddress *)address
 {
