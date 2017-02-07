@@ -10,9 +10,8 @@
 #import "TiUtils.h"
 #import "TiGooglemapsModule.h"
 #import "TiGooglemapsClusterItemProxy.h"
+#import "TiGMSHTTPClient.h"
 #import <GoogleMaps/GoogleMaps.h>
-
-NSString *const kTiGoogleMapsDirectionsBasePath = @"https://maps.googleapis.com/maps/api/directions/json";
 
 @implementation TiGooglemapsModule
 
@@ -127,33 +126,21 @@ NSString *const kTiGoogleMapsDirectionsBasePath = @"https://maps.googleapis.com/
         [options setObject:[self formattedWaypointsFromArray:waypoints] forKey:@"waypoints"];
     }
     
-    NSURLSession *mapsSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    NSURLSessionDataTask *mapsDataTask = [mapsSession dataTaskWithURL:[self entitledURLFromOptions:options] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (error) {
-            NSDictionary *errorObject = [TiUtils dictionaryWithCode:1 message:[error localizedDescription]];
-            NSArray *invocationArray = [[NSArray alloc] initWithObjects:&errorObject count:1];
-
-            [errorCallback call:invocationArray thisObject:self];
-            return;
-        }
-        
-        NSDictionary *json  = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        
-        // TODO: I don't like to write this twice. The GoogleMaps SDK should just throw an error HTTP code ...
-        if ([json objectForKey:@"error_message"]) {
-            NSDictionary *errorObject = [TiUtils dictionaryWithCode:1 message:[json objectForKey:@"error_message"]];
-            NSArray *invocationArray = [[NSArray alloc] initWithObjects:&errorObject count:1];
-            
-            [errorCallback call:invocationArray thisObject:self];
-            return;
-        }
-        
-        NSArray *invocationArray = [[NSArray alloc] initWithObjects:&json count:1];
-        
-        [successCallback call:invocationArray thisObject:self];
-    }];
-    
-    [mapsDataTask resume];
+    TiGMSHTTPClient *httpClient = [[TiGMSHTTPClient alloc] initWithApiKey:apiKey];
+    [httpClient loadWithRequestPath:@"directions/json"
+                         andOptions:options
+                  completionHandler:^(NSDictionary *json, NSError *error) {
+                      if (error) {
+                          NSDictionary *errorObject = [TiUtils dictionaryWithCode:1 message:[error localizedDescription]];
+                          NSArray *invocationArray = [[NSArray alloc] initWithObjects:&errorObject count:1];
+                          
+                          [errorCallback call:invocationArray thisObject:self];
+                          return;
+                      }
+                      
+                      NSArray *invocationArray = [[NSArray alloc] initWithObjects:&json count:1];
+                      [successCallback call:invocationArray thisObject:self];
+                  }];
 }
 
 - (TiGooglemapsClusterItemProxy *)createClusterItem:(id)args
@@ -185,11 +172,11 @@ NSString *const kTiGoogleMapsDirectionsBasePath = @"https://maps.googleapis.com/
                                                              userData:userData];
 }
 
-#pragma mark Utilities
-
-+ (NSArray *)decodePolylinePoints:(NSString *)points
+- (id)decodePolylinePoints:(id)args
 {
-    GMSPath *path = [GMSPath pathFromEncodedPath:points];
+    ENSURE_SINGLE_ARG(args, NSString);
+    
+    GMSPath *path = [GMSPath pathFromEncodedPath:args];
     NSMutableArray *coordinates = [NSMutableArray arrayWithCapacity:path.count];
     
     for (NSUInteger i = 0; i < path.count; i++) {
@@ -199,6 +186,8 @@ NSString *const kTiGoogleMapsDirectionsBasePath = @"https://maps.googleapis.com/
     
     return coordinates;
 }
+
+#pragma mark Utilities
 
 - (NSString *)formattedWaypointsFromArray:(NSArray *)array
 {    
@@ -213,20 +202,6 @@ NSString *const kTiGoogleMapsDirectionsBasePath = @"https://maps.googleapis.com/
     waypoints = [waypoints substringWithRange:NSMakeRange(0, waypoints.length -1)];
     
     return waypoints;
-}
-
-- (NSURL *)entitledURLFromOptions:(NSDictionary *)options
-{
-    NSURLComponents *url = [NSURLComponents componentsWithString:kTiGoogleMapsDirectionsBasePath];
-    NSMutableArray<NSURLQueryItem *> *queryItems = [NSMutableArray arrayWithCapacity:options.count];
-    
-    for (NSString *option in options) {
-        [queryItems addObject:[NSURLQueryItem queryItemWithName:option value:[options objectForKey:option]]];
-    }
-    
-    [url setQueryItems:queryItems];
-    
-    return [NSURL URLWithString:[[[url URL] absoluteString] stringByAppendingString:[NSString stringWithFormat:@"&key=%@", apiKey]]];
 }
 
 - (NSDictionary * _Nullable)dictionaryFromAddress:(GMSAddress *)address

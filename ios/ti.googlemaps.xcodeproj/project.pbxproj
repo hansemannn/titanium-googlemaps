@@ -89,6 +89,8 @@
 		DB0A81321E13111600F03FE9 /* GQTPointQuadTreeItem.h in Headers */ = {isa = PBXBuildFile; fileRef = DB0A812B1E13111600F03FE9 /* GQTPointQuadTreeItem.h */; };
 		DB0A81361E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = DB0A81341E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.h */; };
 		DB0A81371E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0A81351E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.m */; };
+		DB0C69541E49D6DF000F8FA2 /* TiGMSHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = DB0C69521E49D6DF000F8FA2 /* TiGMSHTTPClient.h */; };
+		DB0C69551E49D6DF000F8FA2 /* TiGMSHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0C69531E49D6DF000F8FA2 /* TiGMSHTTPClient.m */; };
 		DB11CE291E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = DB11CE271E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.h */; };
 		DB11CE2A1E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = DB11CE281E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.m */; };
 		DB37298D1E15BF65009CD6B7 /* TiClusterIconGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = DB37298B1E15BF65009CD6B7 /* TiClusterIconGenerator.h */; };
@@ -186,6 +188,8 @@
 		DB0A812B1E13111600F03FE9 /* GQTPointQuadTreeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTreeItem.h; sourceTree = "<group>"; };
 		DB0A81341E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsClusterItemProxy.h; path = Classes/TiGooglemapsClusterItemProxy.h; sourceTree = "<group>"; };
 		DB0A81351E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsClusterItemProxy.m; path = Classes/TiGooglemapsClusterItemProxy.m; sourceTree = "<group>"; };
+		DB0C69521E49D6DF000F8FA2 /* TiGMSHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGMSHTTPClient.h; path = Classes/TiGMSHTTPClient.h; sourceTree = "<group>"; };
+		DB0C69531E49D6DF000F8FA2 /* TiGMSHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGMSHTTPClient.m; path = Classes/TiGMSHTTPClient.m; sourceTree = "<group>"; };
 		DB11CE271E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsCameraUpdateProxy.h; path = Classes/TiGooglemapsCameraUpdateProxy.h; sourceTree = "<group>"; };
 		DB11CE281E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsCameraUpdateProxy.m; path = Classes/TiGooglemapsCameraUpdateProxy.m; sourceTree = "<group>"; };
 		DB37298B1E15BF65009CD6B7 /* TiClusterIconGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiClusterIconGenerator.h; sourceTree = "<group>"; };
@@ -361,6 +365,8 @@
 				24DD6CF71134B3F500162E58 /* TiGooglemapsModule.h */,
 				24DD6CF81134B3F500162E58 /* TiGooglemapsModule.m */,
 				3A142F471C87748D00215B67 /* TiGooglemapsConstants.h */,
+				DB0C69521E49D6DF000F8FA2 /* TiGMSHTTPClient.h */,
+				DB0C69531E49D6DF000F8FA2 /* TiGMSHTTPClient.m */,
 			);
 			name = Module;
 			sourceTree = "<group>";
@@ -507,6 +513,7 @@
 				DB0A811D1E1310BE00F03FE9 /* GMUClusterRenderer.h in Headers */,
 				DB0A81151E1310BE00F03FE9 /* GMUClusterItem.h in Headers */,
 				DB0A81191E1310BE00F03FE9 /* GMUMarkerClustering.h in Headers */,
+				DB0C69541E49D6DF000F8FA2 /* TiGMSHTTPClient.h in Headers */,
 				DB0A81141E1310BE00F03FE9 /* GMUCluster.h in Headers */,
 				DB0A81171E1310BE00F03FE9 /* GMUClusterManager.h in Headers */,
 				DB0A811E1E1310BE00F03FE9 /* GMUDefaultClusterIconGenerator+Testing.h in Headers */,
@@ -624,6 +631,7 @@
 				DB91F99E1E15C8B400DFA78B /* TiPOIItem.m in Sources */,
 				DB9FB86F1E47399300A0790E /* TiGooglemapsTileProxy.m in Sources */,
 				3A433EFF1BE9AB0C0005C8AE /* TiGooglemapsPolylineProxy.m in Sources */,
+				DB0C69551E49D6DF000F8FA2 /* TiGMSHTTPClient.m in Sources */,
 				3ACF6A131CBA800600BC765B /* TiGooglemapsAnnotationProxy.m in Sources */,
 				3A433F081BE9AE620005C8AE /* TiGooglemapsCircleProxy.m in Sources */,
 				3ACF6A1D1CBA874700BC765B /* TiGooglemapsViewProxy.m in Sources */,

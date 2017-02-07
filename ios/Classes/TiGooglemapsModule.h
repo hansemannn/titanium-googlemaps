@@ -9,8 +9,6 @@
 
 @class TiGooglemapsClusterItemProxy;
 
-FOUNDATION_EXPORT NSString *const kTiGoogleMapsDirectionsBasePath;
-
 @interface TiGooglemapsModule : TiModule {
     NSString *apiKey;
 }
