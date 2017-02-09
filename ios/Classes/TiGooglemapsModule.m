@@ -10,6 +10,7 @@
 #import "TiUtils.h"
 #import "TiGooglemapsModule.h"
 #import "TiGooglemapsClusterItemProxy.h"
+#import "TiGMSHTTPClient.h"
 #import <GoogleMaps/GoogleMaps.h>
 
 @implementation TiGooglemapsModule
@@ -39,7 +40,8 @@
 
 - (void)setAPIKey:(id)value
 {
-    [GMSServices provideAPIKey:[TiUtils stringValue:value]];
+    apiKey = [TiUtils stringValue:value];
+    [GMSServices provideAPIKey:apiKey];
 }
 
 - (NSString *)openSourceLicenseInfo
@@ -99,6 +101,50 @@
                                    }];
 }
 
+- (void)getDirections:(id)args
+{
+    ENSURE_SINGLE_ARG(args, NSDictionary);
+    
+    id successCallback = [args objectForKey:@"success"];
+    id errorCallback = [args objectForKey:@"error"];
+    id origin = [args objectForKey:@"origin"];
+    id destination = [args objectForKey:@"destination"];
+    id waypoints = [args objectForKey:@"waypoints"];
+    
+    ENSURE_TYPE(successCallback, KrollCallback);
+    ENSURE_TYPE(errorCallback, KrollCallback);
+    ENSURE_TYPE(origin, NSString);
+    ENSURE_TYPE(destination, NSString);
+    ENSURE_TYPE_OR_NIL(waypoints, NSArray);
+    
+    
+    TiGMSHTTPClient *httpClient = [[TiGMSHTTPClient alloc] initWithApiKey:apiKey];
+
+    NSMutableDictionary *options = [NSMutableDictionary dictionaryWithDictionary:@{
+        @"origin": origin,
+        @"destination": destination,
+    }];
+
+    if (waypoints) {
+        [options setObject:[TiGMSHTTPClient formattedWaypointsFromArray:waypoints] forKey:@"waypoints"];
+    }
+    
+    [httpClient loadWithRequestPath:@"directions/json"
+                         andOptions:options
+                  completionHandler:^(NSDictionary *json, NSError *error) {
+                      if (error) {
+                          NSDictionary *errorObject = [TiUtils dictionaryWithCode:1 message:[error localizedDescription]];
+                          NSArray *invocationArray = [[NSArray alloc] initWithObjects:&errorObject count:1];
+                          
+                          [errorCallback call:invocationArray thisObject:self];
+                          return;
+                      }
+                      
+                      NSArray *invocationArray = [[NSArray alloc] initWithObjects:&json count:1];
+                      [successCallback call:invocationArray thisObject:self];
+                  }];
+}
+
 - (TiGooglemapsClusterItemProxy *)createClusterItem:(id)args
 {
     ENSURE_SINGLE_ARG(args, NSDictionary);
@@ -126,6 +172,21 @@
                                                              subtitle:subtitle
                                                                  icon:icon
                                                              userData:userData];
+}
+
+- (id)decodePolylinePoints:(id)args
+{
+    ENSURE_SINGLE_ARG(args, NSString);
+    
+    GMSPath *path = [GMSPath pathFromEncodedPath:args];
+    NSMutableArray *coordinates = [NSMutableArray arrayWithCapacity:path.count];
+    
+    for (NSUInteger i = 0; i < path.count; i++) {
+        CLLocationCoordinate2D location = [path coordinateAtIndex:i];
+        [coordinates addObject:@{@"latitude": NUMDOUBLE(location.latitude), @"longitude": NUMDOUBLE(location.longitude)}];
+    }
+    
+    return coordinates;
 }
 
 #pragma mark Utilities
