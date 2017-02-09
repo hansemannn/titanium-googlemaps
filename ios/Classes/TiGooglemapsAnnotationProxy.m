@@ -34,6 +34,16 @@
 
 #pragma mark Public API's
 
+- (TiViewProxy *)infoWindow
+{
+    return [self valueForUndefinedKey:@"infoWindow"];
+}
+
+- (void)setInfoWindow:(id)value
+{
+    [self replaceValue:value forKey:@"infoWindow" notification:NO];
+}
+
 - (void)setLatitude:(id)value
 {
     ENSURE_TYPE(value, NSNumber);

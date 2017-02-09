@@ -259,6 +259,32 @@ var annotation = maps.createAnnotation({
 mapView.addAnnotation(annotation);
 ```
 
+You can set an info window of the annotation. Note that you have to specify a width / height for subviews,
+otherwise the SDK will not set a proper frame for the subview:
+```js
+var view = Ti.UI.createView({
+    backgroundColor: "red",
+    width: 200,
+    height: 30
+});
+
+var label = Ti.UI.createLabel({
+    text: key,
+    width: 200,
+    height: 30,
+    color: '#fff',
+    textAlign: 'center'
+});
+
+view.add(label);
+
+var annotation = maps.createAnnotation({
+    latitude: 37.4748624,
+    longitude: -122.1490817
+    infoWindow: view
+});
+```
+
 You can update the location of an Annotation by using:
 ```javascript
 annotation.updateLocation({
@@ -423,14 +449,71 @@ var mapView = maps.createView({
 Use the `clusterclick` and `clusteritemclick` events on your map view instance
 to receive infos about your current cluster or cluster item.
 
+
+#### Tile Layers
+
+You can create URL-based tile layers that use the x / y / z (zoom level) pattern to determine the location pattern:
+```js
+var tile = maps.createTile({
+    // Required
+	// z is for zoom level
+    url: "http://c.tile.openstreetmap.org/{z}/{x}/{y}.png",
+
+    // Optional
+    userAgent: "Titanium rocks!",
+    zIndex: 100,
+    size: 200,
+    opacity: 1,
+    fadeIn: true
+});
+
+// Clear previous tile cache from this URL
+tile.clearTileCache();
+
+// Add tile
+mapView.addTile(tile);
+
+// Remove tile
+mapView.removeTile(tile);
+```
+For more information on Tile Layers: https://developers.google.com/maps/documentation/ios-sdk/tiles
+
+In future releases you will also be able to specify local images, but that is not scheduled so far.
+
 ### Reverse Geocoder
 Use the reverse geocoder to search a location based on a `latitude` and `longitude`:
-```
+```js
 maps.reverseGeocoder(36.368122, -120.913653, function(e) {
     alert('Address found!');
 
     Ti.API.info(e.places);
 });
+
+### Directions
+Use the Directions API to calculate advanced directions:
+```js
+maps.getDirections({
+    origin: 'Mountain View, CA',
+    destination: 'San Francisco, CA',
+    success: function(e) {
+        Ti.API.info(e.routes);
+    },
+    error: function(e) {
+        Ti.API.error('Error: ' + e.error);
+    },
+    waypoints: ['Cupertino, CA', 'via:Sunnyvale, CA'] // Optional
+});
+```
+The polyline points will be received encoded:
+```js
+"polyline": {
+    "points": "a}dcF~nchVPLXLHQhAsCDKzAyDPe@fAqC`@aAh@sARc@pCoHJUj@yAj@{AL]`@cAd@iAbAiCnC_HjAsCvAqDL_@l@mB`@sA^kAJ[h@aBPi@DSJWDMHSFS@GXaABIBI\\eAHW?ATy@HSPo@"
+}
+```
+To decode the polyline points, use the `maps.decodePolylinePoints(points)` utility method.
+                                                                                                                   
+Note that this is not officially supported in the Google Maps iOS SDK. It has been exposed
+by using the REST-API in combination with the `NSURLSession` API and the provided API key.
 
 ### Google License Info
 Google requires you to link the Open Source license somewhere in your map.
@@ -439,8 +522,6 @@ Use the following API to receive the Google Maps license:
 ```js
 var license = maps.getOpenSourceLicenseInfo()
 ```
-
-
 
 Example
 ---------------
