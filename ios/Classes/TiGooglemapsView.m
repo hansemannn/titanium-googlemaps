@@ -78,7 +78,14 @@
         
         for (id background in clusterBackgrounds) {
             ENSURE_TYPE(background, NSString);
-            [backgrounds addObject:[TiUtils image:background proxy:self.proxy]];
+            UIImage *clusterBackground = [TiUtils image:background proxy:self.proxy];
+            
+            if (!clusterBackground) {
+                NSLog(@"[ERROR] Cluster background-file (%@) cannot be found, skipping ...");
+                continue;
+            }
+            
+            [backgrounds addObject:clusterBackground];
         }
         
         return [[TiClusterIconGenerator alloc] initWithBuckets:clusterRanges backgroundImages:backgrounds];
