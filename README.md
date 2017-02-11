@@ -8,11 +8,13 @@
 Ti.GoogleMaps is an open-source project to support the Google Maps iOS-SDK in Appcelerator's Titanium Mobile. The module currently supports the following API's:
 - [x] Map View
 - [x] Annotations
+- [x] Tile overlay
 - [x] Polygon overlay
 - [x] Polyline overlay
 - [x] Circle overlay
 - [x] Autocompletion dialog
 - [x] Clustering
+- [x] Directions
 - [x] All delegates (exposed as events)
 
 Requirements
