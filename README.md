@@ -490,6 +490,7 @@ maps.reverseGeocoder(36.368122, -120.913653, function(e) {
 
     Ti.API.info(e.places);
 });
+```
 
 ### Directions
 Use the Directions API to calculate advanced directions:
