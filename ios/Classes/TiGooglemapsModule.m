@@ -136,12 +136,17 @@
                           NSDictionary *errorObject = [TiUtils dictionaryWithCode:1 message:[error localizedDescription]];
                           NSArray *invocationArray = [[NSArray alloc] initWithObjects:&errorObject count:1];
                           
-                          [errorCallback call:invocationArray thisObject:self];
+                          TiThreadPerformOnMainThread(^{
+                              [errorCallback call:invocationArray thisObject:self];
+                          }, NO);
+
                           return;
                       }
                       
-                      NSArray *invocationArray = [[NSArray alloc] initWithObjects:&json count:1];
-                      [successCallback call:invocationArray thisObject:self];
+                      TiThreadPerformOnMainThread(^{
+                          NSArray *invocationArray = [[NSArray alloc] initWithObjects:&json count:1];
+                          [successCallback call:invocationArray thisObject:self];
+                      }, NO);
                   }];
 }
 
