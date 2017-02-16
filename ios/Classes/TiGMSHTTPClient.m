@@ -39,7 +39,15 @@ NSString *const kTiGoogleMapsBasePath = @"https://maps.googleapis.com/maps/api";
         json  = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         
         if ([json objectForKey:@"error_message"]) {
-            completionHandler(json, error);
+            NSDictionary *userInfo = @{
+                NSLocalizedDescriptionKey: NSLocalizedString([json objectForKey:@"error_message"], nil),
+            };
+            
+            NSError *apiError = [NSError errorWithDomain:NSURLErrorDomain
+                                                 code:-1
+                                             userInfo:userInfo];
+            
+            completionHandler(json, apiError);
             return;
         }
         
