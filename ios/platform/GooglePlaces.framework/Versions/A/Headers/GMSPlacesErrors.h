@@ -8,13 +8,9 @@
 //  Service: https://developers.google.com/maps/terms
 //
 
-#if __has_feature(modules)
-@import GoogleMapsBase;
-#else
-#import <GoogleMapsBase/GoogleMapsBase.h>
-#endif
+#import <Foundation/Foundation.h>
 
-GMS_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /* Error domain used for Places API errors. */
 extern NSString * const kGMSPlacesErrorDomain;
@@ -100,4 +96,4 @@ typedef NS_ENUM(NSInteger, GMSPlacesErrorCode) {
   kGMSPlacesLocationError = -11
 };
 
-GMS_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

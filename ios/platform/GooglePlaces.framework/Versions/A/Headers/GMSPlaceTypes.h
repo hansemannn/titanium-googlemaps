@@ -8,6 +8,8 @@
 //  Service: https://developers.google.com/maps/terms
 //
 
+#import <Foundation/Foundation.h>
+
 
 
 extern NSString *const kGMSPlaceTypeAccounting;

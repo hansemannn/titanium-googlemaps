@@ -10,13 +10,7 @@
 
 #import <CoreLocation/CoreLocation.h>
 
-#if __has_feature(modules)
-@import GoogleMapsBase;
-#else
-#import <GoogleMapsBase/GoogleMapsBase.h>
-#endif
-
-GMS_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 @class GMSPanoramaLink;
 
@@ -33,8 +27,8 @@ GMS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy, readonly) NSString *panoramaID;
 
 /** An array of GMSPanoramaLink describing the neighboring panoramas. */
-@property(nonatomic, copy, readonly) GMS_NSArrayOf(GMSPanoramaLink *) * links;
+@property(nonatomic, copy, readonly) NSArray<GMSPanoramaLink *> *links;
 
 @end
 
-GMS_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

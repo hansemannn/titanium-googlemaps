@@ -10,13 +10,7 @@
 
 #import <UIKit/UIKit.h>
 
-#if __has_feature(modules)
-@import GoogleMapsBase;
-#else
-#import <GoogleMapsBase/GoogleMapsBase.h>
-#endif
-
-GMS_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * The metadata corresponding to a single photo associated with a place.
@@ -32,7 +26,7 @@ GMS_ASSUME_NONNULL_BEGIN
  * In general, these must be shown to the user if data from this GMSPlacePhotoMetadata is shown, as
  * described in the Places API Terms of Service.
  */
-@property(nonatomic, readonly, copy) NSAttributedString* GMS_NULLABLE_PTR attributions;
+@property(nonatomic, readonly, copy, nullable) NSAttributedString *attributions;
 
 /**
  * The maximum pixel size in which this photo is available.
@@ -41,4 +35,4 @@ GMS_ASSUME_NONNULL_BEGIN
 
 @end
 
-GMS_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

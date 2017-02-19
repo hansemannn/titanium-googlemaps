@@ -15,16 +15,11 @@
 #else
 #import <GoogleMapsBase/GoogleMapsBase.h>
 #endif
-#if __has_feature(modules)
-@import GoogleMapsBase;
-#else
-#import <GoogleMapsBase/GoogleMapsBase.h>
-#endif
 #import <GooglePlaces/GMSAutocompleteFilter.h>
 #import <GooglePlaces/GMSAutocompletePrediction.h>
 #import <GooglePlaces/GMSPlace.h>
 
-GMS_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 @class GMSAutocompleteTableDataSource;
 
@@ -117,14 +112,13 @@ GMS_ASSUME_NONNULL_BEGIN
     UITableViewDataSource, UITableViewDelegate>
 
 /** Delegate to be notified when a place is selected or picking is cancelled. */
-@property(nonatomic, weak)
-    IBOutlet id<GMSAutocompleteTableDataSourceDelegate> GMS_NULLABLE_PTR delegate;
+@property(nonatomic, weak, nullable) IBOutlet id<GMSAutocompleteTableDataSourceDelegate> delegate;
 
 /** Bounds used to bias the autocomplete search (can be nil). */
-@property(nonatomic, strong) GMSCoordinateBounds *GMS_NULLABLE_PTR autocompleteBounds;
+@property(nonatomic, strong, nullable) GMSCoordinateBounds *autocompleteBounds;
 
 /** Filter to apply to autocomplete suggestions (can be nil). */
-@property(nonatomic, strong) GMSAutocompleteFilter *GMS_NULLABLE_PTR autocompleteFilter;
+@property(nonatomic, strong, nullable) GMSAutocompleteFilter *autocompleteFilter;
 
 /** The background color of table cells. */
 @property(nonatomic, strong) UIColor *tableCellBackgroundColor;
@@ -142,7 +136,7 @@ GMS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) UIColor *secondaryTextColor;
 
 /** The tint color applied to controls in the Autocomplete view. */
-@property(nonatomic, strong) UIColor *GMS_NULLABLE_PTR tintColor;
+@property(nonatomic, strong, nullable) UIColor *tintColor;
 
 /** Designated initializer */
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -157,8 +151,8 @@ GMS_ASSUME_NONNULL_BEGIN
  * This method is non-blocking.
  * @param text The partial text to autocomplete.
  */
-- (void)sourceTextHasChanged:(NSString *GMS_NULLABLE_PTR)text;
+- (void)sourceTextHasChanged:(nullable NSString *)text;
 
 @end
 
-GMS_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

@@ -10,13 +10,7 @@
 
 #import <CoreLocation/CoreLocation.h>
 
-#if __has_feature(modules)
-@import GoogleMapsBase;
-#else
-#import <GoogleMapsBase/GoogleMapsBase.h>
-#endif
-
-GMS_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 @class GMSAddressComponent;
 @class GMSCoordinateBounds;
@@ -70,12 +64,12 @@ typedef NS_ENUM(NSInteger, GMSPlacesPriceLevel) {
  * Phone number of this place, in international format, i.e. including the country code prefixed
  * with "+".  For example, Google Sydney's phone number is "+61 2 9374 4000".
  */
-@property(nonatomic, copy, readonly) NSString *GMS_NULLABLE_PTR phoneNumber;
+@property(nonatomic, copy, readonly, nullable) NSString *phoneNumber;
 
 /**
  * Address of the place as a simple string.
  */
-@property(nonatomic, copy, readonly) NSString *GMS_NULLABLE_PTR formattedAddress;
+@property(nonatomic, copy, readonly, nullable) NSString *formattedAddress;
 
 /**
  * Five-star rating for this place based on user reviews.
@@ -97,10 +91,10 @@ typedef NS_ENUM(NSInteger, GMSPlacesPriceLevel) {
  * The types of this place.  Types are NSStrings, valid values are any types documented at
  * <https://developers.google.com/places/ios-api/supported_types>.
  */
-@property(nonatomic, copy, readonly) GMS_NSArrayOf(NSString *) *types;
+@property(nonatomic, copy, readonly) NSArray<NSString *> *types;
 
 /** Website for this place. */
-@property(nonatomic, copy, readonly) NSURL *GMS_NULLABLE_PTR website;
+@property(nonatomic, copy, readonly, nullable) NSURL *website;
 
 /**
  * The data provider attribution string for this place.
@@ -111,7 +105,7 @@ typedef NS_ENUM(NSInteger, GMSPlacesPriceLevel) {
  * In general, these must be shown to the user if data from this GMSPlace is shown, as described in
  * the Places API Terms of Service.
  */
-@property(nonatomic, copy, readonly) NSAttributedString *GMS_NULLABLE_PTR attributions;
+@property(nonatomic, copy, readonly, nullable) NSAttributedString *attributions;
 
 /**
  * The recommended viewport for this place. May be nil if the size of the place is not known.
@@ -120,7 +114,7 @@ typedef NS_ENUM(NSInteger, GMSPlacesPriceLevel) {
  * |GMSPlace| object representing a store may have a relatively small viewport, while a |GMSPlace|
  * object representing a country may have a very large viewport.
  */
-@property(nonatomic, strong, readonly) GMSCoordinateBounds *GMS_NULLABLE_PTR viewport;
+@property(nonatomic, strong, readonly, nullable) GMSCoordinateBounds *viewport;
 
 /**
  * An array of |GMSAddressComponent| objects representing the components in the place's address.
@@ -130,9 +124,8 @@ typedef NS_ENUM(NSInteger, GMSPlacesPriceLevel) {
  * These components should not be used for address formatting. If a formatted address is required,
  * use the |formattedAddress| property, which provides a localized formatted address.
  */
-@property(nonatomic, copy, readonly)
-    GMS_NSArrayOf(GMSAddressComponent *) *GMS_NULLABLE_PTR addressComponents;
+@property(nonatomic, copy, readonly, nullable) NSArray<GMSAddressComponent *> *addressComponents;
 
 @end
 
-GMS_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

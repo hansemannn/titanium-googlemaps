@@ -8,15 +8,10 @@
 //  Service: https://developers.google.com/maps/terms
 //
 
+#import <CoreGraphics/CoreGraphics.h>
 #import <CoreLocation/CoreLocation.h>
 
-#if __has_feature(modules)
-@import GoogleMapsBase;
-#else
-#import <GoogleMapsBase/GoogleMapsBase.h>
-#endif
-
-GMS_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /**
 * An immutable class that aggregates all camera position parameters.
@@ -128,4 +123,4 @@ FOUNDATION_EXTERN const float kGMSMaxZoomLevel;
 /** The minimum zoom (farthest from the Earth's surface) permitted by the map camera. */
 FOUNDATION_EXTERN const float kGMSMinZoomLevel;
 
-GMS_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END
