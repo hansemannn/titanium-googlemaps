@@ -43,8 +43,7 @@
 /**
  * Remove entry at |index|.
  *
- * If |index| < count decrements size. If |index| >= count this is a silent
- * no-op.
+ * If |index| < count decrements size. If |index| >= count this is a silent no-op.
  */
 - (void)removeCoordinateAtIndex:(NSUInteger)index;
 

@@ -8,6 +8,7 @@
 //  Service: https://developers.google.com/maps/terms
 //
 
+#import <CoreGraphics/CoreGraphics.h>
 #import <CoreLocation/CoreLocation.h>
 
 /**

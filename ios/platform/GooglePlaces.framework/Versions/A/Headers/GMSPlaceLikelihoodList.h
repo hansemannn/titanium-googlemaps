@@ -8,13 +8,9 @@
 //  Service: https://developers.google.com/maps/terms
 //
 
-#if __has_feature(modules)
-@import GoogleMapsBase;
-#else
-#import <GoogleMapsBase/GoogleMapsBase.h>
-#endif
+#import <Foundation/Foundation.h>
 
-GMS_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 @class GMSPlaceLikelihood;
 
@@ -28,7 +24,7 @@ GMS_ASSUME_NONNULL_BEGIN
 @interface GMSPlaceLikelihoodList : NSObject
 
 /** An array of likelihoods, sorted in descending order. */
-@property(nonatomic, copy) GMS_NSArrayOf(GMSPlaceLikelihood *) *likelihoods;
+@property(nonatomic, copy) NSArray<GMSPlaceLikelihood *> *likelihoods;
 
 /**
  * The data provider attribution strings for the likelihood list.
@@ -39,8 +35,8 @@ GMS_ASSUME_NONNULL_BEGIN
  * In general, these must be shown to the user if data from this likelihood list is shown, as
  * described in the Places API Terms of Service.
  */
-@property(nonatomic, copy, readonly) NSAttributedString *GMS_NULLABLE_PTR attributions;
+@property(nonatomic, copy, readonly, nullable) NSAttributedString *attributions;
 
 @end
 
-GMS_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

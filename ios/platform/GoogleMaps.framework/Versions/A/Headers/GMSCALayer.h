@@ -11,8 +11,8 @@
 #import <QuartzCore/QuartzCore.h>
 
 /**
- * GMSCALayer is a superclass used by layers in the Google Maps SDK for iOS,
- * such as GMSMapLayer and GMSPanoramaLayer.
+ * GMSCALayer is a superclass used by layers in the Google Maps SDK for iOS, such as GMSMapLayer and
+ * GMSPanoramaLayer.
  *
  * This is an implementation detail and it should not be instantiated directly.
  */

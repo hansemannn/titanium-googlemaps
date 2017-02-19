@@ -10,26 +10,19 @@
 
 #import <GoogleMaps/GMSTileLayer.h>
 
-#if __has_feature(modules)
-@import GoogleMapsBase;
-#else
-#import <GoogleMapsBase/GoogleMapsBase.h>
-#endif
-
 @class NSURL;
 
-GMS_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /**
- * |GMSTileURLConstructor| is a block taking |x|, |y| and |zoom|
- * and returning an NSURL, or nil to indicate no tile for that location.
+ * |GMSTileURLConstructor| is a block taking |x|, |y| and |zoom| and returning an NSURL, or nil to
+ * indicate no tile for that location.
  */
-typedef NSURL *GMS_NULLABLE_PTR (^GMSTileURLConstructor)(NSUInteger x, NSUInteger y,
-                                                         NSUInteger zoom);
+typedef NSURL *_Nullable (^GMSTileURLConstructor)(NSUInteger x, NSUInteger y, NSUInteger zoom);
 
 /**
- * GMSURLTileProvider fetches tiles based on the URLs returned from a
- * GMSTileURLConstructor. For example:
+ * GMSURLTileProvider fetches tiles based on the URLs returned from a GMSTileURLConstructor. For
+ * example:
  * <pre>
  *   GMSTileURLConstructor constructor = ^(NSUInteger x, NSUInteger y, NSUInteger zoom) {
  *     NSString *URLStr =
@@ -42,8 +35,8 @@ typedef NSURL *GMS_NULLABLE_PTR (^GMSTileURLConstructor)(NSUInteger x, NSUIntege
  *   layer.map = map;
  * </pre>
  *
- * GMSURLTileProvider may not be subclassed and should only be created via its
- * convenience constructor.
+ * GMSURLTileProvider may not be subclassed and should only be created via its convenience
+ * constructor.
  */
 @interface GMSURLTileLayer : GMSTileLayer
 
@@ -51,11 +44,11 @@ typedef NSURL *GMS_NULLABLE_PTR (^GMSTileURLConstructor)(NSUInteger x, NSUIntege
 + (instancetype)tileLayerWithURLConstructor:(GMSTileURLConstructor)constructor;
 
 /**
- * Specify the user agent to describe your application. If this is nil (the
- * default), the default iOS user agent is used for HTTP requests.
+ * Specify the user agent to describe your application. If this is nil (the default), the default
+ * iOS user agent is used for HTTP requests.
  */
-@property(nonatomic, copy) NSString *GMS_NULLABLE_PTR userAgent;
+@property(nonatomic, copy, nullable) NSString *userAgent;
 
 @end
 
-GMS_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

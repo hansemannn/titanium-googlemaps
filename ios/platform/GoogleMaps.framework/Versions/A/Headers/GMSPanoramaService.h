@@ -10,41 +10,36 @@
 
 #import <CoreLocation/CoreLocation.h>
 
-#if __has_feature(modules)
-@import GoogleMapsBase;
-#else
-#import <GoogleMapsBase/GoogleMapsBase.h>
-#endif
-
 @class GMSPanorama;
 
-GMS_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Callback for when a panorama metadata becomes available.
  * If an error occured, |panorama| is nil and |error| is not nil.
  * Otherwise, |panorama| is not nil and |error| is nil.
  */
-typedef void (^GMSPanoramaCallback)(GMSPanorama *GMS_NULLABLE_PTR panorama,
-                                    NSError *GMS_NULLABLE_PTR error);
+typedef void (^GMSPanoramaCallback)(GMSPanorama *_Nullable panorama, NSError *_Nullable error);
 
 /**
- * GMSPanoramaService can be used to request panorama metadata even when a
- * GMSPanoramaView is not active.
+ * GMSPanoramaService can be used to request panorama metadata even when a GMSPanoramaView is not
+ * active.
+ *
  * Get an instance like this: [[GMSPanoramaService alloc] init].
  */
 @interface GMSPanoramaService : NSObject
 
 /**
  * Retrieves information about a panorama near the given |coordinate|.
+ *
  * This is an asynchronous request, |callback| will be called with the result.
  */
 - (void)requestPanoramaNearCoordinate:(CLLocationCoordinate2D)coordinate
                              callback:(GMSPanoramaCallback)callback;
 
 /**
- * Similar to requestPanoramaNearCoordinate:callback: but allows specifying
- * a search radius (meters) around |coordinate|.
+ * Similar to requestPanoramaNearCoordinate:callback: but allows specifying a search radius (meters)
+ * around |coordinate|.
  */
 - (void)requestPanoramaNearCoordinate:(CLLocationCoordinate2D)coordinate
                                radius:(NSUInteger)radius
@@ -52,11 +47,12 @@ typedef void (^GMSPanoramaCallback)(GMSPanorama *GMS_NULLABLE_PTR panorama,
 
 /**
  * Retrieves information about a panorama with the given |panoramaID|.
- * |callback| will be called with the result. Only panoramaIDs obtained
- * from the Google Maps SDK for iOS are supported.
+ *
+ * |callback| will be called with the result. Only panoramaIDs obtained from the Google Maps SDK for
+ * iOS are supported.
  */
 - (void)requestPanoramaWithID:(NSString *)panoramaID callback:(GMSPanoramaCallback)callback;
 
 @end
 
-GMS_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

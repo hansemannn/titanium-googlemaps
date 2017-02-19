@@ -10,13 +10,7 @@
 
 #import <CoreLocation/CoreLocation.h>
 
-#if __has_feature(modules)
-@import GoogleMapsBase;
-#else
-#import <GoogleMapsBase/GoogleMapsBase.h>
-#endif
-
-GMS_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * GMSPath encapsulates an immutable array of CLLocationCooordinate2D. All the coordinates of a
@@ -40,7 +34,7 @@ GMS_ASSUME_NONNULL_BEGIN
  * Initializes a newly allocated path from |encodedPath|. This format is described at:
  * https://developers.google.com/maps/documentation/utilities/polylinealgorithm
  */
-+ (GMS_NULLABLE_INSTANCETYPE)pathFromEncodedPath:(NSString *)encodedPath;
++ (nullable instancetype)pathFromEncodedPath:(NSString *)encodedPath;
 
 /** Returns an encoded string of the path in the format described above. */
 - (NSString *)encodedPath;
@@ -67,7 +61,7 @@ extern const double kGMSEquatorProjectedMeter;
  * GMSLengthKind indicates the type of a length value, which can be geodesic (in meters), rhumb
  * length (in meters) and projected length (in GMSMapPoint units).
  */
-typedef enum {
+typedef NS_ENUM(NSUInteger, GMSLengthKind) {
   /*
    * Geodesic length, in meters, along geodesic segments. May be useful, for example, to specify
    * lengths along the the trajectory of airplanes or ships.
@@ -91,7 +85,7 @@ typedef enum {
    * regardless of latitude.
    */
   kGMSLengthProjected
-} GMSLengthKind;
+};
 
 @interface GMSPath (GMSPathLength)
 
@@ -108,4 +102,4 @@ typedef enum {
 
 @end
 
-GMS_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END
