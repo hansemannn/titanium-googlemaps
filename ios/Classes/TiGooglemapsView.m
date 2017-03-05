@@ -25,8 +25,6 @@
 
         _mapView = [[GMSMapView alloc] initWithFrame:[self bounds]];
         [_mapView setDelegate:self];
-        [_mapView setMyLocationEnabled:[TiUtils boolValue:[self.proxy valueForKey:@"myLocationEnabled"] def:YES]];
-        [_mapView setUserInteractionEnabled:[TiUtils boolValue:[self.proxy valueForKey:@"userInteractionEnabled"] def:YES]];
         [_mapView setAutoresizingMask:UIViewAutoresizingNone];
 
         [self addSubview:_mapView];
