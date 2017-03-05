@@ -68,7 +68,7 @@ var mapView = maps.createView({
     indoorEnabled: true, // shows indoor polygons of mapped indoor venues
     indoorPicker: true, // shows the vertical floor level
     compassButton: true, // shows the compass (top/right) when bearing is non-zero
-    myLocationEnabled: true,
+    myLocationEnabled: true, // default: false
     myLocationButton: true, // shows the default My location button
     region: { // Camera center of the map
         latitude: 37.368122,

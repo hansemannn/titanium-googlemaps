@@ -52,15 +52,6 @@
 
 #pragma mark Public API's
 
-- (void)setUserInteractionEnabled:(id)value
-{
-    ENSURE_UI_THREAD_1_ARG(value);
-    ENSURE_TYPE(value, NSNumber);
-    
-    [[[self mapView] mapView] setUserInteractionEnabled:[TiUtils boolValue:value]];
-    [self replaceValue:value forKey:@"userInteractionEnabled" notification:NO];
-}
-
 - (void)setMyLocationButton:(id)value
 {
     ENSURE_UI_THREAD_1_ARG(value);
