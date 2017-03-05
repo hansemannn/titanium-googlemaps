@@ -519,7 +519,7 @@ Note that this is not officially supported in the Google Maps iOS SDK. It has be
 by using the REST-API in combination with the `NSURLSession` API and the provided API key.
 
 ### Google License Info
-Google requires you to link the Open Source license somewhere in your map.
+Google requires you to link the Open Source license somewhere in your app.
 Use the following API to receive the Google Maps license:
 
 ```js
