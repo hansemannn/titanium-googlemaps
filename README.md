@@ -1,4 +1,4 @@
-# Ti.GoogleMaps 
+# GoogleMaps iOS SDK in Appcelerator Titanium 
 [![Build Status](https://travis-ci.org/hansemannn/titanium-google-maps.svg?branch=master)](https://travis-ci.org/hansemannn/titanium-google-maps)  [![License](http://hans-knoechel.de/shields/shield-license.svg?v=2)](./LICENSE)  [![Contact](http://hans-knoechel.de/shields/shield-twitter.svg?v=2)](http://twitter.com/hansemannnn)
 
 <img width="1094" src="http://abload.de/img/showcase3vron.png">
