@@ -13,11 +13,11 @@ before_install:
     - nvm use --delete-prefix v4.4.7 4
 install:
     - cd $MODULE_ROOT
-    - curl -o install.sh https://raw.githubusercontent.com/hansemannn/ci/v8/travis/install.sh
+    - curl -o install.sh https://raw.githubusercontent.com/appcelerator-modules/ci/master/travis/install.sh
     - source install.sh -s "--branch master"
 script:
-    - curl -o script.sh https://raw.githubusercontent.com/hansemannn/ci/v8/travis/script.sh
+    - curl -o script.sh https://raw.githubusercontent.com/appcelerator-modules/ci/master/travis/script.sh
     - source script.sh
 after_success: # and this only on success
-    - curl -o deploy.sh https://raw.githubusercontent.com/hansemannn/ci/master/travis/deploy.sh
+    - curl -o deploy.sh https://raw.githubusercontent.com/appcelerator-modules/ci/master/travis/deploy.sh
     - source deploy.sh
