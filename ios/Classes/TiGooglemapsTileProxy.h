@@ -7,7 +7,7 @@
 #import "TiProxy.h"
 #import <GoogleMaps/GoogleMaps.h>
 
-@interface TiGooglemapsTileProxy : TiProxy {
+@interface TiGooglemapsTileProxy : TiProxy<GMSTileReceiver> {
     
 }
 

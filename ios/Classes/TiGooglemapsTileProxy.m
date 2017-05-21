@@ -58,7 +58,7 @@
 
 - (void)setSize:(id)value
 {
-    ENSURE_UI_THREAD(setFadeIn, value);
+    ENSURE_UI_THREAD(setSize, value);
     ENSURE_TYPE(value, NSNumber);
     
     [[self tile] setTileSize:[TiUtils intValue:value]];
@@ -78,6 +78,40 @@
 {
     ENSURE_UI_THREAD(clearTileCache, unused);
     [[self tile] clearTileCache];
+}
+
+- (void)requestTile:(id)args
+{
+    ENSURE_UI_THREAD(requestTile, args);
+    ENSURE_SINGLE_ARG(args, NSDictionary);
+    
+    NSNumber *x = [TiUtils numberFromObject:[args objectForKey:@"x"]];
+    NSNumber *y = [TiUtils numberFromObject:[args objectForKey:@"y"]];
+    NSNumber *zoom = [TiUtils numberFromObject:[args objectForKey:@"zoom"]];
+    
+    [[self tile] requestTileForX:x.unsignedIntegerValue
+                               y:y.unsignedIntegerValue
+                            zoom:zoom.unsignedIntegerValue
+                        receiver:self];
+}
+
+#pragma mark Tile Receiver Delegate
+
+- (void)receiveTileWithX:(NSUInteger)x
+                       y:(NSUInteger)y
+                    zoom:(NSUInteger)zoom
+                   image:(UIImage *)image
+{
+    if ([self _hasListeners:@"receivetile"]) {
+        NSDictionary *event = @{
+            @"x": NUMUINTEGER(x),
+            @"y": NUMUINTEGER(y),
+            @"zoom": NUMUINTEGER(zoom),
+            @"image": [[TiBlob alloc] initWithImage:image]
+        };
+        
+        [self fireEvent:@"receivetile" withObject:@{@"tile": event}];
+    }
 }
 
 @end
