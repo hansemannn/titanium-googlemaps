@@ -479,6 +479,27 @@ mapView.addTile(tile);
 // Remove tile
 mapView.removeTile(tile);
 ```
+You can also request a tile image for a specified x/y/zoom position:
+```js
+var tile = maps.createTile({
+    url: "http://c.tile.openstreetmap.org/{z}/{x}/{y}.png",
+});
+
+tile.addEventListener('receivetile', function(e) {
+    Ti.API.info('Received new tile at ' + e.tile.x + 'x' + e.tile.y);
+    Ti.API.info(e);
+
+    // Add tile image to a view or process it somewhere else
+    // win.add(Ti.UI.createImageView({image: e.tile.image}));
+});
+
+tile.requestTile({
+    x: 200,
+    y: 200,
+    zoom: 3
+});
+```
+
 For more information on Tile Layers: https://developers.google.com/maps/documentation/ios-sdk/tiles
 
 In future releases you will also be able to specify local images, but that is not scheduled so far.
