@@ -31,6 +31,7 @@
 
 - (void)setZIndex:(id)value
 {
+    ENSURE_UI_THREAD(setZIndex, value);
     ENSURE_TYPE(value, NSNumber);
     
     [[self tile] setZIndex:[TiUtils intValue:value]];
@@ -39,6 +40,7 @@
 
 - (void)setOpacity:(id)value
 {
+    ENSURE_UI_THREAD(setOpacity, value);
     ENSURE_TYPE(value, NSNumber);
     
     [[self tile] setOpacity:[TiUtils floatValue:value]];
@@ -47,6 +49,7 @@
 
 - (void)setFadeIn:(id)value
 {
+    ENSURE_UI_THREAD(setFadeIn, value);
     ENSURE_TYPE(value, NSNumber);
     
     [[self tile] setFadeIn:[TiUtils boolValue:value]];
@@ -55,6 +58,7 @@
 
 - (void)setSize:(id)value
 {
+    ENSURE_UI_THREAD(setFadeIn, value);
     ENSURE_TYPE(value, NSNumber);
     
     [[self tile] setTileSize:[TiUtils intValue:value]];
@@ -63,6 +67,7 @@
 
 - (void)setUserAgent:(id)value
 {
+    ENSURE_UI_THREAD(setUserAgent, value);
     ENSURE_TYPE(value, NSString);
     
     [[self tile] setUserAgent:[TiUtils stringValue:value]];
@@ -71,6 +76,7 @@
 
 - (void)clearTileCache:(id)unused
 {
+    ENSURE_UI_THREAD(clearTileCache, unused);
     [[self tile] clearTileCache];
 }
 

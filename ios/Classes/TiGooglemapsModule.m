@@ -33,7 +33,7 @@
 {
 	[super startup];
 
-	NSLog(@"[INFO] %@ loaded",self);
+	NSLog(@"[DEBUG] %@ loaded",self);
 }
 
 #pragma Public APIs
