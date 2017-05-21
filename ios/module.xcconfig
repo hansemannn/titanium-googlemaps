@@ -7,7 +7,7 @@
 // http://developer.apple.com/mac/library/documentation/DeveloperTools/Conceptual/XcodeBuildSystem/400-Build_Configurations/build_configs.html
 //
 
-FRAMEWORK_SEARCH_PATHS = $(SRCROOT)/../../modules/iphone/ti.googlemaps/$(TI_MODULE_VERSION)/platform "~/Library/Application\ Support/Titanium/modules/iphone/ti.googlemaps/$(TI_MODULE_VERSION)/platform"
+FRAMEWORK_SEARCH_PATHS = $(SRCROOT)/../../modules/iphone/ti.googlemaps/3.3.1/platform "~/Library/Application\ Support/Titanium/modules/iphone/ti.googlemaps/3.3.1/platform"
 
 OTHER_LDFLAGS = $(inherited) -framework Accelerate -framework AVFoundation -framework CoreBluetooth -framework CoreData -framework CoreGraphics -framework CoreLocation -framework CoreText -framework GLKit -framework ImageIO -lobjc -lc++ -lz -licucore -framework OpenGLES -framework QuartzCore -framework Security -framework SystemConfiguration -framework GoogleMaps -framework GoogleMapsBase -framework GoogleMapsCore -framework GooglePlaces
 
