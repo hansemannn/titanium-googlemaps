@@ -1,5 +1,5 @@
-# Ti.GoogleMaps 
-[![Build Status](https://travis-ci.org/hansemannn/ti.googlemaps.svg?branch=master)](https://travis-ci.org/hansemannn/ti.googlemaps)  [![License](http://hans-knoechel.de/shields/shield-license.svg?v=2)](./LICENSE)  [![Contact](http://hans-knoechel.de/shields/shield-twitter.svg?v=2)](http://twitter.com/hansemannnn)
+# GoogleMaps iOS SDK in Appcelerator Titanium 
+[![Build Status](https://travis-ci.org/hansemannn/titanium-google-maps.svg?branch=master)](https://travis-ci.org/hansemannn/titanium-google-maps)  [![License](http://hans-knoechel.de/shields/shield-license.svg?v=2)](./LICENSE)  [![Contact](http://hans-knoechel.de/shields/shield-twitter.svg?v=2)](http://twitter.com/hansemannnn)
 
 <img width="1094" src="http://abload.de/img/showcase3vron.png">
 
@@ -48,7 +48,8 @@ maps.setAPIKey('<YOUR_GOOGLE_MAPS_API_KEY>');
 ### Build
 If you want to build the module from the source, you need to check some things beforehand:
 - Set the `TITANIUM_SDK_VERSION` inside the `ios/titanium.xcconfig` file to the Ti.SDK version you want to build with.
-- Build the project with `ti build -p ios --build-only` for Ti.SDK >= 5.2.2
+- Ensure you **build** with SDK 6.0.3 or later. Those versions will include [this PR](https://github.com/appcelerator/titanium_mobile/pull/8861) to automatically set the `TI_MODULE_VERSION` when building. If you are building with SDK < 6.0.3, specify the `TI_MODULE_VERSION` manually in the `module.xcconfig`.   
+- Build the project with `appc run -p ios --build-only`
 - Check the [releases tab](https://github.com/hansemannn/ti.googlemaps/releases) for stable pre-packaged versions of the module
 
 Features
