@@ -8,7 +8,7 @@
 #import "TiViewProxy.h"
 #import <GoogleMaps/GoogleMaps.h>
 
-@interface TiGooglemapsAnnotationProxy : TiProxy
+@interface TiGooglemapsAnnotationProxy : TiProxy<TiProxyObserver>
 
 @property(nonatomic,retain) GMSMarker *marker;
 
@@ -125,5 +125,13 @@
  *  @since 2.4.0
  */
 - (void)updateLocation:(id)args;
+
+/**
+ *  Sets the annotation custom view.
+ *
+ *  @param value The custom view
+ *  @since 3.5.0
+ */
+- (void)setCustomView:(id)value;
 
 @end

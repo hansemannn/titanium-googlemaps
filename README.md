@@ -301,6 +301,47 @@ annotation.updateLocation({
 });
 ```
 
+Since Ti.GoogleMaps 3.5.0, you can also set a custom view. Please note that you need to specify a valid size (width/height)
+for each view-child of this properly, otherwise the view will not be visible. Example:
+```js
+var maps = require("ti.googlemaps");
+maps.setAPIKey('<api-key>');
+var win = Ti.UI.createWindow({
+    backgroundColor: '#fff'
+});
+
+var mapView = maps.createView({
+    region: { // Camera center of the map
+        latitude: 37.368122,
+        longitude: -121.913653
+    }
+});
+
+var label = Ti.UI.createLabel({
+    text: 'Ti',
+    width: Ti.UI.FILL, height: Ti.UI.FILL
+});
+
+var view = Ti.UI.createView({
+    backgroundColor: 'red',
+    width: 30, height: 30
+});
+
+view.add(label);
+
+var annotation = maps.createAnnotation({
+    latitude: 37.368122,
+    longitude: -121.913653,
+    title: 'Appcelerator, Inc',
+    customView: view
+});
+
+mapView.addAnnotation(annotation);
+
+win.add(mapView);
+win.open();
+```
+
 You also can add multiple annotations as well as remove annotations again:
 ```javascript
 mapView.addAnnotations([anno1,anno2,anno3]);
