@@ -8,7 +8,7 @@
 #import "TiViewProxy.h"
 #import <GoogleMaps/GoogleMaps.h>
 
-@interface TiGooglemapsAnnotationProxy : TiProxy<TiProxyObserver>
+@interface TiGooglemapsAnnotationProxy : TiProxy
 
 @property(nonatomic,retain) GMSMarker *marker;
 
