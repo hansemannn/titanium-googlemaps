@@ -576,7 +576,7 @@ The polyline points will be received encoded:
     "points": "a}dcF~nchVPLXLHQhAsCDKzAyDPe@fAqC`@aAh@sARc@pCoHJUj@yAj@{AL]`@cAd@iAbAiCnC_HjAsCvAqDL_@l@mB`@sA^kAJ[h@aBPi@DSJWDMHSFS@GXaABIBI\\eAHW?ATy@HSPo@"
 }
 ```
-To decode the polyline points, use the `maps.decodePolylinePoints(points)` utility method.
+To decode the polyline points, use the `maps.decodePolylinePoints(points)` utility method or [this utility](https://github.com/mapbox/polyline).
                                                                                                                    
 Note that this is not officially supported in the Google Maps iOS SDK. It has been exposed
 by using the REST-API in combination with the `NSURLSession` API and the provided API key.
