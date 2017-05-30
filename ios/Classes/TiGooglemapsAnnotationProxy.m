@@ -192,4 +192,21 @@
     [self replaceValue:longitude forKey:@"longitude" notification:NO];
 }
 
+- (void)setCustomView:(id)value
+{
+    ENSURE_UI_THREAD(setCustomView, value);
+    
+    id current = [self valueForUndefinedKey:@"customView"];
+    [self replaceValue:value forKey:@"customView" notification:NO];
+    
+    if (value == [NSNull null] || value == nil) {
+        [[self marker] setIconView:nil];
+    } else if ([current isEqual:value] == NO) {
+        [self forgetProxy:current];
+        [self rememberProxy:value];
+        
+        [[self marker] setIconView:[(TiViewProxy *)value view]];
+    }
+}
+
 @end

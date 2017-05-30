@@ -126,4 +126,12 @@
  */
 - (void)updateLocation:(id)args;
 
+/**
+ *  Sets the annotation custom view.
+ *
+ *  @param value The custom view
+ *  @since 3.5.0
+ */
+- (void)setCustomView:(id)value;
+
 @end
