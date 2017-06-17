@@ -295,9 +295,11 @@ annotation.updateLocation({
     latitude: 36.368122,
     longitude: -125.913653, 
 
-    // Optional: Animation
+    // Optional
     animated: true,
     duration: 1000 // in MS, default: 2000
+    opacity: 0.5,
+    rotation: 30 // in degrees, clockwise from the default position
 });
 ```
 
