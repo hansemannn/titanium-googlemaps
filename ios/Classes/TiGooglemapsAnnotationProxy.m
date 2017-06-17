@@ -178,11 +178,28 @@
     id longitude = [args valueForKey:@"longitude"];
     id animated = [args valueForKey:@"animated"];
     id duration = [args valueForKey:@"duration"];
+    id rotation = [args valueForKey:@"rotation"];
+    id opacity = [args valueForKey:@"opacity"];
     
     if ([TiUtils boolValue:animated def:NO]) {
         [CATransaction begin];
         [CATransaction setAnimationDuration:[TiUtils floatValue:duration def:2000] / 1000];
+        
+        // Update coordinates
+        if (latitude != nil && longitude != nil) {
             [[self marker] setPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude],[TiUtils doubleValue:longitude])];
+        }
+        
+        // Update rotation
+        if (rotation != nil) {
+            [[self marker] setRotation:[TiUtils doubleValue:rotation def:0]];
+        }
+        
+        // Update opacity
+        if (opacity != nil) {
+            [[self marker] setOpacity:[TiUtils floatValue:opacity def:1]];
+        }
+        
         [CATransaction commit];
     } else {
         [[self marker] setPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude],[TiUtils doubleValue:longitude])];
