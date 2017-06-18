@@ -181,10 +181,9 @@
     id rotation = [args valueForKey:@"rotation"];
     id opacity = [args valueForKey:@"opacity"];
     
-    if ([TiUtils boolValue:animated def:NO]) {
-        [CATransaction begin];
-        [CATransaction setAnimationDuration:[TiUtils floatValue:duration def:2000] / 1000];
-        
+    typedef void (^UpdateLocationHandler)();
+    
+    UpdateLocationHandler locationHandler = ^void() {
         // Update coordinates
         if (latitude != nil && longitude != nil) {
             [[self marker] setPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude],[TiUtils doubleValue:longitude])];
@@ -199,10 +198,17 @@
         if (opacity != nil) {
             [[self marker] setOpacity:[TiUtils floatValue:opacity def:1]];
         }
+    };
+    
+    if ([TiUtils boolValue:animated def:NO]) {
+        [CATransaction begin];
+        [CATransaction setAnimationDuration:[TiUtils floatValue:duration def:2000] / 1000];
+        
+        locationHandler();
         
         [CATransaction commit];
     } else {
-        [[self marker] setPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude],[TiUtils doubleValue:longitude])];
+        locationHandler();
     }
     
     [self replaceValue:latitude forKey:@"latitude" notification:NO];
