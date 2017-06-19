@@ -181,32 +181,47 @@
     id rotation = [args valueForKey:@"rotation"];
     id opacity = [args valueForKey:@"opacity"];
     
-    if ([TiUtils boolValue:animated def:NO]) {
-        [CATransaction begin];
-        [CATransaction setAnimationDuration:[TiUtils floatValue:duration def:2000] / 1000];
-        
+    ENSURE_TYPE(latitude, NSNumber);
+    ENSURE_TYPE(longitude, NSNumber);
+    ENSURE_TYPE_OR_NIL(animated, NSNumber);
+    ENSURE_TYPE_OR_NIL(duration, NSNumber);
+    ENSURE_TYPE_OR_NIL(rotation, NSNumber);
+    ENSURE_TYPE_OR_NIL(opacity, NSNumber);
+    
+    typedef void (^UpdateLocationHandler)();
+    
+    UpdateLocationHandler locationHandler = ^void() {
         // Update coordinates
         if (latitude != nil && longitude != nil) {
             [[self marker] setPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude],[TiUtils doubleValue:longitude])];
+            
+            [self replaceValue:latitude forKey:@"latitude" notification:NO];
+            [self replaceValue:longitude forKey:@"longitude" notification:NO];
         }
         
         // Update rotation
         if (rotation != nil) {
             [[self marker] setRotation:[TiUtils doubleValue:rotation def:0]];
+            [self replaceValue:rotation forKey:@"rotation" notification:NO];
         }
         
         // Update opacity
         if (opacity != nil) {
             [[self marker] setOpacity:[TiUtils floatValue:opacity def:1]];
+            [self replaceValue:opacity forKey:@"opacity" notification:NO];
         }
+    };
+    
+    if ([TiUtils boolValue:animated def:NO]) {
+        [CATransaction begin];
+        [CATransaction setAnimationDuration:[TiUtils floatValue:duration def:2000] / 1000];
+        
+        locationHandler();
         
         [CATransaction commit];
     } else {
-        [[self marker] setPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude],[TiUtils doubleValue:longitude])];
+        locationHandler();
     }
-    
-    [self replaceValue:latitude forKey:@"latitude" notification:NO];
-    [self replaceValue:longitude forKey:@"longitude" notification:NO];
 }
 
 - (void)setCustomView:(id)value
