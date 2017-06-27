@@ -47,27 +47,6 @@ def read_ti_xcconfig():
 			config[key] = replace_vars(config,value)
 	return config
 
-def generate_doc(config):
-	docdir = os.path.join(cwd,'documentation')
-	if not os.path.exists(docdir):
-		docdir = os.path.join(cwd,'..','documentation')
-	if not os.path.exists(docdir):
-		print "Couldn't find documentation file at: %s" % docdir
-		return None
-
-	try:
-		import markdown2 as markdown
-	except ImportError:
-		import markdown
-	documentation = []
-	for file in os.listdir(docdir):
-		if file in ignoreFiles or os.path.isdir(os.path.join(docdir, file)):
-			continue
-		md = open(os.path.join(docdir,file)).read()
-		html = markdown.markdown(md)
-		documentation.append({file:html});
-	return documentation
-
 def compile_js(manifest,config):
 	js_file = os.path.join(cwd,'assets','ti.googlemaps.js')
 	if not os.path.exists(js_file):
@@ -225,13 +204,6 @@ def package_module(manifest,mf,config):
 	zf.write(mf,'%s/manifest' % modulepath)
 	libname = 'lib%s.a' % moduleid
 	zf.write('build/%s' % libname, '%s/%s' % (modulepath,libname))
-	docs = generate_doc(config)
-	if docs!=None:
-		for doc in docs:
-			for file, html in doc.iteritems():
-				filename = string.replace(file,'.md','.html')
-				zf.writestr('%s/documentation/%s'%(modulepath,filename),html)
-
 	p = os.path.join(cwd, 'assets')
 	if not os.path.exists(p):
 		p = os.path.join(cwd, '..', 'assets')
