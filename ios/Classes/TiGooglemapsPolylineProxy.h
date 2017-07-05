@@ -8,8 +8,17 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "TiUtils.h"
 
-@interface TiGooglemapsPolylineProxy : TiProxy
+@interface TiGooglemapsPolylineProxy : TiProxy {
+    NSInteger patternType;
+    
+    NSNumber *dashLength;
+    NSNumber *gapLength;
+    
+    NSArray *styles;
+}
 
 @property(nonatomic,retain) GMSPolyline *polyline;
+
+-(void)updatePattern:(float)scale;
 
 @end
