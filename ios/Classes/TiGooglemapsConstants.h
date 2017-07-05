@@ -11,3 +11,8 @@ typedef NS_ENUM(NSUInteger, TiGooglemapsOverlayType) {
     TiGooglemapsOverlayTypePolyline,
     TiGooglemapsOverlayTypeCircle
 };
+
+typedef NS_ENUM(NSUInteger, TiGooglemapsPolylinePattern) {
+    TiGooglemapsPolylinePatternDashed = 1,
+    TiGooglemapsPolylinePatternDotted = 2
+};

@@ -1,4 +1,4 @@
-# GoogleMaps iOS SDK in Appcelerator Titanium 
+# GoogleMaps iOS SDK in Appcelerator Titanium
 [![Build Status](https://travis-ci.org/hansemannn/titanium-google-maps.svg?branch=master)](https://travis-ci.org/hansemannn/titanium-google-maps)  [![License](http://hans-knoechel.de/shields/shield-license.svg?v=2)](./LICENSE)  [![Contact](http://hans-knoechel.de/shields/shield-twitter.svg?v=2)](http://twitter.com/hansemannnn)
 
 <img width="1094" src="http://abload.de/img/showcase3vron.png">
@@ -55,7 +55,7 @@ If you want to build the module from the source, you need to check some things b
 Features
 --------------------------------
 #### Map View
-A map view creates the view on which annotations and overlays can be added to. You can see all possible events in the demo app. 
+A map view creates the view on which annotations and overlays can be added to. You can see all possible events in the demo app.
 In addition, you can specify one of the following constants to the `mapType` property:
  - `MAP_TYPE_NORMAL`
  - `MAP_TYPE_HYBRID`
@@ -95,8 +95,8 @@ The module supports all native delegates - exposed as events. These are:
 - [x] dragend
 - [x] complete
 
-> Note: For annotations, the latitude, longitude and userData is returned, not the whole annotation proxy to keep the 
-> performance at it's best. If you want to identify an annotation, either use the generated UUID string in the `userData` 
+> Note: For annotations, the latitude, longitude and userData is returned, not the whole annotation proxy to keep the
+> performance at it's best. If you want to identify an annotation, either use the generated UUID string in the `userData`
 > or set an own key in the `userData` property of your annotation.
 
 Map Controls:
@@ -170,7 +170,7 @@ cameraUpdate.zoomOut();
 ```js
 // The second parameter is optional
 cameraUpdate.zoom(4, {
-    x: 100, 
+    x: 100,
     y: 100
 });
 ```
@@ -200,11 +200,11 @@ cameraUpdate.fitBounds({
     insets: {top: 10, left: 10, bottom: 10, right: 10},
     bounds: {
         coordinate1: {
-            latitude: 10.0, 
+            latitude: 10.0,
             longitude: 10.0
-        }, 
+        },
         coordinate2: {
-            latitude: 12.0, 
+            latitude: 12.0,
             longitude: 12.0
         }
     }
@@ -213,7 +213,7 @@ cameraUpdate.fitBounds({
 - [x] **scrollBy**
 ```js
 cameraUpdate.scrollBy({
-    x: 100, 
+    x: 100,
     y: 100
 });
 ```
@@ -229,7 +229,7 @@ mapView.animateWithCameraUpdate(cameraUpdate);
 ```
 
 #### Annotations
-An annotation represents a location specified by at least a `title` and a `subtitle` property. 
+An annotation represents a location specified by at least a `title` and a `subtitle` property.
 It can be added to a map view:
 
 ```javascript
@@ -293,7 +293,7 @@ You can update the location of an Annotation by using:
 annotation.updateLocation({
     // Required
     latitude: 36.368122,
-    longitude: -125.913653, 
+    longitude: -125.913653,
 
     // Optional
     animated: true,
@@ -368,7 +368,7 @@ var selectedAnnotation = mapView.getSelectedAnnotation(); // Selected annotation
 
 #### Autocomplete Dialog
 A autocomplete dialog can be opened modally to search for places in realtime. A number of events
-helps to work with partial results and final selections. 
+helps to work with partial results and final selections.
 
 The whole dialog can be styled (like in the following example) and the default native theming is light.
 
@@ -397,7 +397,7 @@ dialog.open();
 Overlays can be added to the map view just like annotations. The module supports the methods `addPolygon`, `addPolyline` and `addCircle` to add overlays and `removePolygon`, `removePolyline` and `removeCircle` to remove them.
 
 ##### Polyline
-A polyline is a shape defined by its `points` property. It needs at least 2 points to draw a line.
+A polyline is a shape defined by its `points` property. It needs at least 2 points to draw a line. You can optionally define a dashed or dotted polyline stroke.
 
 ```javascript
 var polyline = maps.createPolyline({
@@ -406,10 +406,16 @@ var polyline = maps.createPolyline({
         longitude : 144.96298
     }, [-31.95285, 115.85734]],
     strokeWidth : 3, // Default: 1
-    strokeColor : '#f00'  // Default: Black (#000000)
+    strokeColor : '#f00',  // Default: Black (#000000)
+    pattern: {
+			type: Map.POLYLINE_PATTERN_DASHED, // or Map.POLYLINE_PATTERN_DOTTED
+			dashLength: 15,
+			gapLength: 10
+		}
 });
 mapView.addPolyline(polyline);
 ```
+When `pattern.type` property is set to `Map.POLYLINE_PATTERN_DOTTED`, `dashLenght` and `gapLength` are ignored and the property `strokeWidth` will be used to determine the dot sizes.
 
 ##### Polygon
 A polygon is a shape defined by its `points` property. It behaves similiar to a polyline, but is meant to close its area automatically and also supports the `fillColor` property.
@@ -444,7 +450,7 @@ mapView.addCircle(circle);
 ```
 
 #### Clustering
-You can cluster multiple items by using the Clustering API. 
+You can cluster multiple items by using the Clustering API.
 
 First, create a few cluster items using the `ClusterItem`:
 ```js
@@ -454,7 +460,7 @@ var clusterItem = maps.createClusterItem({
     // Required
     latitude: 37.368122,
     longitude: -121.913653,
-    
+
     // Optional - for now only this three properties available
     title: 'My Annotation',
     subtitle: 'Hello World!',
@@ -579,7 +585,7 @@ The polyline points will be received encoded:
 }
 ```
 To decode the polyline points, use the `maps.decodePolylinePoints(points)` utility method or [this utility](https://github.com/mapbox/polyline).
-                                                                                                                   
+
 Note that this is not officially supported in the Google Maps iOS SDK. It has been exposed
 by using the REST-API in combination with the `NSURLSession` API and the provided API key.
 

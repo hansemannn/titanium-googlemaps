@@ -38,16 +38,16 @@
     if (_clusterManager == nil) {
         // Set up the cluster manager with default icon generator and renderer.
         id<GMUClusterAlgorithm> algorithm = [[GMUNonHierarchicalDistanceBasedAlgorithm alloc] init];
-        
+
         TiClusterIconGenerator *iconGenerator = [self createIconGenerator];
-        
+
         TiClusterRenderer *renderer = [[TiClusterRenderer alloc] initWithMapView:_mapView clusterIconGenerator:iconGenerator];
         renderer.delegate = self;
-        
+
         _clusterManager = [[GMUClusterManager alloc] initWithMap:[self mapView] algorithm:algorithm renderer:renderer];
-        [_clusterManager setDelegate:self mapDelegate:self];        
+        [_clusterManager setDelegate:self mapDelegate:self];
     }
-    
+
     return _clusterManager;
 }
 
@@ -55,13 +55,13 @@
 {
     if ([[marker userData] isKindOfClass:[TiPOIItem class]]) {
         TiPOIItem *item = (TiPOIItem *)[marker userData];
-        
+
         // Note: All native props are nullable, so we don't need to check against nil here
-        
+
         [marker setTitle:item.title];
-        
+
         [marker setSnippet:item.subtitle];
-        
+
         [marker setIcon:item.icon];
     }
 }
@@ -70,27 +70,27 @@
 {
     id clusterRanges = [[self proxy] valueForKey:@"clusterRanges"];
     id clusterBackgrounds = [[self proxy] valueForKey:@"clusterBackgrounds"];
-    
+
     if (clusterRanges && clusterBackgrounds) {
         NSMutableArray *backgrounds = [NSMutableArray array];
-        
+
         for (id background in clusterBackgrounds) {
             ENSURE_TYPE(background, NSString);
             UIImage *clusterBackground = [TiUtils image:background proxy:self.proxy];
-            
+
             if (!clusterBackground) {
                 NSLog(@"[ERROR] Cluster background-file (%@) cannot be found, skipping ...");
                 continue;
             }
-            
+
             [backgrounds addObject:clusterBackground];
         }
-        
+
         return [[TiClusterIconGenerator alloc] initWithBuckets:clusterRanges backgroundImages:backgrounds];
     } else if (clusterRanges) {
         return [[TiClusterIconGenerator alloc] initWithBuckets:clusterRanges];
     }
-    
+
     return [[TiClusterIconGenerator alloc] init];
 }
 
@@ -117,7 +117,7 @@
             @"clusterItems": [self arrayFromClusterItems:cluster.items]
         }];
     }
-    
+
     GMSCameraPosition *newCamera = [GMSCameraPosition cameraWithTarget:cluster.position zoom:_mapView.camera.zoom + 1];
     [_mapView moveCamera:[GMSCameraUpdate setCamera:newCamera]];
 }
@@ -150,21 +150,39 @@
 }
 
 - (void)mapView:(GMSMapView *)mapView didChangeCameraPosition:(GMSCameraPosition *)position
-{
+{    
+    GMSVisibleRegion visibleRegion = [mapView.projection visibleRegion];
+    
+    float latitudeDelta = visibleRegion.farRight.latitude - visibleRegion.nearRight.latitude;
+    float longitudeDelta = visibleRegion.farRight.longitude - visibleRegion.nearLeft.longitude;
+    
+    //Updating all polylines strokes
+    NSMutableArray* overlays = ((TiGooglemapsViewProxy *)[self proxy]).overlays;
+    NSArray* filtered = [overlays filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"class == %@", [TiGooglemapsPolylineProxy class]]];
+    
+    if (filtered.count > 0) {
+        float scale = 1.0/[mapView.projection pointsForMeters:1 atCoordinate:mapView.camera.target];
+        
+        for (TiGooglemapsPolylineProxy* polyline in filtered)
+            [polyline updatePattern:scale];
+    }
+
     if ([[self proxy] _hasListeners:@"regionchanged"]) {
         NSMutableDictionary *updatedRegion = [NSMutableDictionary dictionaryWithDictionary:@{
             @"latitude" : NUMDOUBLE(position.target.latitude),
             @"longitude" : NUMDOUBLE(position.target.longitude),
+            @"latitudeDelta": NUMDOUBLE(latitudeDelta),
+            @"longitudeDelta": NUMDOUBLE(longitudeDelta),
             @"zoom": NUMFLOAT(position.zoom),
             @"bearing": NUMDOUBLE(position.bearing),
             @"viewingAngle": NUMDOUBLE(position.viewingAngle)
         }];
-        
+
         [(TiGooglemapsViewProxy *)[self proxy] replaceValue:updatedRegion forKey:@"region" notification:NO];
-        
+
         NSMutableDictionary *event = [NSMutableDictionary dictionaryWithDictionary:updatedRegion];
         [event setObject:[self proxy] forKey:@"map"];
-        
+
         [[self proxy] fireEvent:@"regionchanged" withObject:event];
     }
 }
@@ -210,7 +228,7 @@
             @"longitude": NUMDOUBLE(marker.position.longitude)
         }];
     }
-    
+
     return NO;
 }
 
@@ -276,18 +294,18 @@
 - (UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker
 {
     TiGooglemapsAnnotationProxy *annotation = nil;
-    
+
     for (TiGooglemapsAnnotationProxy *proxy in [(TiGooglemapsViewProxy *)[self proxy] markers]) {
         if ([[[[proxy marker] userData] objectForKey:@"uuid"] isEqualToString:[[marker userData] objectForKey:@"uuid"]]) {
             annotation = proxy;
             [annotation rememberSelf];
         }
     }
-    
+
     if (!annotation) {
         return nil;
     }
-        
+
     return [[annotation infoWindow] view];
 }
 
@@ -338,7 +356,7 @@
     if (!marker) {
         return @{};
     }
-    
+
     return @{
         @"latitude": NUMDOUBLE(marker.position.latitude),
         @"longitude": NUMDOUBLE(marker.position.longitude),
@@ -359,9 +377,9 @@
     } else if ([overlay isKindOfClass:[GMSCircle class]]) {
         return NUMINTEGER(TiGooglemapsOverlayTypeCircle);
     }
-    
+
     NSLog(@"[ERROR] Unknown overlay provided: %@", [overlay class])
-    
+
     return NUMINTEGER(TiGooglemapsOverlayTypeUnknown);
 }
 
@@ -394,7 +412,7 @@
 - (NSArray *)arrayFromClusterItems:(NSArray<id<GMUClusterItem>> *)clusterItems
 {
     NSMutableArray *result = [NSMutableArray arrayWithCapacity:clusterItems.count];
-    
+
     for (id<GMUClusterItem> clusterItem in clusterItems) {
         [result addObject:[[TiGooglemapsClusterItemProxy alloc] _initWithPageContext:[[self proxy] pageContext]
                                                                           andPosition:clusterItem.position
@@ -403,7 +421,7 @@
                                                                                  icon:[(TiPOIItem *)clusterItem icon]
                                                                              userData:[(TiPOIItem *)clusterItem userData]]];
     }
-    
+
     return result;
 }
 
