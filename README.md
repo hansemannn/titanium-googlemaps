@@ -408,10 +408,10 @@ var polyline = maps.createPolyline({
     strokeWidth : 3, // Default: 1
     strokeColor : '#f00',  // Default: Black (#000000)
     pattern: {
-			type: Map.POLYLINE_PATTERN_DASHED, // or Map.POLYLINE_PATTERN_DOTTED
-			dashLength: 15,
-			gapLength: 10
-		}
+	type: Map.POLYLINE_PATTERN_DASHED, // or Map.POLYLINE_PATTERN_DOTTED
+	dashLength: 15,
+	gapLength: 10
+    }
 });
 mapView.addPolyline(polyline);
 ```
