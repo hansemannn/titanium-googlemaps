@@ -244,6 +244,7 @@ var annotation = maps.createAnnotation({
     draggable: true, // Default: false
     flat: true, // Default: false
     opacity: 1,
+    zIndex: 1,
     animationStyle: maps.APPEAR_ANIMATION_POP, // One of 'APPEAR_ANIMATION_NONE' (default) and 'APPEAR_ANIMATION_POP'
     rotation: 30, // measured in degrees clockwise from the default position
     centerOffset: {
@@ -406,7 +407,8 @@ var polyline = maps.createPolyline({
         longitude : 144.96298
     }, [-31.95285, 115.85734]],
     strokeWidth : 3, // Default: 1
-    strokeColor : '#f00'  // Default: Black (#000000)
+    strokeColor : '#f00'  // Default: Black (#000000),
+    title: 'My Polyline'
 });
 mapView.addPolyline(polyline);
 ```
@@ -424,7 +426,8 @@ var polygon = maps.createPolygon({
     [-33.91785, 115.82234]],
     strokeWidth : 3,
     fillColor : 'yellow', // Default: Blue (#0000ff)
-    strokeColor : 'green'
+    strokeColor : 'green',
+    title: 'My Polygon'
 });
 mapView.addPolygon(polygon);
 ```
@@ -439,6 +442,7 @@ var circle = maps.createCircle({
     fillColor: 'blue', // Default: transparent
     strokeWidth : 3,
     strokeColor : 'orange'
+    title: 'My Circle'
 });
 mapView.addCircle(circle);
 ```

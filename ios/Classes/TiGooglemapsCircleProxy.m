@@ -76,6 +76,15 @@
     [self replaceValue:value forKey:@"strokeWidth" notification:NO];
 }
 
+- (void)setTitle:(id)value
+{
+    ENSURE_UI_THREAD(setTitle, value);
+    ENSURE_TYPE(value, NSString);
+    
+    [[self circle] setTitle:[TiUtils stringValue:value]];
+    [self replaceValue:value forKey:@"title" notification:NO];
+}
+
 #pragma mark Utilities
 
 - (CLLocationCoordinate2D)positionFromPoint:(id)point
