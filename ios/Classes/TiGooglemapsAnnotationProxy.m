@@ -74,6 +74,15 @@
     [self replaceValue:value forKey:@"subtitle" notification:NO];
 }
 
+- (void)setZIndex:(id)value
+{
+    ENSURE_UI_THREAD_1_ARG(value);
+    ENSURE_TYPE(value, NSNumber);
+    
+    [[self marker] setZIndex:[TiUtils intValue:value]];
+    [self replaceValue:value forKey:@"zIndex" notification:NO];
+}
+
 - (void)setCenterOffset:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);

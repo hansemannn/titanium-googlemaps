@@ -85,4 +85,13 @@
     [self replaceValue:value forKey:@"setGeodesic" notification:NO];
 }
 
+- (void)setTitle:(id)value
+{
+    ENSURE_UI_THREAD(setTitle, value);
+    ENSURE_TYPE(value, NSString);
+    
+    [[self polyline] setTitle:[TiUtils stringValue:value]];
+    [self replaceValue:value forKey:@"title" notification:NO];
+}
+
 @end
