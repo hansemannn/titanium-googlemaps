@@ -589,6 +589,4 @@
     [renderer render];
 }
 
-
-
 @end
