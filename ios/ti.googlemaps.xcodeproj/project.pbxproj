@@ -105,6 +105,31 @@
 		DBA037051DB1125D004279F0 /* GoogleMapsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBA037011DB1125D004279F0 /* GoogleMapsBase.framework */; };
 		DBA037061DB1125D004279F0 /* GoogleMapsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBA037021DB1125D004279F0 /* GoogleMapsCore.framework */; };
 		DBA037071DB1125D004279F0 /* GooglePlaces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBA037031DB1125D004279F0 /* GooglePlaces.framework */; };
+		DBB7FAD91F17ED8D008EFEEA /* GMUGeoJSONParser.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB7FABF1F17ED8D008EFEEA /* GMUGeoJSONParser.h */; };
+		DBB7FADA1F17ED8D008EFEEA /* GMUGeoJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB7FAC01F17ED8D008EFEEA /* GMUGeoJSONParser.m */; };
+		DBB7FADB1F17ED8D008EFEEA /* GMUGeometryRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB7FAC11F17ED8D008EFEEA /* GMUGeometryRenderer.h */; };
+		DBB7FADC1F17ED8D008EFEEA /* GMUGeometryRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB7FAC21F17ED8D008EFEEA /* GMUGeometryRenderer.m */; };
+		DBB7FADD1F17ED8D008EFEEA /* GMUGeometryRenderer+Testing.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB7FAC31F17ED8D008EFEEA /* GMUGeometryRenderer+Testing.h */; };
+		DBB7FADE1F17ED8D008EFEEA /* GMUKMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB7FAC41F17ED8D008EFEEA /* GMUKMLParser.h */; };
+		DBB7FADF1F17ED8D008EFEEA /* GMUKMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB7FAC51F17ED8D008EFEEA /* GMUKMLParser.m */; };
+		DBB7FAE01F17ED8D008EFEEA /* GMUFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB7FAC71F17ED8D008EFEEA /* GMUFeature.h */; };
+		DBB7FAE11F17ED8D008EFEEA /* GMUFeature.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB7FAC81F17ED8D008EFEEA /* GMUFeature.m */; };
+		DBB7FAE21F17ED8D008EFEEA /* GMUGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB7FAC91F17ED8D008EFEEA /* GMUGeometry.h */; };
+		DBB7FAE31F17ED8D008EFEEA /* GMUGeometryCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB7FACA1F17ED8D008EFEEA /* GMUGeometryCollection.h */; };
+		DBB7FAE41F17ED8D008EFEEA /* GMUGeometryCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB7FACB1F17ED8D008EFEEA /* GMUGeometryCollection.m */; };
+		DBB7FAE51F17ED8D008EFEEA /* GMUGeometryContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB7FACC1F17ED8D008EFEEA /* GMUGeometryContainer.h */; };
+		DBB7FAE61F17ED8D008EFEEA /* GMUGroundOverlay.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB7FACD1F17ED8D008EFEEA /* GMUGroundOverlay.h */; };
+		DBB7FAE71F17ED8E008EFEEA /* GMUGroundOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB7FACE1F17ED8D008EFEEA /* GMUGroundOverlay.m */; };
+		DBB7FAE81F17ED8E008EFEEA /* GMULineString.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB7FACF1F17ED8D008EFEEA /* GMULineString.h */; };
+		DBB7FAE91F17ED8E008EFEEA /* GMULineString.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB7FAD01F17ED8D008EFEEA /* GMULineString.m */; };
+		DBB7FAEA1F17ED8E008EFEEA /* GMUPlacemark.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB7FAD11F17ED8D008EFEEA /* GMUPlacemark.h */; };
+		DBB7FAEB1F17ED8E008EFEEA /* GMUPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB7FAD21F17ED8D008EFEEA /* GMUPlacemark.m */; };
+		DBB7FAEC1F17ED8E008EFEEA /* GMUPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB7FAD31F17ED8D008EFEEA /* GMUPoint.h */; };
+		DBB7FAED1F17ED8E008EFEEA /* GMUPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB7FAD41F17ED8D008EFEEA /* GMUPoint.m */; };
+		DBB7FAEE1F17ED8E008EFEEA /* GMUPolygon.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB7FAD51F17ED8D008EFEEA /* GMUPolygon.h */; };
+		DBB7FAEF1F17ED8E008EFEEA /* GMUPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB7FAD61F17ED8D008EFEEA /* GMUPolygon.m */; };
+		DBB7FAF01F17ED8E008EFEEA /* GMUStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB7FAD71F17ED8D008EFEEA /* GMUStyle.h */; };
+		DBB7FAF11F17ED8E008EFEEA /* GMUStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB7FAD81F17ED8D008EFEEA /* GMUStyle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -204,6 +229,31 @@
 		DBA037011DB1125D004279F0 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsBase.framework; path = platform/GoogleMapsBase.framework; sourceTree = "<group>"; };
 		DBA037021DB1125D004279F0 /* GoogleMapsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsCore.framework; path = platform/GoogleMapsCore.framework; sourceTree = "<group>"; };
 		DBA037031DB1125D004279F0 /* GooglePlaces.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlaces.framework; path = platform/GooglePlaces.framework; sourceTree = "<group>"; };
+		DBB7FABF1F17ED8D008EFEEA /* GMUGeoJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMUGeoJSONParser.h; path = Classes/Geometry/GMUGeoJSONParser.h; sourceTree = "<group>"; };
+		DBB7FAC01F17ED8D008EFEEA /* GMUGeoJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMUGeoJSONParser.m; path = Classes/Geometry/GMUGeoJSONParser.m; sourceTree = "<group>"; };
+		DBB7FAC11F17ED8D008EFEEA /* GMUGeometryRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMUGeometryRenderer.h; path = Classes/Geometry/GMUGeometryRenderer.h; sourceTree = "<group>"; };
+		DBB7FAC21F17ED8D008EFEEA /* GMUGeometryRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMUGeometryRenderer.m; path = Classes/Geometry/GMUGeometryRenderer.m; sourceTree = "<group>"; };
+		DBB7FAC31F17ED8D008EFEEA /* GMUGeometryRenderer+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GMUGeometryRenderer+Testing.h"; path = "Classes/Geometry/GMUGeometryRenderer+Testing.h"; sourceTree = "<group>"; };
+		DBB7FAC41F17ED8D008EFEEA /* GMUKMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMUKMLParser.h; path = Classes/Geometry/GMUKMLParser.h; sourceTree = "<group>"; };
+		DBB7FAC51F17ED8D008EFEEA /* GMUKMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMUKMLParser.m; path = Classes/Geometry/GMUKMLParser.m; sourceTree = "<group>"; };
+		DBB7FAC71F17ED8D008EFEEA /* GMUFeature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUFeature.h; sourceTree = "<group>"; };
+		DBB7FAC81F17ED8D008EFEEA /* GMUFeature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUFeature.m; sourceTree = "<group>"; };
+		DBB7FAC91F17ED8D008EFEEA /* GMUGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometry.h; sourceTree = "<group>"; };
+		DBB7FACA1F17ED8D008EFEEA /* GMUGeometryCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometryCollection.h; sourceTree = "<group>"; };
+		DBB7FACB1F17ED8D008EFEEA /* GMUGeometryCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGeometryCollection.m; sourceTree = "<group>"; };
+		DBB7FACC1F17ED8D008EFEEA /* GMUGeometryContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometryContainer.h; sourceTree = "<group>"; };
+		DBB7FACD1F17ED8D008EFEEA /* GMUGroundOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGroundOverlay.h; sourceTree = "<group>"; };
+		DBB7FACE1F17ED8D008EFEEA /* GMUGroundOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGroundOverlay.m; sourceTree = "<group>"; };
+		DBB7FACF1F17ED8D008EFEEA /* GMULineString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMULineString.h; sourceTree = "<group>"; };
+		DBB7FAD01F17ED8D008EFEEA /* GMULineString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMULineString.m; sourceTree = "<group>"; };
+		DBB7FAD11F17ED8D008EFEEA /* GMUPlacemark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUPlacemark.h; sourceTree = "<group>"; };
+		DBB7FAD21F17ED8D008EFEEA /* GMUPlacemark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUPlacemark.m; sourceTree = "<group>"; };
+		DBB7FAD31F17ED8D008EFEEA /* GMUPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUPoint.h; sourceTree = "<group>"; };
+		DBB7FAD41F17ED8D008EFEEA /* GMUPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUPoint.m; sourceTree = "<group>"; };
+		DBB7FAD51F17ED8D008EFEEA /* GMUPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUPolygon.h; sourceTree = "<group>"; };
+		DBB7FAD61F17ED8D008EFEEA /* GMUPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUPolygon.m; sourceTree = "<group>"; };
+		DBB7FAD71F17ED8D008EFEEA /* GMUStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUStyle.h; sourceTree = "<group>"; };
+		DBB7FAD81F17ED8D008EFEEA /* GMUStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUStyle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,13 +332,14 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				DBB7FABE1F17ED7E008EFEEA /* Geometry */,
 				3AF900D11BC2288600172627 /* Module */,
+				DB0A80EF1E1310BE00F03FE9 /* Clustering */,
 				3ACA7B0E1D2986C400847EBF /* Autocompletion */,
 				3A28A4C91BE9204C0004FCE9 /* Overlays */,
 				3AF900D31BC2289C00172627 /* View */,
 				DB11CE2B1E1704DC006D0FB2 /* CameraUpdate */,
 				3AF900D41BC228C300172627 /* Annotations */,
-				DB0A81331E1315BE00F03FE9 /* ClusterItem */,
 				DB9FB86B1E47395900A0790E /* Tile */,
 			);
 			name = Classes;
@@ -374,7 +425,6 @@
 		3AF900D31BC2289C00172627 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DB0A80EF1E1310BE00F03FE9 /* Clustering */,
 				3ACF6A161CBA874700BC765B /* TiGooglemapsView.h */,
 				3ACF6A171CBA874700BC765B /* TiGooglemapsView.m */,
 				3ACF6A181CBA874700BC765B /* TiGooglemapsViewProxy.h */,
@@ -395,6 +445,7 @@
 		DB0A80EF1E1310BE00F03FE9 /* Clustering */ = {
 			isa = PBXGroup;
 			children = (
+				DB0A81331E1315BE00F03FE9 /* ClusterItem */,
 				DB0A81241E13111600F03FE9 /* QuadTree */,
 				DB0A80F01E1310BE00F03FE9 /* Algo */,
 				DB0A81021E1310BE00F03FE9 /* View */,
@@ -470,6 +521,7 @@
 				DB0A81351E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.m */,
 			);
 			name = ClusterItem;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 		DB11CE2B1E1704DC006D0FB2 /* CameraUpdate */ = {
@@ -490,6 +542,47 @@
 			name = Tile;
 			sourceTree = "<group>";
 		};
+		DBB7FABE1F17ED7E008EFEEA /* Geometry */ = {
+			isa = PBXGroup;
+			children = (
+				DBB7FABF1F17ED8D008EFEEA /* GMUGeoJSONParser.h */,
+				DBB7FAC01F17ED8D008EFEEA /* GMUGeoJSONParser.m */,
+				DBB7FAC11F17ED8D008EFEEA /* GMUGeometryRenderer.h */,
+				DBB7FAC21F17ED8D008EFEEA /* GMUGeometryRenderer.m */,
+				DBB7FAC31F17ED8D008EFEEA /* GMUGeometryRenderer+Testing.h */,
+				DBB7FAC41F17ED8D008EFEEA /* GMUKMLParser.h */,
+				DBB7FAC51F17ED8D008EFEEA /* GMUKMLParser.m */,
+				DBB7FAC61F17ED8D008EFEEA /* Model */,
+			);
+			name = Geometry;
+			sourceTree = "<group>";
+		};
+		DBB7FAC61F17ED8D008EFEEA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DBB7FAC71F17ED8D008EFEEA /* GMUFeature.h */,
+				DBB7FAC81F17ED8D008EFEEA /* GMUFeature.m */,
+				DBB7FAC91F17ED8D008EFEEA /* GMUGeometry.h */,
+				DBB7FACA1F17ED8D008EFEEA /* GMUGeometryCollection.h */,
+				DBB7FACB1F17ED8D008EFEEA /* GMUGeometryCollection.m */,
+				DBB7FACC1F17ED8D008EFEEA /* GMUGeometryContainer.h */,
+				DBB7FACD1F17ED8D008EFEEA /* GMUGroundOverlay.h */,
+				DBB7FACE1F17ED8D008EFEEA /* GMUGroundOverlay.m */,
+				DBB7FACF1F17ED8D008EFEEA /* GMULineString.h */,
+				DBB7FAD01F17ED8D008EFEEA /* GMULineString.m */,
+				DBB7FAD11F17ED8D008EFEEA /* GMUPlacemark.h */,
+				DBB7FAD21F17ED8D008EFEEA /* GMUPlacemark.m */,
+				DBB7FAD31F17ED8D008EFEEA /* GMUPoint.h */,
+				DBB7FAD41F17ED8D008EFEEA /* GMUPoint.m */,
+				DBB7FAD51F17ED8D008EFEEA /* GMUPolygon.h */,
+				DBB7FAD61F17ED8D008EFEEA /* GMUPolygon.m */,
+				DBB7FAD71F17ED8D008EFEEA /* GMUStyle.h */,
+				DBB7FAD81F17ED8D008EFEEA /* GMUStyle.m */,
+			);
+			name = Model;
+			path = Classes/Geometry/Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -497,9 +590,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBB7FADE1F17ED8D008EFEEA /* GMUKMLParser.h in Headers */,
 				DB0A81301E13111600F03FE9 /* GQTPointQuadTreeChild.h in Headers */,
 				DB0A811A1E1310BE00F03FE9 /* GMUStaticCluster.h in Headers */,
 				DB0A81221E1310BE00F03FE9 /* GMUDefaultClusterRenderer.h in Headers */,
+				DBB7FADB1F17ED8D008EFEEA /* GMUGeometryRenderer.h in Headers */,
 				DB0A810C1E1310BE00F03FE9 /* GMUGridBasedClusterAlgorithm.h in Headers */,
 				DB91F99D1E15C8B400DFA78B /* TiPOIItem.h in Headers */,
 				DB0A810E1E1310BE00F03FE9 /* GMUNonHierarchicalDistanceBasedAlgorithm.h in Headers */,
@@ -510,25 +605,37 @@
 				DB0A81161E1310BE00F03FE9 /* GMUClusterManager+Testing.h in Headers */,
 				DB0A81121E1310BE00F03FE9 /* GMUWrappingDictionaryKey.h in Headers */,
 				DB0A811C1E1310BE00F03FE9 /* GMUClusterIconGenerator.h in Headers */,
+				DBB7FAF01F17ED8E008EFEEA /* GMUStyle.h in Headers */,
+				DBB7FAE01F17ED8D008EFEEA /* GMUFeature.h in Headers */,
 				DB0A811D1E1310BE00F03FE9 /* GMUClusterRenderer.h in Headers */,
 				DB0A81151E1310BE00F03FE9 /* GMUClusterItem.h in Headers */,
+				DBB7FAE61F17ED8D008EFEEA /* GMUGroundOverlay.h in Headers */,
+				DBB7FAEA1F17ED8E008EFEEA /* GMUPlacemark.h in Headers */,
 				DB0A81191E1310BE00F03FE9 /* GMUMarkerClustering.h in Headers */,
 				DB0C69541E49D6DF000F8FA2 /* TiGMSHTTPClient.h in Headers */,
 				DB0A81141E1310BE00F03FE9 /* GMUCluster.h in Headers */,
+				DBB7FAE21F17ED8D008EFEEA /* GMUGeometry.h in Headers */,
 				DB0A81171E1310BE00F03FE9 /* GMUClusterManager.h in Headers */,
+				DBB7FAD91F17ED8D008EFEEA /* GMUGeoJSONParser.h in Headers */,
 				DB0A811E1E1310BE00F03FE9 /* GMUDefaultClusterIconGenerator+Testing.h in Headers */,
 				DB0A81211E1310BE00F03FE9 /* GMUDefaultClusterRenderer+Testing.h in Headers */,
 				DB9FB86E1E47399300A0790E /* TiGooglemapsTileProxy.h in Headers */,
+				DBB7FAEC1F17ED8E008EFEEA /* GMUPoint.h in Headers */,
 				DB0A810B1E1310BE00F03FE9 /* GMUClusterAlgorithm.h in Headers */,
+				DBB7FAEE1F17ED8E008EFEEA /* GMUPolygon.h in Headers */,
 				3A433F021BE9AB270005C8AE /* TiGooglemapsPolygonProxy.h in Headers */,
 				AA747D9F0F9514B9006C5449 /* TiGooglemaps_Prefix.pch in Headers */,
 				24DD6CF91134B3F500162E58 /* TiGooglemapsModule.h in Headers */,
+				DBB7FADD1F17ED8D008EFEEA /* GMUGeometryRenderer+Testing.h in Headers */,
 				DB0A812D1E13111600F03FE9 /* GQTPoint.h in Headers */,
+				DBB7FAE81F17ED8E008EFEEA /* GMULineString.h in Headers */,
 				3ACF6A1C1CBA874700BC765B /* TiGooglemapsViewProxy.h in Headers */,
 				DB37298D1E15BF65009CD6B7 /* TiClusterIconGenerator.h in Headers */,
 				3ACF6A121CBA800600BC765B /* TiGooglemapsAnnotationProxy.h in Headers */,
+				DBB7FAE31F17ED8D008EFEEA /* GMUGeometryCollection.h in Headers */,
 				3A433F071BE9AE620005C8AE /* TiGooglemapsCircleProxy.h in Headers */,
 				DB0A812E1E13111600F03FE9 /* GQTPointQuadTree.h in Headers */,
+				DBB7FAE51F17ED8D008EFEEA /* GMUGeometryContainer.h in Headers */,
 				3A433EFE1BE9AB0C0005C8AE /* TiGooglemapsPolylineProxy.h in Headers */,
 				3ACA7B111D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.h in Headers */,
 				DB0A81321E13111600F03FE9 /* GQTPointQuadTreeItem.h in Headers */,
@@ -611,10 +718,16 @@
 			files = (
 				DB0A811B1E1310BE00F03FE9 /* GMUStaticCluster.m in Sources */,
 				DB11CE2A1E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.m in Sources */,
+				DBB7FAE91F17ED8E008EFEEA /* GMULineString.m in Sources */,
 				DB0A81201E1310BE00F03FE9 /* GMUDefaultClusterIconGenerator.m in Sources */,
 				DB0A81131E1310BE00F03FE9 /* GMUWrappingDictionaryKey.m in Sources */,
+				DBB7FAF11F17ED8E008EFEEA /* GMUStyle.m in Sources */,
+				DBB7FAED1F17ED8E008EFEEA /* GMUPoint.m in Sources */,
 				DB0A81231E1310BE00F03FE9 /* GMUDefaultClusterRenderer.m in Sources */,
+				DBB7FADF1F17ED8D008EFEEA /* GMUKMLParser.m in Sources */,
 				DB0A810D1E1310BE00F03FE9 /* GMUGridBasedClusterAlgorithm.m in Sources */,
+				DBB7FAE71F17ED8E008EFEEA /* GMUGroundOverlay.m in Sources */,
+				DBB7FAE41F17ED8D008EFEEA /* GMUGeometryCollection.m in Sources */,
 				DB0A81111E1310BE00F03FE9 /* GMUSimpleClusterAlgorithm.m in Sources */,
 				DB0A81181E1310BE00F03FE9 /* GMUClusterManager.m in Sources */,
 				DB0A810F1E1310BE00F03FE9 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
@@ -624,10 +737,15 @@
 				3ACF6A1B1CBA874700BC765B /* TiGooglemapsView.m in Sources */,
 				DB91F99A1E15C28400DFA78B /* TiClusterRenderer.m in Sources */,
 				DB37298E1E15BF65009CD6B7 /* TiClusterIconGenerator.m in Sources */,
+				DBB7FAEF1F17ED8E008EFEEA /* GMUPolygon.m in Sources */,
 				DB0A81371E1315D700F03FE9 /* TiGooglemapsClusterItemProxy.m in Sources */,
 				24DE9E1211C5FE74003F90F6 /* TiGooglemapsModuleAssets.m in Sources */,
+				DBB7FADA1F17ED8D008EFEEA /* GMUGeoJSONParser.m in Sources */,
 				3A433F031BE9AB270005C8AE /* TiGooglemapsPolygonProxy.m in Sources */,
+				DBB7FAE11F17ED8D008EFEEA /* GMUFeature.m in Sources */,
 				3ACA7B121D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.m in Sources */,
+				DBB7FADC1F17ED8D008EFEEA /* GMUGeometryRenderer.m in Sources */,
+				DBB7FAEB1F17ED8E008EFEEA /* GMUPlacemark.m in Sources */,
 				DB91F99E1E15C8B400DFA78B /* TiPOIItem.m in Sources */,
 				DB9FB86F1E47399300A0790E /* TiGooglemapsTileProxy.m in Sources */,
 				3A433EFF1BE9AB0C0005C8AE /* TiGooglemapsPolylineProxy.m in Sources */,
