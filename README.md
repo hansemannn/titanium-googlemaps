@@ -551,6 +551,15 @@ For more information on Tile Layers: https://developers.google.com/maps/document
 
 In future releases you will also be able to specify local images, but that is not scheduled so far.
 
+### Renderer
+
+Using Ti.GoogleMaps 3.8.0 and later, you are able to render '.geojson' and '.kml' files inside your map
+by using the `renderFromFile` method:
+```js
+// Pass either a '.geojson' or '.kml' file
+mapView.renderFromFile('renderer/GeoJSON_Sample.geojson');
+```
+
 ### Reverse Geocoder
 Use the reverse geocoder to search a location based on a `latitude` and `longitude`:
 ```js
