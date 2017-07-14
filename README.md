@@ -554,10 +554,20 @@ In future releases you will also be able to specify local images, but that is no
 ### Renderer
 
 Using Ti.GoogleMaps 3.8.0 and later, you are able to render '.geojson' and '.kml' files inside your map
-by using the `renderFromFile` method:
+by using the `Renderer` API. In can be instantiated by using the following constructor:
 ```js
-// Pass either a '.geojson' or '.kml' file
-mapView.renderFromFile('renderer/GeoJSON_Sample.geojson');
+var renderer = map.createRenderer({
+    file: 'example.geojson'
+    mapView: mapView
+});
+```
+There are two methods `render` and `clear` available:
+```js
+// Renders the geometries
+renderer.render();
+
+// Removes the geometries
+renderer.clear();
 ```
 
 ### Reverse Geocoder

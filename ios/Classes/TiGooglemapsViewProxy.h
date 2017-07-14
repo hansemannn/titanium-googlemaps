@@ -215,12 +215,4 @@
  */
 - (void)animateWithCameraUpdate:(id)value;
 
-/**
- *  Renders a map-view based on an input file.
- *
- *  @param value The input file.
- *  @since 3.8.0
- */
-- (void)renderFromFile:(id)value;
-
 @end
