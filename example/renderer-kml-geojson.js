@@ -16,16 +16,19 @@ var mapView = maps.createView({
     }
 });
 
+var renderer = maps.createRenderer({
+    mapView: mapView,
+    file: 'renderer/GeoJSON_Sample.json'
+});
+
 var btn = Ti.UI.createButton({
     title: 'Render from File!',
     top: 40
 });
 
 btn.addEventListener('click', function() {
-    /**
-     * Pass either a '.geojson' or '.kml' file
-     **/
-    mapView.renderFromFile('renderer/GeoJSON_Sample.geojson');
+    // Change to "clear" to remove the geometries
+    renderer.render();
 });
 
 win.add(mapView);

@@ -16,8 +16,6 @@
 #import "TiGooglemapsTileProxy.h"
 
 #import "GMUMarkerClustering.h"
-#import "GMUKMLParser.h"
-#import "GMUGeometryRenderer.h"
 
 @implementation TiGooglemapsViewProxy
 
@@ -569,24 +567,6 @@
     ENSURE_TYPE([value objectAtIndex:0], NSNumber);
     
     [[[self mapView] mapView] animateToViewingAngle:[TiUtils doubleValue:[value objectAtIndex:0]]];
-}
-
-- (void)renderFromFile:(id)value
-{
-    ENSURE_SINGLE_ARG(value, NSString);
-    
-    NSString *path = [[NSBundle mainBundle] pathForResource:[value stringByDeletingPathExtension]
-                                                     ofType:[value pathExtension]];
-    
-    NSURL *url = [NSURL fileURLWithPath:path];
-    GMUKMLParser *parser = [[GMUKMLParser alloc] initWithURL:url];
-    [parser parse];
-    
-    GMUGeometryRenderer *renderer = [[GMUGeometryRenderer alloc] initWithMap:[[self mapView] mapView]
-                                                                  geometries:[parser placemarks]
-                                                                      styles:[parser styles]];
-    
-    [renderer render];
 }
 
 @end

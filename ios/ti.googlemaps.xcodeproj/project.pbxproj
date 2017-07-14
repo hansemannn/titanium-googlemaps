@@ -130,6 +130,8 @@
 		DBB7FAEF1F17ED8E008EFEEA /* GMUPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB7FAD61F17ED8D008EFEEA /* GMUPolygon.m */; };
 		DBB7FAF01F17ED8E008EFEEA /* GMUStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB7FAD71F17ED8D008EFEEA /* GMUStyle.h */; };
 		DBB7FAF11F17ED8E008EFEEA /* GMUStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB7FAD81F17ED8D008EFEEA /* GMUStyle.m */; };
+		DBEFA8DD1F19272700A8FA1D /* TiGooglemapsRendererProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = DBEFA8DB1F19272700A8FA1D /* TiGooglemapsRendererProxy.h */; };
+		DBEFA8DE1F19272700A8FA1D /* TiGooglemapsRendererProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = DBEFA8DC1F19272700A8FA1D /* TiGooglemapsRendererProxy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -254,6 +256,8 @@
 		DBB7FAD61F17ED8D008EFEEA /* GMUPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUPolygon.m; sourceTree = "<group>"; };
 		DBB7FAD71F17ED8D008EFEEA /* GMUStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUStyle.h; sourceTree = "<group>"; };
 		DBB7FAD81F17ED8D008EFEEA /* GMUStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUStyle.m; sourceTree = "<group>"; };
+		DBEFA8DB1F19272700A8FA1D /* TiGooglemapsRendererProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsRendererProxy.h; path = Classes/TiGooglemapsRendererProxy.h; sourceTree = "<group>"; };
+		DBEFA8DC1F19272700A8FA1D /* TiGooglemapsRendererProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsRendererProxy.m; path = Classes/TiGooglemapsRendererProxy.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -332,7 +336,7 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				DBB7FABE1F17ED7E008EFEEA /* Geometry */,
+				DBEFA8DA1F19270D00A8FA1D /* Renderer */,
 				3AF900D11BC2288600172627 /* Module */,
 				DB0A80EF1E1310BE00F03FE9 /* Clustering */,
 				3ACA7B0E1D2986C400847EBF /* Autocompletion */,
@@ -583,6 +587,16 @@
 			path = Classes/Geometry/Model;
 			sourceTree = "<group>";
 		};
+		DBEFA8DA1F19270D00A8FA1D /* Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				DBB7FABE1F17ED7E008EFEEA /* Geometry */,
+				DBEFA8DB1F19272700A8FA1D /* TiGooglemapsRendererProxy.h */,
+				DBEFA8DC1F19272700A8FA1D /* TiGooglemapsRendererProxy.m */,
+			);
+			name = Renderer;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -631,6 +645,7 @@
 				DBB7FAE81F17ED8E008EFEEA /* GMULineString.h in Headers */,
 				3ACF6A1C1CBA874700BC765B /* TiGooglemapsViewProxy.h in Headers */,
 				DB37298D1E15BF65009CD6B7 /* TiClusterIconGenerator.h in Headers */,
+				DBEFA8DD1F19272700A8FA1D /* TiGooglemapsRendererProxy.h in Headers */,
 				3ACF6A121CBA800600BC765B /* TiGooglemapsAnnotationProxy.h in Headers */,
 				DBB7FAE31F17ED8D008EFEEA /* GMUGeometryCollection.h in Headers */,
 				3A433F071BE9AE620005C8AE /* TiGooglemapsCircleProxy.h in Headers */,
@@ -672,7 +687,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "ti.googlemaps" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -750,6 +765,7 @@
 				DB9FB86F1E47399300A0790E /* TiGooglemapsTileProxy.m in Sources */,
 				3A433EFF1BE9AB0C0005C8AE /* TiGooglemapsPolylineProxy.m in Sources */,
 				DB0C69551E49D6DF000F8FA2 /* TiGMSHTTPClient.m in Sources */,
+				DBEFA8DE1F19272700A8FA1D /* TiGooglemapsRendererProxy.m in Sources */,
 				3ACF6A131CBA800600BC765B /* TiGooglemapsAnnotationProxy.m in Sources */,
 				3A433F081BE9AE620005C8AE /* TiGooglemapsCircleProxy.m in Sources */,
 				3ACF6A1D1CBA874700BC765B /* TiGooglemapsViewProxy.m in Sources */,
@@ -863,7 +879,7 @@
 			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -926,7 +942,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
