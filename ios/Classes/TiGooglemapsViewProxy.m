@@ -215,13 +215,23 @@
         
     if (value == nil) {
         [[[self mapView] mapView] setMapStyle:nil];
-    } else {
+    } else if ([value isKindOfClass:[NSString class]]) {
         NSError *error = nil;
-        [[[self mapView] mapView] setMapStyle:[GMSMapStyle styleWithJSONString:[TiUtils stringValue:value] error:&error]];
+
+        // Pretty simple check to distinguish between a JSON-file and JSON-content. Improve if desired 😙
+        if ([[value pathExtension] isEqualToString:@".json"]) {
+            [[[self mapView] mapView] setMapStyle:[GMSMapStyle styleWithContentsOfFileURL:[TiUtils toURL:value proxy:self]
+                                                                                    error:&error]];
+        } else {
+            [[[self mapView] mapView] setMapStyle:[GMSMapStyle styleWithJSONString:[TiUtils stringValue:value]
+                                                                             error:&error]];
+        }
         
-        if (error) {
+        if (error != nil) {
             NSLog(@"[ERROR] Ti.GoogleMaps: Could not apply map style: %@", [error localizedDescription]);
         }
+    } else {
+        NSLog(@"[ERROR] Invalid map-style provided. Use either a String or Blob type instead!");
     }
 }
 
