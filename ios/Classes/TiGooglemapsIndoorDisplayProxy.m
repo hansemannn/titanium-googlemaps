@@ -32,7 +32,7 @@
     return [[TiGooglemapsIndoorLevelProxy alloc] _initWithPageContext:[self pageContext] andIndoorDisplay:[_indoorDisplay activeLevel]];
 }
 
-- (id)setActiveLevel:(id)activeLevel
+- (void)setActiveLevel:(id)activeLevel
 {
     ENSURE_UI_THREAD(setActiveLevel, activeLevel);
     ENSURE_TYPE(activeLevel, TiGooglemapsIndoorLevelProxy);
