@@ -38,10 +38,12 @@
 
 #pragma Public APIs
 
-- (void)setAPIKey:(id)value
+- (void)setAPIKey:(NSString *)apiKey
 {
-    apiKey = [TiUtils stringValue:value];
-    [GMSServices provideAPIKey:apiKey];
+    ENSURE_TYPE(apiKey, NSString);
+    
+    _apiKey = [TiUtils stringValue:apiKey];
+    [GMSServices provideAPIKey:_apiKey];
 }
 
 - (NSString *)openSourceLicenseInfo
@@ -66,7 +68,7 @@
     return version;
 }
 
-- (void)reverseGeocoder:(id)args
+- (void)reverseGeocoder:(NSArray *)args
 {
     ENSURE_UI_THREAD(reverseGeocoder, args);
     ENSURE_ARG_COUNT(args, 3);
@@ -101,15 +103,15 @@
                                    }];
 }
 
-- (void)getDirections:(id)args
+- (void)getDirections:(NSArray *)args
 {
-    ENSURE_SINGLE_ARG(args, NSDictionary);
+    NSDictionary *params = [args objectAtIndex:0];
     
-    id successCallback = [args objectForKey:@"success"];
-    id errorCallback = [args objectForKey:@"error"];
-    id origin = [args objectForKey:@"origin"];
-    id destination = [args objectForKey:@"destination"];
-    id waypoints = [args objectForKey:@"waypoints"];
+    id successCallback = [params objectForKey:@"success"];
+    id errorCallback = [params objectForKey:@"error"];
+    id origin = [params objectForKey:@"origin"];
+    id destination = [params objectForKey:@"destination"];
+    id waypoints = [params objectForKey:@"waypoints"];
     
     ENSURE_TYPE(successCallback, KrollCallback);
     ENSURE_TYPE(errorCallback, KrollCallback);
@@ -118,7 +120,7 @@
     ENSURE_TYPE_OR_NIL(waypoints, NSArray);
     
     
-    TiGMSHTTPClient *httpClient = [[TiGMSHTTPClient alloc] initWithApiKey:apiKey];
+    TiGMSHTTPClient *httpClient = [[TiGMSHTTPClient alloc] initWithApiKey:_apiKey];
 
     NSMutableDictionary *options = [NSMutableDictionary dictionaryWithDictionary:@{
         @"origin": origin,
@@ -150,25 +152,25 @@
                   }];
 }
 
-- (TiGooglemapsClusterItemProxy *)createClusterItem:(id)args
+- (TiGooglemapsClusterItemProxy *)createClusterItem:(NSArray *)args
 {
-    ENSURE_SINGLE_ARG(args, NSDictionary);
+    NSDictionary *params = [args objectAtIndex:0];
     
-    id latitude = [args objectForKey:@"latitude"];
+    id latitude = [params objectForKey:@"latitude"];
     ENSURE_TYPE(latitude, NSNumber);
     
-    id longitude = [args objectForKey:@"longitude"];
+    id longitude = [params objectForKey:@"longitude"];
     ENSURE_TYPE(longitude, NSNumber);
     
-    id title = [args objectForKey:@"title"];
+    id title = [params objectForKey:@"title"];
     ENSURE_TYPE_OR_NIL(title, NSString);
 
-    id subtitle = [args objectForKey:@"subtitle"];
+    id subtitle = [params objectForKey:@"subtitle"];
     ENSURE_TYPE_OR_NIL(subtitle, NSString);
 
-    id icon = [args objectForKey:@"icon"];
+    id icon = [params objectForKey:@"icon"];
 
-    id userData = [args objectForKey:@"userData"];
+    id userData = [params objectForKey:@"userData"];
     ENSURE_TYPE_OR_NIL(userData, NSDictionary);
     
     return [[TiGooglemapsClusterItemProxy alloc] _initWithPageContext:[self pageContext]
@@ -179,11 +181,11 @@
                                                              userData:userData];
 }
 
-- (id)decodePolylinePoints:(id)args
+- (NSArray *)decodePolylinePoints:(NSArray *)args
 {
-    ENSURE_SINGLE_ARG(args, NSString);
+    NSString *polylinePoints = [args objectAtIndex:0];
     
-    GMSPath *path = [GMSPath pathFromEncodedPath:args];
+    GMSPath *path = [GMSPath pathFromEncodedPath:polylinePoints];
     NSMutableArray *coordinates = [NSMutableArray arrayWithCapacity:path.count];
     
     for (NSUInteger i = 0; i < path.count; i++) {
