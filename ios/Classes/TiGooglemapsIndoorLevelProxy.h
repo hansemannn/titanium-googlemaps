@@ -17,8 +17,20 @@
 
 #pragma mark Public API
 
-- (id)name;
+/**
+ * The floor name (can be null).
+ *
+ * @return The name.
+ * @since 3.8.0
+ */
+- (NSString *)name;
 
-- (id)shortName;
+/**
+ * The floor short-name (can be null).
+ *
+ * @return The short-name.
+ * @since 3.8.0
+ */
+- (NSString *)shortName;
 
 @end

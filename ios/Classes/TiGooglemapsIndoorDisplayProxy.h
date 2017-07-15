@@ -15,10 +15,26 @@
 
 #pragma mark Public API
 
+/**
+ * The active building.
+ *
+ * @since 3.8.0
+ */
 - (id)activeBuilding;
 
+/**
+ * The active floor-level.
+ *
+ * @since 3.8.0
+ */
 - (id)activeLevel;
 
-- (id)setActiveLevel:(id)activeLevel;
+/**
+ * Set the active floor-level.
+ *
+ * @param activeLevel The new active floor-level.
+ * @since 3.8.0
+ */
+- (void)setActiveLevel:(id)activeLevel;
 
 @end

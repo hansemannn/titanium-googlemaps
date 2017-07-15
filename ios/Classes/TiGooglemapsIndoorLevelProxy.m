@@ -25,14 +25,14 @@
 
 #pragma mark Public API
 
-- (id)name
+- (NSString *)name
 {
-    return _indoorLevel.name;
+    return NULL_IF_NIL([_indoorLevel name]);
 }
 
-- (id)shortName
+- (NSString *)shortName
 {
-    return _indoorLevel.shortName;
+    return NULL_IF_NIL([_indoorLevel shortName]);
 }
 
 @end
