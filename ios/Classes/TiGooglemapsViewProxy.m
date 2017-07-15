@@ -14,6 +14,7 @@
 #import "TiGooglemapsClusterItemProxy.h"
 #import "TiGooglemapsCameraUpdateProxy.h"
 #import "TiGooglemapsTileProxy.h"
+#import "TiGooglemapsIndoorDisplayProxy.h"
 
 #import "GMUMarkerClustering.h"
 
@@ -567,6 +568,11 @@
     ENSURE_TYPE([value objectAtIndex:0], NSNumber);
     
     [[[self mapView] mapView] animateToViewingAngle:[TiUtils doubleValue:[value objectAtIndex:0]]];
+}
+
+- (id)indoorDisplay
+{
+    return [[TiGooglemapsIndoorDisplayProxy alloc] _initWithPageContext:[self pageContext] andIndoorDisplay:[[[self mapView] mapView] indoorDisplay]];
 }
 
 @end
