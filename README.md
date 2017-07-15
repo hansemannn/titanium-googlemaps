@@ -66,8 +66,8 @@ In addition, you can specify one of the following constants to the `mapType` pro
 ```javascript
 var mapView = maps.createView({
     mapType: maps.MAP_TYPE_TERRAIN,
-    indoorEnabled: true, // shows indoor polygons of mapped indoor venues
-    indoorPicker: true, // shows the vertical floor level
+    indoorEnabled: true, // shows indoor capabilities (see "Indoor Navigation" section) 
+    indoorPicker: true, // shows the vertical floor level (see "Indoor Navigation" section)
     compassButton: true, // shows the compass (top/right) when bearing is non-zero
     myLocationEnabled: true, // default: false
     myLocationButton: true, // shows the default My location button
@@ -580,8 +580,33 @@ maps.reverseGeocoder(36.368122, -120.913653, function(e) {
 });
 ```
 
+### Indoor Navigation
+
+There are a number of special API's to deal with indoor-navigtion in GoogleMaps. Inside a `View` instance,
+you can enabled indoor-navigation by setting `indoorEnabled` to `true`. To show the the vertical floor levels
+in your map-instance, set `indoorPicker` to `true`. 
+
+To receive the indoor-display, use the `indoorDisplay` getter,
+which has the following events to be notified when the indoor-navigation changes:
+
+- [x] `didChangeActiveBuilding` (Raised when the activeBuilding has changed)
+  - `defaultLevelIndex` (Array of GMSIndoorLevel describing the levels which make up the building)
+  - `isUnderground` (Index in the levels array of the default level)
+  - `levels` (If `true`, the building is entirely underground and supports being hidden)
+
+- [x] `didChangeActiveLevel` (Raised when the activeLevel has changed)
+  - `name` (Localized display name for the level, e.g. "Ground floor")
+  - `shortName` (Localized short display name for the level, e.g. "1")
+
+In addition to the above events, you can also communicate with the indoor-display by receiving the `activeBuilding`
+and `activeLevel` properties. Finally, when receiving the floor-level inside the `level` property of the
+`didChangeActiveBuilding` event, you can set the `activeLevel` property as well, to change the currently active
+floor-level. 
+
 ### Directions
+
 Use the Directions API to calculate advanced directions:
+
 ```js
 maps.getDirections({
     origin: 'Mountain View, CA',
