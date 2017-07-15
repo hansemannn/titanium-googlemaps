@@ -97,7 +97,7 @@ The module supports all native delegates - exposed as events. These are:
 > or set an own key in the `userData` property of your annotation.
 
 #### Map Controls
-```javascript
+```js
 mapView.indoorEnabled = false;
 mapView.indoorPicker = true;
 mapView.compassButton = true;
@@ -107,7 +107,7 @@ mapView.trafficEnabled = true; // default is false
 ```
 
 #### Enable / Disable Gestures
-```javascript
+```js
 mapView.scrollGesture = true;
 mapView.zoomGestures = false;
 mapView.tiltGestures = true;
@@ -115,12 +115,12 @@ mapView.rotateGestures = false;
 mapView.allowScrollGesturesDuringRotateOrZoom = false;
 ```
 
-#### Map Insets:
+Map Insets:
 ```js
 mapView.mapInsets = { bottom:200 };
 ```
 
-#### Map Style:
+#### Map Style
 ```js
 // Either a JSON-string
 mapView.mapStyle = 'JSON_STYLE_GOES_HERE';
@@ -133,38 +133,25 @@ See [this link](https://developers.google.com/maps/documentation/ios-sdk/hiding-
 #### Animations
 
 ##### Animate to a location
-```javascript
+```js
 mapView.animateToLocation({
     latitude: 36.368122,
     longitude: -120.913653
 });
 ```
 
-Animate to a zoom level:
-```js
-mapView.animateToZoom(5);
-```
-
-Animate to a bearing:
-```js
-mapView.animateToBearing(45);
-```
-
-Animate to a viewing angle:
-```js
-=======
 ##### Animate to a zoom level:
-```javascript
+```js
 mapView.animateToZoom(5);
 ```
 
 ##### Animate to a bearing:
-```javascript
+```js
 mapView.animateToBearing(45);
 ```
 
 ##### Animate to a viewing angle:
-```javascript
+```js
 mapView.animateToViewingAngle(30);
 ```
 
