@@ -3,8 +3,7 @@
 
 <img width="1094" src="http://abload.de/img/showcase3vron.png">
 
- Summary
----------------
+## Summary
 Ti.GoogleMaps is an open-source project to support the Google Maps iOS-SDK in Appcelerator's Titanium Mobile. The module currently supports the following API's:
 - [x] Map View
 - [x] Annotations
@@ -17,14 +16,12 @@ Ti.GoogleMaps is an open-source project to support the Google Maps iOS-SDK in Ap
 - [x] Directions
 - [x] All delegates (exposed as events)
 
-Requirements
----------------
+## Requirements
   - Titanium Mobile SDK 5.2.2.GA or later
   - iOS 7.1 or later
   - Xcode 6.4 or later
 
-Download + Setup
----------------
+## Download, Setup and Build
 
 ### Download
   * [Stable release](https://github.com/hansemannn/Ti.GoogleMaps/releases)
@@ -52,9 +49,9 @@ If you want to build the module from the source, you need to check some things b
 - Build the project with `appc run -p ios --build-only`
 - Check the [releases tab](https://github.com/hansemannn/ti.googlemaps/releases) for stable pre-packaged versions of the module
 
-Features
---------------------------------
-#### Map View
+## Features
+
+### Map View
 A map view creates the view on which annotations and overlays can be added to. You can see all possible events in the demo app. 
 In addition, you can specify one of the following constants to the `mapType` property:
  - `MAP_TYPE_NORMAL`
@@ -81,7 +78,7 @@ var mapView = maps.createView({
 });
 ```
 
-Map Events:
+#### Map Events
 The module supports all native delegates - exposed as events. These are:
 
 - [x] click (map, pin, infoWindow, overlay)
@@ -99,8 +96,8 @@ The module supports all native delegates - exposed as events. These are:
 > performance at it's best. If you want to identify an annotation, either use the generated UUID string in the `userData` 
 > or set an own key in the `userData` property of your annotation.
 
-Map Controls:
-```js
+#### Map Controls
+```javascript
 mapView.indoorEnabled = false;
 mapView.indoorPicker = true;
 mapView.compassButton = true;
@@ -109,8 +106,8 @@ mapView.myLocationButton = false;
 mapView.trafficEnabled = true; // default is false
 ```
 
-Enable/Disable Gestures:
-```js
+#### Enable / Disable Gestures
+```javascript
 mapView.scrollGesture = true;
 mapView.zoomGestures = false;
 mapView.tiltGestures = true;
@@ -118,12 +115,12 @@ mapView.rotateGestures = false;
 mapView.allowScrollGesturesDuringRotateOrZoom = false;
 ```
 
-Map Insets:
+#### Map Insets:
 ```js
 mapView.mapInsets = { bottom:200 };
 ```
 
-Map Style:
+#### Map Style:
 ```js
 // Either a JSON-string
 mapView.mapStyle = 'JSON_STYLE_GOES_HERE';
@@ -133,8 +130,10 @@ mapView.mapStyle = 'mapStyle.json'
 ```
 See [this link](https://developers.google.com/maps/documentation/ios-sdk/hiding-features) for more infos on map styling.
 
-Animate to a location:
-```js
+#### Animations
+
+##### Animate to a location
+```javascript
 mapView.animateToLocation({
     latitude: 36.368122,
     longitude: -120.913653
@@ -153,12 +152,26 @@ mapView.animateToBearing(45);
 
 Animate to a viewing angle:
 ```js
+=======
+##### Animate to a zoom level:
+```javascript
+mapView.animateToZoom(5);
+```
+
+##### Animate to a bearing:
+```javascript
+mapView.animateToBearing(45);
+```
+
+##### Animate to a viewing angle:
+```javascript
 mapView.animateToViewingAngle(30);
 ```
 
-#### Camera Update
+### Camera Update
 You can perform camera updates to your map view instance by creating an instance of the `CameraUpdate` API:
 ```js
+var maps = require('ti.googlemaps');
 var cameraUpdate = maps.createCameraUpdate();
 ```
 Before you can use the camera update, you must specify one of this actions:
@@ -221,7 +234,7 @@ cameraUpdate.scrollBy({
     y: 100
 });
 ```
--
+
 After creating the camera update, you can use it in one of the following methods:
 **moveCamera**
 ```js
@@ -232,7 +245,7 @@ mapView.moveCamera(cameraUpdate);
 mapView.animateWithCameraUpdate(cameraUpdate);
 ```
 
-#### Annotations
+### Annotations
 An annotation represents a location specified by at least a `title` and a `subtitle` property. 
 It can be added to a map view:
 
@@ -371,7 +384,7 @@ mapView.deselectAnnotation(); // Deselect
 var selectedAnnotation = mapView.getSelectedAnnotation(); // Selected annotation, null if no annotation is selected
 ```
 
-#### Autocomplete Dialog
+### Autocomplete Dialog
 A autocomplete dialog can be opened modally to search for places in realtime. A number of events
 helps to work with partial results and final selections. 
 
@@ -393,15 +406,15 @@ dialog.configure('<YOUR_GOOGLE_PLACES_API_KEY>');
 dialog.open();
 ```
 
-##### Autocomplete Events
+#### Autocomplete Events
 - [x] success
 - [x] error
 - [x] cancel
 
-#### Overlays
+### Overlays
 Overlays can be added to the map view just like annotations. The module supports the methods `addPolygon`, `addPolyline` and `addCircle` to add overlays and `removePolygon`, `removePolyline` and `removeCircle` to remove them.
 
-##### Polyline
+#### Polyline
 A polyline is a shape defined by its `points` property. It needs at least 2 points to draw a line.
 
 ```js
@@ -417,7 +430,7 @@ var polyline = maps.createPolyline({
 mapView.addPolyline(polyline);
 ```
 
-##### Polygon
+#### Polygon
 A polygon is a shape defined by its `points` property. It behaves similiar to a polyline, but is meant to close its area automatically and also supports the `fillColor` property.
 
 ```js
@@ -436,7 +449,7 @@ var polygon = maps.createPolygon({
 mapView.addPolygon(polygon);
 ```
 
-##### Circle
+#### Circle
 A circle is a shape defined by the `center` property to specify its location as well as the `radius` in meters.
 
 ```js
@@ -451,7 +464,7 @@ var circle = maps.createCircle({
 mapView.addCircle(circle);
 ```
 
-#### Clustering
+### Clustering
 You can cluster multiple items by using the Clustering API. 
 
 First, create a few cluster items using the `ClusterItem`:
@@ -503,8 +516,7 @@ var mapView = maps.createView({
 Use the `clusterclick` and `clusteritemclick` events on your map view instance
 to receive infos about your current cluster or cluster item.
 
-
-#### Tile Layers
+### Tile Layers
 
 You can create URL-based tile layers that use the x / y / z (zoom level) pattern to determine the location pattern:
 ```js
@@ -643,18 +655,14 @@ Use the following API to receive the Google Maps license:
 var license = maps.getOpenSourceLicenseInfo()
 ```
 
-Example
----------------
+## Example
 For a full example, check the demos in `example/app.js` and `example/clustering.js`.
 
-Author
----------------
-Hans Knoechel ([@hansemannnn](https://twitter.com/hansemannnn) / [Web](http://hans-knoechel.de))
+## Author
+Hans Knöchel ([@hansemannnn](https://twitter.com/hansemannnn) / [Web](http://hans-knoechel.de))
 
-License
----------------
+## License
 Apache 2.0
 
-Contributing
----------------
-Code contributions are greatly appreciated, please submit a new [pull request](https://github.com/hansemannn/ti.googlemaps/pull/new/master)!
+## Contributing
+Code contributions are greatly appreciated, please submit a new [Pull-Request](https://github.com/hansemannn/titanium-google-maps/pull/new/master)!
