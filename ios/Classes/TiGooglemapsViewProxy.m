@@ -219,7 +219,7 @@
         NSError *error = nil;
 
         // Pretty simple check to distinguish between a JSON-file and JSON-content. Improve if desired 😙
-        if ([[value pathExtension] isEqualToString:@".json"]) {
+        if ([[value pathExtension] isEqualToString:@"json"]) {
             [[[self mapView] mapView] setMapStyle:[GMSMapStyle styleWithContentsOfFileURL:[TiUtils toURL:value proxy:self]
                                                                                     error:&error]];
         } else {
