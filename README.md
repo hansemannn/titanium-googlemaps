@@ -115,7 +115,7 @@ mapView.rotateGestures = false;
 mapView.allowScrollGesturesDuringRotateOrZoom = false;
 ```
 
-Map Insets:
+#### Map Insets
 ```js
 mapView.mapInsets = { bottom:200 };
 ```
