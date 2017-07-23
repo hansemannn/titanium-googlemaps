@@ -45,15 +45,19 @@
 - (void)didChangeActiveLevel:(GMSIndoorLevel *)level
 {
     if ([self _hasListeners:@"didChangeActiveLevel"]) {
-        [self fireEvent:@"didChangeActiveLevel" withObject:[[TiGooglemapsIndoorLevelProxy alloc] _initWithPageContext:[self pageContext]
-                                                                                                     andIndoorDisplay:level]];
+        TiThreadPerformOnMainThread(^{
+            [self fireEvent:@"didChangeActiveLevel" withObject:[[TiGooglemapsIndoorLevelProxy alloc] _initWithPageContext:[self pageContext]
+                                                                                                         andIndoorDisplay:level]];
+        }, NO);
     }
 }
 
 - (void)didChangeActiveBuilding:(GMSIndoorBuilding *)building
 {
     if ([self _hasListeners:@"didChangeActiveBuilding"]) {
-        [self fireEvent:@"didChangeActiveBuilding" withObject:[self dictionaryFromIndoorBuilding:building]];
+        TiThreadPerformOnMainThread(^{
+            [self fireEvent:@"didChangeActiveBuilding" withObject:[self dictionaryFromIndoorBuilding:building]];
+        }, NO);
     }
 }
 

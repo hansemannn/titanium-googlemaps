@@ -582,7 +582,13 @@
 
 - (id)indoorDisplay
 {
-    return [[TiGooglemapsIndoorDisplayProxy alloc] _initWithPageContext:[self pageContext] andIndoorDisplay:[[[self mapView] mapView] indoorDisplay]];
+    __block TiGooglemapsIndoorDisplayProxy *indoorProxy = nil;
+    
+    TiThreadPerformOnMainThread(^{
+        indoorProxy = [[TiGooglemapsIndoorDisplayProxy alloc] _initWithPageContext:[self pageContext] andIndoorDisplay:[[[self mapView] mapView] indoorDisplay]];
+    }, YES);
+    
+    return indoorProxy;
 }
 
 @end
