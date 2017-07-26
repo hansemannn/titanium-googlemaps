@@ -29,7 +29,7 @@
 
 - (id)activeLevel
 {
-    return [[TiGooglemapsIndoorLevelProxy alloc] _initWithPageContext:[self pageContext] andIndoorDisplay:[_indoorDisplay activeLevel]];
+    return [[TiGooglemapsIndoorLevelProxy alloc] _initWithPageContext:[self pageContext] andIndoorLevel:[_indoorDisplay activeLevel]];
 }
 
 - (void)setActiveLevel:(id)activeLevel
@@ -45,19 +45,17 @@
 - (void)didChangeActiveLevel:(GMSIndoorLevel *)level
 {
     if ([self _hasListeners:@"didChangeActiveLevel"]) {
-        TiThreadPerformOnMainThread(^{
-            [self fireEvent:@"didChangeActiveLevel" withObject:[[TiGooglemapsIndoorLevelProxy alloc] _initWithPageContext:[self pageContext]
-                                                                                                         andIndoorDisplay:level]];
-        }, NO);
+        [self fireEvent:@"didChangeActiveLevel" withObject:@{
+            @"level": [[TiGooglemapsIndoorLevelProxy alloc] _initWithPageContext:[self pageContext]
+                                                                  andIndoorLevel:level]
+        }];
     }
 }
 
 - (void)didChangeActiveBuilding:(GMSIndoorBuilding *)building
 {
     if ([self _hasListeners:@"didChangeActiveBuilding"]) {
-        TiThreadPerformOnMainThread(^{
-            [self fireEvent:@"didChangeActiveBuilding" withObject:[self dictionaryFromIndoorBuilding:building]];
-        }, NO);
+        [self fireEvent:@"didChangeActiveBuilding" withObject:[self dictionaryFromIndoorBuilding:building]];
     }
 }
 
@@ -69,7 +67,7 @@
     
     for (GMSIndoorLevel *indoorLevel in indoorBuilding.levels) {
         [levels addObject:[[TiGooglemapsIndoorLevelProxy alloc] _initWithPageContext:[self pageContext]
-                                                                    andIndoorDisplay:indoorLevel]];
+                                                                    andIndoorLevel:indoorLevel]];
     }
     
     return @{
