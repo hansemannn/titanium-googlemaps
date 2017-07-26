@@ -11,9 +11,9 @@
     GMSIndoorLevel *_indoorLevel;
 }
 
-- (id)_initWithPageContext:(id<TiEvaluator>)context andIndoorDisplay:(GMSIndoorLevel *)indoorLevel;
+- (id _Nonnull)_initWithPageContext:(id<TiEvaluator> _Nullable)context andIndoorLevel:(GMSIndoorLevel * _Nonnull)indoorLevel;
 
-- (GMSIndoorLevel *)indoorLevel;
+- (GMSIndoorLevel * _Nonnull)indoorLevel;
 
 #pragma mark Public API
 
@@ -23,7 +23,7 @@
  * @return The name.
  * @since 3.8.0
  */
-- (NSString *)name;
+- (NSString * _Nullable)name;
 
 /**
  * The floor short-name (can be null).
@@ -31,6 +31,6 @@
  * @return The short-name.
  * @since 3.8.0
  */
-- (NSString *)shortName;
+- (NSString * _Nullable)shortName;
 
 @end

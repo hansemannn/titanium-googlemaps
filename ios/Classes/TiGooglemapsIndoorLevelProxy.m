@@ -9,7 +9,7 @@
 
 @implementation TiGooglemapsIndoorLevelProxy
 
-- (id)_initWithPageContext:(id<TiEvaluator>)context andIndoorDisplay:(GMSIndoorLevel *)indoorLevel
+- (id _Nonnull)_initWithPageContext:(id<TiEvaluator> _Nullable)context andIndoorLevel:(GMSIndoorLevel * _Nonnull)indoorLevel
 {
     if (self = [super _initWithPageContext:pageContext]) {
         _indoorLevel = indoorLevel;
@@ -18,19 +18,19 @@
     return self;
 }
 
-- (GMSIndoorLevel *)indoorLevel
+- (GMSIndoorLevel * _Nonnull)indoorLevel
 {
     return _indoorLevel;
 }
 
 #pragma mark Public API
 
-- (NSString *)name
+- (NSString * _Nullable)name
 {
     return NULL_IF_NIL([_indoorLevel name]);
 }
 
-- (NSString *)shortName
+- (NSString * _Nullable)shortName
 {
     return NULL_IF_NIL([_indoorLevel shortName]);
 }
