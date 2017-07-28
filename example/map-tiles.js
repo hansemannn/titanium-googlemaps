@@ -3,7 +3,7 @@ var maps = require('ti.googlemaps');
 /**
  *  SET YOUR API-KEY BEFORE USING THIS MODULE
  */
-maps.setAPIKey("<YOUR_GOOGLE_MAPS_API_KEY>");
+maps.setAPIKey('<YOUR_GOOGLE_MAPS_API_KEY>');
 
 var win = Ti.UI.createWindow({
     backgroundColor: '#fff'
