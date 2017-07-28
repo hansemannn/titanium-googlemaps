@@ -10,19 +10,55 @@
 @class TiGooglemapsClusterItemProxy;
 
 @interface TiGooglemapsModule : TiModule {
-    NSString *apiKey;
+    NSString *_apiKey;
 }
 
-- (void)setAPIKey:(id)value;
+/**
+ * Provides your API key to the Google Maps SDK for iOS.
+ *
+ * @param apiKey The API-key to use.
+ * @since 1.0.0
+ */
+- (void)setAPIKey:(NSString *)apiKey;
 
+/**
+ * Returns the version for this release of the Google Maps SDK for iOS.
+ *
+ * @return The GoogleMaps SDK version.
+ * @since 1.0.0
+ */
 - (NSString *)version;
 
-- (void)reverseGeocoder:(id)args;
+/**
+ * Reverse geocodes a coordinate on the Earth's surface.
+ *
+ * @param apiKey The arguments passed to the reverse geocoder.
+ * @since 3.1.0
+ */
+- (void)reverseGeocoder:(NSArray *)args;
 
-- (void)getDirections:(id)args;
+/**
+ * Calculates the directions between two given addresses.
+ *
+ * @param args The arguments passed to the directions-API.
+ * @since 3.2.0
+ */
+- (void)getDirections:(NSArray *)args;
 
-- (id)decodePolylinePoints:(id)args;
+/**
+ * Decodes a given number of encoded polyline-points.
+ *
+ * @param args The polines to decode.
+ * @since 3.2.0
+ */
+- (NSArray *)decodePolylinePoints:(NSArray *)args;
 
-- (TiGooglemapsClusterItemProxy *)createClusterItem:(id)args;
+/**
+ * Creates a new cluster-item.
+ *
+ * @param apiKey The API-key to use.
+ * @since 2.7.0
+ */
+- (TiGooglemapsClusterItemProxy *)createClusterItem:(NSArray *)args;
 
 @end

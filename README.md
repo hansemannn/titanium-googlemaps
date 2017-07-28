@@ -37,7 +37,7 @@ Edit the modules section of your `tiapp.xml` file to include this module:
 ```
 
 Initialize the module by setting the Google Maps API key you can get from [here](https://developers.google.com/maps/signup).
-```javascript
+```js
 var maps = require('ti.googlemaps');
 maps.setAPIKey('<YOUR_GOOGLE_MAPS_API_KEY>');
 ```
@@ -60,11 +60,11 @@ In addition, you can specify one of the following constants to the `mapType` pro
  - `MAP_TYPE_TERRAIN`
  - `MAP_TYPE_NONE`
 
-```javascript
+```js
 var mapView = maps.createView({
     mapType: maps.MAP_TYPE_TERRAIN,
-    indoorEnabled: true, // shows indoor polygons of mapped indoor venues
-    indoorPicker: true, // shows the vertical floor level
+    indoorEnabled: true, // shows indoor capabilities (see "Indoor Navigation" section) 
+    indoorPicker: true, // shows the vertical floor level (see "Indoor Navigation" section)
     compassButton: true, // shows the compass (top/right) when bearing is non-zero
     myLocationEnabled: true, // default: false
     myLocationButton: true, // shows the default My location button
@@ -97,7 +97,7 @@ The module supports all native delegates - exposed as events. These are:
 > or set an own key in the `userData` property of your annotation.
 
 #### Map Controls
-```javascript
+```js
 mapView.indoorEnabled = false;
 mapView.indoorPicker = true;
 mapView.compassButton = true;
@@ -107,7 +107,7 @@ mapView.trafficEnabled = true; // default is false
 ```
 
 #### Enable / Disable Gestures
-```javascript
+```js
 mapView.scrollGesture = true;
 mapView.zoomGestures = false;
 mapView.tiltGestures = true;
@@ -116,20 +116,24 @@ mapView.allowScrollGesturesDuringRotateOrZoom = false;
 ```
 
 #### Map Insets
-```javascript
+```js
 mapView.mapInsets = { bottom:200 };
 ```
 
 #### Map Style
-```javascript
+```js
+// Either a JSON-string
 mapView.mapStyle = 'JSON_STYLE_GOES_HERE';
+
+// Or a JSON-file
+mapView.mapStyle = 'mapStyle.json'
 ```
 See [this link](https://developers.google.com/maps/documentation/ios-sdk/hiding-features) for more infos on map styling.
 
 #### Animations
 
 ##### Animate to a location
-```javascript
+```js
 mapView.animateToLocation({
     latitude: 36.368122,
     longitude: -120.913653
@@ -137,17 +141,17 @@ mapView.animateToLocation({
 ```
 
 ##### Animate to a zoom level:
-```javascript
+```js
 mapView.animateToZoom(5);
 ```
 
 ##### Animate to a bearing:
-```javascript
+```js
 mapView.animateToBearing(45);
 ```
 
 ##### Animate to a viewing angle:
-```javascript
+```js
 mapView.animateToViewingAngle(30);
 ```
 
@@ -232,7 +236,7 @@ mapView.animateWithCameraUpdate(cameraUpdate);
 An annotation represents a location specified by at least a `title` and a `subtitle` property. 
 It can be added to a map view:
 
-```javascript
+```js
 var annotation = maps.createAnnotation({
     latitude : 37.368122,
     longitude : -121.913653,
@@ -290,7 +294,7 @@ var annotation = maps.createAnnotation({
 ```
 
 You can update the location of an Annotation by using:
-```javascript
+```js
 annotation.updateLocation({
     // Required
     latitude: 36.368122,
@@ -346,22 +350,22 @@ win.open();
 ```
 
 You also can add multiple annotations as well as remove annotations again:
-```javascript
+```js
 mapView.addAnnotations([anno1,anno2,anno3]);
 mapView.removeAnnotation(anno4);
 ```
 
 Remove Annotations by passing an array of Annotations:
-```javascript
+```js
 mapView.removeAnnotations([anno1,anno2,anno3]);
 ```
 Remove all annotations (one shot):
-```javascript
+```js
 mapView.removeAllAnnotations();
 ```
 
 You can select and deselect annotations, as well as receive the currently selected annotation:
-```javascript
+```js
 mapView.selectAnnotation(anno1); // Select
 mapView.deselectAnnotation(); // Deselect
 var selectedAnnotation = mapView.getSelectedAnnotation(); // Selected annotation, null if no annotation is selected
@@ -373,7 +377,7 @@ helps to work with partial results and final selections.
 
 The whole dialog can be styled (like in the following example) and the default native theming is light.
 
-```javascript
+```js
 var dialog = GoogleMaps.createAutocompleteDialog({
     tableCellBackgroundColor: '#333',
     tableCellSeparatorColor: '#444',
@@ -400,7 +404,7 @@ Overlays can be added to the map view just like annotations. The module supports
 #### Polyline
 A polyline is a shape defined by its `points` property. It needs at least 2 points to draw a line.
 
-```javascript
+```js
 var polyline = maps.createPolyline({
     points : [{ // Can handle both object and array
         latitude : -37.81319,
@@ -416,7 +420,7 @@ mapView.addPolyline(polyline);
 #### Polygon
 A polygon is a shape defined by its `points` property. It behaves similiar to a polyline, but is meant to close its area automatically and also supports the `fillColor` property.
 
-```javascript
+```js
 var polygon = maps.createPolygon({
     points : [{ // Can handle both object and array
         latitude : -37.81819,
@@ -435,7 +439,7 @@ mapView.addPolygon(polygon);
 #### Circle
 A circle is a shape defined by the `center` property to specify its location as well as the `radius` in meters.
 
-```javascript
+```js
 var circle = maps.createCircle({
     center : [-32.9689, 151.7721], // Can handle object or array
     radius : 500 * 1000, // 500 km, Default: 0
@@ -550,6 +554,25 @@ For more information on Tile Layers: https://developers.google.com/maps/document
 
 In future releases you will also be able to specify local images, but that is not scheduled so far.
 
+### Renderer
+
+Using Ti.GoogleMaps 3.8.0 and later, you are able to render '.geojson' and '.kml' files inside your map
+by using the `Renderer` API. In can be instantiated by using the following constructor:
+```js
+var renderer = map.createRenderer({
+    file: 'example.geojson'
+    mapView: mapView
+});
+```
+There are two methods `render` and `clear` available:
+```js
+// Renders the geometries
+renderer.render();
+
+// Removes the geometries
+renderer.clear();
+```
+
 ### Reverse Geocoder
 Use the reverse geocoder to search a location based on a `latitude` and `longitude`:
 ```js
@@ -560,8 +583,33 @@ maps.reverseGeocoder(36.368122, -120.913653, function(e) {
 });
 ```
 
+### Indoor Navigation
+
+There are a number of special API's to deal with indoor-navigtion in GoogleMaps. Inside a `View` instance,
+you can enabled indoor-navigation by setting `indoorEnabled` to `true`. To show the the vertical floor levels
+in your map-instance, set `indoorPicker` to `true`. 
+
+To receive the indoor-display, use the `indoorDisplay` getter,
+which has the following events to be notified when the indoor-navigation changes:
+
+- [x] `didChangeActiveBuilding` (Raised when the activeBuilding has changed)
+  - `defaultLevelIndex` (Array of GMSIndoorLevel describing the levels which make up the building)
+  - `isUnderground` (Index in the levels array of the default level)
+  - `levels` (If `true`, the building is entirely underground and supports being hidden)
+
+- [x] `didChangeActiveLevel` (Raised when the activeLevel has changed)
+  - `name` (Localized display name for the level, e.g. "Ground floor")
+  - `shortName` (Localized short display name for the level, e.g. "1")
+
+In addition to the above events, you can also communicate with the indoor-display by receiving the `activeBuilding`
+and `activeLevel` properties. Finally, when receiving the floor-level inside the `level` property of the
+`didChangeActiveBuilding` event, you can set the `activeLevel` property as well, to change the currently active
+floor-level. 
+
 ### Directions
+
 Use the Directions API to calculate advanced directions:
+
 ```js
 maps.getDirections({
     origin: 'Mountain View, CA',
