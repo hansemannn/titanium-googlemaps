@@ -95,6 +95,8 @@
 		DB11CE2A1E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = DB11CE281E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.m */; };
 		DB37298D1E15BF65009CD6B7 /* TiClusterIconGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = DB37298B1E15BF65009CD6B7 /* TiClusterIconGenerator.h */; };
 		DB37298E1E15BF65009CD6B7 /* TiClusterIconGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = DB37298C1E15BF65009CD6B7 /* TiClusterIconGenerator.m */; };
+		DB6BD6DC1F5C77BB00B710BF /* TiGooglemapsPlacePickerDialogProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6BD6DB1F5C778D00B710BF /* TiGooglemapsPlacePickerDialogProxy.m */; };
+		DB6BD6DD1F5C77CA00B710BF /* TiGooglemapsPlacePickerDialogProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = DB6BD6DA1F5C778D00B710BF /* TiGooglemapsPlacePickerDialogProxy.h */; };
 		DB91F9991E15C28400DFA78B /* TiClusterRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = DB91F9971E15C28400DFA78B /* TiClusterRenderer.h */; };
 		DB91F99A1E15C28400DFA78B /* TiClusterRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = DB91F9981E15C28400DFA78B /* TiClusterRenderer.m */; };
 		DB91F99D1E15C8B400DFA78B /* TiPOIItem.h in Headers */ = {isa = PBXBuildFile; fileRef = DB91F99B1E15C8B400DFA78B /* TiPOIItem.h */; };
@@ -225,6 +227,9 @@
 		DB11CE281E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsCameraUpdateProxy.m; path = Classes/TiGooglemapsCameraUpdateProxy.m; sourceTree = "<group>"; };
 		DB37298B1E15BF65009CD6B7 /* TiClusterIconGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiClusterIconGenerator.h; sourceTree = "<group>"; };
 		DB37298C1E15BF65009CD6B7 /* TiClusterIconGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiClusterIconGenerator.m; sourceTree = "<group>"; };
+		DB6BD6D81F5C773900B710BF /* GooglePlacePicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlacePicker.framework; path = platform/GooglePlacePicker.framework; sourceTree = "<group>"; };
+		DB6BD6DA1F5C778D00B710BF /* TiGooglemapsPlacePickerDialogProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsPlacePickerDialogProxy.h; path = Classes/TiGooglemapsPlacePickerDialogProxy.h; sourceTree = "<group>"; };
+		DB6BD6DB1F5C778D00B710BF /* TiGooglemapsPlacePickerDialogProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsPlacePickerDialogProxy.m; path = Classes/TiGooglemapsPlacePickerDialogProxy.m; sourceTree = "<group>"; };
 		DB91F9971E15C28400DFA78B /* TiClusterRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiClusterRenderer.h; sourceTree = "<group>"; };
 		DB91F9981E15C28400DFA78B /* TiClusterRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiClusterRenderer.m; sourceTree = "<group>"; };
 		DB91F99B1E15C8B400DFA78B /* TiPOIItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiPOIItem.h; sourceTree = "<group>"; };
@@ -319,6 +324,7 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DB6BD6D81F5C773900B710BF /* GooglePlacePicker.framework */,
 				DBA037001DB1125D004279F0 /* GoogleMaps.framework */,
 				DBA037011DB1125D004279F0 /* GoogleMapsBase.framework */,
 				DBA037021DB1125D004279F0 /* GoogleMapsCore.framework */,
@@ -346,6 +352,7 @@
 			children = (
 				3AF900D11BC2288600172627 /* Module */,
 				DB0A80EF1E1310BE00F03FE9 /* Clustering */,
+				DB6BD6D91F5C776600B710BF /* Place Picker */,
 				3ACA7B0E1D2986C400847EBF /* Autocompletion */,
 				3A28A4C91BE9204C0004FCE9 /* Overlays */,
 				DBEFA8DA1F19270D00A8FA1D /* Renderer */,
@@ -546,6 +553,15 @@
 			name = CameraUpdate;
 			sourceTree = "<group>";
 		};
+		DB6BD6D91F5C776600B710BF /* Place Picker */ = {
+			isa = PBXGroup;
+			children = (
+				DB6BD6DA1F5C778D00B710BF /* TiGooglemapsPlacePickerDialogProxy.h */,
+				DB6BD6DB1F5C778D00B710BF /* TiGooglemapsPlacePickerDialogProxy.m */,
+			);
+			name = "Place Picker";
+			sourceTree = "<group>";
+		};
 		DB9FB86B1E47395900A0790E /* Tile */ = {
 			isa = PBXGroup;
 			children = (
@@ -655,6 +671,7 @@
 				DB0A811E1E1310BE00F03FE9 /* GMUDefaultClusterIconGenerator+Testing.h in Headers */,
 				DB0A81211E1310BE00F03FE9 /* GMUDefaultClusterRenderer+Testing.h in Headers */,
 				DB9FB86E1E47399300A0790E /* TiGooglemapsTileProxy.h in Headers */,
+				DB6BD6DD1F5C77CA00B710BF /* TiGooglemapsPlacePickerDialogProxy.h in Headers */,
 				DBB7FAEC1F17ED8E008EFEEA /* GMUPoint.h in Headers */,
 				DB0A810B1E1310BE00F03FE9 /* GMUClusterAlgorithm.h in Headers */,
 				DBB7FAEE1F17ED8E008EFEEA /* GMUPolygon.h in Headers */,
@@ -771,6 +788,7 @@
 				DB0A810F1E1310BE00F03FE9 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				DB0A812F1E13111600F03FE9 /* GQTPointQuadTree.m in Sources */,
 				DB0A81311E13111600F03FE9 /* GQTPointQuadTreeChild.m in Sources */,
+				DB6BD6DC1F5C77BB00B710BF /* TiGooglemapsPlacePickerDialogProxy.m in Sources */,
 				24DD6CFA1134B3F500162E58 /* TiGooglemapsModule.m in Sources */,
 				DBEB0D661F19D518005C692F /* TiGooglemapsIndoorDisplayProxy.m in Sources */,
 				3ACF6A1B1CBA874700BC765B /* TiGooglemapsView.m in Sources */,
