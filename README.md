@@ -532,6 +532,15 @@ var mapView = maps.createView({
 });
 ```
 
+To remove cluster-items or clear the whole cluster, use the following methods:
+```js
+// Remove a single cluster-item
+mapView.removeClusterItem(clisterItem);
+
+// Clear the whole cluster
+mapView.clearClusterItems();
+```
+
 Use the `clusterclick` and `clusteritemclick` events on your map view instance
 to receive infos about your current cluster or cluster item.
 
