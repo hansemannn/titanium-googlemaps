@@ -457,13 +457,14 @@ var polygon = maps.createPolygon({
     points : [{ // Can handle both object and array
         latitude : -37.81819,
         longitude : 144.96798
-    },
-    [-32.95785, 115.86234],
-    [-33.91785, 115.82234]],
+    }],
     strokeWidth : 3,
     fillColor : 'yellow', // Default: Blue (#0000ff)
     strokeColor : 'green',
-    title: 'My Polygon'
+    title: 'My Polygon',
+    holes: [{
+        latitude: -32.95785, longitude: 115.86234
+    }]
 });
 mapView.addPolygon(polygon);
 ```

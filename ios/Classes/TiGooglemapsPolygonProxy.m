@@ -99,9 +99,31 @@
 {
     ENSURE_UI_THREAD(setTitle, value);
     ENSURE_TYPE(value, NSString);
-    
+  
     [[self polygon] setTitle:[TiUtils stringValue:value]];
     [self replaceValue:value forKey:@"title" notification:NO];
+}
+
+- (void)setHoles:(id)value
+{
+    ENSURE_UI_THREAD(setHoles, value);
+    ENSURE_TYPE(value, NSArray);
+  
+    NSMutableArray *holes = [NSMutableArray arrayWithCapacity:[value count]];
+  
+    [value enumerateObjectsUsingBlock:^(id item, NSUInteger idx, BOOL *stop) {
+        ENSURE_TYPE(item, NSDictionary);
+      
+        CLLocationDegrees latitude = [TiUtils doubleValue:[value valueForKey:@"latitude"]];
+        CLLocationDegrees longitude = [TiUtils doubleValue:[value valueForKey:@"longitude"]];
+      
+        GMSMutablePath *path = [[GMSMutablePath alloc] init];
+        [path insertCoordinate:CLLocationCoordinate2DMake(latitude, longitude) atIndex:idx];
+        [holes addObject:path];
+    }];
+    
+    [[self polygon] setHoles:holes];
+    [self replaceValue:value forKey:@"holes" notification:NO];
 }
 
 @end
