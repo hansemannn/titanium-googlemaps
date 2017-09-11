@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode8.2 # Change to 8.3 when 6.1.1.GA comes out
+osx_image: xcode8.3
 env:
 global:
     - "MODULE_NAME=ti.googlemaps"
