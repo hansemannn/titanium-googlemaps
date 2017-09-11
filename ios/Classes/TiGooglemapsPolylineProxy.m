@@ -82,7 +82,7 @@
     ENSURE_UI_THREAD(setGeodesic, value);
     
     [[self polyline] setGeodesic:[TiUtils boolValue:value def:NO]];    
-    [self replaceValue:value forKey:@"setGeodesic" notification:NO];
+    [self replaceValue:value forKey:@"geodesic" notification:NO];
 }
 
 - (void)setTitle:(id)value
