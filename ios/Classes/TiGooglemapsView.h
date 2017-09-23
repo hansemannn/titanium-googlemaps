@@ -11,6 +11,7 @@
 @interface TiGooglemapsView : TiUIView <GMSMapViewDelegate, GMUClusterManagerDelegate, GMUClusterRendererDelegate>
 
 @property (nonatomic, strong) GMSMapView *mapView;
+
 @property (nonatomic, strong) GMUClusterManager *clusterManager;
 
 @end
