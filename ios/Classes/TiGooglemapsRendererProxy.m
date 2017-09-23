@@ -6,46 +6,46 @@
  */
 
 #import "TiGooglemapsRendererProxy.h"
-#import "TiGooglemapsViewProxy.h"
 #import "TiGooglemapsView.h"
+#import "TiGooglemapsViewProxy.h"
 
 @implementation TiGooglemapsRendererProxy
 
 - (GMUGeometryRenderer *)renderer
 {
-    if (_renderer == nil) {
-        id mapView = [self valueForKey:@"mapView"];
-        id file = [self valueForKey:@"file"];
+  if (_renderer == nil) {
+    id mapView = [self valueForKey:@"mapView"];
+    id file = [self valueForKey:@"file"];
 
-        ENSURE_TYPE(mapView, TiGooglemapsViewProxy);
-        ENSURE_TYPE(file, NSString);
+    ENSURE_TYPE(mapView, TiGooglemapsViewProxy);
+    ENSURE_TYPE(file, NSString);
 
-        NSURL *url = [TiUtils toURL:file proxy:self];
+    NSURL *url = [TiUtils toURL:file proxy:self];
 
-        if (url == nil) {
-            [self throwException:@"Invalid file provided" subreason:@"The file provided could not be found." location:CODELOCATION];
-            return;
-        }
-
-        GMUKMLParser *parser = [[GMUKMLParser alloc] initWithURL:url];
-        [parser parse];
-
-        _renderer = [[GMUGeometryRenderer alloc] initWithMap:[(TiGooglemapsView *)[(TiGooglemapsViewProxy *)mapView view] mapView]
-                                                  geometries:[parser placemarks]
-                                                      styles:[parser styles]];
+    if (url == nil) {
+      [self throwException:@"Invalid file provided" subreason:@"The file provided could not be found." location:CODELOCATION];
+      return;
     }
 
-    return _renderer;
+    GMUKMLParser *parser = [[GMUKMLParser alloc] initWithURL:url];
+    [parser parse];
+
+    _renderer = [[GMUGeometryRenderer alloc] initWithMap:[(TiGooglemapsView *)[(TiGooglemapsViewProxy *)mapView view] mapView]
+                                              geometries:[parser placemarks]
+                                                  styles:[parser styles]];
+  }
+
+  return _renderer;
 }
 
 - (void)render:(id)unused
 {
-    [[self renderer] render];
+  [[self renderer] render];
 }
 
 - (void)clear:(id)unused
 {
-    [[self renderer] clear];
+  [[self renderer] clear];
 }
 
 @end

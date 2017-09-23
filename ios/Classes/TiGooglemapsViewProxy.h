@@ -1,19 +1,19 @@
 /**
  * Ti.GoogleMaps
- * Copyright (c) 2015-Present by Hans Knoechel, Inc. All Rights Reserved.
+ * Copyright (c) 2015-present by Hans Knöchel. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
-#import "TiViewProxy.h"
 #import "TiGooglemapsAnnotationProxy.h"
+#import "TiViewProxy.h"
 
-@interface TiGooglemapsViewProxy : TiViewProxy<GMSMapViewDelegate> {
-    TiGooglemapsViewProxy *mapView;
-    NSMutableArray *markers;
-    NSMutableArray *overlays;
-    
-    @private
-    dispatch_queue_t q;
+@interface TiGooglemapsViewProxy : TiViewProxy <GMSMapViewDelegate> {
+  TiGooglemapsViewProxy *mapView;
+  NSMutableArray *markers;
+  NSMutableArray *overlays;
+
+  @private
+  dispatch_queue_t q;
 }
 
 /**
@@ -111,6 +111,38 @@
  *  @since 1.0.0
  */
 - (void)removeCircle:(id)args;
+
+/**
+ *  Adds a tile.
+ *
+ *  @param args The tile proxy.
+ *  @since 3.2.0
+ */
+- (void)addTile:(id)args;
+
+/**
+ *  Removes a tile.
+ *
+ *  @param args The tile proxy.
+ *  @since 3.2.0
+ */
+- (void)removeTile:(id)args;
+
+/**
+ *  Adds a heatmap-layer.
+ *
+ *  @param args The heatmap-layer proxy.
+ *  @since 3.10.0
+ */
+- (void)addHeatmapLayer:(id)args;
+
+/**
+ *  Removes a heatmap-layer.
+ *
+ *  @param args The heatmap-layer proxy.
+ *  @since 3.10.0
+ */
+- (void)removeHeatmapLayer:(id)args;
 
 /**
  *  Animates to a location.

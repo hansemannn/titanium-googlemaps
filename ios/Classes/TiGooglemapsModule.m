@@ -1,16 +1,16 @@
 /**
  * Ti.GoogleMaps
- * Copyright (c) 2015-Present by Hans Knoechel, Inc. All Rights Reserved.
+ * Copyright (c) 2015-present by Hans Knöchel. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
 
+#import "TiGooglemapsModule.h"
 #import "TiBase.h"
+#import "TiGMSHTTPClient.h"
+#import "TiGooglemapsClusterItemProxy.h"
 #import "TiHost.h"
 #import "TiUtils.h"
-#import "TiGooglemapsModule.h"
-#import "TiGooglemapsClusterItemProxy.h"
-#import "TiGMSHTTPClient.h"
 #import <GoogleMaps/GoogleMaps.h>
 
 @implementation TiGooglemapsModule
@@ -19,242 +19,246 @@
 
 - (id)moduleGUID
 {
-	return @"81fe0326-e874-4843-b902-51bbd46f9283";
+  return @"81fe0326-e874-4843-b902-51bbd46f9283";
 }
 
 - (NSString *)moduleId
 {
-	return @"ti.googlemaps";
+  return @"ti.googlemaps";
 }
 
 #pragma mark Lifecycle
 
 - (void)startup
 {
-	[super startup];
+  [super startup];
 
-	NSLog(@"[DEBUG] %@ loaded",self);
+  NSLog(@"[DEBUG] %@ loaded", self);
 }
 
 #pragma Public APIs
 
 - (void)setAPIKey:(NSString *)apiKey
 {
-    ENSURE_TYPE(apiKey, NSString);
-    
-    _apiKey = [TiUtils stringValue:apiKey];
-    [GMSServices provideAPIKey:_apiKey];
+  ENSURE_TYPE(apiKey, NSString);
+
+  _apiKey = [TiUtils stringValue:apiKey];
+  [GMSServices provideAPIKey:_apiKey];
 }
 
 - (NSString *)openSourceLicenseInfo
 {
-    __block NSString *openSourceLicenseInfo;
-    
-    TiThreadPerformOnMainThread(^{
-        openSourceLicenseInfo = [GMSServices openSourceLicenseInfo];
-    }, YES);
-    
-    return openSourceLicenseInfo;
+  __block NSString *openSourceLicenseInfo;
+
+  TiThreadPerformOnMainThread(^{
+    openSourceLicenseInfo = [GMSServices openSourceLicenseInfo];
+  },
+      YES);
+
+  return openSourceLicenseInfo;
 }
 
 - (NSString *)version
 {
-    __block NSString *version;
-    
-    TiThreadPerformOnMainThread(^{
-        version = [GMSServices SDKVersion];
-    }, YES);
-    
-    return version;
+  __block NSString *version;
+
+  TiThreadPerformOnMainThread(^{
+    version = [GMSServices SDKVersion];
+  },
+      YES);
+
+  return version;
 }
 
 - (void)reverseGeocoder:(NSArray *)args
 {
-    ENSURE_UI_THREAD(reverseGeocoder, args);
-    ENSURE_ARG_COUNT(args, 3);
-    
-    KrollCallback *callback;
-    NSNumber *latitude;
-    NSNumber *longitude;
-    
-    ENSURE_ARG_AT_INDEX(latitude, args, 0, NSNumber);
-    ENSURE_ARG_AT_INDEX(longitude, args, 1, NSNumber);
-    ENSURE_ARG_AT_INDEX(callback, args, 2, KrollCallback);
-    
-    [[GMSGeocoder geocoder] reverseGeocodeCoordinate:CLLocationCoordinate2DMake(latitude.doubleValue, longitude.doubleValue)
-                                   completionHandler:^(GMSReverseGeocodeResponse *response, NSError *error) {
-                                       NSMutableDictionary *propertiesDict = [NSMutableDictionary dictionaryWithDictionary:@{
-                                           @"firstPlace": NULL_IF_NIL([self dictionaryFromAddress:response.firstResult]),
-                                           @"places": [self arrayFromAddresses:response.results]
-                                       }];
-                                       
-                                       if (!response.results || response.results.count == 0) {
-                                           [propertiesDict setValue:@"No places found" forKey:@"error"];
-                                           [propertiesDict setValue:NUMINT(1) forKey:@"code"];
-                                           [propertiesDict setValue:NUMBOOL(NO) forKey:@"success"];
-                                       } else {
-                                           [propertiesDict setValue:NUMINT(0) forKey:@"code"];
-                                           [propertiesDict setValue:NUMBOOL(YES) forKey:@"success"];
-                                       }
-                                       
-                                       NSArray *invocationArray = [[NSArray alloc] initWithObjects:&propertiesDict count:1];
-                                       
-                                       [callback call:invocationArray thisObject:self];
+  ENSURE_UI_THREAD(reverseGeocoder, args);
+  ENSURE_ARG_COUNT(args, 3);
+
+  KrollCallback *callback;
+  NSNumber *latitude;
+  NSNumber *longitude;
+
+  ENSURE_ARG_AT_INDEX(latitude, args, 0, NSNumber);
+  ENSURE_ARG_AT_INDEX(longitude, args, 1, NSNumber);
+  ENSURE_ARG_AT_INDEX(callback, args, 2, KrollCallback);
+
+  [[GMSGeocoder geocoder] reverseGeocodeCoordinate:CLLocationCoordinate2DMake(latitude.doubleValue, longitude.doubleValue)
+                                 completionHandler:^(GMSReverseGeocodeResponse *response, NSError *error) {
+                                   NSMutableDictionary *propertiesDict = [NSMutableDictionary dictionaryWithDictionary:@{
+                                     @"firstPlace" : NULL_IF_NIL([self dictionaryFromAddress:response.firstResult]),
+                                     @"places" : [self arrayFromAddresses:response.results]
                                    }];
+
+                                   if (!response.results || response.results.count == 0) {
+                                     [propertiesDict setValue:@"No places found" forKey:@"error"];
+                                     [propertiesDict setValue:NUMINT(1) forKey:@"code"];
+                                     [propertiesDict setValue:NUMBOOL(NO) forKey:@"success"];
+                                   } else {
+                                     [propertiesDict setValue:NUMINT(0) forKey:@"code"];
+                                     [propertiesDict setValue:NUMBOOL(YES) forKey:@"success"];
+                                   }
+
+                                   NSArray *invocationArray = [[NSArray alloc] initWithObjects:&propertiesDict count:1];
+
+                                   [callback call:invocationArray thisObject:self];
+                                 }];
 }
 
 - (void)getDirections:(NSArray *)args
 {
-    NSDictionary *params = [args objectAtIndex:0];
-    
-    id successCallback = [params objectForKey:@"success"];
-    id errorCallback = [params objectForKey:@"error"];
-    id origin = [params objectForKey:@"origin"];
-    id destination = [params objectForKey:@"destination"];
-    id waypoints = [params objectForKey:@"waypoints"];
-    
-    ENSURE_TYPE(successCallback, KrollCallback);
-    ENSURE_TYPE(errorCallback, KrollCallback);
-    ENSURE_TYPE(origin, NSString);
-    ENSURE_TYPE(destination, NSString);
-    ENSURE_TYPE_OR_NIL(waypoints, NSArray);
-    
-    
-    TiGMSHTTPClient *httpClient = [[TiGMSHTTPClient alloc] initWithApiKey:_apiKey];
+  NSDictionary *params = [args objectAtIndex:0];
 
-    NSMutableDictionary *options = [NSMutableDictionary dictionaryWithDictionary:@{
-        @"origin": origin,
-        @"destination": destination,
-    }];
+  id successCallback = [params objectForKey:@"success"];
+  id errorCallback = [params objectForKey:@"error"];
+  id origin = [params objectForKey:@"origin"];
+  id destination = [params objectForKey:@"destination"];
+  id waypoints = [params objectForKey:@"waypoints"];
 
-    if (waypoints) {
-        [options setObject:[TiGMSHTTPClient formattedWaypointsFromArray:waypoints] forKey:@"waypoints"];
-    }
-    
-    [httpClient loadWithRequestPath:@"directions/json"
-                         andOptions:options
-                  completionHandler:^(NSDictionary *json, NSError *error) {
-                      if (error) {
-                          NSDictionary *errorObject = [TiUtils dictionaryWithCode:1 message:[error localizedDescription]];
-                          NSArray *invocationArray = [[NSArray alloc] initWithObjects:&errorObject count:1];
-                          
-                          TiThreadPerformOnMainThread(^{
-                              [errorCallback call:invocationArray thisObject:self];
-                          }, NO);
+  ENSURE_TYPE(successCallback, KrollCallback);
+  ENSURE_TYPE(errorCallback, KrollCallback);
+  ENSURE_TYPE(origin, NSString);
+  ENSURE_TYPE(destination, NSString);
+  ENSURE_TYPE_OR_NIL(waypoints, NSArray);
 
-                          return;
-                      }
-                      
-                      TiThreadPerformOnMainThread(^{
-                          NSArray *invocationArray = [[NSArray alloc] initWithObjects:&json count:1];
-                          [successCallback call:invocationArray thisObject:self];
-                      }, NO);
-                  }];
+  TiGMSHTTPClient *httpClient = [[TiGMSHTTPClient alloc] initWithApiKey:_apiKey];
+
+  NSMutableDictionary *options = [NSMutableDictionary dictionaryWithDictionary:@{
+    @"origin" : origin,
+    @"destination" : destination,
+  }];
+
+  if (waypoints) {
+    [options setObject:[TiGMSHTTPClient formattedWaypointsFromArray:waypoints] forKey:@"waypoints"];
+  }
+
+  [httpClient loadWithRequestPath:@"directions/json"
+                       andOptions:options
+                completionHandler:^(NSDictionary *json, NSError *error) {
+                  if (error) {
+                    NSDictionary *errorObject = [TiUtils dictionaryWithCode:1 message:[error localizedDescription]];
+                    NSArray *invocationArray = [[NSArray alloc] initWithObjects:&errorObject count:1];
+
+                    TiThreadPerformOnMainThread(^{
+                      [errorCallback call:invocationArray thisObject:self];
+                    },
+                        NO);
+
+                    return;
+                  }
+
+                  TiThreadPerformOnMainThread(^{
+                    NSArray *invocationArray = [[NSArray alloc] initWithObjects:&json count:1];
+                    [successCallback call:invocationArray thisObject:self];
+                  },
+                      NO);
+                }];
 }
 
 - (TiGooglemapsClusterItemProxy *)createClusterItem:(NSArray *)args
 {
-    NSDictionary *params = [args objectAtIndex:0];
-    
-    id latitude = [params objectForKey:@"latitude"];
-    ENSURE_TYPE(latitude, NSNumber);
-    
-    id longitude = [params objectForKey:@"longitude"];
-    ENSURE_TYPE(longitude, NSNumber);
-    
-    id title = [params objectForKey:@"title"];
-    ENSURE_TYPE_OR_NIL(title, NSString);
+  NSDictionary *params = [args objectAtIndex:0];
 
-    id subtitle = [params objectForKey:@"subtitle"];
-    ENSURE_TYPE_OR_NIL(subtitle, NSString);
+  id latitude = [params objectForKey:@"latitude"];
+  ENSURE_TYPE(latitude, NSNumber);
 
-    id icon = [params objectForKey:@"icon"];
+  id longitude = [params objectForKey:@"longitude"];
+  ENSURE_TYPE(longitude, NSNumber);
 
-    id userData = [params objectForKey:@"userData"];
-    ENSURE_TYPE_OR_NIL(userData, NSDictionary);
-    
-    return [[TiGooglemapsClusterItemProxy alloc] _initWithPageContext:[self pageContext]
-                                                          andPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude])
-                                                                title:title
-                                                             subtitle:subtitle
-                                                                 icon:icon
-                                                             userData:userData];
+  id title = [params objectForKey:@"title"];
+  ENSURE_TYPE_OR_NIL(title, NSString);
+
+  id subtitle = [params objectForKey:@"subtitle"];
+  ENSURE_TYPE_OR_NIL(subtitle, NSString);
+
+  id icon = [params objectForKey:@"icon"];
+
+  id userData = [params objectForKey:@"userData"];
+  ENSURE_TYPE_OR_NIL(userData, NSDictionary);
+
+  return [[TiGooglemapsClusterItemProxy alloc] _initWithPageContext:[self pageContext]
+                                                        andPosition:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude])
+                                                              title:title
+                                                           subtitle:subtitle
+                                                               icon:icon
+                                                           userData:userData];
 }
 
 - (NSArray *)decodePolylinePoints:(NSArray *)args
 {
-    NSString *polylinePoints = [args objectAtIndex:0];
-    
-    GMSPath *path = [GMSPath pathFromEncodedPath:polylinePoints];
-    NSMutableArray *coordinates = [NSMutableArray arrayWithCapacity:path.count];
-    
-    for (NSUInteger i = 0; i < path.count; i++) {
-        CLLocationCoordinate2D location = [path coordinateAtIndex:i];
-        [coordinates addObject:@{@"latitude": NUMDOUBLE(location.latitude), @"longitude": NUMDOUBLE(location.longitude)}];
-    }
-    
-    return coordinates;
+  NSString *polylinePoints = [args objectAtIndex:0];
+
+  GMSPath *path = [GMSPath pathFromEncodedPath:polylinePoints];
+  NSMutableArray *coordinates = [NSMutableArray arrayWithCapacity:path.count];
+
+  for (NSUInteger i = 0; i < path.count; i++) {
+    CLLocationCoordinate2D location = [path coordinateAtIndex:i];
+    [coordinates addObject:@{ @"latitude" : NUMDOUBLE(location.latitude),
+      @"longitude" : NUMDOUBLE(location.longitude) }];
+  }
+
+  return coordinates;
 }
 
 #pragma mark Utilities
 
-- (NSDictionary * _Nullable)dictionaryFromAddress:(GMSAddress *)address
+- (NSDictionary *_Nullable)dictionaryFromAddress:(GMSAddress *)address
 {
-    if (!address) {
-        return nil;
-    }
-    
-    NSMutableDictionary *result = [NSMutableDictionary dictionary];
-    
-    if (address.coordinate.latitude && address.coordinate.longitude) {
-        [result setObject:NUMDOUBLE(address.coordinate.latitude) forKey:@"latitude"];
-        [result setObject:NUMDOUBLE(address.coordinate.longitude) forKey:@"longitude"];
-    }
-    
-    if (address.thoroughfare) {
-        [result setObject:address.thoroughfare forKey:@"thoroughfare"];
-    }
-    
-    if (address.locality) {
-        [result setObject:address.locality forKey:@"locality"];
-    }
-    
-    if (address.subLocality) {
-        [result setObject:address.subLocality forKey:@"subLocality"];
-    }
-    
-    if (address.administrativeArea) {
-        [result setObject:address.administrativeArea forKey:@"administrativeArea"];
-    }
-    
-    if (address.postalCode) {
-        [result setObject:address.postalCode forKey:@"postalCode"];
-    }
-    
-    if (address.country) {
-        [result setObject:address.country forKey:@"country"];
-    }
-    
-    if (address.lines) {
-        [result setObject:address.lines forKey:@"lines"];
-    }
-    
-    return result;
+  if (!address) {
+    return nil;
+  }
+
+  NSMutableDictionary *result = [NSMutableDictionary dictionary];
+
+  if (address.coordinate.latitude && address.coordinate.longitude) {
+    [result setObject:NUMDOUBLE(address.coordinate.latitude) forKey:@"latitude"];
+    [result setObject:NUMDOUBLE(address.coordinate.longitude) forKey:@"longitude"];
+  }
+
+  if (address.thoroughfare) {
+    [result setObject:address.thoroughfare forKey:@"thoroughfare"];
+  }
+
+  if (address.locality) {
+    [result setObject:address.locality forKey:@"locality"];
+  }
+
+  if (address.subLocality) {
+    [result setObject:address.subLocality forKey:@"subLocality"];
+  }
+
+  if (address.administrativeArea) {
+    [result setObject:address.administrativeArea forKey:@"administrativeArea"];
+  }
+
+  if (address.postalCode) {
+    [result setObject:address.postalCode forKey:@"postalCode"];
+  }
+
+  if (address.country) {
+    [result setObject:address.country forKey:@"country"];
+  }
+
+  if (address.lines) {
+    [result setObject:address.lines forKey:@"lines"];
+  }
+
+  return result;
 }
 
 - (NSArray *)arrayFromAddresses:(NSArray<GMSAddress *> *)addresses
 {
-    if (!addresses) {
-        return @[];
-    }
-    
-    NSMutableArray *result = [NSMutableArray arrayWithCapacity:[addresses count]];
-    
-    for (GMSAddress *address in addresses) {
-        [result addObject:[self dictionaryFromAddress:address]];
-    }
-    
-    return result;
+  if (!addresses) {
+    return @[];
+  }
+
+  NSMutableArray *result = [NSMutableArray arrayWithCapacity:[addresses count]];
+
+  for (GMSAddress *address in addresses) {
+    [result addObject:[self dictionaryFromAddress:address]];
+  }
+
+  return result;
 }
 
 #pragma mark Constants

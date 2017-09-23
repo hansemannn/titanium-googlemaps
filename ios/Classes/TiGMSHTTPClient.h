@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)loadWithRequestPath:(NSString *)path
                  andOptions:(NSDictionary<NSString *, id> *)options
-          completionHandler:(void (^)(NSDictionary<NSString *, id> * _Nullable json, NSError * _Nullable error))completionHandler;
+          completionHandler:(void (^)(NSDictionary<NSString *, id> *_Nullable json, NSError *_Nullable error))completionHandler;
 
 /**
  Creates an url based on the api path and request options.
@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @see -loadWithRequestPath:andOptions:completionHandler
  */
-- (NSURL *)entitledURLWithPath:(NSString *)path andOptions:(NSDictionary * _Nullable)options;
+- (NSURL *)entitledURLWithPath:(NSString *)path andOptions:(NSDictionary *_Nullable)options;
 
 /**
  Formats a given array of waypoints to a string that can be passed to the request.
@@ -58,13 +58,13 @@ NS_ASSUME_NONNULL_BEGIN
  @return A formmated string to be passed to the URL.
  
  */
-+ (NSString * _Nullable)formattedWaypointsFromArray:(NSArray<NSString *> * _Nullable)array;
++ (NSString *_Nullable)formattedWaypointsFromArray:(NSArray<NSString *> *_Nullable)array;
 
 /**
  The Google Maps API key used to communicate with the API.
  The API key can be generated at https://developers.google.com/maps/documentation/geocoding/get-api-key
  */
-@property(nonatomic, strong, readonly) NSString *apiKey;
+@property (nonatomic, strong, readonly) NSString *apiKey;
 
 @end
 

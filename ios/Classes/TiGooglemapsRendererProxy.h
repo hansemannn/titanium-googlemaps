@@ -6,11 +6,11 @@
  */
 #import "TiProxy.h"
 
-#import "GMUKMLParser.h"
 #import "GMUGeometryRenderer.h"
+#import "GMUKMLParser.h"
 
 @interface TiGooglemapsRendererProxy : TiProxy {
-    GMUGeometryRenderer *_renderer;
+  GMUGeometryRenderer *_renderer;
 }
 
 /**

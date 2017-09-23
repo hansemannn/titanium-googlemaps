@@ -8,12 +8,12 @@
 #import <GoogleMaps/GoogleMaps.h>
 
 @interface TiGooglemapsIndoorLevelProxy : TiProxy {
-    GMSIndoorLevel *_indoorLevel;
+  GMSIndoorLevel *_indoorLevel;
 }
 
-- (id _Nonnull)_initWithPageContext:(id<TiEvaluator> _Nullable)context andIndoorLevel:(GMSIndoorLevel * _Nonnull)indoorLevel;
+- (id _Nonnull)_initWithPageContext:(id<TiEvaluator> _Nullable)context andIndoorLevel:(GMSIndoorLevel *_Nonnull)indoorLevel;
 
-- (GMSIndoorLevel * _Nonnull)indoorLevel;
+- (GMSIndoorLevel *_Nonnull)indoorLevel;
 
 #pragma mark Public API
 
@@ -23,7 +23,7 @@
  * @return The name.
  * @since 3.8.0
  */
-- (NSString * _Nullable)name;
+- (NSString *_Nullable)name;
 
 /**
  * The floor short-name (can be null).
@@ -31,6 +31,6 @@
  * @return The short-name.
  * @since 3.8.0
  */
-- (NSString * _Nullable)shortName;
+- (NSString *_Nullable)shortName;
 
 @end
