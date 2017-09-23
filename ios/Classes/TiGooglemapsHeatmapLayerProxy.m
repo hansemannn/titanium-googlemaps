@@ -26,11 +26,14 @@
 
 - (void)setGradient:(NSDictionary *)gradient
 {
-  NSArray<UIColor *> *colors = [(NSArray *)[gradient objectForKey:@"colors"] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id object, NSDictionary *bindings) {
-    return [[TiUtils colorValue:object] color];
-  }]];
+  NSArray *proxyColors = (NSArray *)[gradient objectForKey:@"colors"];
+  NSMutableArray *colors = [NSMutableArray arrayWithCapacity:proxyColors];
 
-  GMUGradient *nativeGradient = [[GMUGradient alloc] initWithColors:colors
+  for (id color in proxyColors) {
+    [colors addObject:[[TiUtils colorValue:color] color]];
+  }
+
+  GMUGradient *nativeGradient = [[GMUGradient alloc] initWithColors:@[ UIColor.greenColor, UIColor.redColor ]
                                                         startPoints:[gradient objectForKey:@"startPoints"]
                                                        colorMapSize:[TiUtils intValue:@"colorMapSize" properties:gradient def:256]];
 
@@ -49,10 +52,13 @@
 
 - (void)setWeightedData:(NSArray *)weightedData
 {
-  NSArray<GMUWeightedLatLng *> *result = [weightedData filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id object, NSDictionary *bindings) {
-    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([TiUtils doubleValue:@"latitude" properties:object], [TiUtils doubleValue:@"longitude" properties:object]);
-    return [[GMUWeightedLatLng alloc] initWithCoordinate:coordinate intensity:[TiUtils floatValue:@"intensity" properties:object]];
-  }]];
+  NSMutableArray *result = [NSMutableArray arrayWithCapacity:weightedData.count];
+
+  for (NSDictionary *data in weightedData) {
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([TiUtils doubleValue:@"latitude" properties:data], [TiUtils doubleValue:@"longitude" properties:data]);
+
+    [result addObject:[[GMUWeightedLatLng alloc] initWithCoordinate:coordinate intensity:[TiUtils floatValue:@"intensity" properties:data]]];
+  }
 
   [_layer setWeightedData:result];
 }
