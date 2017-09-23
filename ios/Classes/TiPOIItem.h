@@ -5,20 +5,17 @@
  * Please see the LICENSE included with this distribution for details.
  */
 
-#import "TiPOIItem.h"
+#import "GMUMarkerClustering.h"
+#import <Foundation/Foundation.h>
 
-@implementation TiPOIItem
+@interface TiPOIItem : NSObject <GMUClusterItem>
+
+@property (nonatomic, readonly) CLLocationCoordinate2D position;
+@property (nonatomic, readonly) NSString *title;
+@property (nonatomic, readonly) NSString *subtitle;
+@property (nonatomic, readonly) UIImage *icon;
+@property (nonatomic, readonly) NSDictionary *userData;
 
 - (instancetype)initWithPosition:(CLLocationCoordinate2D)position andTitle:(NSString *)title subtitle:(NSString *)subtitle icon:(UIImage *)icon userData:(NSDictionary *)userData;
-{
-    if (self = [super init]) {
-        _position = position;
-        _title = title;
-        _subtitle = subtitle;
-        _icon = icon;
-        _userData = userData;
-    }
-    return self;
-}
 
 @end

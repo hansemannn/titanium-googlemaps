@@ -13,8 +13,6 @@
  * limitations under the License.
  */
 
-/** Umbrella header. */
-
 #import "GMUCluster.h"
 #import "GMUClusterItem.h"
 #import "GMUClusterManager.h"
@@ -22,5 +20,6 @@
 #import "GMUDefaultClusterRenderer.h"
 #import "GMUGridBasedClusterAlgorithm.h"
 #import "GMUNonHierarchicalDistanceBasedAlgorithm.h"
+#import "GMUStaticCluster.h"
 
 #import "GQTPointQuadTree.h"

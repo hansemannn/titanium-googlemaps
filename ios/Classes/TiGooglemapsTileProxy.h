@@ -7,11 +7,10 @@
 #import "TiProxy.h"
 #import <GoogleMaps/GoogleMaps.h>
 
-@interface TiGooglemapsTileProxy : TiProxy<GMSTileReceiver> {
-    
+@interface TiGooglemapsTileProxy : TiProxy <GMSTileReceiver> {
 }
 
-@property(nonatomic, strong) GMSURLTileLayer *tile;
+@property (nonatomic, strong) GMSURLTileLayer *tile;
 
 /**
  * Set the tile z-index.

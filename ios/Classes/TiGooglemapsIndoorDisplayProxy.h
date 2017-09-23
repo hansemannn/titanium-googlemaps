@@ -7,8 +7,8 @@
 #import "TiProxy.h"
 #import <GoogleMaps/GoogleMaps.h>
 
-@interface TiGooglemapsIndoorDisplayProxy : TiProxy<GMSIndoorDisplayDelegate> {
-    GMSIndoorDisplay *_indoorDisplay;
+@interface TiGooglemapsIndoorDisplayProxy : TiProxy <GMSIndoorDisplayDelegate> {
+  GMSIndoorDisplay *_indoorDisplay;
 }
 
 - (id)_initWithPageContext:(id<TiEvaluator>)context andIndoorDisplay:(GMSIndoorDisplay *)indoorDisplay;
