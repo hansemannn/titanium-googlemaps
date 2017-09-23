@@ -9,6 +9,7 @@
 #import "TiGooglemapsCameraUpdateProxy.h"
 #import "TiGooglemapsCircleProxy.h"
 #import "TiGooglemapsClusterItemProxy.h"
+#import "TiGooglemapsHeatmapLayerProxy.h"
 #import "TiGooglemapsIndoorDisplayProxy.h"
 #import "TiGooglemapsPolygonProxy.h"
 #import "TiGooglemapsPolylineProxy.h"
@@ -500,6 +501,26 @@
   ENSURE_TYPE(tileProxy, TiGooglemapsTileProxy);
 
   [[tileProxy tile] setMap:nil];
+}
+
+- (void)addHeatmapLayer:(id)args
+{
+  ENSURE_UI_THREAD_1_ARG(args);
+
+  id heatmapLayerProxy = [args objectAtIndex:0];
+  ENSURE_TYPE(heatmapLayerProxy, TiGooglemapsHeatmapLayerProxy);
+
+  [[heatmapLayerProxy heatmapLayer] setMap:[[self mapView] mapView]];
+}
+
+- (void)removeHeatmapLayer:(id)args
+{
+  ENSURE_UI_THREAD_1_ARG(args);
+
+  id heatmapLayerProxy = [args objectAtIndex:0];
+  ENSURE_TYPE(heatmapLayerProxy, TiGooglemapsHeatmapLayerProxy);
+
+  [[heatmapLayerProxy heatmapLayer] setMap:nil];
 }
 
 - (id)getSelectedAnnotation:(id)unused
