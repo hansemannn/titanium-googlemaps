@@ -59,6 +59,8 @@
 		DB0C69551E49D6DF000F8FA2 /* TiGMSHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0C69531E49D6DF000F8FA2 /* TiGMSHTTPClient.m */; };
 		DB11CE291E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = DB11CE271E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.h */; };
 		DB11CE2A1E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = DB11CE281E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.m */; };
+		DB2AB2B51F76942700C91DAE /* TiGooglemapsHeatmapLayerProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = DB2AB2B31F76942700C91DAE /* TiGooglemapsHeatmapLayerProxy.h */; };
+		DB2AB2B61F76942700C91DAE /* TiGooglemapsHeatmapLayerProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2AB2B41F76942700C91DAE /* TiGooglemapsHeatmapLayerProxy.m */; };
 		DB548D551F76908B001F54C7 /* TiClusterRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = DB548D4F1F76908B001F54C7 /* TiClusterRenderer.m */; };
 		DB548D561F76908B001F54C7 /* TiClusterRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = DB548D501F76908B001F54C7 /* TiClusterRenderer.h */; };
 		DB548D571F76908B001F54C7 /* TiGooglemapsClusterItemProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = DB548D511F76908B001F54C7 /* TiGooglemapsClusterItemProxy.m */; };
@@ -156,6 +158,8 @@
 		DB0C69531E49D6DF000F8FA2 /* TiGMSHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGMSHTTPClient.m; path = Classes/TiGMSHTTPClient.m; sourceTree = "<group>"; };
 		DB11CE271E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsCameraUpdateProxy.h; path = Classes/TiGooglemapsCameraUpdateProxy.h; sourceTree = "<group>"; };
 		DB11CE281E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsCameraUpdateProxy.m; path = Classes/TiGooglemapsCameraUpdateProxy.m; sourceTree = "<group>"; };
+		DB2AB2B31F76942700C91DAE /* TiGooglemapsHeatmapLayerProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsHeatmapLayerProxy.h; path = Classes/TiGooglemapsHeatmapLayerProxy.h; sourceTree = "<group>"; };
+		DB2AB2B41F76942700C91DAE /* TiGooglemapsHeatmapLayerProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsHeatmapLayerProxy.m; path = Classes/TiGooglemapsHeatmapLayerProxy.m; sourceTree = "<group>"; };
 		DB548D4F1F76908B001F54C7 /* TiClusterRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiClusterRenderer.m; path = Classes/TiClusterRenderer.m; sourceTree = "<group>"; };
 		DB548D501F76908B001F54C7 /* TiClusterRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiClusterRenderer.h; path = Classes/TiClusterRenderer.h; sourceTree = "<group>"; };
 		DB548D511F76908B001F54C7 /* TiGooglemapsClusterItemProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsClusterItemProxy.m; path = Classes/TiGooglemapsClusterItemProxy.m; sourceTree = "<group>"; };
@@ -414,7 +418,8 @@
 		3AF900D31BC2289C00172627 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DBEB0D621F19D4FE005C692F /* IndoorDisplay */,
+				DB2AB2B21F76940C00C91DAE /* Heatmap Layer */,
+				DBEB0D621F19D4FE005C692F /* Indoor Display */,
 				3ACF6A161CBA874700BC765B /* TiGooglemapsView.h */,
 				3ACF6A171CBA874700BC765B /* TiGooglemapsView.m */,
 				3ACF6A181CBA874700BC765B /* TiGooglemapsViewProxy.h */,
@@ -439,6 +444,15 @@
 				DB11CE281E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.m */,
 			);
 			name = CameraUpdate;
+			sourceTree = "<group>";
+		};
+		DB2AB2B21F76940C00C91DAE /* Heatmap Layer */ = {
+			isa = PBXGroup;
+			children = (
+				DB2AB2B31F76942700C91DAE /* TiGooglemapsHeatmapLayerProxy.h */,
+				DB2AB2B41F76942700C91DAE /* TiGooglemapsHeatmapLayerProxy.m */,
+			);
+			name = "Heatmap Layer";
 			sourceTree = "<group>";
 		};
 		DB548D4E1F769041001F54C7 /* Clustering */ = {
@@ -602,7 +616,7 @@
 			name = Tile;
 			sourceTree = "<group>";
 		};
-		DBEB0D621F19D4FE005C692F /* IndoorDisplay */ = {
+		DBEB0D621F19D4FE005C692F /* Indoor Display */ = {
 			isa = PBXGroup;
 			children = (
 				DBEB0D631F19D518005C692F /* TiGooglemapsIndoorDisplayProxy.h */,
@@ -610,7 +624,7 @@
 				DBEB0D671F19D976005C692F /* TiGooglemapsIndoorLevelProxy.h */,
 				DBEB0D681F19D976005C692F /* TiGooglemapsIndoorLevelProxy.m */,
 			);
-			name = IndoorDisplay;
+			name = "Indoor Display";
 			sourceTree = "<group>";
 		};
 		DBEFA8DA1F19270D00A8FA1D /* Renderer */ = {
@@ -636,6 +650,7 @@
 				DB6BD6DD1F5C77CA00B710BF /* TiGooglemapsPlacePickerDialogProxy.h in Headers */,
 				3A433F021BE9AB270005C8AE /* TiGooglemapsPolygonProxy.h in Headers */,
 				AA747D9F0F9514B9006C5449 /* TiGooglemaps_Prefix.pch in Headers */,
+				DB2AB2B51F76942700C91DAE /* TiGooglemapsHeatmapLayerProxy.h in Headers */,
 				24DD6CF91134B3F500162E58 /* TiGooglemapsModule.h in Headers */,
 				DB548D591F76908C001F54C7 /* TiGooglemapsClusterItemProxy.h in Headers */,
 				3ACF6A1C1CBA874700BC765B /* TiGooglemapsViewProxy.h in Headers */,
@@ -754,6 +769,7 @@
 				DB6BD6DC1F5C77BB00B710BF /* TiGooglemapsPlacePickerDialogProxy.m in Sources */,
 				24DD6CFA1134B3F500162E58 /* TiGooglemapsModule.m in Sources */,
 				DBEB0D661F19D518005C692F /* TiGooglemapsIndoorDisplayProxy.m in Sources */,
+				DB2AB2B61F76942700C91DAE /* TiGooglemapsHeatmapLayerProxy.m in Sources */,
 				3ACF6A1B1CBA874700BC765B /* TiGooglemapsView.m in Sources */,
 				24DE9E1211C5FE74003F90F6 /* TiGooglemapsModuleAssets.m in Sources */,
 				3A433F031BE9AB270005C8AE /* TiGooglemapsPolygonProxy.m in Sources */,

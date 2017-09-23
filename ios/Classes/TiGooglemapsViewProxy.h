@@ -113,6 +113,38 @@
 - (void)removeCircle:(id)args;
 
 /**
+ *  Adds a tile.
+ *
+ *  @param args The tile proxy.
+ *  @since 3.2.0
+ */
+- (void)addTile:(id)args;
+
+/**
+ *  Removes a tile.
+ *
+ *  @param args The tile proxy.
+ *  @since 3.2.0
+ */
+- (void)removeTile:(id)args;
+
+/**
+ *  Adds a heatmap-layer.
+ *
+ *  @param args The heatmap-layer proxy.
+ *  @since 3.10.0
+ */
+- (void)addHeatmapLayer:(id)args;
+
+/**
+ *  Removes a heatmap-layer.
+ *
+ *  @param args The heatmap-layer proxy.
+ *  @since 3.10.0
+ */
+- (void)removeHeatmapLayer:(id)args;
+
+/**
  *  Animates to a location.
  *
  *  @param args The location to animate to.
