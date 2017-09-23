@@ -1,7 +1,7 @@
 # GoogleMaps iOS SDK in Appcelerator Titanium 
 [![Build Status](https://travis-ci.org/hansemannn/titanium-google-maps.svg?branch=master)](https://travis-ci.org/hansemannn/titanium-google-maps)  [![License](http://hans-knoechel.de/shields/shield-license.svg?v=2)](./LICENSE)  [![Contact](http://hans-knoechel.de/shields/shield-twitter.svg?v=2)](http://twitter.com/hansemannnn)
 
-<img width="1094" src="http://abload.de/img/showcase3vron.png">
+<img width="1094" src="https://abload.de/img/687474703a2f2f61626c6ymjhw.jpg">
 
 ## Summary
 Ti.GoogleMaps is an open-source project to support the Google Maps iOS-SDK in Appcelerator's Titanium Mobile. The module currently supports the following API's:
@@ -15,6 +15,8 @@ Ti.GoogleMaps is an open-source project to support the Google Maps iOS-SDK in Ap
 - [x] Place Picker dialog
 - [x] Clustering
 - [x] Directions
+- [x] Clustering
+- [x] Heatmap Layers
 - [x] All delegates (exposed as events)
 
 ## Requirements
@@ -25,7 +27,7 @@ Ti.GoogleMaps is an open-source project to support the Google Maps iOS-SDK in Ap
 ## Download, Setup and Build
 
 ### Download
-  * [Stable release](https://github.com/hansemannn/Ti.GoogleMaps/releases)
+  * [Stable release](https://github.com/hansemannn/titanium-googlemaps/releases)
   * [![gitTio](http://hans-knoechel.de/shields/shield-gittio.svg)](http://gitt.io/component/ti.googlemaps)
 
 ### Setup
@@ -370,6 +372,41 @@ You can select and deselect annotations, as well as receive the currently select
 mapView.selectAnnotation(anno1); // Select
 mapView.deselectAnnotation(); // Deselect
 var selectedAnnotation = mapView.getSelectedAnnotation(); // Selected annotation, null if no annotation is selected
+```
+
+### Heatmap Layer
+Use heatmaps-layers in your map-views by providing weighted data and designated gradient-colors.
+
+```js
+// Import data
+var stations = JSON.parse(Ti.Filesystem.getFile('police_stations.json').read());
+var data = [];
+
+// Map data to an an array of latitude/longitude/intensity objects
+for (var i = 0; i < stations.length; i++) {
+  var station = stations[i];
+
+  data.push({
+    latitude: station.lat,
+    longitude: station.lng,
+    intensity: 1.0
+  });
+}
+
+// Create a new heatmap-layer
+var heatmap = maps.createHeatmapLayer({
+  weightedData: data,
+  radius: 80,
+  opacity: 0.8,
+  gradient: {
+    colors: ['green', 'red'],
+    startPoints: [0.2, 1.0],
+    colorMapSize: 256
+  }
+});
+
+// Add the layer to your map-view
+mapView.addHeatmapLayer(heatmap);
 ```
 
 ### Autocomplete Dialog
