@@ -372,7 +372,7 @@
 				3A28A4C91BE9204C0004FCE9 /* Overlays */,
 				DBEFA8DA1F19270D00A8FA1D /* Renderer */,
 				3AF900D31BC2289C00172627 /* View */,
-				DB11CE2B1E1704DC006D0FB2 /* CameraUpdate */,
+				DB11CE2B1E1704DC006D0FB2 /* Camera Update */,
 				3AF900D41BC228C300172627 /* Annotations */,
 				DB9FB86B1E47395900A0790E /* Tile */,
 			);
@@ -478,13 +478,13 @@
 			name = Annotations;
 			sourceTree = "<group>";
 		};
-		DB11CE2B1E1704DC006D0FB2 /* CameraUpdate */ = {
+		DB11CE2B1E1704DC006D0FB2 /* Camera Update */ = {
 			isa = PBXGroup;
 			children = (
 				DB11CE271E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.h */,
 				DB11CE281E1704D9006D0FB2 /* TiGooglemapsCameraUpdateProxy.m */,
 			);
-			name = CameraUpdate;
+			name = "Camera Update";
 			sourceTree = "<group>";
 		};
 		DB2AB2B21F76940C00C91DAE /* Heatmap Layer */ = {
