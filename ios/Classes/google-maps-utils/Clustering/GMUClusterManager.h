@@ -25,16 +25,26 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class GMUClusterManager;
 
-/** Delegate for events on GMUClusterManager. */
+/**
+ * Delegate for events on the GMUClusterManager.
+ */
 @protocol GMUClusterManagerDelegate<NSObject>
 
 @optional
 
-/** Called when the user taps on a cluster marker. */
-- (void)clusterManager:(GMUClusterManager *)clusterManager didTapCluster:(id<GMUCluster>)cluster;
+/**
+ * Called when the user taps on a cluster marker.
+ * @return YES if this delegate handled the tap event,
+ * and NO to pass this tap event to other handlers.
+ */
+- (BOOL)clusterManager:(GMUClusterManager *)clusterManager didTapCluster:(id<GMUCluster>)cluster;
 
-/** Called when the user taps on a cluster item marker. */
-- (void)clusterManager:(GMUClusterManager *)clusterManager
+/**
+ * Called when the user taps on a cluster item marker.
+ * @return YES if this delegate handled the tap event,
+ * and NO to pass this tap event to other handlers.
+ */
+- (BOOL)clusterManager:(GMUClusterManager *)clusterManager
      didTapClusterItem:(id<GMUClusterItem>)clusterItem;
 
 @end
@@ -45,13 +55,22 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface GMUClusterManager : NSObject<GMSMapViewDelegate>
 
-/** Initializer with the |mapView|, |algorithm| and |renderer|. */
+/**
+ * The default initializer is not available. Use initWithMap:algorithm:renderer instead.
+ */
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
+ * Returns a new instance of the GMUClusterManager class defined by it's |algorithm| and |renderer|.
+ */
 - (instancetype)initWithMap:(GMSMapView *)mapView
                   algorithm:(id<GMUClusterAlgorithm>)algorithm
-                   renderer:(id<GMUClusterRenderer>)renderer;
+                   renderer:(id<GMUClusterRenderer>)renderer NS_DESIGNATED_INITIALIZER;
 
-/** Gets the clustering algorithm. */
-@property(nonatomic, readonly, nullable) id<GMUClusterAlgorithm> algorithm;
+/**
+ * Returns the clustering algorithm.
+ */
+@property(nonatomic, readonly) id<GMUClusterAlgorithm> algorithm;
 
 /**
  * GMUClusterManager |delegate|.
@@ -82,16 +101,24 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setDelegate:(id<GMUClusterManagerDelegate> _Nullable)delegate
         mapDelegate:(id<GMSMapViewDelegate> _Nullable)mapDelegate;
 
-/** Adds a cluster item to the collection. */
+/**
+ * Adds a cluster item to the collection.
+ */
 - (void)addItem:(id<GMUClusterItem>)item;
 
-/** Adds multiple cluster items to the collection. */
+/**
+ * Adds multiple cluster items to the collection.
+ */
 - (void)addItems:(NSArray<id<GMUClusterItem>> *)items;
 
-/** Removes a cluster item from the collection. */
+/**
+ * Removes a cluster item from the collection.
+ */
 - (void)removeItem:(id<GMUClusterItem>)item;
 
-/** Removes all items from the collection. */
+/**
+ * Removes all items from the collection.
+ */
 - (void)clearItems;
 
 /**

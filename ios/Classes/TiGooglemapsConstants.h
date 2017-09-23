@@ -1,6 +1,6 @@
 /**
  * Ti.GoogleMaps
- * Copyright (c) 2015-Present by Hans Knoechel, Inc. All Rights Reserved.
+ * Copyright (c) 2015-present by Hans Knöchel. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -11,24 +11,24 @@
  * @since 1.0.0
  */
 typedef NS_ENUM(NSUInteger, TiGooglemapsOverlayType) {
-    
-    /**
+
+  /**
      * Unknown overlay type.
      */
-    TiGooglemapsOverlayTypeUnknown = 0,
+  TiGooglemapsOverlayTypeUnknown = 0,
 
-    /**
+  /**
      * Polygon overlay type.
      */
-    TiGooglemapsOverlayTypePolygon,
-    
-    /**
+  TiGooglemapsOverlayTypePolygon,
+
+  /**
      * Polyline overlay type.
      */
-    TiGooglemapsOverlayTypePolyline,
-    
-    /**
+  TiGooglemapsOverlayTypePolyline,
+
+  /**
      * Circle overlay type.
      */
-    TiGooglemapsOverlayTypeCircle
+  TiGooglemapsOverlayTypeCircle
 };

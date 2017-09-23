@@ -9,30 +9,30 @@
 
 @implementation TiGooglemapsIndoorLevelProxy
 
-- (id _Nonnull)_initWithPageContext:(id<TiEvaluator> _Nullable)context andIndoorLevel:(GMSIndoorLevel * _Nonnull)indoorLevel
+- (id _Nonnull)_initWithPageContext:(id<TiEvaluator> _Nullable)context andIndoorLevel:(GMSIndoorLevel *_Nonnull)indoorLevel
 {
-    if (self = [super _initWithPageContext:pageContext]) {
-        _indoorLevel = indoorLevel;
-    }
-    
-    return self;
+  if (self = [super _initWithPageContext:pageContext]) {
+    _indoorLevel = indoorLevel;
+  }
+
+  return self;
 }
 
-- (GMSIndoorLevel * _Nonnull)indoorLevel
+- (GMSIndoorLevel *_Nonnull)indoorLevel
 {
-    return _indoorLevel;
+  return _indoorLevel;
 }
 
 #pragma mark Public API
 
-- (NSString * _Nullable)name
+- (NSString *_Nullable)name
 {
-    return NULL_IF_NIL([_indoorLevel name]);
+  return NULL_IF_NIL([_indoorLevel name]);
 }
 
-- (NSString * _Nullable)shortName
+- (NSString *_Nullable)shortName
 {
-    return NULL_IF_NIL([_indoorLevel shortName]);
+  return NULL_IF_NIL([_indoorLevel shortName]);
 }
 
 @end
