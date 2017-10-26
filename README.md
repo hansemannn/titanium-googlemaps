@@ -81,6 +81,25 @@ var mapView = maps.createView({
 });
 ```
 
+#### Safe Area / iPhone X
+The GoogleMaps SDK supports configuring the map-view for the iPhone X. Use the `paddingAdjustmentBehavior` to get
+or set the padding-adjustment-behavior and use one of the following constants:
+```
+/** 1. Always include the safe area insets in the padding. */
+PADDING_ADJUSTMENT_BEHAVIOR_ALWAYS
+
+/**
+* 2. When the padding value is smaller than the safe area inset for a particular edge, use the safe
+* area value for layout, else use padding.
+*/
+PADDING_ADJUSTMENT_BEHAVIOR_AUTOMATIC
+
+/**
+* 3. Never include the safe area insets in the padding. This was the behavior prior to version 2.5.
+*/
+PADDING_ADJUSTMENT_BEHAVIOR_NEVER
+```
+
 #### Map Events
 The module supports all native delegates - exposed as events. These are:
 
