@@ -27,7 +27,7 @@
 - (void)setGradient:(NSDictionary *)gradient
 {
   NSArray *proxyColors = (NSArray *)[gradient objectForKey:@"colors"];
-  NSMutableArray *colors = [NSMutableArray arrayWithCapacity:proxyColors];
+  NSMutableArray *colors = [NSMutableArray arrayWithCapacity:[proxyColors count]];
 
   for (id color in proxyColors) {
     [colors addObject:[[TiUtils colorValue:color] color]];

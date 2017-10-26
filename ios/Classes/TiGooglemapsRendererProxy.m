@@ -24,7 +24,7 @@
 
     if (url == nil) {
       [self throwException:@"Invalid file provided" subreason:@"The file provided could not be found." location:CODELOCATION];
-      return;
+      return nil;
     }
 
     GMUKMLParser *parser = [[GMUKMLParser alloc] initWithURL:url];

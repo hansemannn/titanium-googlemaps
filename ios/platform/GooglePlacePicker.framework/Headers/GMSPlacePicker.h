@@ -19,16 +19,17 @@ NS_ASSUME_NONNULL_BEGIN;
 
 
 /**
+ * \defgroup PlacePickerErrors GMSPlacePickerErrorCode
+ * @{
+ */
+
+/**
  * Error domain used for Place Picker errors.
- *
- * @related GMSPlacePicker
  */
 extern NSString *const kGMSPlacePickerErrorDomain;
 
 /**
  * Error codes for |kGMSPlacePickerErrorDomain|.
- *
- * @related GMSPlacePicker
  */
 typedef NS_ENUM(NSInteger, GMSPlacePickerErrorCode) {
   /**
@@ -48,6 +49,8 @@ typedef NS_ENUM(NSInteger, GMSPlacePickerErrorCode) {
    */
   kGMSPlacePickerOverlappingCalls = -4,
 };
+
+/**@}*/
 
 /**
  * The Place Picker is a dialog that allows the user to pick a |GMSPlace| using an interactive map
