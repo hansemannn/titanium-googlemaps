@@ -15,6 +15,7 @@
 #else
 #import <GoogleMapsBase/GoogleMapsBase.h>
 #endif
+#import "GMSAutocompleteBoundsMode.h"
 #import "GMSAutocompleteFilter.h"
 #import "GMSAutocompletePrediction.h"
 #import "GMSPlace.h"
@@ -118,8 +119,18 @@ NS_ASSUME_NONNULL_BEGIN;
 /** Delegate to be notified when a place is selected or picking is cancelled. */
 @property(nonatomic, weak, nullable) IBOutlet id<GMSAutocompleteViewControllerDelegate> delegate;
 
-/** Bounds used to bias the autocomplete search (can be nil). */
+/**
+ * Bounds used to bias or restrict the autocomplete results depending on the value of
+ * |autocompleteBoundsMode| (can be nil).
+ */
 @property(nonatomic, strong, nullable) GMSCoordinateBounds *autocompleteBounds;
+
+/**
+ * How to treat the |autocompleteBounds| property. Defaults to |kGMSAutocompleteBoundsModeBias|.
+ *
+ * Has no effect if |autocompleteBounds| is nil.
+ */
+@property(nonatomic, assign) GMSAutocompleteBoundsMode autocompleteBoundsMode;
 
 /** Filter to apply to autocomplete suggestions (can be nil). */
 @property(nonatomic, strong, nullable) GMSAutocompleteFilter *autocompleteFilter;

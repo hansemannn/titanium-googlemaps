@@ -13,10 +13,13 @@
 NS_ASSUME_NONNULL_BEGIN;
 
 /**
+ * \defgroup PlacesAutocompleteTypeFilter GMSPlacesAutocompleteTypeFilter
+ * @{
+ */
+
+/**
  * The type filters that may be applied to an autocomplete request to restrict results to different
  * types.
- *
- * @related GMSAutocompleteFilter
  */
 typedef NS_ENUM(NSInteger, GMSPlacesAutocompleteTypeFilter) {
   /**
@@ -52,6 +55,8 @@ typedef NS_ENUM(NSInteger, GMSPlacesAutocompleteTypeFilter) {
    */
   kGMSPlacesAutocompleteTypeFilterCity,
 };
+
+/**@}*/
 
 /**
  * This class represents a set of restrictions that may be applied to autocomplete requests. This
