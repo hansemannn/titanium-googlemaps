@@ -210,6 +210,20 @@
   [self replaceValue:args forKey:@"region" notification:NO];
 }
 
+
+- (void)setPaddingAdjustmentBehavior:(id)paddingAdjustmentBehavior
+{
+  ENSURE_UI_THREAD(setPaddingAdjustmentBehavior, paddingAdjustmentBehavior);
+  ENSURE_TYPE(paddingAdjustmentBehavior, NSNumber);
+  
+  [[[self mapView] mapView] setPaddingAdjustmentBehavior:[TiUtils intValue:paddingAdjustmentBehavior]];
+}
+
+- (void)paddingAdjustmentBehavior
+{
+  return @([[[self mapView] mapView] paddingAdjustmentBehavior]);
+}
+
 - (void)setMapStyle:(id)value
 {
   ENSURE_UI_THREAD(setMapStyle, value);
@@ -523,9 +537,9 @@
   [[heatmapLayerProxy heatmapLayer] setMap:nil];
 }
 
-- (id)getSelectedAnnotation:(id)unused
+- (id)selectedAnnotation:(id)unused
 {
-  ENSURE_UI_THREAD(getSelectedAnnotation, unused);
+  ENSURE_UI_THREAD(selectedAnnotation, unused);
   GMSMarker *selectedMarker = [[[self mapView] mapView] selectedMarker];
 
   if (selectedMarker == nil) {

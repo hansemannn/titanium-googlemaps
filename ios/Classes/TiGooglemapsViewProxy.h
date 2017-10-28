@@ -182,7 +182,7 @@
  *  @return The selected annotation.
  *  @since 2.2.0
  */
-- (id)getSelectedAnnotation:(id)unused;
+- (id)selectedAnnotation:(id)unused;
 
 /**
  *  Selects a annotation.
@@ -222,6 +222,21 @@
  *  @since 2.2.0
  */
 - (void)setRegion:(id)args;
+
+/**
+ *  Sets the padding adjustment behavior.
+ *
+ *  @param value The padding adjustment behavior.
+ *  @since 3.11.0
+ */
+- (void)setPaddingAdjustmentBehavior:(id)paddingAdjustmentBehavior;
+
+/**
+ *  Returns the padding adjustment behavior.
+ *
+ *  @since 3.11.0
+ */
+- (void)paddingAdjustmentBehavior;
 
 /**
  *  Sets the JSOn-based map style.

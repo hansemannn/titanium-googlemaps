@@ -1,13 +1,4 @@
-//
-//  GooglePlaces.h
-//  Google Places API for iOS
-//
-//  Copyright 2017 Google Inc.
-//
-//  Usage of this SDK is subject to the Google Maps/Google Earth APIs Terms of
-//  Service: https://developers.google.com/maps/terms
-//
-
+#import "GMSAutocompleteBoundsMode.h"
 #import "GMSAutocompleteFetcher.h"
 #import "GMSAutocompleteFilter.h"
 #import "GMSAutocompleteMatchFragment.h"

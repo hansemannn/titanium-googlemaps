@@ -19,15 +19,11 @@ NS_ASSUME_NONNULL_BEGIN;
 
 /**
  * Error domain used for Places API errors.
- *
- * @related GMSPlacesErrors
  */
 extern NSString *const kGMSPlacesErrorDomain;
 
 /**
  * Error codes for |kGMSPlacesErrorDomain|.
- *
- * @related GMSPlacesErrors
  */
 typedef NS_ENUM(NSInteger, GMSPlacesErrorCode) {
   /**

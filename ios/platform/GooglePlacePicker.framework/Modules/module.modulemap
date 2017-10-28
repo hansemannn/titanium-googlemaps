@@ -17,5 +17,4 @@ framework module GooglePlacePicker {
   link framework "QuartzCore"
   link framework "Security"
   link framework "SystemConfiguration"
-  link framework "UIKit"
-}
+  link framework "UIKit"}
