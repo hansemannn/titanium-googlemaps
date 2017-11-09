@@ -518,10 +518,10 @@ var polygon = maps.createPolygon({
     fillColor : 'yellow', // Default: Blue (#0000ff)
     strokeColor : 'green',
     title: 'My Polygon',
-    holes: [{
+    holes: [[{
         latitude: -32.95785,
         longitude: 115.86234
-    }]
+    }, [-32.95785, 115.86234]]]
 });
 mapView.addPolygon(polygon);
 ```
