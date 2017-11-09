@@ -112,13 +112,24 @@
   NSMutableArray *holes = [NSMutableArray arrayWithCapacity:[value count]];
 
   [value enumerateObjectsUsingBlock:^(id item, NSUInteger idx, BOOL *stop) {
-    ENSURE_TYPE(item, NSDictionary);
-
-    CLLocationDegrees latitude = [TiUtils doubleValue:[value valueForKey:@"latitude"]];
-    CLLocationDegrees longitude = [TiUtils doubleValue:[value valueForKey:@"longitude"]];
+    ENSURE_TYPE(item, NSArray);
 
     GMSMutablePath *path = [[GMSMutablePath alloc] init];
-    [path insertCoordinate:CLLocationCoordinate2DMake(latitude, longitude) atIndex:idx];
+
+    for (id point in item) {
+      if ([point isKindOfClass:[NSDictionary class]]) {
+        CLLocationDegrees latitude = [TiUtils doubleValue:[point valueForKey:@"latitude"]];
+        CLLocationDegrees longitude = [TiUtils doubleValue:[point valueForKey:@"longitude"]];
+
+        [path insertCoordinate:CLLocationCoordinate2DMake(latitude, longitude) atIndex:idx];
+      } else if ([point isKindOfClass:[NSArray class]]) {
+        CLLocationDegrees latitude = [TiUtils doubleValue:[point objectAtIndex:0]];
+        CLLocationDegrees longitude = [TiUtils doubleValue:[point objectAtIndex:1]];
+        
+        [path insertCoordinate:CLLocationCoordinate2DMake(latitude, longitude) atIndex:idx];
+      }
+    }
+
     [holes addObject:path];
   }];
 
