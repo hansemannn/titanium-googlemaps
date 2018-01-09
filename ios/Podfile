@@ -1,0 +1,9 @@
+platform :ios, '8.0'
+
+target 'ti.googlemaps' do
+    use_frameworks!
+  
+    pod 'GoogleMaps', '~> 2.5.0'
+    pod 'GooglePlaces', '~> 2.5.0'
+    pod 'GooglePlacePicker', '~> 2.5.0'
+end
