@@ -79,8 +79,8 @@ function handleClickEvent(e) {
     Ti.API.warn(e);
 }
 
-function handleLongpressEvent(e) {
-    Ti.API.warn('\'longpress\' event fired!');
+function handleLongclickEvent(e) {
+    Ti.API.warn('\'longclick\' event fired!');
     Ti.API.warn(e);
 }
 
@@ -140,7 +140,7 @@ function handleMapCompleteEvent(e) {
 }
 
 mapView.addEventListener('click', handleClickEvent);
-mapView.addEventListener('longpress', handleLongpressEvent);
+mapView.addEventListener('longclick', handleLongclickEvent);
 mapView.addEventListener('regionwillchange', handleWillMoveEvent);
 mapView.addEventListener('regionchanged', handleCameraChangeEvent);
 mapView.addEventListener('idle', handleIdleEvent);
