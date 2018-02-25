@@ -499,7 +499,8 @@ var polyline = maps.createPolyline({
     }, [-31.95285, 115.85734]],
     strokeWidth : 3, // Default: 1
     strokeColor : '#f00'  // Default: Black (#000000),
-    title: 'My Polyline'
+    title: 'My Polyline',
+    zIndex: 10
 });
 mapView.addPolyline(polyline);
 ```
@@ -521,6 +522,7 @@ var polygon = maps.createPolygon({
         latitude: -32.95785,
         longitude: 115.86234
     }, [-32.95785, 115.86234]]]
+    zIndex: 10
 });
 mapView.addPolygon(polygon);
 ```
@@ -535,7 +537,8 @@ var circle = maps.createCircle({
     fillColor: 'blue', // Default: transparent
     strokeWidth : 3,
     strokeColor : 'orange'
-    title: 'My Circle'
+    title: 'My Circle',
+    zIndex: 10
 });
 mapView.addCircle(circle);
 ```
