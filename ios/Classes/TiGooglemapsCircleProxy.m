@@ -85,6 +85,15 @@
   [self replaceValue:value forKey:@"title" notification:NO];
 }
 
+- (void)setZIndex:(id)value
+{
+  ENSURE_UI_THREAD(setZIndex, value);
+  ENSURE_TYPE(value, NSNumber);
+  
+  [[self circle] setZIndex:[TiUtils intValue:value]];
+  [self replaceValue:value forKey:@"zIndex" notification:NO];
+}
+
 #pragma mark Utilities
 
 - (CLLocationCoordinate2D)positionFromPoint:(id)point

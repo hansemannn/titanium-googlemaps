@@ -104,6 +104,15 @@
   [self replaceValue:value forKey:@"title" notification:NO];
 }
 
+- (void)setZIndex:(id)value
+{
+  ENSURE_UI_THREAD(setZIndex, value);
+  ENSURE_TYPE(value, NSNumber);
+  
+  [[self polygon] setZIndex:[TiUtils intValue:value]];
+  [self replaceValue:value forKey:@"zIndex" notification:NO];
+}
+
 - (void)setHoles:(id)value
 {
   ENSURE_UI_THREAD(setHoles, value);
