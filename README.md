@@ -102,7 +102,7 @@ PADDING_ADJUSTMENT_BEHAVIOR_NEVER
 #### Map Events
 The module supports all native delegates - exposed as events. These are:
 
-- [x] click (map, pin, infoWindow, overlay)
+- [x] click - `clicksource` (`map`, `pin`, `infoWindow`, `OVERLAY_TYPE_*`), `map`, `overlay`
 - [x] locationclick
 - [x] longclick
 - [x] regionchanged
