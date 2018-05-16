@@ -112,7 +112,7 @@
     @"placeID" : [place placeID],
     @"latitude" : NUMDOUBLE([place coordinate].latitude),
     @"longitude" : NUMDOUBLE([place coordinate].longitude),
-    @"formattedAddress" : [place formattedAddress],
+    @"formattedAddress" : NULL_IF_NIL([place formattedAddress]),
     @"addressComponents" : [TiGooglemapsPlacePickerDialogProxy arrayFromAddressComponents:[place addressComponents]]
   };
 }
