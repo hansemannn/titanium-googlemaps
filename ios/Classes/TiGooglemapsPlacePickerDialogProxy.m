@@ -107,14 +107,12 @@
 
 + (NSDictionary *)dictionaryFromPlace:(GMSPlace *)place
 {
-    NSString * formattedAddress = [place formattedAddress];
-    
   return @{
     @"name" : [place name],
     @"placeID" : [place placeID],
     @"latitude" : NUMDOUBLE([place coordinate].latitude),
     @"longitude" : NUMDOUBLE([place coordinate].longitude),
-    @"formattedAddress" : (formattedAddress != nil ? formattedAddress : @""),
+    @"formattedAddress" : NULL_IF_NIL([place formattedAddress]),
     @"addressComponents" : [TiGooglemapsPlacePickerDialogProxy arrayFromAddressComponents:[place addressComponents]]
   };
 }
