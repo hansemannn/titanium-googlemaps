@@ -1,4 +1,3 @@
-
 var maps = require('ti.googlemaps');
 
 /**
@@ -271,7 +270,7 @@ function openAutocompleteDialog() {
 }
 
 var searchButton = Ti.UI.createButton({
-    systemButton: Ti.UI.iPhone.SystemButton.ADD
+    systemButton: Ti.UI.iOS.SystemButton.ADD
 });
 
 searchButton.addEventListener('click', openAutocompleteDialog);
