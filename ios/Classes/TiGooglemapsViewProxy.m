@@ -7,17 +7,17 @@
 
 #import "TiGooglemapsViewProxy.h"
 #import "TiGooglemapsCameraUpdateProxy.h"
-#import "TiGooglemapsCircleProxy.h"
 #import "TiGooglemapsClusterItemProxy.h"
 #import "TiGooglemapsHeatmapLayerProxy.h"
 #import "TiGooglemapsIndoorDisplayProxy.h"
-#import "TiGooglemapsPolygonProxy.h"
-#import "TiGooglemapsPolylineProxy.h"
 #import "TiGooglemapsTileProxy.h"
 #import "TiGooglemapsView.h"
 #import "TiUtils.h"
+#import "math.h"
 
 #import "GMUMarkerClustering.h"
+
+const CGFloat LN2 = 0.6931471805599453;
 
 @implementation TiGooglemapsViewProxy
 
@@ -35,7 +35,7 @@
   return (TiGooglemapsView *)[self view];
 }
 
-- (NSMutableArray *)markers
+- (NSMutableArray<TiGooglemapsAnnotationProxy *> *)markers
 {
   if (markers == nil) {
     markers = [[NSMutableArray alloc] initWithArray:@[]];
@@ -174,6 +174,12 @@
 
 - (void)setMapInsets:(id)args
 {
+  TI_GMS_DEPRECATED(@"View.mapInsets", @"View.padding", @"3.14.0");
+  [self setPadding:args];
+}
+
+- (void)setPadding:(id)args
+{
   ENSURE_UI_THREAD_1_ARG(args);
   ENSURE_TYPE(args, NSDictionary);
 
@@ -188,28 +194,35 @@
   ENSURE_UI_THREAD_1_ARG(args);
   ENSURE_TYPE(args, NSDictionary);
 
-  id latitude = [args valueForKey:@"latitude"];
-  id longitude = [args valueForKey:@"longitude"];
-  id zoom = [args valueForKey:@"zoom"];
-  id bearing = [args valueForKey:@"bearing"];
-  id viewingAngle = [args valueForKey:@"viewingAngle"];
+  double latitude = [TiUtils floatValue:[args valueForKey:@"latitude"]];
+  double longitude = [TiUtils floatValue:[args valueForKey:@"longitude"] ];
+  double latitudeDelta = [TiUtils floatValue:[args valueForKey:@"latitudeDelta"] def:-1];
+  double longitudeDelta = [TiUtils floatValue:[args valueForKey:@"longitudeDelta"] def:-1];
+  CGFloat zoom = [TiUtils floatValue:[args valueForKey:@"zoom"] def:1];
+  CGFloat bearing = [TiUtils floatValue:[args valueForKey:@"bearing"] def:0];
+  CGFloat viewingAngle = [TiUtils floatValue:[args valueForKey:@"viewingAngle"] def:0];
 
-  ENSURE_TYPE(latitude, NSNumber);
-  ENSURE_TYPE(longitude, NSNumber)
-  ENSURE_TYPE_OR_NIL(zoom, NSNumber);
-  ENSURE_TYPE_OR_NIL(bearing, NSNumber);
-  ENSURE_TYPE_OR_NIL(viewingAngle, NSNumber);
+  // Generate zoom based on longitude delta
+  if ([args valueForKey:@"zoom"] == nil && longitudeDelta != -1) {
+    zoom = round(log(360 / longitudeDelta) / LN2);
+  } else if ([args valueForKey:@"zoom"] != nil && longitudeDelta != -1) {
+    DebugLog(@"[WARN] Found both `zoomLevel` and `longitudeDelta` properties. Please use either of one. Using `zoom` for backwards compatibility …");
+  }
 
-  GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[TiUtils doubleValue:latitude]
-                                                          longitude:[TiUtils doubleValue:longitude]
-                                                               zoom:[TiUtils floatValue:zoom def:1]
-                                                            bearing:[TiUtils floatValue:bearing def:0]
-                                                       viewingAngle:[TiUtils floatValue:viewingAngle def:0]];
+  GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:latitude
+                                                          longitude:longitude
+                                                               zoom:zoom
+                                                            bearing:bearing
+                                                       viewingAngle:viewingAngle];
 
   [[[self mapView] mapView] setCamera:camera];
   [self replaceValue:args forKey:@"region" notification:NO];
 }
 
+- (void)setLocation:(id)args
+{
+  
+}
 
 - (void)setPaddingAdjustmentBehavior:(id)paddingAdjustmentBehavior
 {
@@ -246,7 +259,7 @@
       NSLog(@"[ERROR] Ti.GoogleMaps: Could not apply map style: %@", [error localizedDescription]);
     }
   } else {
-    NSLog(@"[ERROR] Invalid map-style provided. Use either a String or Blob type instead!");
+    NSLog(@"[ERROR] Invalid map-style provided. Use either a a raw JSON string or a path to your JSON file instead!");
   }
 }
 
@@ -417,6 +430,22 @@
   });
 }
 
+- (void)removeAllPolylines:(id)args
+{
+  ENSURE_UI_THREAD_1_ARG(args);
+  
+  dispatch_barrier_async(q, ^{
+    [[self overlays] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+      if ([obj isKindOfClass:[TiGooglemapsPolylineProxy class]]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [[(TiGooglemapsPolylineProxy *)obj polyline] setMap:nil];
+        });
+        [[self overlays] removeObject:obj];
+      }
+    }];
+  });
+}
+
 - (void)removePolyline:(id)args
 {
   ENSURE_UI_THREAD_1_ARG(args);
@@ -449,6 +478,23 @@
   });
 }
 
+- (void)removeAllPolygons:(id)args
+{
+  ENSURE_UI_THREAD_1_ARG(args);
+  
+  dispatch_barrier_async(q, ^{
+    [[self overlays] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+      if ([obj isKindOfClass:[TiGooglemapsPolygonProxy class]]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [[(TiGooglemapsPolygonProxy *)obj polygon] setMap:nil];
+        });
+        [[self overlays] removeObject:obj];
+      }
+    }];
+  });
+}
+
+
 - (void)removePolygon:(id)args
 {
   ENSURE_UI_THREAD_1_ARG(args);
@@ -478,6 +524,22 @@
     dispatch_async(dispatch_get_main_queue(), ^{
       [[circleProxy circle] setMap:[[self mapView] mapView]];
     });
+  });
+}
+
+- (void)removeAllCircles:(id)args
+{
+  ENSURE_UI_THREAD_1_ARG(args);
+  
+  dispatch_barrier_async(q, ^{
+    [[self overlays] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+      if ([obj isKindOfClass:[TiGooglemapsCircleProxy class]]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [[(TiGooglemapsCircleProxy *)obj circle] setMap:nil];
+        });
+        [[self overlays] removeObject:obj];
+      }
+    }];
   });
 }
 
@@ -537,13 +599,13 @@
   [[heatmapLayerProxy heatmapLayer] setMap:nil];
 }
 
-- (id)selectedAnnotation:(id)unused
+- (TiGooglemapsAnnotationProxy *)selectedAnnotation:(id)unused
 {
   ENSURE_UI_THREAD(selectedAnnotation, unused);
   GMSMarker *selectedMarker = [[[self mapView] mapView] selectedMarker];
 
   if (selectedMarker == nil) {
-    return [NSNull null];
+    return nil;
   }
 
   for (NSUInteger i = 0; i < [[self markers] count]; i++) {
@@ -552,7 +614,7 @@
       return annotation;
     }
   }
-  return [NSNull null];
+  return nil;
 }
 
 - (void)selectAnnotation:(id)value
@@ -625,6 +687,92 @@
       YES);
 
   return indoorProxy;
+}
+
+- (void)showAnnotations:(id)args
+{
+  ENSURE_UI_THREAD(showAnnotations, args);
+  
+  NSMutableArray *markersToUse = [NSMutableArray array];
+  CGFloat padding = 40;
+  NSArray *annotations = [(NSArray *)args objectAtIndex:0];
+  BOOL animated = NO;
+  
+  if ([args count] > 1) {
+    ENSURE_TYPE(args[1], NSNumber);
+    padding = [TiUtils floatValue:args[1]];
+  }
+
+  if ([args count] > 2) {
+    ENSURE_TYPE(args[2], NSNumber);
+    animated = [TiUtils boolValue:args[2]];
+  }
+
+  if (args != nil && [(NSArray *)annotations count] > 0) {
+    [annotations enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+      [markersToUse addObject:[(TiGooglemapsAnnotationProxy *)obj marker]];
+    }];
+  } else {
+    markersToUse = [[self markers] mutableCopy];
+  }
+
+  GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] init];
+
+  for (GMSMarker *marker in markersToUse) {
+    bounds = [bounds includingCoordinate:marker.position];
+  }
+
+  GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:bounds withPadding:padding];
+  
+  if (animated) {
+    [self.mapView.mapView animateWithCameraUpdate:update];
+  } else {
+    [self.mapView.mapView moveCamera:update];
+  }
+}
+
+- (NSArray<TiGooglemapsAnnotationProxy *> *)annotations
+{
+  return markers;
+}
+
+- (NSArray<TiGooglemapsPolylineProxy *> *)polylines
+{
+  NSMutableArray<TiGooglemapsPolylineProxy *> *polylines = [NSMutableArray array];
+  
+  [overlays enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    if ([obj isKindOfClass:TiGooglemapsPolylineProxy.class]) {
+      [polylines addObject:obj];
+    }
+  }];
+  
+  return polylines;
+}
+
+- (NSArray<TiGooglemapsPolygonProxy *> *)polygons
+{
+  NSMutableArray<TiGooglemapsPolygonProxy *> *polygons = [NSMutableArray array];
+  
+  [overlays enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    if ([obj isKindOfClass:TiGooglemapsPolygonProxy.class]) {
+      [polygons addObject:obj];
+    }
+  }];
+  
+  return polygons;
+}
+
+- (NSArray<TiGooglemapsCircleProxy *> *)circles
+{
+  NSMutableArray<TiGooglemapsCircleProxy *> *circles = [NSMutableArray array];
+  
+  [overlays enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    if ([obj isKindOfClass:TiGooglemapsCircleProxy.class]) {
+      [circles addObject:obj];
+    }
+  }];
+  
+  return circles;
 }
 
 @end

@@ -1,10 +1,13 @@
-# GoogleMaps iOS SDK in Appcelerator Titanium 
+# Native GoogleMaps iOS SDK in Appcelerator Titanium 
+
 [![Build Status](https://travis-ci.org/hansemannn/titanium-google-maps.svg?branch=master)](https://travis-ci.org/hansemannn/titanium-google-maps)  [![License](http://hans-knoechel.de/shields/shield-license.svg?v=2)](./LICENSE)  [![Contact](http://hans-knoechel.de/shields/shield-twitter.svg?v=2)](http://twitter.com/hansemannnn)
 
 <img width="1094" src="https://abload.de/img/687474703a2f2f61626c6ymjhw.jpg">
 
 ## Summary
+
 Ti.GoogleMaps is an open-source project to support the Google Maps iOS-SDK in Appcelerator's Titanium Mobile. The module currently supports the following API's:
+
 - [x] Map View
 - [x] Annotations
 - [x] Tile overlay
@@ -19,17 +22,18 @@ Ti.GoogleMaps is an open-source project to support the Google Maps iOS-SDK in Ap
 - [x] All delegates (exposed as events)
 
 ## Requirements
-  - Titanium Mobile SDK 5.2.2.GA or later
-  - iOS 7.1 or later
-  - Xcode 6.4 or later
+
+  - Titanium SDK 5.2.2 or later
 
 ## Download, Setup and Build
 
 ### Download
+
   * [Stable release](https://github.com/hansemannn/titanium-googlemaps/releases)
   * [![gitTio](http://hans-knoechel.de/shields/shield-gittio.svg)](http://gitt.io/component/ti.googlemaps)
 
 ### Setup
+
 Unpack the module and place it inside the `modules/iphone/` folder of your project.
 Edit the modules section of your `tiapp.xml` file to include this module:
 ```xml
@@ -45,15 +49,16 @@ maps.setAPIKey('<YOUR_GOOGLE_MAPS_API_KEY>');
 ```
 
 ### Build
+
 If you want to build the module from the source, you need to check some things beforehand:
 - Set the `TITANIUM_SDK_VERSION` inside the `ios/titanium.xcconfig` file to the Ti.SDK version you want to build with.
-- Ensure you **build** with SDK 6.0.3 or later. Those versions will include [this PR](https://github.com/appcelerator/titanium_mobile/pull/8861) to automatically set the `TI_MODULE_VERSION` when building. If you are building with SDK < 6.0.3, specify the `TI_MODULE_VERSION` manually in the `module.xcconfig`.   
 - Build the project with `appc run -p ios --build-only`
 - Check the [releases tab](https://github.com/hansemannn/titanium-googlemaps/releases) for stable pre-packaged versions of the module
 
 ## Features
 
 ### Map View
+
 A map view creates the view on which annotations and overlays can be added to. You can see all possible events in the demo app. 
 In addition, you can specify one of the following constants to the `mapType` property:
  - `MAP_TYPE_NORMAL`
@@ -73,7 +78,8 @@ var mapView = maps.createView({
     region: { // Camera center of the map
         latitude: 37.368122,
         longitude: -121.913653,
-        zoom: 10, // Zoom in points
+        zoom: 10, // EITHER: Zoom in points
+        latitudeDelta: 0.1, longitudeDelta: 0.1, // OR: LAT/LONG-delta
         bearing: 45, // orientation measured in degrees clockwise from north
         viewingAngle: 30 // measured in degrees
     }
@@ -81,6 +87,7 @@ var mapView = maps.createView({
 ```
 
 #### Safe Area / iPhone X
+
 The GoogleMaps SDK supports configuring the map-view for the iPhone X. Use the `paddingAdjustmentBehavior` to get
 or set the padding-adjustment-behavior and use one of the following constants:
 ```
@@ -100,6 +107,7 @@ PADDING_ADJUSTMENT_BEHAVIOR_NEVER
 ```
 
 #### Map Events
+
 The module supports all native delegates - exposed as events. These are:
 
 - [x] click - `clicksource` (`map`, `pin`, `infoWindow`, `OVERLAY_TYPE_*`), `map`, `overlay`
@@ -118,6 +126,7 @@ The module supports all native delegates - exposed as events. These are:
 > or set an own key in the `userData` property of your annotation.
 
 #### Map Controls
+
 ```js
 mapView.indoorEnabled = false;
 mapView.indoorPicker = true;
@@ -128,6 +137,7 @@ mapView.trafficEnabled = true; // default is false
 ```
 
 #### Enable / Disable Gestures
+
 ```js
 mapView.scrollGesture = true;
 mapView.zoomGestures = false;
@@ -137,11 +147,13 @@ mapView.allowScrollGesturesDuringRotateOrZoom = false;
 ```
 
 #### Map Insets
+
 ```js
 mapView.mapInsets = { bottom:200 };
 ```
 
 #### Map Style
+
 ```js
 // Either a JSON-string
 mapView.mapStyle = 'JSON_STYLE_GOES_HERE';
@@ -154,6 +166,7 @@ See [this link](https://developers.google.com/maps/documentation/ios-sdk/hiding-
 #### Animations
 
 ##### Animate to a location
+
 ```js
 mapView.animateToLocation({
     latitude: 36.368122,
@@ -162,21 +175,25 @@ mapView.animateToLocation({
 ```
 
 ##### Animate to a zoom level:
+
 ```js
 mapView.animateToZoom(5);
 ```
 
 ##### Animate to a bearing:
+
 ```js
 mapView.animateToBearing(45);
 ```
 
 ##### Animate to a viewing angle:
+
 ```js
 mapView.animateToViewingAngle(30);
 ```
 
 ### Camera Update
+
 You can perform camera updates to your map view instance by creating an instance of the `CameraUpdate` API:
 ```js
 var maps = require('ti.googlemaps');
@@ -254,6 +271,7 @@ mapView.animateWithCameraUpdate(cameraUpdate);
 ```
 
 ### Annotations
+
 An annotation represents a location specified by at least a `title` and a `subtitle` property. 
 It can be added to a map view:
 
@@ -287,6 +305,8 @@ var annotation = maps.createAnnotation({
 });
 mapView.addAnnotation(annotation);
 ```
+
+You can get a list of all currently added annotations by using `mapView.annotations`;
 
 You can set an info window of the annotation. Note that you have to specify a width / height for subviews,
 otherwise the SDK will not set a proper frame for the subview:
@@ -428,6 +448,7 @@ mapView.addHeatmapLayer(heatmap);
 ```
 
 ### Autocomplete Dialog
+
 A autocomplete dialog can be opened modally to search for places in realtime. A number of events
 helps to work with partial results and final selections. 
 
@@ -450,11 +471,13 @@ dialog.open();
 ```
 
 #### Autocomplete Events
+
 - [x] success
 - [x] error
 - [x] cancel
 
 ### Place Picker Dialog
+
 A place picker provides an interface that displays a map to pick places from.
 
 Set the `config` property with viewport-bounds to specify a configuration
@@ -481,14 +504,17 @@ dialog.open();
 ```
 
 #### Place Picker Events
+
 - [x] success
 - [x] error
 - [x] cancel
 
 ### Overlays
+
 Overlays can be added to the map view just like annotations. The module supports the methods `addPolygon`, `addPolyline` and `addCircle` to add overlays and `removePolygon`, `removePolyline` and `removeCircle` to remove them.
 
 #### Polyline
+
 A polyline is a shape defined by its `points` property. It needs at least 2 points to draw a line.
 
 ```js
@@ -505,7 +531,10 @@ var polyline = maps.createPolyline({
 mapView.addPolyline(polyline);
 ```
 
+You can get a list of all currently added polylines by using `mapView.polylines`;
+
 #### Polygon
+
 A polygon is a shape defined by its `points` property. It behaves similiar to a polyline, but is meant to close its area automatically and also supports the `fillColor` property.
 
 ```js
@@ -527,7 +556,10 @@ var polygon = maps.createPolygon({
 mapView.addPolygon(polygon);
 ```
 
+You can get a list of all currently added polygons by using `mapView.polygons`;
+
 #### Circle
+
 A circle is a shape defined by the `center` property to specify its location as well as the `radius` in meters.
 
 ```js
@@ -543,7 +575,10 @@ var circle = maps.createCircle({
 mapView.addCircle(circle);
 ```
 
+You can get a list of all currently added circles by using `mapView.circles`;
+
 ### Clustering
+
 You can cluster multiple items by using the Clustering API. 
 
 First, create a few cluster items using the `ClusterItem`:

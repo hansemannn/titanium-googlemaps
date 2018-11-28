@@ -5,11 +5,15 @@
  * Please see the LICENSE included with this distribution for details.
  */
 #import "TiGooglemapsAnnotationProxy.h"
+#import "TiGooglemapsPolygonProxy.h"
+#import "TiGooglemapsPolylineProxy.h"
+#import "TiGooglemapsCircleProxy.h"
+
 #import "TiViewProxy.h"
 
 @interface TiGooglemapsViewProxy : TiViewProxy <GMSMapViewDelegate> {
   TiGooglemapsViewProxy *mapView;
-  NSMutableArray *markers;
+  NSMutableArray<TiGooglemapsAnnotationProxy *> *markers;
   NSMutableArray *overlays;
 
   @private
@@ -182,7 +186,7 @@
  *  @return The selected annotation.
  *  @since 2.2.0
  */
-- (id)selectedAnnotation:(id)unused;
+- (TiGooglemapsAnnotationProxy *)selectedAnnotation:(id)unused;
 
 /**
  *  Selects a annotation.
@@ -239,7 +243,7 @@
 - (void)paddingAdjustmentBehavior;
 
 /**
- *  Sets the JSOn-based map style.
+ *  Sets the JSON-based map style.
  *
  *  @param value The map style.
  *  @since 2.6.0
@@ -261,5 +265,45 @@
  *  @since 2.7.0
  */
 - (void)animateWithCameraUpdate:(id)value;
+
+/**
+ *  Shows the specified annotations, or all annotations if none are specified.
+ *
+ *  @param annotations The annotations to show.
+ *  @since 3.14.0
+ */
+- (void)showAnnotations:(id)annotations;
+
+/**
+ *  Returns all currently added annotations.
+ *
+ *  @return The available annotations.
+ *  @since 3.14.0
+ */
+- (NSArray<TiGooglemapsAnnotationProxy *> *)annotations;
+
+/**
+ *  Returns all currently added polylines.
+ *
+ *  @return The available polylines.
+ *  @since 3.14.0
+ */
+- (NSArray<TiGooglemapsPolylineProxy *> *)polylines;
+
+/**
+ *  Returns all currently added polygons.
+ *
+ *  @return The available polygons.
+ *  @since 3.14.0
+ */
+- (NSArray<TiGooglemapsPolygonProxy *> *)polygons;
+
+/**
+ *  Returns all currently added circles.
+ *
+ *  @return The available circles.
+ *  @since 3.14.0
+ */
+- (NSArray<TiGooglemapsCircleProxy *> *)circles;
 
 @end
