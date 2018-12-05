@@ -23,7 +23,7 @@ Ti.GoogleMaps is an open-source project to support the Google Maps iOS-SDK in Ap
 
 ## Requirements
 
-  - Titanium SDK 5.2.2 or later
+  - Appcelerator Titanium 6.3.0 or later
 
 ## Download, Setup and Build
 
@@ -34,6 +34,8 @@ Ti.GoogleMaps is an open-source project to support the Google Maps iOS-SDK in Ap
 
 ### Setup
 
+#### Add to your Project
+
 Unpack the module and place it inside the `modules/iphone/` folder of your project.
 Edit the modules section of your `tiapp.xml` file to include this module:
 ```xml
@@ -42,11 +44,39 @@ Edit the modules section of your `tiapp.xml` file to include this module:
 </modules>
 ```
 
+#### Initialize with your API Key
+
 Initialize the module by setting the Google Maps API key you can get from [here](https://developers.google.com/maps/signup).
 ```js
 var maps = require('ti.googlemaps');
 maps.setAPIKey('<YOUR_GOOGLE_MAPS_API_KEY>');
 ```
+
+#### Use 100 % Cross-Platform with Android
+
+If you want to use this moduel as a replacement for Ti.Map  on iOS, here is how you can have 100 % parity:
+1. Create a file called `maps.js` in `app/lib/` (Alloy) or `Resources/` (Classic) with the following content
+```js
+if (Ti.Platform.osname === 'iphone' || Ti.Platform.osname === 'ipad') {
+  module.exports = TiMap = require('ti.googlemaps');
+} else {
+  module.exports = TiMap = require('ti.map');
+}
+```
+2. In your controllers, import / require the maps instance like before:
+```
+// ES6+ (recommended)
+import TiMap from 'maps'
+
+// ES5
+var TiMap = require('maps');
+```
+3. (optional) You can even use it in Alloy:
+```xml
+<View module="maps" method="createView" id="mapView" />
+```
+
+That's it!
 
 ### Build
 
@@ -110,7 +140,8 @@ PADDING_ADJUSTMENT_BEHAVIOR_NEVER
 
 The module supports all native delegates - exposed as events. These are:
 
-- [x] click - `clicksource` (`map`, `pin`, `infoWindow`, `OVERLAY_TYPE_*`), `map`, `overlay`
+- [x] click - Can be an annotation, overlay or info-window. Use `clicksource` to determine.
+- [x] mapclick
 - [x] locationclick
 - [x] longclick
 - [x] regionchanged
@@ -146,10 +177,13 @@ mapView.rotateGestures = false;
 mapView.allowScrollGesturesDuringRotateOrZoom = false;
 ```
 
-#### Map Insets
+#### Map Padding
+
+> Note: The `mapInsets` property is deprecated since Ti.GoogleMaps 4.0.0 in favor this property to achieve better
+parity with Ti.Map and will be removed in future versions of the module.
 
 ```js
-mapView.mapInsets = { bottom:200 };
+mapView.padding = { bottom:200 };
 ```
 
 #### Map Style
@@ -162,6 +196,18 @@ mapView.mapStyle = 'JSON_STYLE_GOES_HERE';
 mapView.mapStyle = 'mapStyle.json'
 ```
 See [this link](https://developers.google.com/maps/documentation/ios-sdk/hiding-features) for more infos on map styling.
+
+#### Map Location
+
+```
+map.location = {
+  latitude: 37.368122,
+  longitude: -121.913653,
+  latitudeDelta: 0.2,
+  longitudeDelta: 0.2,
+  animate: true
+}
+```
 
 #### Animations
 
