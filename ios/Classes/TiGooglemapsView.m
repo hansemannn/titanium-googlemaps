@@ -185,10 +185,9 @@
 
 - (void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate
 {
-  if ([[self proxy] _hasListeners:@"click"]) {
-    [[self proxy] fireEvent:@"click"
+  if ([[self proxy] _hasListeners:@"mapclick"]) {
+    [[self proxy] fireEvent:@"mapclick"
                  withObject:@{
-                   @"clicksource" : @"map",
                    @"map" : [self proxy],
                    @"latitude" : NUMDOUBLE(coordinate.latitude),
                    @"longitude" : NUMDOUBLE(coordinate.longitude)
