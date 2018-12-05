@@ -221,7 +221,27 @@ const CGFloat LN2 = 0.6931471805599453;
 
 - (void)setLocation:(id)args
 {
+  double latitude = [TiUtils floatValue:[args valueForKey:@"latitude"]];
+  double longitude = [TiUtils floatValue:[args valueForKey:@"longitude"] ];
+  double latitudeDelta = [TiUtils floatValue:[args valueForKey:@"latitudeDelta"] def:-1];
+  double longitudeDelta = [TiUtils floatValue:[args valueForKey:@"longitudeDelta"] def:-1];
+  BOOL animate = [TiUtils boolValue:[args valueForKey:@"animate"] def:YES];
+
+  GMSCameraUpdate *update = nil;
   
+  if (longitudeDelta != -1) {
+    update = [GMSCameraUpdate setTarget:CLLocationCoordinate2DMake(latitude, longitude)
+                          zoom:round(log(360 / longitudeDelta) / LN2)];
+  } else {
+    update = [GMSCameraUpdate setTarget:CLLocationCoordinate2DMake(latitude, longitude)];
+
+  }
+
+  if (animate) {
+    [[[self mapView] mapView] animateWithCameraUpdate:update];
+  } else {
+    [[[self mapView] mapView] moveCamera:update];
+  }
 }
 
 - (void)setPaddingAdjustmentBehavior:(id)paddingAdjustmentBehavior
