@@ -176,6 +176,7 @@ const CGFloat LN2 = 0.6931471805599453;
 {
   TI_GMS_DEPRECATED(@"View.mapInsets", @"View.padding", @"3.14.0");
   [self setPadding:args];
+  [self replaceValue:args forKey:@"mapInsets" notification:NO];
 }
 
 - (void)setPadding:(id)args
@@ -186,7 +187,7 @@ const CGFloat LN2 = 0.6931471805599453;
   UIEdgeInsets mapInsets = [TiUtils contentInsets:args];
 
   [[[self mapView] mapView] setPadding:mapInsets];
-  [self replaceValue:args forKey:@"mapInsets" notification:NO];
+  [self replaceValue:args forKey:@"padding" notification:NO];
 }
 
 - (void)setRegion:(id)args
