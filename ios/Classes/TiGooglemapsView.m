@@ -220,7 +220,7 @@
                  }];
   }
 
-  return NO;
+  return YES;
 }
 
 - (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker
