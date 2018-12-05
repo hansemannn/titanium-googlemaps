@@ -289,16 +289,17 @@
 {
   TiGooglemapsAnnotationProxy *annotation = nil;
 
-  for (TiGooglemapsAnnotationProxy *proxy in [(TiGooglemapsViewProxy *)[self proxy] markers]) {
+  for (TiGooglemapsAnnotationProxy *proxy in [[(TiGooglemapsViewProxy *)[self proxy] markers] mutableCopy]) {
     if ([[[[proxy marker] userData] objectForKey:@"uuid"] isEqualToString:[[marker userData] objectForKey:@"uuid"]]) {
       annotation = proxy;
-      [annotation rememberSelf];
     }
   }
 
-  if (!annotation) {
+  if (!annotation || !annotation.infoWindow) {
     return nil;
   }
+  
+  [annotation rememberSelf];
 
   return [[annotation infoWindow] view];
 }
