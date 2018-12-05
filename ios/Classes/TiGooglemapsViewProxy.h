@@ -228,6 +228,14 @@
 - (void)setRegion:(id)args;
 
 /**
+ *  Moves the camera to a specified location.
+ *
+ *  @param value The region.
+ *  @since 3.15.0
+ */
+- (void)setLocation:(id)args;
+
+/**
  *  Sets the padding adjustment behavior.
  *
  *  @param value The padding adjustment behavior.
