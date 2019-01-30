@@ -18,15 +18,17 @@
 #endif
 #import "GMSAutocompleteBoundsMode.h"
 #import "GMSPlace.h"
+#import "GMSPlaceFieldMask.h"
 #import "GMSPlacesErrors.h"
-#import "GMSUserAddedPlace.h"
-
 
 @class GMSAutocompleteFilter;
 @class GMSAutocompletePrediction;
+@class GMSAutocompleteSessionToken;
+@class GMSPlaceLikelihood;
 @class GMSPlaceLikelihoodList;
 @class GMSPlacePhotoMetadata;
 @class GMSPlacePhotoMetadataList;
+
 
 NS_ASSUME_NONNULL_BEGIN;
 
@@ -50,6 +52,15 @@ typedef void (^GMSPlaceResultCallback)(GMSPlace *_Nullable result, NSError *_Nul
  */
 typedef void (^GMSPlaceLikelihoodListCallback)(GMSPlaceLikelihoodList *_Nullable likelihoodList,
                                                NSError *_Nullable error);
+
+/**
+ * Callback type for receiving array of |GMSPlaceLikelihood|s. If an error occurred, the array will
+ * be nil and |error| will contain information about the error.
+ *
+ * @related GMSPlacesClient
+ */
+typedef void (^GMSPlaceLikelihoodsCallback)(NSArray<GMSPlaceLikelihood *> *_Nullable likelihoods,
+                                            NSError *_Nullable error);
 
 /**
  * Callback type for receiving autocompletion results. |results| is an array of
@@ -106,8 +117,8 @@ typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
 /**
  * Provides your API key to the Google Places API for iOS. This key is generated for your
  * application via the Google APIs Console, and is paired with your application's bundle ID to
- * identify it. This should be called exactly once by your application, e.g., in application:
- * didFinishLaunchingWithOptions:.
+ * identify it. This should be called by your application before using GMSPlacesClient.
+ * (e.g., in application:didFinishLaunchingWithOptions:).
  *
  * @return YES if the APIKey was successfully provided.
  */
@@ -125,11 +136,6 @@ typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
 + (NSString *)SDKVersion;
 
 /**
- * Report that the device is at a particular place.
- */
-- (void)reportDeviceAtPlaceWithID:(NSString *)placeID;
-
-/**
  * Get details for a place. This method is non-blocking.
  * @param placeID The place ID to lookup.
  * @param callback The callback to invoke with the lookup result.
@@ -143,7 +149,7 @@ typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
  * by Google+ users. In most cases, these photos can be used without attribution, or will have the
  * required attribution included as a part of the image. However, you must use the |attributions|
  * property in the response to retrieve any additional attributions required, and display those
- * attributions in your application wherever you display the image. A maximum of 10 photos is
+ * attributions in your application wherever you display the image. A maximum of 10 photos are
  * returned.
  *
  * Multiple calls of this method will probably return the same photos each time. However, this is
@@ -160,13 +166,13 @@ typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
 /**
  * Loads the image for a specific photo at its maximum size.
  *
- * Image data may be cached. If the requested photo does not exist in the cache then a network
- * lookup will be performed.
+ * Image data may be cached by the SDK. If the requested photo does not exist in the cache then a
+ * network lookup will be performed.
  *
  * @param photo The photo for which to load a |UIImage|.
  * @param callback The callback to invoke with the loaded |UIImage|.
  */
-- (void)loadPlacePhoto:(GMSPlacePhotoMetadata *)photo
+- (void)loadPlacePhoto:(GMSPlacePhotoMetadata *)photoMetadata
               callback:(GMSPlacePhotoImageResultCallback)callback;
 
 /**
@@ -176,11 +182,11 @@ typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
  * the original image. This scaling is performed server-side.
  *
  * If the scale parameter is not 1.0 maxSize will be multiplied by this value and the returned
- * UIImage will be set to have the specified scale. This parameter should be set to the screen scale
- * if you are loading images for display on screen.
+ * |UIImage| will be set to have the specified scale. This parameter should be set to the screen
+ * scale if you are loading images for display on screen.
  *
- * Image data may be cached. If the requested photo does not exist in the cache then a network
- * lookup will be performed.
+ * Image data may be cached by the SDK. If the requested photo does not exist in the cache then a
+ * network lookup will be performed.
  *
  * NOTE: After applying the scale factor the dimensions in maxSize will be rounded up to the nearest
  * integer before use. If an image is requested which is larger than the maximum size available a
@@ -191,7 +197,7 @@ typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
  * @param scale The scale to load the image at.
  * @param callback The callback to invoke with the loaded |UIImage|.
  */
-- (void)loadPlacePhoto:(GMSPlacePhotoMetadata *)photo
+- (void)loadPlacePhoto:(GMSPlacePhotoMetadata *)photoMetadata
      constrainedToSize:(CGSize)maxSize
                  scale:(CGFloat)scale
               callback:(GMSPlacePhotoImageResultCallback)callback;
@@ -251,19 +257,52 @@ typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
                  callback:(GMSAutocompletePredictionsCallback)callback;
 
 /**
- * Add a place. The |place| must have all its fields set, except that website or phoneNumber may be
- * nil.
- * @param place The details of the place to be added.
- * @param callback The callback to invoke with the place that was added.
+ * Find Autocomplete predictions from text query. Results may optionally be biased towards a
+ * certain location or restricted to an area. This method is non-blocking.
  *
- * NOTE: The Add Place feature is deprecated as of June 30, 2017. This feature will be turned down
- * on June 30, 2018, and will no longer be available after that date.
+ * The supplied callback will be invoked with an array of autocompletion predictions upon success
+ * and an NSError upon an error.
+ *
+ * @param query The partial text to autocomplete.
+ * @param bounds The bounds used to bias or restrict the results. Whether this biases or restricts
+ *               is determined by the value of the |boundsMode| parameter. This parameter may be
+ *               nil.
+ * @param boundsMode How to treat the |bounds| parameter. Has no effect if |bounds| is nil.
+ * @param filter The filter to apply to the results. This parameter may be nil.
+ * @param sessionToken The |GMSAutocompleteSessionToken| to associate request to a billing session.
+ * @param callback The callback to invoke with the predictions.
  */
-- (void)addPlace:(GMSUserAddedPlace *)place
-        callback:(GMSPlaceResultCallback)callback
-    __GMS_AVAILABLE_BUT_DEPRECATED_MSG(
-        "The Add Place feature is deprecated as of June 30, 2017. This feature will be turned down "
-        "on June 30, 2018, and will no longer be available after that date.");
+- (void)findAutocompletePredictionsFromQuery:(NSString *)query
+                                      bounds:(nullable GMSCoordinateBounds *)bounds
+                                  boundsMode:(GMSAutocompleteBoundsMode)boundsMode
+                                      filter:(nullable GMSAutocompleteFilter *)filter
+                                sessionToken:(GMSAutocompleteSessionToken *)sessionToken
+                                    callback:(GMSAutocompletePredictionsCallback)callback;
+
+/**
+ * Fetch details for a place. This method is non-blocking.
+ * @param placeID The place ID to lookup.
+ * @param placeFields The individual place fields requested for the place objects in the list.
+ * @param sessionToken The |GMSAutocompleteSessionToken| to associate request to a billing session.
+ * @param callback The callback to invoke with the lookup result.
+ */
+- (void)fetchPlaceFromPlaceID:(NSString *)placeID
+                  placeFields:(GMSPlaceField)placeFields
+                 sessionToken:(nullable GMSAutocompleteSessionToken *)sessionToken
+                     callback:(GMSPlaceResultCallback)callback;
+
+/**
+ * Find place likelihoods using the user's current location. This method is non-blocking.
+ *
+ * The supplied callback will be invoked with an array of places with likelihood scores upon success
+ * and an NSError upon an error.
+ *
+ * @param placeFields The individual place fields requested for the place objects in the list.
+ * @param callback The callback to invoke with place likelihoods.
+ */
+- (void)findPlaceLikelihoodsFromCurrentLocationWithPlaceFields:(GMSPlaceField)placeFields
+                                                      callback:
+                                                          (GMSPlaceLikelihoodsCallback)callback;
 
 @end
 

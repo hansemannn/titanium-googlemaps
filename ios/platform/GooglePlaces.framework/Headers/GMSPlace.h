@@ -10,10 +10,19 @@
 
 #import <CoreLocation/CoreLocation.h>
 
-NS_ASSUME_NONNULL_BEGIN;
+#if __has_feature(modules)
+@import GoogleMapsBase;
+#else
+#import <GoogleMapsBase/GoogleMapsBase.h>
+#endif
 
 @class GMSAddressComponent;
 @class GMSCoordinateBounds;
+@class GMSOpeningHours;
+@class GMSPlacePhotoMetadata;
+@class GMSPlusCode;
+
+NS_ASSUME_NONNULL_BEGIN;
 
 
 /**
@@ -62,10 +71,10 @@ typedef NS_ENUM(NSInteger, GMSPlacesPriceLevel) {
 @interface GMSPlace : NSObject
 
 /** Name of the place. */
-@property(nonatomic, copy, readonly) NSString *name;
+@property(nonatomic, copy, readonly, nullable) NSString *name;
 
 /** Place ID of this place. */
-@property(nonatomic, copy, readonly) NSString *placeID;
+@property(nonatomic, copy, readonly, nullable) NSString *placeID;
 
 /**
  * Location of the place. The location is not necessarily the center of the Place, or any
@@ -76,8 +85,12 @@ typedef NS_ENUM(NSInteger, GMSPlacesPriceLevel) {
 
 /**
  * Represents the open now status of the place at the time that the place was created.
+ *
+ * (Deprecated: This property is currently not supported and should not be used)
  */
-@property(nonatomic, readonly, assign) GMSPlacesOpenNowStatus openNowStatus;
+@property(nonatomic, readonly, assign)
+    GMSPlacesOpenNowStatus openNowStatus __GMS_AVAILABLE_BUT_DEPRECATED_MSG(
+        "openNowStatus property is currently not supported and should not be used)");
 
 /**
  * Phone number of this place, in international format, i.e. including the country code prefixed
@@ -108,9 +121,9 @@ typedef NS_ENUM(NSInteger, GMSPlacesPriceLevel) {
 
 /**
  * The types of this place.  Types are NSStrings, valid values are any types documented at
- * <https://developers.google.com/places/ios-api/supported_types>.
+ * <https://developers.google.com/places/ios-sdk/supported_types>.
  */
-@property(nonatomic, copy, readonly) NSArray<NSString *> *types;
+@property(nonatomic, copy, readonly, nullable) NSArray<NSString *> *types;
 
 /** Website for this place. */
 @property(nonatomic, copy, readonly, nullable) NSURL *website;
@@ -144,6 +157,27 @@ typedef NS_ENUM(NSInteger, GMSPlacesPriceLevel) {
  * use the |formattedAddress| property, which provides a localized formatted address.
  */
 @property(nonatomic, copy, readonly, nullable) NSArray<GMSAddressComponent *> *addressComponents;
+
+/**
+ * The Plus code representation of location for this place.
+ */
+@property(nonatomic, strong, readonly, nullable) GMSPlusCode *plusCode;
+
+/**
+ * The Opening Hours information for this place.
+ * Includes open status, periods and weekday text when available.
+ */
+@property(nonatomic, strong, readonly, nullable) GMSOpeningHours *openingHours;
+
+/**
+ * Represents how many reviews make up this place's rating.
+ */
+@property(nonatomic, readonly, assign) NSUInteger userRatingsTotal;
+
+/**
+ * An array of |GMSPlacePhotoMetadata| objects representing the photos of the place.
+ */
+@property(nonatomic, copy, readonly, nullable) NSArray<GMSPlacePhotoMetadata *> *photos;
 
 @end
 

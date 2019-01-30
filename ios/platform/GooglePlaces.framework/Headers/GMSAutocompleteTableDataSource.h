@@ -19,10 +19,11 @@
 #import "GMSAutocompleteFilter.h"
 #import "GMSAutocompletePrediction.h"
 #import "GMSPlace.h"
-
-NS_ASSUME_NONNULL_BEGIN;
+#import "GMSPlaceFieldMask.h"
 
 @class GMSAutocompleteTableDataSource;
+
+NS_ASSUME_NONNULL_BEGIN;
 
 /**
  * Protocol used by |GMSAutocompleteTableDataSource|, to communicate the user's interaction with the
@@ -147,6 +148,12 @@ NS_ASSUME_NONNULL_BEGIN;
 /** The tint color applied to controls in the Autocomplete view. */
 @property(nonatomic, strong, nullable) UIColor *tintColor;
 
+/**
+ * The |GMSPlaceField| for specifying explicit place details to be requested. Default returns
+ * all avilable fields.
+ */
+@property(nonatomic, assign) GMSPlaceField placeFields;
+
 /** Designated initializer */
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 
@@ -161,6 +168,18 @@ NS_ASSUME_NONNULL_BEGIN;
  * @param text The partial text to autocomplete.
  */
 - (void)sourceTextHasChanged:(nullable NSString *)text;
+
+/**
+ * Clear all predictions.
+ *
+ *  NOTE: This will call the two delegate methods below:
+ *
+ *  - |didUpdateAutocompletePredictionsForResultsController:|
+ *  - |didRequestAutocompletePredictionsForResultsController:|
+ *
+ *  The implementation of this method is guaranteed to call these synchronously and in-order.
+ */
+- (void)clearResults;
 
 @end
 

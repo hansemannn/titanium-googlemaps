@@ -446,6 +446,11 @@ typedef NS_ENUM(NSUInteger, GMSMapViewPaddingAdjustmentBehavior) {
 @property(nonatomic, strong, nullable) GMSCoordinateBounds *cameraTargetBounds;
 
 /**
+ * Convenience initializer that builds and returns a GMSMapView, with a frame and camera target.
+ */
+- (instancetype)initWithFrame:(CGRect)frame camera:(GMSCameraPosition *)camera;
+
+/**
  * Builds and returns a GMSMapView, with a frame and camera target.
  */
 + (instancetype)mapWithFrame:(CGRect)frame camera:(GMSCameraPosition *)camera;

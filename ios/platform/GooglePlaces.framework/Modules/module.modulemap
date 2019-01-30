@@ -3,6 +3,8 @@ framework module GooglePlaces {
   export *
   module * { export *}
   link "z"
+  link framework "CoreFoundation"
   link framework "CoreLocation"
   link framework "CoreTelephony"
+  link framework "CoreText"
   link framework "Security"}
