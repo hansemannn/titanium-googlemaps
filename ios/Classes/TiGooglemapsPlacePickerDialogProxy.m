@@ -17,6 +17,8 @@
 - (GMSPlacePickerViewController *)dialog
 {
   if (dialog == nil) {
+    DebugLog(@"[WARN] The Google Place Picker SDK has been deprecated by Google and will be turned off on July 29, 2019.");
+
     NSDictionary *config = [self valueForKey:@"config"];
     id viewport = [config valueForKey:@"viewport"];
     GMSCoordinateBounds *bounds = nil;

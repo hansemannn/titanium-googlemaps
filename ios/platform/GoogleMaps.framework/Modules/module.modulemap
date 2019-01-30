@@ -3,7 +3,6 @@ framework module GoogleMaps {
   export *
   module * { export *}
   link "z"
-  link framework "Accelerate"
   link framework "CoreData"
   link framework "CoreFoundation"
   link framework "CoreGraphics"

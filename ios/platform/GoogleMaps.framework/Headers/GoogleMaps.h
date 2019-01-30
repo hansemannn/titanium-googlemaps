@@ -24,6 +24,7 @@
 #import "GMSOverlay.h"
 #import "GMSOverlayLayer.h"
 #import "GMSPolygon.h"
+#import "GMSPolygonLayer.h"
 #import "GMSPolyline.h"
 #import "GMSSyncTileLayer.h"
 #import "GMSTileLayer.h"

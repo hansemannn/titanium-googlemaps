@@ -17,6 +17,7 @@
 #import "GMSAutocompleteFilter.h"
 
 @class GMSAutocompletePrediction;
+@class GMSAutocompleteSessionToken;
 
 NS_ASSUME_NONNULL_BEGIN;
 
@@ -83,6 +84,11 @@ NS_ASSUME_NONNULL_BEGIN;
 
 /** Filter to apply to autocomplete suggestions (can be nil). */
 @property(nonatomic, strong, nullable) GMSAutocompleteFilter *autocompleteFilter;
+
+/**
+ * Provide a |GMSAutocompleteSessionToken| for tracking the specific autocomplete query flow.
+ */
+- (void)provideSessionToken:(GMSAutocompleteSessionToken *)sessionToken;
 
 /**
  * Notify the fetcher that the source text to autocomplete has changed.

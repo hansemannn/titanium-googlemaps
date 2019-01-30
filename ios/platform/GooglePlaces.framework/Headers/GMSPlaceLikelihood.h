@@ -11,9 +11,9 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN;
-
 @class GMSPlace;
+
+NS_ASSUME_NONNULL_BEGIN;
 
 /**
  * Represents a |GMSPlace| and the relative likelihood of the place being the best match within the

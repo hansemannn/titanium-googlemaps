@@ -9,14 +9,25 @@
 //
 
 
+#import <Foundation/Foundation.h>
+
 NS_ASSUME_NONNULL_BEGIN;
 
+#if defined(__IPHONE_11_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_11_0)
+/**
+ * Attribute name for match fragments in |GMSAutocompletePrediction| attributedFullText.
+ *
+ * @related GMSAutocompletePrediction
+ */
+extern NSAttributedStringKey const kGMSAutocompleteMatchAttribute;
+#else
 /**
  * Attribute name for match fragments in |GMSAutocompletePrediction| attributedFullText.
  *
  * @related GMSAutocompletePrediction
  */
 extern NSString *const kGMSAutocompleteMatchAttribute;
+#endif
 
 /**
  * This class represents a prediction of a full query based on a partially typed string.
@@ -68,14 +79,14 @@ extern NSString *const kGMSAutocompleteMatchAttribute;
 @property(nonatomic, copy, readonly, nullable) NSAttributedString *attributedSecondaryText;
 
 /**
- * An optional property representing the place ID of the prediction, suitable for use in a place
- * details request.
+ * A property representing the place ID of the prediction, suitable for use in a place details
+ * request.
  */
-@property(nonatomic, copy, readonly, nullable) NSString *placeID;
+@property(nonatomic, copy, readonly) NSString *placeID;
 
 /**
  * The types of this autocomplete result.  Types are NSStrings, valid values are any types
- * documented at <https://developers.google.com/places/ios-api/supported_types>.
+ * documented at <https://developers.google.com/places/ios-sdk/supported_types>.
  */
 @property(nonatomic, copy, readonly) NSArray<NSString *> *types;
 
