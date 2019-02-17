@@ -105,9 +105,10 @@ static const double kGMUAnimationDuration = 0.5;  // seconds.
 - (void)renderAnimatedClusters:(NSArray<id<GMUCluster>> *)clusters {
   float zoom = _mapView.camera.zoom;
   BOOL isZoomingIn = zoom > _previousZoom;
-  _previousZoom = zoom;
 
   [self prepareClustersForAnimation:clusters isZoomingIn:isZoomingIn];
+
+  _previousZoom = zoom;
 
   _clusters = [clusters copy];
 
@@ -195,7 +196,10 @@ static const double kGMUAnimationDuration = 0.5;  // seconds.
     _itemToOldClusterMap =
         [[NSMutableDictionary<GMUWrappingDictionaryKey *, id<GMUCluster>> alloc] init];
     for (id<GMUCluster> cluster in _clusters) {
-      if (![self shouldRenderAsCluster:cluster atZoom:zoom]) continue;
+      if (![self shouldRenderAsCluster:cluster atZoom:zoom]
+          && ![self shouldRenderAsCluster:cluster atZoom:_previousZoom]) {
+        continue;
+      }
       for (id<GMUClusterItem> clusterItem in cluster.items) {
         GMUWrappingDictionaryKey *key =
             [[GMUWrappingDictionaryKey alloc] initWithObject:clusterItem];
@@ -229,13 +233,21 @@ static const double kGMUAnimationDuration = 0.5;  // seconds.
     if ([_renderedClusters containsObject:cluster]) continue;
 
     BOOL shouldShowCluster = [visibleBounds containsCoordinate:cluster.position];
-    if (!shouldShowCluster && animated) {
+    BOOL shouldRenderAsCluster = [self shouldRenderAsCluster:cluster atZoom: _mapView.camera.zoom];
+
+    if (!shouldShowCluster) {
       for (id<GMUClusterItem> item in cluster.items) {
-        GMUWrappingDictionaryKey *key = [[GMUWrappingDictionaryKey alloc] initWithObject:item];
-        id<GMUCluster> oldCluster = [_itemToOldClusterMap objectForKey:key];
-        if (oldCluster != nil && [visibleBounds containsCoordinate:oldCluster.position]) {
+        if (!shouldRenderAsCluster && [visibleBounds containsCoordinate:item.position]) {
           shouldShowCluster = YES;
           break;
+        }
+        if (animated) {
+          GMUWrappingDictionaryKey *key = [[GMUWrappingDictionaryKey alloc] initWithObject:item];
+          id<GMUCluster> oldCluster = [_itemToOldClusterMap objectForKey:key];
+          if (oldCluster != nil && [visibleBounds containsCoordinate:oldCluster.position]) {
+            shouldShowCluster = YES;
+            break;
+          }
         }
       }
     }

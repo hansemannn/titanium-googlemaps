@@ -1,4 +1,4 @@
-/* Copyright (c) 2016 Google Inc.
+/* Copyright (c) 2018 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,31 +13,21 @@
  * limitations under the License.
  */
 
-#import <CoreLocation/CoreLocation.h>
-#import <Foundation/Foundation.h>
-#import <GoogleMaps/GoogleMaps.h>
+#import "GMUPair.h"
+#import "GMUStyleMap.h"
 
-#import "GMUGeometry.h"
+@implementation GMUStyleMap
 
-NS_ASSUME_NONNULL_BEGIN
+@synthesize styleMapId = _id;
+@synthesize pairs = _pairs;
 
-/**
- * Instances of this class represent a LineString object.
- */
-@interface GMULineString : NSObject<GMUGeometry>
-
-/**
- * The path of the LineString.
- */
-@property(nonatomic, readonly) GMSPath *path;
-
-/**
- * Initializes a GMULineString object with a path.
- *
- * @param path The path of the LineString.
- */
-- (instancetype)initWithPath:(GMSPath *)path;
+- (instancetype)initWithId:(NSString *)styleMapId
+                     pairs:(NSArray<GMUPair *> *)pairs {
+    if (self = [super init]) {
+        _id = styleMapId;
+        _pairs = pairs;
+    }
+    return self;
+}
 
 @end
-
-NS_ASSUME_NONNULL_END
