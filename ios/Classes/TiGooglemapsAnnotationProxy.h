@@ -12,6 +12,20 @@
 
 @property (nonatomic, retain) GMSMarker *marker;
 
+/**
+ *  Creates a new `TiGooglemapsAnnotationProxy` proxy from a native `GMSMarker` instance.
+ *
+ *  @return The new annotation proxy instance.
+ *  @since 4.1.0
+ */
+- (id)_initWithPageContext:(id<TiEvaluator>)context andMarker:(GMSMarker *)marker;
+
+/**
+ *  Returns the annotation info window.
+ *
+ *  @return The info window
+ *  @since 3.2.0
+ */
 - (TiViewProxy *)infoWindow;
 
 /**

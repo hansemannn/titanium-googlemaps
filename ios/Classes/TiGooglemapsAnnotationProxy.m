@@ -12,6 +12,25 @@
 
 @synthesize marker = _marker;
 
+- (id)_initWithPageContext:(id<TiEvaluator>)context andMarker:(GMSMarker *)marker
+{
+  if (self = [super _initWithPageContext:context]) {
+    // Assign native instance
+    _marker = marker;
+
+    // Map a few common properties over.
+    // TODO: We could have an automatic mapping for this
+    [self replaceValue:@(_marker.position.latitude) forKey:@"latitude" notification:NO];
+    [self replaceValue:@(_marker.position.longitude) forKey:@"longitude" notification:NO];
+    [self replaceValue:_marker.title forKey:@"title" notification:NO];
+    [self replaceValue:_marker.snippet forKey:@"subtitle" notification:NO];
+
+    _marker.userData = @{ @"uuid" : [[NSUUID UUID] UUIDString] };
+  }
+  
+  return self;
+}
+
 - (GMSMarker *)marker
 {
   if (!_marker) {
@@ -20,8 +39,8 @@
     CLLocationDegrees latitude = [TiUtils doubleValue:[self valueForKey:@"latitude"]];
     CLLocationDegrees longitude = [TiUtils doubleValue:[self valueForKey:@"longitude"]];
 
-    [_marker setPosition:CLLocationCoordinate2DMake(latitude, longitude)];
-    [_marker setUserData:@{ @"uuid" : [[NSUUID UUID] UUIDString] }];
+    _marker.position = CLLocationCoordinate2DMake(latitude, longitude);
+    _marker.userData = @{ @"uuid" : [[NSUUID UUID] UUIDString] };
   }
 
   return _marker;
