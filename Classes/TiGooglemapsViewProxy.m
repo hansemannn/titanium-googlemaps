@@ -752,16 +752,6 @@ const CGFloat LN2 = 0.6931471805599453;
   return markers;
 }
 
-- (NSArray<TiGooglemapsAnnotationProxy *> *)clusteredAnnotations
-{
-  NSMutableArray *clusteredAnnotations = [NSMutableArray array];
-  [[self mapView].clusteredMarkers enumerateObjectsUsingBlock:^(GMSMarker * _Nonnull marker, NSUInteger idx, BOOL * _Nonnull stop) {
-    [clusteredAnnotations addObject:[[TiGooglemapsAnnotationProxy alloc] _initWithPageContext:self.pageContext andMarker:(GMSMarker *)marker]];
-  }];
-  
-  return clusteredAnnotations;
-}
-
 - (NSArray<TiGooglemapsPolylineProxy *> *)polylines
 {
   NSMutableArray<TiGooglemapsPolylineProxy *> *polylines = [NSMutableArray array];
@@ -799,6 +789,17 @@ const CGFloat LN2 = 0.6931471805599453;
   }];
   
   return circles;
+}
+
+- (void)setClusterConfiguration:(NSDictionary<NSString *,id> *)clusterConfiguration
+{
+  NSUInteger minimumClusterSize = [TiUtils intValue:clusterConfiguration[@"minimumClusterSize"] def:4];
+  NSUInteger maximumClusterZoom = [TiUtils intValue:clusterConfiguration[@"maximumClusterZoom"] def:20];
+  double animationDuration = [TiUtils doubleValue:clusterConfiguration[@"animationDuration"] def:0.5];
+
+  [self mapView].clusterRenderer.minimumClusterSize = minimumClusterSize;
+  [self mapView].clusterRenderer.maximumClusterZoom = maximumClusterZoom;
+  [self mapView].clusterRenderer.animationDuration = animationDuration;
 }
 
 @end

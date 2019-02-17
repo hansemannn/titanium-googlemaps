@@ -283,14 +283,6 @@
 - (void)showAnnotations:(id)annotations;
 
 /**
- *  Returns all currently added annotations of a cluster.
- *
- *  @return The available annotations.
- *  @since 4.1.0
- */
-- (NSArray<TiGooglemapsAnnotationProxy *> *)clusteredAnnotations;
-
-/**
  *  Returns all currently added annotations.
  *
  *  @return The available annotations.
@@ -321,5 +313,13 @@
  *  @since 3.14.0
  */
 - (NSArray<TiGooglemapsCircleProxy *> *)circles;
+
+/**
+ *  Sets the cluster configuration.
+ *
+ *  @return The cluster configuration.
+ *  @since 4.1.0
+ */
+- (void)setClusterConfiguration:(NSDictionary<NSString *, id> *)clusterConfiguration;
 
 @end

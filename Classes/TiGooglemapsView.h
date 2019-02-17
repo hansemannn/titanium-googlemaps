@@ -9,14 +9,12 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "TiClusterRenderer.h"
 
-@interface TiGooglemapsView : TiUIView <GMSMapViewDelegate, GMUClusterManagerDelegate, GMUClusterRendererDelegate> {
-  TiClusterRenderer *_clusterRenderer;
-}
+@interface TiGooglemapsView : TiUIView <GMSMapViewDelegate, GMUClusterManagerDelegate, GMUClusterRendererDelegate>
 
 @property (nonatomic, strong) GMSMapView *mapView;
 
 @property (nonatomic, strong) GMUClusterManager *clusterManager;
 
-- (NSArray<GMSMarker *> *)clusteredMarkers;
+@property (nonatomic, strong) TiClusterRenderer *clusterRenderer;
 
 @end

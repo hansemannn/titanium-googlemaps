@@ -424,11 +424,6 @@
   return result;
 }
 
-- (NSArray<GMSMarker *> *)clusteredMarkers
-{
-  return _clusterRenderer.markers;
-}
-
 #pragma mark Constants
 
 MAKE_SYSTEM_PROP(OVERLAY_TYPE_POLYGON, TiGooglemapsOverlayTypePolygon);
