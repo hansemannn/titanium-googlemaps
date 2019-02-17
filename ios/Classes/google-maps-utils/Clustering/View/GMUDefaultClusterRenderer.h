@@ -71,6 +71,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface GMUDefaultClusterRenderer : NSObject<GMUClusterRenderer>
 
+- (NSArray<GMSMarker *> *)markers;
+
 /**
  * Animates the clusters to achieve splitting (when zooming in) and merging
  * (when zooming out) effects:
