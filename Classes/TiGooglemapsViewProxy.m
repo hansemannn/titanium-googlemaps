@@ -793,6 +793,8 @@ const CGFloat LN2 = 0.6931471805599453;
 
 - (void)setClusterConfiguration:(NSDictionary<NSString *,id> *)clusterConfiguration
 {
+  NSArray<NSNumber *> *ranges = clusterConfiguration[@"ranges"];
+  NSArray<NSString *> *rangeBackgrounds = clusterConfiguration[@"rangeBackgrounds"];
   NSUInteger minimumClusterSize = [TiUtils intValue:clusterConfiguration[@"minimumClusterSize"] def:4];
   NSUInteger maximumClusterZoom = [TiUtils intValue:clusterConfiguration[@"maximumClusterZoom"] def:20];
   double animationDuration = [TiUtils doubleValue:clusterConfiguration[@"animationDuration"] def:0.5];
@@ -800,6 +802,10 @@ const CGFloat LN2 = 0.6931471805599453;
   [self mapView].clusterRenderer.minimumClusterSize = minimumClusterSize;
   [self mapView].clusterRenderer.maximumClusterZoom = maximumClusterZoom;
   [self mapView].clusterRenderer.animationDuration = animationDuration;
+  
+  // Set the proxy values to the old keys for background compatibility
+  [self replaceValue:ranges forKey:@"clusterRanges" notification:NO];
+  [self replaceValue:rangeBackgrounds forKey:@"clusterBackgrounds" notification:NO];
 }
 
 @end

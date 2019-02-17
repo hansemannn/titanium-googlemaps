@@ -658,14 +658,19 @@ You are all set! Optionally, you can also set your own cluster ranges and define
 images for each cluster range in your `mapView` instance:
 ```js
 var mapView = maps.createView({
-    clusterRanges: [10, 50, 100, 200, 500],
-    clusterBackgrounds: [
-        'buckets/m1.png',
-        'buckets/m2.png',
-        'buckets/m3.png',
-        'buckets/m4.png',
-        'buckets/m5.png'
-    ],
+    clusterConfiguration: {
+        ranges: [10, 50, 100, 200, 500],
+        rangeBackgrounds: [
+            'buckets/m1.png',
+            'buckets/m2.png',
+            'buckets/m3.png',
+            'buckets/m4.png',
+            'buckets/m5.png'
+        ],
+        minimumClusterSize: 4,
+        maximumClusterZoom: 20,
+        animationDuration: 0.5
+    },
     region: {
         latitude: 37.368122,
         longitude: -121.913653,
