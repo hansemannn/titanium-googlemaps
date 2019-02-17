@@ -7,7 +7,6 @@
 
 #import "TiGooglemapsView.h"
 #import "TiClusterIconGenerator.h"
-#import "TiClusterRenderer.h"
 #import "TiGooglemapsAnnotationProxy.h"
 #import "TiGooglemapsCircleProxy.h"
 #import "TiGooglemapsClusterItemProxy.h"
@@ -18,6 +17,12 @@
 #import "TiPOIItem.h"
 
 @implementation TiGooglemapsView
+
+- (void)dealloc
+{
+  _mapView.delegate = nil;
+  _clusterRenderer.delegate = nil;
+}
 
 - (GMSMapView *)mapView
 {
@@ -41,10 +46,10 @@
 
     TiClusterIconGenerator *iconGenerator = [self createIconGenerator];
 
-    TiClusterRenderer *renderer = [[TiClusterRenderer alloc] initWithMapView:_mapView clusterIconGenerator:iconGenerator];
-    renderer.delegate = self;
+    _clusterRenderer = [[TiClusterRenderer alloc] initWithMapView:_mapView clusterIconGenerator:iconGenerator];
+    _clusterRenderer.delegate = self;
 
-    _clusterManager = [[GMUClusterManager alloc] initWithMap:[self mapView] algorithm:algorithm renderer:renderer];
+    _clusterManager = [[GMUClusterManager alloc] initWithMap:[self mapView] algorithm:algorithm renderer:_clusterRenderer];
     [_clusterManager setDelegate:self mapDelegate:self];
   }
 
@@ -58,10 +63,9 @@
 
     // Note: All native props are nullable, so we don't need to check against nil here
 
+    // TODO: Add more property mappings here
     [marker setTitle:item.title];
-
     [marker setSnippet:item.subtitle];
-
     [marker setIcon:item.icon];
   }
 }
@@ -418,6 +422,11 @@
   }
 
   return result;
+}
+
+- (NSArray<GMSMarker *> *)clusteredMarkers
+{
+  return _clusterRenderer.markers;
 }
 
 #pragma mark Constants

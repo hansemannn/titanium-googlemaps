@@ -197,7 +197,6 @@ const CGFloat LN2 = 0.6931471805599453;
 
   double latitude = [TiUtils floatValue:[args valueForKey:@"latitude"]];
   double longitude = [TiUtils floatValue:[args valueForKey:@"longitude"] ];
-  double latitudeDelta = [TiUtils floatValue:[args valueForKey:@"latitudeDelta"] def:-1];
   double longitudeDelta = [TiUtils floatValue:[args valueForKey:@"longitudeDelta"] def:-1];
   CGFloat zoom = [TiUtils floatValue:[args valueForKey:@"zoom"] def:1];
   CGFloat bearing = [TiUtils floatValue:[args valueForKey:@"bearing"] def:0];
@@ -224,7 +223,6 @@ const CGFloat LN2 = 0.6931471805599453;
 {
   double latitude = [TiUtils floatValue:[args valueForKey:@"latitude"]];
   double longitude = [TiUtils floatValue:[args valueForKey:@"longitude"] ];
-  double latitudeDelta = [TiUtils floatValue:[args valueForKey:@"latitudeDelta"] def:-1];
   double longitudeDelta = [TiUtils floatValue:[args valueForKey:@"longitudeDelta"] def:-1];
   BOOL animate = [TiUtils boolValue:[args valueForKey:@"animate"] def:YES];
 
@@ -752,6 +750,16 @@ const CGFloat LN2 = 0.6931471805599453;
 - (NSArray<TiGooglemapsAnnotationProxy *> *)annotations
 {
   return markers;
+}
+
+- (NSArray<TiGooglemapsAnnotationProxy *> *)clusteredAnnotations
+{
+  NSMutableArray *clusteredAnnotations = [NSMutableArray array];
+  [[self mapView].clusteredMarkers enumerateObjectsUsingBlock:^(GMSMarker * _Nonnull marker, NSUInteger idx, BOOL * _Nonnull stop) {
+    [clusteredAnnotations addObject:[[TiGooglemapsAnnotationProxy alloc] _initWithPageContext:self.pageContext andMarker:(GMSMarker *)marker]];
+  }];
+  
+  return clusteredAnnotations;
 }
 
 - (NSArray<TiGooglemapsPolylineProxy *> *)polylines
