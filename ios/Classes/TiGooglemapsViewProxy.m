@@ -310,19 +310,18 @@ const CGFloat LN2 = 0.6931471805599453;
 - (void)addClusterItem:(id)args
 {
   ENSURE_SINGLE_ARG(args, TiGooglemapsClusterItemProxy);
+  ENSURE_UI_THREAD(addClusterItem, args);
 
-  dispatch_async(dispatch_get_main_queue(), ^{
-    [[[self mapView] clusterManager] addItem:[(TiGooglemapsClusterItemProxy *)args clusterItem]];
-  });
+  [[[self mapView] clusterManager] addItem:[(TiGooglemapsClusterItemProxy *)args clusterItem]];
 }
 
 - (void)addClusterItems:(id)args
 {
   ENSURE_SINGLE_ARG(args, NSArray);
+  ENSURE_UI_THREAD(addClusterItems, args);
 
   NSMutableArray *items = [NSMutableArray array];
 
-  dispatch_async(dispatch_get_main_queue(), ^{
     for (NSUInteger i = 0; i < [args count]; i++) {
       TiGooglemapsClusterItemProxy *clusterItem = [args objectAtIndex:i];
       ENSURE_TYPE(clusterItem, TiGooglemapsClusterItemProxy);
@@ -330,7 +329,6 @@ const CGFloat LN2 = 0.6931471805599453;
       [items addObject:[(TiGooglemapsClusterItemProxy *)clusterItem clusterItem]];
     }
     [[[self mapView] clusterManager] addItems:items];
-  });
 }
 
 - (void)setClusterItems:(id)args
@@ -514,7 +512,6 @@ const CGFloat LN2 = 0.6931471805599453;
     }];
   });
 }
-
 
 - (void)removePolygon:(id)args
 {
