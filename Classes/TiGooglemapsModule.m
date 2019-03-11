@@ -92,11 +92,11 @@
 
                                    if (!response.results || response.results.count == 0) {
                                      [propertiesDict setValue:@"No places found" forKey:@"error"];
-                                     [propertiesDict setValue:NUMINT(1) forKey:@"code"];
-                                     [propertiesDict setValue:NUMBOOL(NO) forKey:@"success"];
+                                     [propertiesDict setValue:@(1) forKey:@"code"];
+                                     [propertiesDict setValue:@(NO) forKey:@"success"];
                                    } else {
-                                     [propertiesDict setValue:NUMINT(0) forKey:@"code"];
-                                     [propertiesDict setValue:NUMBOOL(YES) forKey:@"success"];
+                                     [propertiesDict setValue:@(0) forKey:@"code"];
+                                     [propertiesDict setValue:@(YES) forKey:@"success"];
                                    }
 
                                    NSArray *invocationArray = [[NSArray alloc] initWithObjects:&propertiesDict count:1];
@@ -193,8 +193,8 @@
 
   for (NSUInteger i = 0; i < path.count; i++) {
     CLLocationCoordinate2D location = [path coordinateAtIndex:i];
-    [coordinates addObject:@{ @"latitude" : NUMDOUBLE(location.latitude),
-      @"longitude" : NUMDOUBLE(location.longitude) }];
+    [coordinates addObject:@{ @"latitude" : @(location.latitude),
+      @"longitude" : @(location.longitude) }];
   }
 
   return coordinates;
@@ -211,8 +211,8 @@
   NSMutableDictionary *result = [NSMutableDictionary dictionary];
 
   if (address.coordinate.latitude && address.coordinate.longitude) {
-    [result setObject:NUMDOUBLE(address.coordinate.latitude) forKey:@"latitude"];
-    [result setObject:NUMDOUBLE(address.coordinate.longitude) forKey:@"longitude"];
+    [result setObject:@(address.coordinate.latitude) forKey:@"latitude"];
+    [result setObject:@(address.coordinate.longitude) forKey:@"longitude"];
   }
 
   if (address.thoroughfare) {

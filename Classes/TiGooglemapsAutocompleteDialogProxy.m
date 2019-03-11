@@ -95,7 +95,7 @@
     [self fireEvent:@"error"
          withObject:@{
            @"error" : [error localizedDescription],
-           @"code" : NUMINTEGER([error code])
+           @"code" : @([error code])
          }];
   }
 
@@ -125,8 +125,8 @@
   return @{
     @"name" : [place name],
     @"placeID" : [place placeID],
-    @"latitude" : NUMDOUBLE([place coordinate].latitude),
-    @"longitude" : NUMDOUBLE([place coordinate].longitude),
+    @"latitude" : @([place coordinate].latitude),
+    @"longitude" : @([place coordinate].longitude),
     @"formattedAddress" : [place formattedAddress],
     @"addressComponents" : [TiGooglemapsAutocompleteDialogProxy arrayFromAddressComponents:[place addressComponents]]
   };

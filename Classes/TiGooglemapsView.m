@@ -116,9 +116,9 @@
   if ([[self proxy] _hasListeners:@"clusterclick"]) {
     [[self proxy] fireEvent:@"clusterclick"
                  withObject:@{
-                   @"latitude" : NUMDOUBLE(cluster.position.latitude),
-                   @"longitude" : NUMDOUBLE(cluster.position.longitude),
-                   @"count" : NUMUINTEGER(cluster.count),
+                   @"latitude" : @(cluster.position.latitude),
+                   @"longitude" : @(cluster.position.longitude),
+                   @"count" : @(cluster.count),
                    @"clusterItems" : [self arrayFromClusterItems:cluster.items]
                  }];
   }
@@ -134,8 +134,8 @@
   if ([[self proxy] _hasListeners:@"clusteritemclick"]) {
     [[self proxy] fireEvent:@"clusteritemclick"
                  withObject:@{
-                   @"latitude" : NUMDOUBLE(clusterItem.position.latitude),
-                   @"longitude" : NUMDOUBLE(clusterItem.position.longitude),
+                   @"latitude" : @(clusterItem.position.latitude),
+                   @"longitude" : @(clusterItem.position.longitude),
                    @"title" : [(TiPOIItem *)clusterItem title] ?: [NSNull null],
                    @"subtitle" : [(TiPOIItem *)clusterItem subtitle] ?: [NSNull null],
                    @"userData" : [(TiPOIItem *)clusterItem userData] ?: [NSNull null]
@@ -153,9 +153,9 @@
     [[self proxy] fireEvent:@"regionwillchange"
                  withObject:@{
                    @"map" : [self proxy],
-                   @"latitude" : NUMDOUBLE(mapView.camera.target.latitude),
-                   @"longitude" : NUMDOUBLE(mapView.camera.target.longitude),
-                   @"gesture" : NUMBOOL(gesture)
+                   @"latitude" : @(mapView.camera.target.latitude),
+                   @"longitude" : @(mapView.camera.target.longitude),
+                   @"gesture" : @(gesture)
                  }];
   }
 }
@@ -164,11 +164,11 @@
 {
   if ([[self proxy] _hasListeners:@"regionchanged"]) {
     NSMutableDictionary *updatedRegion = [NSMutableDictionary dictionaryWithDictionary:@{
-      @"latitude" : NUMDOUBLE(position.target.latitude),
-      @"longitude" : NUMDOUBLE(position.target.longitude),
-      @"zoom" : NUMFLOAT(position.zoom),
-      @"bearing" : NUMDOUBLE(position.bearing),
-      @"viewingAngle" : NUMDOUBLE(position.viewingAngle)
+      @"latitude" : @(position.target.latitude),
+      @"longitude" : @(position.target.longitude),
+      @"zoom" : @(position.zoom),
+      @"bearing" : @(position.bearing),
+      @"viewingAngle" : @(position.viewingAngle)
     }];
 
     [(TiGooglemapsViewProxy *)[self proxy] replaceValue:updatedRegion forKey:@"region" notification:NO];
@@ -193,8 +193,8 @@
     [[self proxy] fireEvent:@"mapclick"
                  withObject:@{
                    @"map" : [self proxy],
-                   @"latitude" : NUMDOUBLE(coordinate.latitude),
-                   @"longitude" : NUMDOUBLE(coordinate.longitude)
+                   @"latitude" : @(coordinate.latitude),
+                   @"longitude" : @(coordinate.longitude)
                  }];
   }
 }
@@ -205,8 +205,8 @@
     [[self proxy] fireEvent:@"longclick"
                  withObject:@{
                    @"map" : [self proxy],
-                   @"latitude" : NUMDOUBLE(coordinate.latitude),
-                   @"longitude" : NUMDOUBLE(coordinate.longitude)
+                   @"latitude" : @(coordinate.latitude),
+                   @"longitude" : @(coordinate.longitude)
                  }];
   }
 }
@@ -219,8 +219,8 @@
                    @"clicksource" : @"pin",
                    @"annotation" : [self dictionaryFromMarker:marker],
                    @"map" : [self proxy],
-                   @"latitude" : NUMDOUBLE(marker.position.latitude),
-                   @"longitude" : NUMDOUBLE(marker.position.longitude)
+                   @"latitude" : @(marker.position.latitude),
+                   @"longitude" : @(marker.position.longitude)
                  }];
   }
 
@@ -235,8 +235,8 @@
                    @"clicksource" : @"infoWindow",
                    @"annotation" : [self dictionaryFromMarker:marker],
                    @"map" : [self proxy],
-                   @"latitude" : NUMDOUBLE(marker.position.latitude),
-                   @"longitude" : NUMDOUBLE(marker.position.longitude)
+                   @"latitude" : @(marker.position.latitude),
+                   @"longitude" : @(marker.position.longitude)
                  }];
   }
 }
@@ -347,19 +347,19 @@
   }
 
   return @{
-    @"latitude" : NUMDOUBLE(position.target.latitude),
-    @"longitude" : NUMDOUBLE(position.target.longitude),
-    @"zoom" : NUMFLOAT(position.zoom),
-    @"viewingAngle" : NUMDOUBLE(position.viewingAngle),
-    @"bearing" : NUMDOUBLE([position bearing])
+    @"latitude" : @(position.target.latitude),
+    @"longitude" : @(position.target.longitude),
+    @"zoom" : @(position.zoom),
+    @"viewingAngle" : @(position.viewingAngle),
+    @"bearing" : @([position bearing])
   };
 }
 
 - (NSDictionary *)dictionaryFromCoordinate:(CLLocationCoordinate2D)coordinate
 {
   return @{
-    @"latitude" : NUMDOUBLE(coordinate.latitude),
-    @"longitude" : NUMDOUBLE(coordinate.longitude)
+    @"latitude" : @(coordinate.latitude),
+    @"longitude" : @(coordinate.longitude)
   };
 }
 
@@ -370,8 +370,8 @@
   }
 
   return @{
-    @"latitude" : NUMDOUBLE(marker.position.latitude),
-    @"longitude" : NUMDOUBLE(marker.position.longitude),
+    @"latitude" : @(marker.position.latitude),
+    @"longitude" : @(marker.position.longitude),
     @"userData" : marker.userData ?: [NSNull null],
     @"title" : marker.title ?: [NSNull null],
     @"subtitle" : marker.snippet ?: [NSNull null]
@@ -383,16 +383,16 @@
   ENSURE_UI_THREAD(overlayTypeFromOverlay, overlay);
 
   if ([overlay isKindOfClass:[GMSPolygon class]]) {
-    return NUMINTEGER(TiGooglemapsOverlayTypePolygon);
+    return @(TiGooglemapsOverlayTypePolygon);
   } else if ([overlay isKindOfClass:[GMSPolyline class]]) {
-    return NUMINTEGER(TiGooglemapsOverlayTypePolyline);
+    return @(TiGooglemapsOverlayTypePolyline);
   } else if ([overlay isKindOfClass:[GMSCircle class]]) {
-    return NUMINTEGER(TiGooglemapsOverlayTypeCircle);
+    return @(TiGooglemapsOverlayTypeCircle);
   }
 
   NSLog(@"[ERROR] Unknown overlay provided: %@", [overlay class])
 
-      return NUMINTEGER(TiGooglemapsOverlayTypeUnknown);
+      return @(TiGooglemapsOverlayTypeUnknown);
 }
 
 - (id)overlayProxyFromOverlay:(GMSOverlay *)overlay

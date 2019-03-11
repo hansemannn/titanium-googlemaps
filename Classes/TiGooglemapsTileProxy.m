@@ -104,9 +104,9 @@
 {
   if ([self _hasListeners:@"receivetile"]) {
     NSDictionary *event = @{
-      @"x" : NUMUINTEGER(x),
-      @"y" : NUMUINTEGER(y),
-      @"zoom" : NUMUINTEGER(zoom),
+      @"x" : @(x),
+      @"y" : @(y),
+      @"zoom" : @(zoom),
       @"image" : [[TiBlob alloc] initWithImage:image]
     };
 
