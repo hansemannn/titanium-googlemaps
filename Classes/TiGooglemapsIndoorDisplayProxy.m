@@ -72,8 +72,8 @@
   }
 
   return @{
-    @"defaultLevelIndex" : NUMUINTEGER([indoorBuilding defaultLevelIndex]),
-    @"isUnderground" : NUMBOOL([indoorBuilding isUnderground]),
+    @"defaultLevelIndex" : @([indoorBuilding defaultLevelIndex]),
+    @"isUnderground" : @([indoorBuilding isUnderground]),
     @"levels" : levels
   };
 }
