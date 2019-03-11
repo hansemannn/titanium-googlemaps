@@ -259,6 +259,19 @@
   }
 }
 
+- (void)mapView:(GMSMapView *)mapView didTapPOIWithPlaceID:(NSString *)placeID name:(NSString *)name location:(CLLocationCoordinate2D)location
+{
+  if ([[self proxy] _hasListeners:@"poiclick"]) {
+    NSDictionary *event = @{
+      @"placeID" : placeID,
+      @"name": name,
+      @"latitude" : @(location.latitude),
+      @"longitude" : @(location.longitude)
+    };
+    [[self proxy] fireEvent:@"poiclick" withObject:event];
+  }
+}
+
 - (void)mapView:(GMSMapView *)mapView didBeginDraggingMarker:(GMSMarker *)marker
 {
   if ([[self proxy] _hasListeners:@"dragstart"]) {
