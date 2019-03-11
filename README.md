@@ -467,7 +467,7 @@ Use heatmaps-layers in your map-views by providing weighted data and designated 
 var stations = JSON.parse(Ti.Filesystem.getFile('police_stations.json').read());
 var data = [];
 
-// Map data to an an array of latitude/longitude/intensity objects
+// Map data to an array of latitude/longitude/intensity objects
 for (var i = 0; i < stations.length; i++) {
   var station = stations[i];
 
