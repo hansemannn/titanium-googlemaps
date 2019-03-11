@@ -144,6 +144,7 @@ The module supports all native delegates - exposed as events. These are:
 - [x] mapclick
 - [x] locationclick
 - [x] longclick
+- [x] poiclick
 - [x] regionchanged
 - [x] regionwillchange
 - [x] idle
