@@ -224,6 +224,7 @@ const CGFloat LN2 = 0.6931471805599453;
   double latitude = [TiUtils floatValue:[args valueForKey:@"latitude"]];
   double longitude = [TiUtils floatValue:[args valueForKey:@"longitude"] ];
   double longitudeDelta = [TiUtils floatValue:[args valueForKey:@"longitudeDelta"] def:-1];
+  double zoom = [TiUtils floatValue:[args valueForKey:@"zoom"] def:-1];
   BOOL animate = [TiUtils boolValue:[args valueForKey:@"animate"] def:YES];
 
   GMSCameraUpdate *update = nil;
@@ -231,6 +232,9 @@ const CGFloat LN2 = 0.6931471805599453;
   if (longitudeDelta != -1) {
     update = [GMSCameraUpdate setTarget:CLLocationCoordinate2DMake(latitude, longitude)
                           zoom:round(log(360 / longitudeDelta) / LN2)];
+  } else if (zoom != -1) {
+    update = [GMSCameraUpdate setTarget:CLLocationCoordinate2DMake(latitude, longitude)
+                                   zoom:zoom];
   } else {
     update = [GMSCameraUpdate setTarget:CLLocationCoordinate2DMake(latitude, longitude)];
 
@@ -703,6 +707,25 @@ const CGFloat LN2 = 0.6931471805599453;
       YES);
 
   return indoorProxy;
+}
+
+- (NSNumber *)containsCoordinate:(id)annotation
+{
+  ENSURE_SINGLE_ARG(annotation, NSDictionary);
+  
+  CLLocationDegrees latitude = [TiUtils doubleValue:annotation[@"latitude"]];
+  CLLocationDegrees longitude = [TiUtils doubleValue:annotation[@"longitude"]];
+
+  CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude, longitude);
+  
+  if (![self mapView].mapView) {
+    return @(NO);
+  }
+  
+  GMSVisibleRegion region = [self mapView].mapView.projection.visibleRegion;
+  GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithRegion:region];
+  
+  return @([bounds containsCoordinate:coordinate]);
 }
 
 - (void)showAnnotations:(id)args

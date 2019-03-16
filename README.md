@@ -239,6 +239,12 @@ mapView.animateToBearing(45);
 mapView.animateToViewingAngle(30);
 ```
 
+##### Check if a location is currently visible on the map
+
+```js
+const contains = mapView.containsCoordinate({ latitude: -13.37, longitude:  42.0 });
+```
+
 ### Camera Update
 
 You can perform camera updates to your map view instance by creating an instance of the `CameraUpdate` API:

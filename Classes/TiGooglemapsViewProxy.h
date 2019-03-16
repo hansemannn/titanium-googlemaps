@@ -322,4 +322,12 @@
  */
 - (void)setClusterConfiguration:(NSDictionary<NSString *, id> *)clusterConfiguration;
 
+/**
+ *  Returns whether or not the provided annotation is currently visible.
+ *
+ *  @return A boxed boolean indicating whether or not the provided annotation is currently visible.
+ *  @since 4.3.0
+ */
+- (NSNumber *)containsCoordinate:(id)annotation;
+
 @end
