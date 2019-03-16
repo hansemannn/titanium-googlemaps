@@ -330,4 +330,12 @@
  */
 - (NSNumber *)containsCoordinate:(id)annotation;
 
+/**
+ *  Returns the current map view zoom level.
+ *
+ *  @return A boxed float containing the current map view zoom level.
+ *  @since 4.3.0
+ */
+- (NSNumber *)zoom;
+
 @end

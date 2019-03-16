@@ -814,6 +814,11 @@ const CGFloat LN2 = 0.6931471805599453;
   return circles;
 }
 
+- (NSNumber *)zoom
+{
+  return @([[self mapView] mapView].camera.zoom);
+}
+
 - (void)setClusterConfiguration:(NSDictionary<NSString *,id> *)clusterConfiguration
 {
   NSArray<NSNumber *> *ranges = clusterConfiguration[@"ranges"];

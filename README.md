@@ -178,6 +178,14 @@ mapView.rotateGestures = false;
 mapView.allowScrollGesturesDuringRotateOrZoom = false;
 ```
 
+#### Get current zoom
+
+```js
+const currentZoom = mapView.zoom;
+```
+
+Note: You can watch the `regionchanged` event to get realtime updates about the zoom level change
+
 #### Map Padding
 
 > Note: The `mapInsets` property is deprecated since Ti.GoogleMaps 4.0.0 in favor this property to achieve better
