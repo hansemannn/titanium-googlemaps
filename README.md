@@ -24,6 +24,7 @@ Ti.GoogleMaps is an open-source project to support the Google Maps iOS-SDK in Ap
 ## Requirements
 
   - Appcelerator Titanium 6.3.0 or later
+  - Minimum Deployment Target iOS 9+
 
 ## Download, Setup and Build
 
