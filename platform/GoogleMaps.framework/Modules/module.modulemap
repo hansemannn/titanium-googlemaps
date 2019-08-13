@@ -1,7 +1,7 @@
 framework module GoogleMaps {
   umbrella header "GoogleMaps.h"
   export *
-  module * { export *}
+  module * { export * }
   link "z"
   link framework "CoreData"
   link framework "CoreFoundation"
@@ -17,4 +17,5 @@ framework module GoogleMaps {
   link framework "QuartzCore"
   link framework "Security"
   link framework "SystemConfiguration"
-  link framework "UIKit"}
+  link framework "UIKit"
+}

@@ -11,7 +11,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <QuartzCore/QuartzCore.h>
 
-NS_ASSUME_NONNULL_BEGIN;
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * GMSOverlayLayer is a custom subclass of CALayer, and an abstract baseclass for GMSOverlay layers

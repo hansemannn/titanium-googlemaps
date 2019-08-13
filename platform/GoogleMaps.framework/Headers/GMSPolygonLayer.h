@@ -13,7 +13,7 @@
 
 #import "GMSOverlayLayer.h"
 
-NS_ASSUME_NONNULL_BEGIN;
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * GMSPolygonLayer is a subclass of GMSOverlayLayer, available on a per-polygon basis, that allows
@@ -46,4 +46,4 @@ extern NSString *const kGMSPolygonLayerStrokeWidth;
 extern NSString *const kGMSPolygonLayerStrokeColor;
 extern NSString *const kGMSPolygonLayerFillColor;
 
-NS_ASSUME_NONNULL_END;
+NS_ASSUME_NONNULL_END

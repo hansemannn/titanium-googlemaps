@@ -35,7 +35,7 @@
 @class GMSOverlay;
 @class GMSProjection;
 
-NS_ASSUME_NONNULL_BEGIN;
+NS_ASSUME_NONNULL_BEGIN
 
 /** Delegate for events on GMSMapView. */
 @protocol GMSMapViewDelegate<NSObject>
@@ -517,4 +517,4 @@ extern NSString *const kGMSAccessibilityCompass;
  */
 extern NSString *const kGMSAccessibilityMyLocation;
 
-NS_ASSUME_NONNULL_END;
+NS_ASSUME_NONNULL_END

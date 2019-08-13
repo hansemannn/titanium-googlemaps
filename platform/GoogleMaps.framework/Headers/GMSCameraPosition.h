@@ -11,7 +11,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <CoreLocation/CoreLocation.h>
 
-NS_ASSUME_NONNULL_BEGIN;
+NS_ASSUME_NONNULL_BEGIN
 
 /**
 * An immutable class that aggregates all camera position parameters.
@@ -163,4 +163,4 @@ FOUNDATION_EXTERN const float kGMSMaxZoomLevel;
 /** The minimum zoom (farthest from the Earth's surface) permitted by the map camera. */
 FOUNDATION_EXTERN const float kGMSMinZoomLevel;
 
-NS_ASSUME_NONNULL_END;
+NS_ASSUME_NONNULL_END

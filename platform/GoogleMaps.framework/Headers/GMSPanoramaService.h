@@ -14,7 +14,7 @@
 
 @class GMSPanorama;
 
-NS_ASSUME_NONNULL_BEGIN;
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Callback for when a panorama metadata becomes available.
@@ -80,4 +80,4 @@ typedef void (^GMSPanoramaCallback)(GMSPanorama *_Nullable panorama, NSError *_N
 
 @end
 
-NS_ASSUME_NONNULL_END;
+NS_ASSUME_NONNULL_END

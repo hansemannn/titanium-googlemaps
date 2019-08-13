@@ -12,7 +12,7 @@
 
 #import "GMSOverlay.h"
 
-NS_ASSUME_NONNULL_BEGIN;
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * A circle on the Earth's surface (spherical cap).
@@ -51,4 +51,4 @@ NS_ASSUME_NONNULL_BEGIN;
 
 @end
 
-NS_ASSUME_NONNULL_END;
+NS_ASSUME_NONNULL_END

@@ -21,7 +21,7 @@
 @class GMSPanoramaCameraUpdate;
 @class GMSPanoramaView;
 
-NS_ASSUME_NONNULL_BEGIN;
+NS_ASSUME_NONNULL_BEGIN
 
 /** Delegate for events on GMSPanoramaView. */
 @protocol GMSPanoramaViewDelegate<NSObject>
@@ -297,4 +297,4 @@ NS_ASSUME_NONNULL_BEGIN;
 
 @end
 
-NS_ASSUME_NONNULL_END;
+NS_ASSUME_NONNULL_END
