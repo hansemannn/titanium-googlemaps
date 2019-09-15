@@ -1,6 +1,6 @@
 //
 //  GMSAutocompletePrediction.h
-//  Google Places API for iOS
+//  Google Places SDK for iOS
 //
 //  Copyright 2016 Google Inc.
 //
@@ -11,7 +11,7 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN;
+NS_ASSUME_NONNULL_BEGIN
 
 #if defined(__IPHONE_11_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_11_0)
 /**
@@ -90,6 +90,11 @@ extern NSString *const kGMSAutocompleteMatchAttribute;
  */
 @property(nonatomic, copy, readonly) NSArray<NSString *> *types;
 
+/**
+ * Initializer is not available.
+ */
+- (instancetype)init NS_UNAVAILABLE;
+
 @end
 
-NS_ASSUME_NONNULL_END;
+NS_ASSUME_NONNULL_END

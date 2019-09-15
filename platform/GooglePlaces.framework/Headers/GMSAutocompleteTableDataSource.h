@@ -1,6 +1,6 @@
 //
 //  GMSAutocompleteTableDataSource.h
-//  Google Places API for iOS
+//  Google Places SDK for iOS
 //
 //  Copyright 2016 Google Inc.
 //
@@ -10,11 +10,6 @@
 
 #import <UIKit/UIKit.h>
 
-#if __has_feature(modules)
-@import GoogleMapsBase;
-#else
-#import <GoogleMapsBase/GoogleMapsBase.h>
-#endif
 #import "GMSAutocompleteBoundsMode.h"
 #import "GMSAutocompleteFilter.h"
 #import "GMSAutocompletePrediction.h"
@@ -22,8 +17,9 @@
 #import "GMSPlaceFieldMask.h"
 
 @class GMSAutocompleteTableDataSource;
+@class GMSCoordinateBounds;
 
-NS_ASSUME_NONNULL_BEGIN;
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Protocol used by |GMSAutocompleteTableDataSource|, to communicate the user's interaction with the
@@ -181,6 +177,12 @@ NS_ASSUME_NONNULL_BEGIN;
  */
 - (void)clearResults;
 
+/**
+ * Sets up the autocomplete bounds using the NE and SW corner locations.
+ */
+- (void)setAutocompleteBoundsUsingNorthEastCorner:(CLLocationCoordinate2D)NorthEastCorner
+                                  SouthWestCorner:(CLLocationCoordinate2D)SouthWestCorner;
+
 @end
 
-NS_ASSUME_NONNULL_END;
+NS_ASSUME_NONNULL_END

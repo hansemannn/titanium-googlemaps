@@ -1,6 +1,6 @@
 //
 //  GMSPlusCode.h
-//  Google Places API for iOS
+//  Google Places SDK for iOS
 //
 //  Copyright 2018 Google Inc.
 //
@@ -10,7 +10,7 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN;
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * A class containing the Plus codes representation for a location.
@@ -26,4 +26,4 @@ NS_ASSUME_NONNULL_BEGIN;
 
 @end
 
-NS_ASSUME_NONNULL_END;
+NS_ASSUME_NONNULL_END

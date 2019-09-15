@@ -2,7 +2,7 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 4.4.0
+version: 5.0.0
 apiversion: 2
 architectures: armv7 arm64 i386 x86_64
 description: ti.googlemaps
@@ -15,5 +15,5 @@ name: ti.googlemaps
 moduleid: ti.googlemaps
 guid: 81fe0326-e874-4843-b902-51bbd46f9283
 platform: iphone
-minsdk: 6.3.0
+minsdk: 7.5.1
 architectures: armv7 arm64 i386 x86_64

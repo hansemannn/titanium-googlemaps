@@ -15,7 +15,6 @@ Ti.GoogleMaps is an open-source project to support the Google Maps iOS-SDK in Ap
 - [x] Polyline overlay
 - [x] Circle overlay
 - [x] Autocompletion dialog
-- [x] Place Picker dialog
 - [x] Clustering
 - [x] Directions
 - [x] Heatmap Layers
@@ -533,39 +532,6 @@ dialog.open();
 ```
 
 #### Autocomplete Events
-
-- [x] success
-- [x] error
-- [x] cancel
-
-### Place Picker Dialog
-
-A place picker provides an interface that displays a map to pick places from.
-
-Set the `config` property with viewport-bounds to specify a configuration
-
-```js
-var dialog = GoogleMaps.createPlacePickerDialog({
-    config: {
-        northEast: {
-            latitude: 0.0,
-            longitude: 0.0
-        },
-        southWest: {
-            latitude: 0.0,
-            longitude: 0.0
-        }
-    }
-});
-
-// You need a Google Maps API key from the Google Developer Console
-// This is not the same one like your Google Places API key
-dialog.configure('<YOUR_GOOGLE_MAPS_API_KEY>');
-
-dialog.open();
-```
-
-#### Place Picker Events
 
 - [x] success
 - [x] error

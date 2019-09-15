@@ -1,6 +1,6 @@
 //
 //  GMSAutocompleteFilter.h
-//  Google Places API for iOS
+//  Google Places SDK for iOS
 //
 //  Copyright 2016 Google Inc.
 //
@@ -10,7 +10,7 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN;
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * \defgroup PlacesAutocompleteTypeFilter GMSPlacesAutocompleteTypeFilter
@@ -78,4 +78,4 @@ typedef NS_ENUM(NSInteger, GMSPlacesAutocompleteTypeFilter) {
 
 @end
 
-NS_ASSUME_NONNULL_END;
+NS_ASSUME_NONNULL_END

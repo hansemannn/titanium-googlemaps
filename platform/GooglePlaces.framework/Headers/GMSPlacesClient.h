@@ -1,6 +1,6 @@
 //
 //  GMSPlacesClient.h
-//  Google Places API for iOS
+//  Google Places SDK for iOS
 //
 //  Copyright 2016 Google Inc.
 //
@@ -11,11 +11,6 @@
 #import <CoreLocation/CoreLocation.h>
 #import <UIKit/UIKit.h>
 
-#if __has_feature(modules)
-@import GoogleMapsBase;
-#else
-#import <GoogleMapsBase/GoogleMapsBase.h>
-#endif
 #import "GMSAutocompleteBoundsMode.h"
 #import "GMSPlace.h"
 #import "GMSPlaceFieldMask.h"
@@ -30,7 +25,7 @@
 @class GMSPlacePhotoMetadataList;
 
 
-NS_ASSUME_NONNULL_BEGIN;
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Callback type for receiving place details lookups. If an error occurred,
@@ -96,7 +91,7 @@ typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
                                                  NSError *_Nullable error);
 
 /**
- * Main interface to the Places API. Used for searching and getting details about places. This class
+ * Main interface to the Places SDK. Used for searching and getting details about places. This class
  * should be accessed through the [GMSPlacesClient sharedClient] method.
  *
  * GMSPlacesClient methods should only be called from the main thread. Calling these methods from
@@ -106,7 +101,7 @@ typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
 @interface GMSPlacesClient : NSObject
 
 /**
- * Provides the shared instance of GMSPlacesClient for the Google Places API for iOS, creating it if
+ * Provides the shared instance of GMSPlacesClient for the Google Places SDK for iOS, creating it if
  * necessary.
  *
  * If your application often uses methods of GMSPlacesClient it may want to hold onto this object
@@ -115,7 +110,7 @@ typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
 + (instancetype)sharedClient;
 
 /**
- * Provides your API key to the Google Places API for iOS. This key is generated for your
+ * Provides your API key to the Google Places SDK for iOS. This key is generated for your
  * application via the Google APIs Console, and is paired with your application's bundle ID to
  * identify it. This should be called by your application before using GMSPlacesClient.
  * (e.g., in application:didFinishLaunchingWithOptions:).
@@ -125,15 +120,21 @@ typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
 + (BOOL)provideAPIKey:(NSString *)key;
 
 /**
- * Returns the open source software license information for the Google Places API for iOS. This
+ * Returns the open source software license information for the Google Places SDK for iOS. This
  * information must be made available within your application.
  */
 + (NSString *)openSourceLicenseInfo;
 
 /**
- * Returns the version for this release of the Google Places API for iOS.
+ * Returns the version for this release of the Google Places SDK for iOS.. For example, "1.0.0".
  */
 + (NSString *)SDKVersion;
+
+/**
+ * Returns the long version for this release of the Google Places SDK for iOS.. For example, "1.0.0
+ * (102.1)".
+ */
++ (NSString *)SDKLongVersion;
 
 /**
  * Get details for a place. This method is non-blocking.
@@ -169,7 +170,7 @@ typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
  * Image data may be cached by the SDK. If the requested photo does not exist in the cache then a
  * network lookup will be performed.
  *
- * @param photo The photo for which to load a |UIImage|.
+ * @param photoMetadata The |GMSPlacePhotoMetadata| for which to load a |UIImage|.
  * @param callback The callback to invoke with the loaded |UIImage|.
  */
 - (void)loadPlacePhoto:(GMSPlacePhotoMetadata *)photoMetadata
@@ -192,7 +193,7 @@ typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
  * integer before use. If an image is requested which is larger than the maximum size available a
  * smaller image may be returned.
  *
- * @param photo The photo for which to load a |UIImage|.
+ * @param photoMetadata The |GMSPlacePhotoMetadata| for which to load a |UIImage|.
  * @param maxSize The maximum size of the image.
  * @param scale The scale to load the image at.
  * @param callback The callback to invoke with the loaded |UIImage|.
@@ -276,7 +277,7 @@ typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
                                       bounds:(nullable GMSCoordinateBounds *)bounds
                                   boundsMode:(GMSAutocompleteBoundsMode)boundsMode
                                       filter:(nullable GMSAutocompleteFilter *)filter
-                                sessionToken:(GMSAutocompleteSessionToken *)sessionToken
+                                sessionToken:(nullable GMSAutocompleteSessionToken *)sessionToken
                                     callback:(GMSAutocompletePredictionsCallback)callback;
 
 /**
@@ -306,4 +307,4 @@ typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
 
 @end
 
-NS_ASSUME_NONNULL_END;
+NS_ASSUME_NONNULL_END

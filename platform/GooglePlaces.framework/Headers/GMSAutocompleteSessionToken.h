@@ -1,6 +1,6 @@
 //
 //  GMSAutocompleteSessionToken.h
-//  Google Places API for iOS
+//  Google Places SDK for iOS
 //
 //  Copyright 2018 Google Inc.
 //
@@ -11,7 +11,7 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN;
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * This class represents an session token to uniquely identify an series of queries to the Google
@@ -20,4 +20,4 @@ NS_ASSUME_NONNULL_BEGIN;
 @interface GMSAutocompleteSessionToken : NSObject
 @end
 
-NS_ASSUME_NONNULL_END;
+NS_ASSUME_NONNULL_END
