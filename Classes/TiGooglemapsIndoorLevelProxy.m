@@ -27,12 +27,12 @@
 
 - (NSString *_Nullable)name
 {
-  return NULL_IF_NIL([_indoorLevel name]);
+  return [_indoorLevel name];
 }
 
 - (NSString *_Nullable)shortName
 {
-  return NULL_IF_NIL([_indoorLevel shortName]);
+  return [_indoorLevel shortName];
 }
 
 @end

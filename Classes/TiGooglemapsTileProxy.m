@@ -6,7 +6,6 @@
  */
 
 #import "TiGooglemapsTileProxy.h"
-#import "TiUtils.h"
 
 @implementation TiGooglemapsTileProxy
 
