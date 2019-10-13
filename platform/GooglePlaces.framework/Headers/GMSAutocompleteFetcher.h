@@ -8,16 +8,12 @@
 //  Service: https://developers.google.com/maps/terms
 //
 
-#if __has_feature(modules)
-@import GoogleMapsBase;
-#else
-#import <GoogleMapsBase/GoogleMapsBase.h>
-#endif
 #import "GMSAutocompleteBoundsMode.h"
 #import "GMSAutocompleteFilter.h"
 
 @class GMSAutocompletePrediction;
 @class GMSAutocompleteSessionToken;
+@class GMSCoordinateBounds;
 
 NS_ASSUME_NONNULL_BEGIN
 

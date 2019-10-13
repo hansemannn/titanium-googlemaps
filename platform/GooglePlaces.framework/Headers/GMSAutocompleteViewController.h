@@ -10,11 +10,6 @@
 
 #import <UIKit/UIKit.h>
 
-#if __has_feature(modules)
-@import GoogleMapsBase;
-#else
-#import <GoogleMapsBase/GoogleMapsBase.h>
-#endif
 #import "GMSAutocompleteBoundsMode.h"
 #import "GMSAutocompleteFilter.h"
 #import "GMSAutocompletePrediction.h"
@@ -22,6 +17,7 @@
 #import "GMSPlaceFieldMask.h"
 
 @class GMSAutocompleteViewController;
+@class GMSCoordinateBounds;
 
 NS_ASSUME_NONNULL_BEGIN
 
