@@ -146,4 +146,13 @@
   [self replaceValue:value forKey:@"holes" notification:NO];
 }
 
+- (void)setUserData:(id)value
+{
+  ENSURE_UI_THREAD(setUserData, value);
+  ENSURE_TYPE(value, NSDictionary);
+  
+  [[self polygon] setUserData:value];
+  [self replaceValue:value forKey:@"userData" notification:NO];
+}
+
 @end

@@ -94,6 +94,15 @@
   [self replaceValue:value forKey:@"zIndex" notification:NO];
 }
 
+- (void)setUserData:(id)value
+{
+  ENSURE_UI_THREAD(setUserData, value);
+  ENSURE_TYPE(value, NSDictionary);
+  
+  [[self circle] setUserData:value];
+  [self replaceValue:value forKey:@"userData" notification:NO];
+}
+
 #pragma mark Utilities
 
 - (CLLocationCoordinate2D)positionFromPoint:(id)point
