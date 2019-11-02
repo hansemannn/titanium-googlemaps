@@ -155,6 +155,44 @@
                 }];
 }
 
+- (NSNumber *)geometryContainsLocation:(id)args
+{
+  ENSURE_SINGLE_ARG(args, NSDictionary);
+  
+  NSDictionary *location = args[@"location"];
+  NSArray<NSDictionary<NSString *, NSNumber *> *> *jsPath = args[@"path"];
+
+  CLLocationDegrees latitude = [TiUtils doubleValue:@"latitude" properties:location[@"location"]];
+  CLLocationDegrees longitude = [TiUtils doubleValue:@"longitude" properties:location[@"location"]];
+
+  GMSMutablePath *path = [[GMSMutablePath alloc] init];
+
+  [jsPath enumerateObjectsUsingBlock:^(NSDictionary<NSString *,NSNumber *> * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    CLLocationDegrees latitude = [TiUtils doubleValue:@"latitude" properties:obj];
+    CLLocationDegrees longitude = [TiUtils doubleValue:@"longitude" properties:obj];
+
+    [path addCoordinate:CLLocationCoordinate2DMake(latitude, longitude)];
+  }];
+
+  return @(GMSGeometryContainsLocation(CLLocationCoordinate2DMake(latitude, latitude), path, YES));
+}
+
+- (NSNumber *)geometryDistanceBetweenPoints:(id)locations
+{
+  ENSURE_ARG_COUNT(locations, 2);
+
+  NSDictionary *location1 = locations[0];
+  NSDictionary *location2 = locations[1];
+
+  CLLocationDegrees latitude1 = [TiUtils doubleValue:@"latitude" properties:location1];
+  CLLocationDegrees longitude1 = [TiUtils doubleValue:@"longitude" properties:location1];
+
+  CLLocationDegrees latitude2 = [TiUtils doubleValue:@"latitude" properties:location2];
+  CLLocationDegrees longitude2 = [TiUtils doubleValue:@"longitude" properties:location2];
+
+  return @(GMSGeometryDistance(CLLocationCoordinate2DMake(latitude1, longitude1), CLLocationCoordinate2DMake(latitude2, longitude2)));
+}
+
 - (TiGooglemapsClusterItemProxy *)createClusterItem:(NSArray *)args
 {
   NSDictionary *params = [args objectAtIndex:0];
