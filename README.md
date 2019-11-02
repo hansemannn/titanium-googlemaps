@@ -48,7 +48,7 @@ Edit the modules section of your `tiapp.xml` file to include this module:
 
 Initialize the module by setting the Google Maps API key you can get from [here](https://developers.google.com/maps/signup).
 ```js
-var maps = require('ti.googlemaps');
+const maps = require('ti.googlemaps');
 maps.setAPIKey('<YOUR_GOOGLE_MAPS_API_KEY>');
 ```
 
@@ -69,7 +69,7 @@ if (Ti.Platform.osname === 'iphone' || Ti.Platform.osname === 'ipad') {
 import TiMap from 'maps'
 
 // ES5
-var TiMap = require('maps');
+const TiMap = require('maps');
 ```
 3. (optional) You can even use it in Alloy:
 ```xml
@@ -98,7 +98,7 @@ In addition, you can specify one of the following constants to the `mapType` pro
  - `MAP_TYPE_NONE`
 
 ```js
-var mapView = maps.createView({
+const mapView = maps.createView({
     mapType: maps.MAP_TYPE_TERRAIN,
     indoorEnabled: true, // shows indoor capabilities (see "Indoor Navigation" section) 
     indoorPicker: true, // shows the vertical floor level (see "Indoor Navigation" section)
@@ -257,8 +257,8 @@ const contains = mapView.containsCoordinate({ latitude: -13.37, longitude:  42.0
 
 You can perform camera updates to your map view instance by creating an instance of the `CameraUpdate` API:
 ```js
-var maps = require('ti.googlemaps');
-var cameraUpdate = maps.createCameraUpdate();
+const maps = require('ti.googlemaps');
+const cameraUpdate = maps.createCameraUpdate();
 ```
 Before you can use the camera update, you must specify one of this actions:
 - [x] **zoomIn**
@@ -337,11 +337,11 @@ An annotation represents a location specified by at least a `title` and a `subti
 It can be added to a map view:
 
 ```js
-var annotation = maps.createAnnotation({
-    latitude : 37.368122,
-    longitude : -121.913653,
-    title : 'Appcelerator, Inc',
-    subtitle : '1732 N. 1st Street, San Jose',
+const annotation = maps.createAnnotation({
+    latitude: 37.368122,
+    longitude: -121.913653,
+    title: 'Appcelerator, Inc',
+    subtitle: '1732 N. 1st Street, San Jose',
     pinColor: 'green',
     image: 'pin.png',
     touchEnabled: true, // Default: true
@@ -372,13 +372,13 @@ You can get a list of all currently added annotations by using `mapView.annotati
 You can set an info window of the annotation. Note that you have to specify a width / height for subviews,
 otherwise the SDK will not set a proper frame for the subview:
 ```js
-var view = Ti.UI.createView({
+const view = Ti.UI.createView({
     backgroundColor: "red",
     width: 200,
     height: 30
 });
 
-var label = Ti.UI.createLabel({
+const label = Ti.UI.createLabel({
     text: key,
     width: 200,
     height: 30,
@@ -388,7 +388,7 @@ var label = Ti.UI.createLabel({
 
 view.add(label);
 
-var annotation = maps.createAnnotation({
+const annotation = maps.createAnnotation({
     latitude: 37.4748624,
     longitude: -122.1490817
     infoWindow: view
@@ -413,32 +413,32 @@ annotation.updateLocation({
 Since Ti.GoogleMaps 3.5.0, you can also set a custom view. Please note that you need to specify a valid size (width/height)
 for each view-child of this properly, otherwise the view will not be visible. Example:
 ```js
-var maps = require("ti.googlemaps");
+const maps = require("ti.googlemaps");
 maps.setAPIKey('<api-key>');
-var win = Ti.UI.createWindow({
+const win = Ti.UI.createWindow({
     backgroundColor: '#fff'
 });
 
-var mapView = maps.createView({
+const mapView = maps.createView({
     region: { // Camera center of the map
         latitude: 37.368122,
         longitude: -121.913653
     }
 });
 
-var label = Ti.UI.createLabel({
+const label = Ti.UI.createLabel({
     text: 'Ti',
     width: Ti.UI.FILL, height: Ti.UI.FILL
 });
 
-var view = Ti.UI.createView({
+const view = Ti.UI.createView({
     backgroundColor: 'red',
     width: 30, height: 30
 });
 
 view.add(label);
 
-var annotation = maps.createAnnotation({
+const annotation = maps.createAnnotation({
     latitude: 37.368122,
     longitude: -121.913653,
     title: 'Appcelerator, Inc',
@@ -470,7 +470,7 @@ You can select and deselect annotations, as well as receive the currently select
 ```js
 mapView.selectAnnotation(anno1); // Select
 mapView.deselectAnnotation(); // Deselect
-var selectedAnnotation = mapView.getSelectedAnnotation(); // Selected annotation, null if no annotation is selected
+const selectedAnnotation = mapView.getSelectedAnnotation(); // Selected annotation, null if no annotation is selected
 ```
 
 ### Heatmap Layer
@@ -478,12 +478,12 @@ Use heatmaps-layers in your map-views by providing weighted data and designated 
 
 ```js
 // Import data
-var stations = JSON.parse(Ti.Filesystem.getFile('police_stations.json').read());
-var data = [];
+const stations = JSON.parse(Ti.Filesystem.getFile('police_stations.json').read());
+const data = [];
 
 // Map data to an array of latitude/longitude/intensity objects
-for (var i = 0; i < stations.length; i++) {
-  var station = stations[i];
+for (const i = 0; i < stations.length; i++) {
+  const station = stations[i];
 
   data.push({
     latitude: station.lat,
@@ -493,13 +493,13 @@ for (var i = 0; i < stations.length; i++) {
 }
 
 // Create a new heatmap-layer
-var heatmap = maps.createHeatmapLayer({
+const heatmap = maps.createHeatmapLayer({
   weightedData: data,
   radius: 80,
   opacity: 0.8,
   gradient: {
-    colors: ['green', 'red'],
-    startPoints: [0.2, 1.0],
+    colors: [ 'green', 'red' ],
+    startPoints: [ 0.2, 1.0 ],
     colorMapSize: 256
   }
 });
@@ -516,7 +516,7 @@ helps to work with partial results and final selections.
 The whole dialog can be styled (like in the following example) and the default native theming is light.
 
 ```js
-var dialog = GoogleMaps.createAutocompleteDialog({
+const dialog = GoogleMaps.createAutocompleteDialog({
     tableCellBackgroundColor: '#333',
     tableCellSeparatorColor: '#444',
     primaryTextColor: '#fff',
@@ -546,13 +546,13 @@ Overlays can be added to the map view just like annotations. The module supports
 A polyline is a shape defined by its `points` property. It needs at least 2 points to draw a line.
 
 ```js
-var polyline = maps.createPolyline({
-    points : [{ // Can handle both object and array
-        latitude : -37.81319,
-        longitude : 144.96298
-    }, [-31.95285, 115.85734]],
-    strokeWidth : 3, // Default: 1
-    strokeColor : '#f00'  // Default: Black (#000000),
+const polyline = maps.createPolyline({
+    points: [ { // Can handle both object and array
+        latitude: -37.81319,
+        longitude: 144.96298
+    }, [ -31.95285, 115.85734 ] ],
+    strokeWidth: 3, // Default: 1
+    strokeColor: '#f00'  // Default: Black (#000000),
     title: 'My Polyline',
     zIndex: 10
 });
@@ -566,19 +566,19 @@ You can get a list of all currently added polylines by using `mapView.polylines`
 A polygon is a shape defined by its `points` property. It behaves similiar to a polyline, but is meant to close its area automatically and also supports the `fillColor` property.
 
 ```js
-var polygon = maps.createPolygon({
-    points : [{ // Can handle both object and array
-        latitude : -37.81819,
-        longitude : 144.96798
-    }, [-31.95285, 115.85734]],
-    strokeWidth : 3,
-    fillColor : 'yellow', // Default: Blue (#0000ff)
-    strokeColor : 'green',
+const polygon = maps.createPolygon({
+    points: [ { // Can handle both object and array
+        latitude: -37.81819,
+        longitude: 144.96798
+    }, [ -31.95285, 115.85734 ] ],
+    strokeWidth: 3,
+    fillColor: 'yellow', // Default: Blue (#0000ff)
+    strokeColor: 'green',
     title: 'My Polygon',
-    holes: [[{
+    holes: [ {
         latitude: -32.95785,
         longitude: 115.86234
-    }, [-32.95785, 115.86234]]]
+    }, [ -32.95785, 115.86234 ] ],
     zIndex: 10
 });
 mapView.addPolygon(polygon);
@@ -591,12 +591,12 @@ You can get a list of all currently added polygons by using `mapView.polygons`;
 A circle is a shape defined by the `center` property to specify its location as well as the `radius` in meters.
 
 ```js
-var circle = maps.createCircle({
-    center : [-32.9689, 151.7721], // Can handle object or array
-    radius : 500 * 1000, // 500 km, Default: 0
+const circle = maps.createCircle({
+    center: [ -32.9689, 151.7721 ], // Can handle object or array
+    radius: 500 * 1000, // 500 km, Default: 0
     fillColor: 'blue', // Default: transparent
-    strokeWidth : 3,
-    strokeColor : 'orange'
+    strokeWidth: 3,
+    strokeColor: 'orange'
     title: 'My Circle',
     zIndex: 10
 });
@@ -611,9 +611,9 @@ You can cluster multiple items by using the Clustering API.
 
 First, create a few cluster items using the `ClusterItem`:
 ```js
-var items = [];
+const items = [];
 
-var clusterItem = maps.createClusterItem({
+const clusterItem = maps.createClusterItem({
     // Required
     latitude: 37.368122,
     longitude: -121.913653,
@@ -639,9 +639,9 @@ mapView.cluster();
 You are all set! Optionally, you can also set your own cluster ranges and define custom
 images for each cluster range in your `mapView` instance:
 ```js
-var mapView = maps.createView({
+const mapView = maps.createView({
     clusterConfiguration: {
-        ranges: [10, 50, 100, 200, 500],
+        ranges: [ 10, 50, 100, 200, 500 ],
         rangeBackgrounds: [
             'buckets/m1.png',
             'buckets/m2.png',
@@ -676,9 +676,9 @@ to receive infos about your current cluster or cluster item.
 
 You can create URL-based tile layers that use the x / y / z (zoom level) pattern to determine the location pattern:
 ```js
-var tile = maps.createTile({
+const tile = maps.createTile({
     // Required
-	// z is for zoom level
+	  // z is for zoom level
     url: "http://c.tile.openstreetmap.org/{z}/{x}/{y}.png",
 
     // Optional
@@ -700,16 +700,16 @@ mapView.removeTile(tile);
 ```
 You can also request a tile image for a specified x/y/zoom position:
 ```js
-var tile = maps.createTile({
+const tile = maps.createTile({
     url: "http://c.tile.openstreetmap.org/{z}/{x}/{y}.png",
 });
 
-tile.addEventListener('receivetile', function(e) {
-    Ti.API.info('Received new tile at ' + e.tile.x + 'x' + e.tile.y);
-    Ti.API.info(e);
+tile.addEventListener('receivetile', event => {
+    Ti.API.info(`Received new tile at ${event.tile.x}x${event.tile.y}`);
+    Ti.API.info(event);
 
     // Add tile image to a view or process it somewhere else
-    // win.add(Ti.UI.createImageView({image: e.tile.image}));
+    // win.add(Ti.UI.createImageView({ image: event.tile.image }));
 });
 
 tile.requestTile({
@@ -728,7 +728,7 @@ In future releases you will also be able to specify local images, but that is no
 Using Ti.GoogleMaps 3.8.0 and later, you are able to render '.geojson' and '.kml' files inside your map
 by using the `Renderer` API. In can be instantiated by using the following constructor:
 ```js
-var renderer = map.createRenderer({
+const renderer = map.createRenderer({
     file: 'example.geojson'
     mapView: mapView
 });
@@ -745,10 +745,10 @@ renderer.clear();
 ### Reverse Geocoder
 Use the reverse geocoder to search a location based on a `latitude` and `longitude`:
 ```js
-maps.reverseGeocoder(36.368122, -120.913653, function(e) {
+maps.reverseGeocoder(36.368122, -120.913653, event => {
     alert('Address found!');
 
-    Ti.API.info(e.places);
+    Ti.API.info(event.places);
 });
 ```
 
@@ -783,13 +783,13 @@ Use the Directions API to calculate advanced directions:
 maps.getDirections({
     origin: 'Mountain View, CA',
     destination: 'San Francisco, CA',
-    success: function(e) {
-        Ti.API.info(e.routes);
+    success: event => {
+        Ti.API.info(event.routes);
     },
-    error: function(e) {
-        Ti.API.error('Error: ' + e.error);
+    error: event => {
+        Ti.API.error(`Error: ${event.error}`);
     },
-    waypoints: ['Cupertino, CA', 'via:Sunnyvale, CA'] // Optional
+    waypoints: [ 'Cupertino, CA', 'via:Sunnyvale, CA' ] // Optional
 });
 ```
 The polyline points will be received encoded:
@@ -803,12 +803,46 @@ To decode the polyline points, use the `maps.decodePolylinePoints(points)` utili
 Note that this is not officially supported in the Google Maps iOS SDK. It has been exposed
 by using the REST-API in combination with the `NSURLSession` API and the provided API key.
 
+### Geometry Utils
+
+#### `geometryContainsLocation`
+
+Check whether or not a given geometry list contains a given location.
+
+```js
+const geometryContainsLocation = maps.geometryContainsLocation({
+    location: { latitude: 1, longitude: -1 },
+    points: [ {
+        latitude: 37.368122,
+        longitude: -121.234
+    }, {
+        latitude: 35.368122,
+        longitude: -119.234
+    } ]
+});
+
+console.log(`geometryContainsLocation: ${geometryContainsLocation}`);
+```
+
+#### `geometryDistanceBetweenPoints`
+
+Get the geometry distance between two given points in meters. 
+The geodesic is included in the calculation. 
+
+```js
+const location1 = { latitude: 52.687489, longitude: 7.291130 };
+const location2 = { latitude: 52.279911, longitude: 8.047179 };
+
+const geometryDistanceBetweenPoints = maps.geometryDistanceBetweenPoints(location1, location2);
+```
+
 ### Google License Info
+
 Google requires you to link the Open Source license somewhere in your app.
 Use the following API to receive the Google Maps license:
 
 ```js
-var license = maps.getOpenSourceLicenseInfo()
+const license = maps.getOpenSourceLicenseInfo();
 ```
 
 ## Example
