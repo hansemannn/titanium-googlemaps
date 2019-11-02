@@ -45,6 +45,25 @@
  */
 - (void)getDirections:(NSArray *)args;
 
+
+/**
+ * Checks if a given geometry contains a given location.
+ *
+ * @param args The geometry and location.
+ * @return Whether or not the geometry contains the location.
+ * @since 5.2.0
+ */
+- (NSNumber *)geometryContainsLocation:(id)location;
+
+/**
+ * Calculates the distance between two points.
+ *
+ * @param args The two points
+ * @return The distance in meters.
+ * @since 5.2.0
+*/
+- (NSNumber *)geometryDistanceBetweenPoints:(id)locations;
+
 /**
  * Decodes a given number of encoded polyline-points.
  *
