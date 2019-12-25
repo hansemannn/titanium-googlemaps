@@ -113,8 +113,8 @@
 
     return CLLocationCoordinate2DMake(latitude, longitude);
   } else if ([point isKindOfClass:[NSArray class]]) {
-    CLLocationDegrees latitude = [TiUtils doubleValue:[point objectAtIndex:0]];
-    CLLocationDegrees longitude = [TiUtils doubleValue:[point objectAtIndex:1]];
+    CLLocationDegrees latitude = [TiUtils doubleValue:[point objectAtIndex:1]];
+    CLLocationDegrees longitude = [TiUtils doubleValue:[point objectAtIndex:0]];
 
     return CLLocationCoordinate2DMake(latitude, longitude);
   }
