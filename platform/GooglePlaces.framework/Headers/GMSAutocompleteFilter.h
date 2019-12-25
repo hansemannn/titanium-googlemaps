@@ -8,6 +8,7 @@
 //  Service: https://developers.google.com/maps/terms
 //
 
+#import <CoreLocation/CoreLocation.h>
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -75,6 +76,12 @@ typedef NS_ENUM(NSInteger, GMSPlacesAutocompleteTypeFilter) {
  * insensitive). If nil, no country filtering will take place.
  */
 @property(nonatomic, copy, nullable) NSString *country;
+
+/**
+ * The staight line distance origin location for measuring the straight line distance between the
+ * origin location and autocomplete predictions.
+ */
+@property(nonatomic, nullable) CLLocation *origin;
 
 @end
 

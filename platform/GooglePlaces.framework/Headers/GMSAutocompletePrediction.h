@@ -91,6 +91,12 @@ extern NSString *const kGMSAutocompleteMatchAttribute;
 @property(nonatomic, copy, readonly) NSArray<NSString *> *types;
 
 /**
+ * The straight line distance in meters between the origin and this prediction if a valid origin is
+ * specified in the |GMSAutocompleteFilter| of the request.
+ */
+@property(nonatomic, readonly, nullable) NSNumber *distanceMeters;
+
+/**
  * Initializer is not available.
  */
 - (instancetype)init NS_UNAVAILABLE;

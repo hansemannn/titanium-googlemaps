@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Note: GMSPlaceFieldPhoneNumber, GMSPlaceFieldWebsite and GMSPlaceFieldAddressComponents are not
  *       supported for |GMSPlaceLikelihoodList| place objects. Please refer to
- *       https://developers.google.com/places/web-service/search#Fields for more details.
+ *       https://developers.google.com/places/ios-sdk/place-data-fields for more details.
  */
 typedef NS_ENUM(NSUInteger, GMSPlaceField) {
   GMSPlaceFieldName = 1 << 0,

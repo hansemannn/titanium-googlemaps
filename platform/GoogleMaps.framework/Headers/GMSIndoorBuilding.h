@@ -36,6 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, assign, readonly, getter=isUnderground) BOOL underground;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 @end
 
 NS_ASSUME_NONNULL_END
