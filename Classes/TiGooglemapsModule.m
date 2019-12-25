@@ -159,22 +159,22 @@
 {
   ENSURE_SINGLE_ARG(args, NSDictionary);
   
-  NSDictionary *location = args[@"location"];
-  NSArray<NSDictionary<NSString *, NSNumber *> *> *jsPath = args[@"path"];
+  NSDictionary<NSString *, NSNumber *> *location = args[@"location"];
+  NSArray<NSArray<NSNumber *> *> *jsPath = args[@"path"];
 
-  CLLocationDegrees latitude = [TiUtils doubleValue:@"latitude" properties:location[@"location"]];
-  CLLocationDegrees longitude = [TiUtils doubleValue:@"longitude" properties:location[@"location"]];
+  CLLocationDegrees latitude = [TiUtils doubleValue:@"latitude" properties:location];
+  CLLocationDegrees longitude = [TiUtils doubleValue:@"longitude" properties:location];
 
   GMSMutablePath *path = [[GMSMutablePath alloc] init];
 
-  [jsPath enumerateObjectsUsingBlock:^(NSDictionary<NSString *,NSNumber *> * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-    CLLocationDegrees latitude = [TiUtils doubleValue:@"latitude" properties:obj];
-    CLLocationDegrees longitude = [TiUtils doubleValue:@"longitude" properties:obj];
+  [jsPath enumerateObjectsUsingBlock:^(NSArray<NSNumber *> * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    CLLocationDegrees _latitude = obj[0].doubleValue;
+    CLLocationDegrees _longitude = obj[1].doubleValue;
 
-    [path addCoordinate:CLLocationCoordinate2DMake(latitude, longitude)];
+    [path addCoordinate:CLLocationCoordinate2DMake(_latitude, _longitude)];
   }];
 
-  return @(GMSGeometryContainsLocation(CLLocationCoordinate2DMake(latitude, latitude), path, YES));
+  return @(GMSGeometryContainsLocation(CLLocationCoordinate2DMake(latitude, longitude), path, YES));
 }
 
 - (NSNumber *)geometryDistanceBetweenPoints:(id)locations
