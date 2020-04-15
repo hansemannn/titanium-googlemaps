@@ -728,6 +728,18 @@ const CGFloat LN2 = 0.6931471805599453;
   return @([bounds containsCoordinate:coordinate]);
 }
 
+- (NSDictionary *)coordinateForPoint:(id)value
+{
+    ENSURE_SINGLE_ARG(value, NSDictionary);
+    
+    CGPoint point = [TiUtils pointValue:value];
+    CLLocationCoordinate2D coordinate =  [[self mapView].mapView.projection coordinateForPoint:point];
+    return @{
+      @"latitude" : @(coordinate.latitude),
+      @"longitude" : @(coordinate.longitude)
+    };
+}
+
 - (void)showAnnotations:(id)args
 {
   ENSURE_UI_THREAD(showAnnotations, args);
