@@ -112,4 +112,18 @@
   [self replaceValue:value forKey:@"userData" notification:NO];
 }
 
+- (void)setStrokeGradient:(id)value
+{
+  ENSURE_UI_THREAD(setStrokeGradient, value);
+  ENSURE_TYPE(value, NSDictionary);
+
+  UIColor *fromColor = [TiUtils colorValue:value[@"from"]].color;
+  UIColor *toColor = [TiUtils colorValue:value[@"to"]].color;
+
+  GMSStrokeStyle *gradient = [GMSStrokeStyle gradientFromColor:fromColor toColor:toColor];
+  [[self polyline] setSpans:@[[GMSStyleSpan spanWithStyle:gradient]]];
+
+  [self replaceValue:value forKey:@"spans" notification:NO];
+}
+
 @end

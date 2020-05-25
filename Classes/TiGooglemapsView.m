@@ -16,10 +16,13 @@
 #import "TiGooglemapsViewProxy.h"
 #import "TiPOIItem.h"
 
+static NSString *const kGMUMyLocationKeyPath = @"myLocation";
+
 @implementation TiGooglemapsView
 
 - (void)dealloc
 {
+  [_mapView removeObserver:self forKeyPath:kGMUMyLocationKeyPath];
   _mapView.delegate = nil;
   _clusterRenderer.delegate = nil;
 }
@@ -27,10 +30,14 @@
 - (GMSMapView *)mapView
 {
   if (_mapView == nil) {
-
     _mapView = [[GMSMapView alloc] initWithFrame:[self bounds]];
     [_mapView setDelegate:self];
     [_mapView setAutoresizingMask:UIViewAutoresizingNone];
+
+    [_mapView addObserver:self
+               forKeyPath:kGMUMyLocationKeyPath
+                  options:NSKeyValueObservingOptionNew
+                  context:nil];
 
     [self addSubview:_mapView];
   }
@@ -435,6 +442,15 @@
   }
 
   return result;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+  CLLocation *myLocation = _mapView.myLocation;
+
+  if (myLocation != nil) {
+    [[self proxy] fireEvent:@"myLocationUpdate" withObject:@{ @"latitude": @(myLocation.coordinate.latitude), @"longitude": @(myLocation.coordinate.longitude) }];
+  }
 }
 
 #pragma mark Constants
