@@ -11,6 +11,9 @@
 #import <CoreLocation/CoreLocation.h>
 #import <Foundation/Foundation.h>
 
+@protocol GMSPlaceLocationBias;
+@protocol GMSPlaceLocationRestriction;
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -74,14 +77,35 @@ typedef NS_ENUM(NSInteger, GMSPlacesAutocompleteTypeFilter) {
 /**
  * The country to restrict results to. This should be a ISO 3166-1 Alpha-2 country code (case
  * insensitive). If nil, no country filtering will take place.
+ *
+ * NOTE: Ignored if the countries property is set.
  */
 @property(nonatomic, copy, nullable) NSString *country;
+;
+
+/**
+ * The countries to restrict results to. This should be a ISO 3166-1 Alpha-2 country code (case
+ * insensitive). Supports up to 5 countries to filter. If nil, no country filtering will take place.
+ *
+ * NOTE: Overrides the country property if that is set.
+ */
+@property(nonatomic, copy, nullable) NSArray<NSString *> *countries;
 
 /**
  * The staight line distance origin location for measuring the straight line distance between the
  * origin location and autocomplete predictions.
  */
 @property(nonatomic, nullable) CLLocation *origin;
+
+/**
+ * The optional location bias to perfer place results near the location.
+ */
+@property(nonatomic, nullable) id<GMSPlaceLocationBias> locationBias;
+
+/**
+ * The optional location restriction to limit the place results to.
+ */
+@property(nonatomic, nullable) id<GMSPlaceLocationRestriction> locationRestriction;
 
 @end
 

@@ -281,6 +281,23 @@ typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
                                     callback:(GMSAutocompletePredictionsCallback)callback;
 
 /**
+ * Find Autocomplete predictions from text query. Results may optionally be biased towards a
+ * certain location or restricted to an area. This method is non-blocking.
+ *
+ * The supplied callback will be invoked with an array of autocompletion predictions upon success
+ * and an NSError upon an error.
+ *
+ * @param query The partial text to autocomplete.
+ * @param filter The filter to apply to the results. This parameter may be nil.
+ * @param sessionToken The |GMSAutocompleteSessionToken| to associate request to a billing session.
+ * @param callback The callback to invoke with the predictions.
+ */
+- (void)findAutocompletePredictionsFromQuery:(NSString *)query
+                                      filter:(nullable GMSAutocompleteFilter *)filter
+                                sessionToken:(nullable GMSAutocompleteSessionToken *)sessionToken
+                                    callback:(GMSAutocompletePredictionsCallback)callback;
+
+/**
  * Fetch details for a place. This method is non-blocking.
  * @param placeID The place ID to lookup.
  * @param placeFields The individual place fields requested for the place objects in the list.

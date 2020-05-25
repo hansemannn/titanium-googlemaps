@@ -13,6 +13,7 @@
 #import "GMSPlaceFieldMask.h"
 #import "GMSPlaceLikelihood.h"
 #import "GMSPlaceLikelihoodList.h"
+#import "GMSPlaceLocationOptions.h"
 #import "GMSPlacePhotoMetadata.h"
 #import "GMSPlacePhotoMetadataList.h"
 #import "GMSPlaceTypes.h"
