@@ -773,7 +773,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1150;
 			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "ti.googlemaps" */;
 			compatibilityVersion = "Xcode 3.2";
