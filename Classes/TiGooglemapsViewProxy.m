@@ -237,7 +237,6 @@ const CGFloat LN2 = 0.6931471805599453;
                                    zoom:zoom];
   } else {
     update = [GMSCameraUpdate setTarget:CLLocationCoordinate2DMake(latitude, longitude)];
-
   }
 
   if (animate) {
