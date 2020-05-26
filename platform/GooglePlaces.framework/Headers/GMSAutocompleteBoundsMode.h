@@ -2,7 +2,7 @@
 //  GMSAutocompleteBoundsMode.h
 //  Google Places SDK for iOS
 //
-//  Copyright 2017 Google Inc.
+//  Copyright 2017 Google LLC
 //
 //  Usage of this SDK is subject to the Google Maps/Google Earth APIs Terms of
 //  Service: https://developers.google.com/maps/terms

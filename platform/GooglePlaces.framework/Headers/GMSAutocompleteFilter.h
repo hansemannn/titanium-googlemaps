@@ -2,7 +2,7 @@
 //  GMSAutocompleteFilter.h
 //  Google Places SDK for iOS
 //
-//  Copyright 2016 Google Inc.
+//  Copyright 2016 Google LLC
 //
 //  Usage of this SDK is subject to the Google Maps/Google Earth APIs Terms of
 //  Service: https://developers.google.com/maps/terms
@@ -81,7 +81,6 @@ typedef NS_ENUM(NSInteger, GMSPlacesAutocompleteTypeFilter) {
  * NOTE: Ignored if the countries property is set.
  */
 @property(nonatomic, copy, nullable) NSString *country;
-;
 
 /**
  * The countries to restrict results to. This should be a ISO 3166-1 Alpha-2 country code (case

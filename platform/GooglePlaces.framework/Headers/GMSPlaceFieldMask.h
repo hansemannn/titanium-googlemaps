@@ -2,7 +2,7 @@
 //  GMSPlaceFieldMask.h
 //  Google Places SDK for iOS
 //
-//  Copyright 2018 Google Inc.
+//  Copyright 2018 Google LLC
 //
 //  Usage of this SDK is subject to the Google Maps/Google Earth APIs Terms of
 //  Service: https://developers.google.com/maps/terms
@@ -42,6 +42,7 @@ typedef NS_ENUM(NSUInteger, GMSPlaceField) {
   GMSPlaceFieldPhotos = 1 << 13,
   GMSPlaceFieldUserRatingsTotal = 1 << 14,
   GMSPlaceFieldUTCOffsetMinutes = 1 << 15,
+  GMSPlaceFieldBusinessStatus = 1 << 16,
   GMSPlaceFieldAll = NSUIntegerMax,
 };
 

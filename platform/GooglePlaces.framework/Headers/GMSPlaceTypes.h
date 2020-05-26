@@ -2,7 +2,7 @@
 //  GMSPlaceTypes.h
 //  Google Places SDK for iOS
 //
-//  Copyright 2016 Google Inc.
+//  Copyright 2016 Google LLC
 //
 //  Usage of this SDK is subject to the Google Maps/Google Earth APIs Terms of
 //  Service: https://developers.google.com/maps/terms
@@ -106,6 +106,7 @@ extern NSString *const kGMSPlaceTypeStadium;
 extern NSString *const kGMSPlaceTypeStorage;
 extern NSString *const kGMSPlaceTypeStore;
 extern NSString *const kGMSPlaceTypeSubwayStation;
+extern NSString *const kGMSPlaceTypeSupermarket;
 extern NSString *const kGMSPlaceTypeSynagogue;
 extern NSString *const kGMSPlaceTypeTaxiStand;
 extern NSString *const kGMSPlaceTypeTrainStation;

@@ -36,9 +36,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Provides your API key to the Google Maps SDK for iOS.  This key is generated for your application
- * via the Google APIs Console, and is paired with your application's bundle ID to identify it.
- * This must be called exactly once by your application before any iOS Maps SDK object is
- * initialized.
+ * via the Google Cloud Platform Console, and is paired with your application's bundle ID to
+ * identify it. This must be called exactly once by your application before any iOS Maps SDK
+ * object is initialized.
  *
  * @return YES if the APIKey was successfully provided.
  */
