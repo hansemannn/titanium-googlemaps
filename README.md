@@ -836,6 +836,17 @@ const location2 = { latitude: 52.279911, longitude: 8.047179 };
 const geometryDistanceBetweenPoints = maps.geometryDistanceBetweenPoints(location1, location2);
 ```
 
+#### `coordinateForPoint`
+
+Returns the coordinate pair for the given screen point
+
+```js
+const coordinate = maps.coordinateForPoint({
+  x: point.x,
+  y: point.y,
+});
+```
+
 ### Google License Info
 
 Google requires you to link the Open Source license somewhere in your app.
