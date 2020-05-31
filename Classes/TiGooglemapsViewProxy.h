@@ -331,6 +331,14 @@
 - (NSNumber *)containsCoordinate:(id)annotation;
 
 /**
+*  Returns the coordinate pair for the given point
+*
+*  @return a dictionary with latitude and longitude
+*  @since 5.3.0
+*/
+- (NSDictionary *)coordinateForPoint:(id)value;
+
+/**
  *  Returns the current map view zoom level.
  *
  *  @return A boxed float containing the current map view zoom level.
