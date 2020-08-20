@@ -10,6 +10,8 @@
 
 #import <CoreLocation/CoreLocation.h>
 
+#import "GMSPlacesDeprecationUtils.h"
+
 @class GMSAddressComponent;
 @class GMSCoordinateBounds;
 @class GMSOpeningHours;
@@ -123,10 +125,10 @@ typedef NS_ENUM(NSInteger, GMSPlacesBusinessStatus) {
 /**
  * Represents the open now status of the place at the time that the place was created.
  *
- * (Deprecated: This property is currently not supported and should not be used)
  */
-@property(nonatomic, readonly, assign) GMSPlacesOpenNowStatus openNowStatus __deprecated_msg(
-    "openNowStatus property is currently not supported and should not be used)");
+@property(nonatomic, readonly, assign)
+    GMSPlacesOpenNowStatus openNowStatus __GMS_PLACES_AVAILABLE_BUT_DEPRECATED_MSG(
+        "openNowStatus property is currently not supported and should not be used");
 
 /**
  * Phone number of this place, in international format, i.e. including the country code prefixed

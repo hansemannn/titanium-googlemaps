@@ -14,6 +14,7 @@
 #import "GMSAutocompleteBoundsMode.h"
 #import "GMSPlace.h"
 #import "GMSPlaceFieldMask.h"
+#import "GMSPlacesDeprecationUtils.h"
 #import "GMSPlacesErrors.h"
 
 @class GMSAutocompleteFilter;
@@ -235,8 +236,8 @@ typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
                    bounds:(nullable GMSCoordinateBounds *)bounds
                    filter:(nullable GMSAutocompleteFilter *)filter
                  callback:(GMSAutocompletePredictionsCallback)callback
-    __deprecated_msg("Method deprecated in favor of "
-                     "findAutocompletePredictionsFromQuery:filter:sessionToken:callback");
+    __GMS_PLACES_AVAILABLE_BUT_DEPRECATED_MSG(
+        "Method deprecated in favor of findAutocompletePredictionsFromQuery:filter:sessionToken:callback");
 
 /**
  * Autocompletes a given text query. Results may optionally be biased towards a certain location,
@@ -258,8 +259,8 @@ typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
                boundsMode:(GMSAutocompleteBoundsMode)boundsMode
                    filter:(nullable GMSAutocompleteFilter *)filter
                  callback:(GMSAutocompletePredictionsCallback)callback
-    __deprecated_msg("Method deprecated in favor of "
-                     "findAutocompletePredictionsFromQuery:filter:sessionToken:callback");
+    __GMS_PLACES_AVAILABLE_BUT_DEPRECATED_MSG(
+        "Method deprecated in favor of findAutocompletePredictionsFromQuery:filter:sessionToken:callback");
 
 /**
  * Find Autocomplete predictions from text query. Results may optionally be biased towards a
@@ -283,8 +284,8 @@ typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
                                       filter:(nullable GMSAutocompleteFilter *)filter
                                 sessionToken:(nullable GMSAutocompleteSessionToken *)sessionToken
                                     callback:(GMSAutocompletePredictionsCallback)callback
-    __deprecated_msg("Method deprecated in favor of "
-                     "findAutocompletePredictionsFromQuery:filter:sessionToken:callback");
+    __GMS_PLACES_AVAILABLE_BUT_DEPRECATED_MSG(
+        "Method deprecated in favor of findAutocompletePredictionsFromQuery:filter:sessionToken:callback");
 
 /**
  * Find Autocomplete predictions from text query. Results may optionally be biased towards a

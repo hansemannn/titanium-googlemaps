@@ -1,0 +1,2 @@
+binary "https://dl.google.com/geosdk/GoogleMaps.json"
+binary "https://dl.google.com/geosdk/GooglePlaces.json"

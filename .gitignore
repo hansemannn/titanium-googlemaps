@@ -21,3 +21,4 @@ xcuserdata/
 *.xccheckout
 *.xcscmblueprint
 /build
+/Carthage
