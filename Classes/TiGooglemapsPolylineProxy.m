@@ -22,29 +22,34 @@
 - (void)setPoints:(id)points
 {
   ENSURE_UI_THREAD(setPoints, points);
-  ENSURE_TYPE_OR_NIL(points, NSArray);
 
   [self replaceValue:points forKey:@"points" notification:NO];
 
   GMSMutablePath *path = [GMSMutablePath path];
 
   if (points != nil) {
-    if ([points count] < 2) {
-      NSLog(@"[WARN] Ti.GoogleMaps: You need to specify at least 2 points to create a polygon.");
-      return;
-    }
+    // Handle string paths
+    if ([points isKindOfClass:[NSString class]]) {
+      path = [GMSMutablePath pathFromEncodedPath:points];
+    // Handle array paths
+    } else {
+      if ([points count] < 2) {
+        NSLog(@"[WARN] Ti.GoogleMaps: You need to specify at least 2 points to create a polygon.");
+        return;
+      }
 
-    for (id point in points) {
-      if ([point isKindOfClass:[NSDictionary class]]) {
-        CLLocationDegrees latitude = [TiUtils doubleValue:[point valueForKey:@"latitude"]];
-        CLLocationDegrees longitude = [TiUtils doubleValue:[point valueForKey:@"longitude"]];
+      for (id point in points) {
+        if ([point isKindOfClass:[NSDictionary class]]) {
+          CLLocationDegrees latitude = [TiUtils doubleValue:[point valueForKey:@"latitude"]];
+          CLLocationDegrees longitude = [TiUtils doubleValue:[point valueForKey:@"longitude"]];
 
-        [path addLatitude:latitude longitude:longitude];
-      } else if ([point isKindOfClass:[NSArray class]]) {
-        CLLocationDegrees latitude = [TiUtils doubleValue:[point objectAtIndex:1]];
-        CLLocationDegrees longitude = [TiUtils doubleValue:[point objectAtIndex:0]];
+          [path addLatitude:latitude longitude:longitude];
+        } else if ([point isKindOfClass:[NSArray class]]) {
+          CLLocationDegrees latitude = [TiUtils doubleValue:[point objectAtIndex:1]];
+          CLLocationDegrees longitude = [TiUtils doubleValue:[point objectAtIndex:0]];
 
-        [path addLatitude:latitude longitude:longitude];
+          [path addLatitude:latitude longitude:longitude];
+        }
       }
     }
   }
