@@ -178,13 +178,14 @@ mapView.rotateGestures = false;
 mapView.allowScrollGesturesDuringRotateOrZoom = false;
 ```
 
-#### Get current zoom
+#### Get current zoom level
 
 ```js
-const currentZoom = mapView.zoom;
+const currentZoom = mapView.zoomLevel;
 ```
 
-Note: You can watch the `regionchanged` event to get realtime updates about the zoom level change
+Note: You can watch the `regionchanged` event to get real time updates about the zoom level change.
+See the `event.zoom` property for details.
 
 #### Map Padding
 

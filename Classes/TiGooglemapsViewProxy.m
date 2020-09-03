@@ -827,6 +827,12 @@ const CGFloat LN2 = 0.6931471805599453;
 
 - (NSNumber *)zoom
 {
+  DEPRECATED_REPLACED(@"Map.View.zoom", @"5.4.1", @"Map.View.zoomLevel");
+  return self.zoomLevel;
+}
+
+- (NSNumber *)zoomLevel
+{
   return @([[self mapView] mapView].camera.zoom);
 }
 
