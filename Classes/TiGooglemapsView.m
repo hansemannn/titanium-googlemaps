@@ -31,6 +31,7 @@ static NSString *const kGMUMyLocationKeyPath = @"myLocation";
 {
   if (_mapView == nil) {
     _mapView = [[GMSMapView alloc] initWithFrame:[self bounds]];
+    [_mapView setMapType:kGMSTypeNormal];
     [_mapView setDelegate:self];
     [_mapView setAutoresizingMask:UIViewAutoresizingNone];
 

@@ -781,6 +781,85 @@ const CGFloat LN2 = 0.6931471805599453;
   }
 }
 
+// CREDITS: https://stackoverflow.com/a/53569754/5537752
+- (NSDictionary *)drawRoundedPolylineBetweenCoordinates:(id)args
+{
+  ENSURE_UI_THREAD(drawRoundedPolylineBetweenCoordinates, args);
+  ENSURE_SINGLE_ARG(args, NSDictionary)
+
+  // Unwrap proxy values
+  NSArray<NSDictionary<NSString *, NSNumber *> *> *coordinates = args[@"coordinates"];
+  NSDictionary *options = args[@"options"] ?: @{}; // UNUSED so far
+
+  NSDictionary<NSString *, NSNumber *> *startCoordinatesDictionary = coordinates[0];
+  NSDictionary<NSString *, NSNumber *> *endCoordinatesDictionary = coordinates[1];
+
+  CLLocationDegrees startLocationLatitude = [TiUtils doubleValue:startCoordinatesDictionary[@"latitude"]];
+  CLLocationDegrees startLocationLongitude = [TiUtils doubleValue:startCoordinatesDictionary[@"longitude"]];
+  CLLocationDegrees endLocationLatitude = [TiUtils doubleValue:endCoordinatesDictionary[@"latitude"]];
+  CLLocationDegrees endLocationLongitude = [TiUtils doubleValue:endCoordinatesDictionary[@"longitude"]];
+
+  CLLocationCoordinate2D startLocation = CLLocationCoordinate2DMake(startLocationLatitude, startLocationLongitude);
+  CLLocationCoordinate2D endLocation = CLLocationCoordinate2DMake(endLocationLatitude, endLocationLongitude);
+
+  // Create path
+  GMSMutablePath *path = [GMSMutablePath new];
+
+  // Curve Line
+  double k = 0.25; // try between 0.5 to 0.2 for better results that suits you
+  CLLocationDistance d = GMSGeometryDistance(startLocation, endLocation);
+  CLLocationDirection h = GMSGeometryHeading(startLocation, endLocation);
+
+  // Midpoint position (not rounded, yet)
+  CLLocationCoordinate2D p = GMSGeometryOffset(startLocation, d * 0.5, h);
+  
+  // Apply some mathematics to calculate position of the circle center
+  double x = (1 - k * k) * d * 0.5 / (2 * k);
+  double r = (1 + k * k ) * d * 0.5 / (2 * k);
+  CLLocationCoordinate2D c = GMSGeometryOffset(p, x, h + 90.0);
+
+  // Polyline options
+  // Calculate heading between circle center and two points
+  CLLocationDirection h1 = GMSGeometryHeading(c, startLocation);
+  CLLocationDirection h2 = GMSGeometryHeading(c, endLocation);
+  
+  // Calculate positions of points on circle border and add them to polyline options
+  double numpoints = 100.0;
+  double step = ((h2 - h1) / numpoints);
+  
+  // Generate the curve coordinates
+  for (double i = 0.0; i < numpoints; i++) {
+    CLLocationCoordinate2D pi = GMSGeometryOffset(c, r, h1 + i * step);
+    [path addCoordinate:pi];
+  }
+
+  // Midpoint position (rounding including)
+  CLLocationCoordinate2D centerCoordinate = GMSGeometryOffset(c, r, h1 + roundf(numpoints / 2) * step);
+
+  // Draw polyline
+  GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
+  polyline.map = self.mapView.mapView; // Assign GMSMapView as map
+  polyline.strokeWidth = 2.0;
+
+  GMSStrokeStyle *greenToRed = [GMSStrokeStyle gradientFromColor:[UIColor clearColor] toColor:[UIColor blackColor]];
+  polyline.spans = @[[GMSStyleSpan spanWithStyle:greenToRed]];
+
+  GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithCoordinate:startLocation coordinate:endLocation];
+  UIEdgeInsets insets = UIEdgeInsetsMake(20, 20, 20, 20);
+
+  if ([TiUtils boolValue:@"animate" properties:options]) {
+    GMSCameraPosition *camera = [self.mapView.mapView cameraForBounds:bounds insets:insets];
+    [self.mapView.mapView animateToCameraPosition:camera];
+  } else {
+    [self.mapView.mapView moveCamera:[GMSCameraUpdate fitBounds:bounds withEdgeInsets:insets]];
+  }
+
+  return @{
+    @"latitude": @(centerCoordinate.latitude),
+    @"longitude": @(centerCoordinate.longitude)
+  };
+}
+
 - (NSArray<TiGooglemapsAnnotationProxy *> *)annotations
 {
   return markers;
