@@ -52,7 +52,7 @@ const maps = require('ti.googlemaps');
 maps.setAPIKey('<YOUR_GOOGLE_MAPS_API_KEY>');
 ```
 
-#### Use 100 % Cross-Platform with Android
+#### Use Cross-Platform with Android
 
 If you want to use this moduel as a replacement for Ti.Map  on iOS, here is how you can have 100 % parity:
 1. Create a file called `maps.js` in `app/lib/` (Alloy) or `Resources/` (Classic) with the following content
@@ -561,6 +561,17 @@ mapView.addPolyline(polyline);
 ```
 
 You can get a list of all currently added polylines by using `mapView.polylines`;
+
+##### Rounded Polylines
+
+If you want rounded polylines (e.g. for simulating a flight direction), you can use the following method to draw the line:
+
+```js
+$.mapView.drawRoundedPolylineBetweenCoordinates({
+    coordinates: [ { latitude: 0.0, longitude: 0.0 }, { latitude: 1.0, longitude: 1.0 } ],
+    options: {} // Unused so far
+});
+```
 
 #### Polygon
 
