@@ -14,6 +14,7 @@
 #import "TiGooglemapsView.h"
 #import "TiUtils.h"
 #import "math.h"
+#import <GoogleMaps/GMSGeometryUtils.h>
 
 #import "GMUMarkerClustering.h"
 
@@ -805,37 +806,37 @@ const CGFloat LN2 = 0.6931471805599453;
   // Create path
   GMSMutablePath *path = [GMSMutablePath new];
 
-  // Curve Line
-  double k = 0.25; // try between 0.5 to 0.2 for better results that suits you
-  CLLocationDistance d = GMSGeometryDistance(startLocation, endLocation);
-  CLLocationDirection h = GMSGeometryHeading(startLocation, endLocation);
+  CLLocationDistance distance = GMSGeometryDistance(startLocation, endLocation);
+  CLLocationCoordinate2D midPoint = GMSGeometryInterpolate(startLocation, endLocation, 0.5);
+  
+  CLLocationDirection midToStartLocHeading = GMSGeometryHeading(midPoint, startLocation);
 
-  // Midpoint position (not rounded, yet)
-  CLLocationCoordinate2D p = GMSGeometryOffset(startLocation, d * 0.5, h);
-  
-  // Apply some mathematics to calculate position of the circle center
-  double x = (1 - k * k) * d * 0.5 / (2 * k);
-  double r = (1 + k * k ) * d * 0.5 / (2 * k);
-  CLLocationCoordinate2D c = GMSGeometryOffset(p, x, h + 90.0);
+  double controlPointAngle = 360.0 - (90.0 - midToStartLocHeading);
+  CLLocationCoordinate2D controlPoint = GMSGeometryOffset(midPoint, distance / 2.0 , controlPointAngle);
 
-  // Polyline options
-  // Calculate heading between circle center and two points
-  CLLocationDirection h1 = GMSGeometryHeading(c, startLocation);
-  CLLocationDirection h2 = GMSGeometryHeading(c, endLocation);
+  double stepper = 0.05;
+  NSMutableArray *range = [NSMutableArray arrayWithArray:@[]];
   
-  // Calculate positions of points on circle border and add them to polyline options
-  double numpoints = 100.0;
-  double step = ((h2 - h1) / numpoints);
-  
-  // Generate the curve coordinates
-  for (double i = 0.0; i < numpoints; i++) {
-    CLLocationCoordinate2D pi = GMSGeometryOffset(c, r, h1 + i * step);
-    [path addCoordinate:pi];
+  for (int i = 0.0; i < 1.0; i = i + 0.05) {
+    [range addObject:@(i)];
   }
+  
+  __block CLLocationCoordinate2D centerCoordinate;
 
-  // Midpoint position (rounding including)
-  CLLocationCoordinate2D centerCoordinate = GMSGeometryOffset(c, r, h1 + roundf(numpoints / 2) * step);
+  [range enumerateObjectsUsingBlock:^(NSNumber *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    double t = obj.doubleValue;
+    double t1 = (1.0 - t);
+    CLLocationDegrees latitude = t1 * t1 * startLocation.latitude + 2 * t1 * t * controlPoint.latitude + t * t * endLocation.latitude;
+    CLLocationDegrees longitude = t1 * t1 * startLocation.longitude + 2 * t1 * t * controlPoint.longitude + t * t * endLocation.longitude;
+    CLLocationCoordinate2D point = CLLocationCoordinate2DMake(latitude, longitude);
+    
+    if (idx == floor(range.count / 2)) {
+      centerCoordinate = point;
+    }
 
+    [path addCoordinate:point];
+  }];
+  
   // Draw polyline
   GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
   polyline.map = self.mapView.mapView; // Assign GMSMapView as map
