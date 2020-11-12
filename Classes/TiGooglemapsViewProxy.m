@@ -14,6 +14,7 @@
 #import "TiGooglemapsView.h"
 #import "TiUtils.h"
 #import "math.h"
+#import <GoogleMaps/GMSGeometryUtils.h>
 
 #import "GMUMarkerClustering.h"
 
@@ -779,6 +780,85 @@ const CGFloat LN2 = 0.6931471805599453;
   } else {
     [self.mapView.mapView moveCamera:update];
   }
+}
+
+// CREDITS: https://stackoverflow.com/a/53569754/5537752
+- (NSDictionary *)drawRoundedPolylineBetweenCoordinates:(id)args
+{
+  ENSURE_UI_THREAD(drawRoundedPolylineBetweenCoordinates, args);
+  ENSURE_SINGLE_ARG(args, NSDictionary)
+
+  // Unwrap proxy values
+  NSArray<NSDictionary<NSString *, NSNumber *> *> *coordinates = args[@"coordinates"];
+  NSDictionary *options = args[@"options"] ?: @{}; // UNUSED so far
+
+  NSDictionary<NSString *, NSNumber *> *startCoordinatesDictionary = coordinates[0];
+  NSDictionary<NSString *, NSNumber *> *endCoordinatesDictionary = coordinates[1];
+
+  CLLocationDegrees startLocationLatitude = [TiUtils doubleValue:startCoordinatesDictionary[@"latitude"]];
+  CLLocationDegrees startLocationLongitude = [TiUtils doubleValue:startCoordinatesDictionary[@"longitude"]];
+  CLLocationDegrees endLocationLatitude = [TiUtils doubleValue:endCoordinatesDictionary[@"latitude"]];
+  CLLocationDegrees endLocationLongitude = [TiUtils doubleValue:endCoordinatesDictionary[@"longitude"]];
+
+  CLLocationCoordinate2D startLocation = CLLocationCoordinate2DMake(startLocationLatitude, startLocationLongitude);
+  CLLocationCoordinate2D endLocation = CLLocationCoordinate2DMake(endLocationLatitude, endLocationLongitude);
+
+  // Create path
+  GMSMutablePath *path = [GMSMutablePath new];
+
+  CLLocationDistance distance = GMSGeometryDistance(startLocation, endLocation);
+  CLLocationCoordinate2D midPoint = GMSGeometryInterpolate(startLocation, endLocation, 0.5);
+  
+  CLLocationDirection midToStartLocHeading = GMSGeometryHeading(midPoint, startLocation);
+
+  double controlPointAngle = 360.0 - (90.0 - midToStartLocHeading);
+  CLLocationCoordinate2D controlPoint = GMSGeometryOffset(midPoint, distance / 2.0 , controlPointAngle);
+
+  double stepper = 0.05;
+  NSMutableArray *range = [NSMutableArray arrayWithArray:@[]];
+  
+  for (int i = 0.0; i < 1.0; i = i + 0.05) {
+    [range addObject:@(i)];
+  }
+  
+  __block CLLocationCoordinate2D centerCoordinate;
+
+  [range enumerateObjectsUsingBlock:^(NSNumber *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    double t = obj.doubleValue;
+    double t1 = (1.0 - t);
+    CLLocationDegrees latitude = t1 * t1 * startLocation.latitude + 2 * t1 * t * controlPoint.latitude + t * t * endLocation.latitude;
+    CLLocationDegrees longitude = t1 * t1 * startLocation.longitude + 2 * t1 * t * controlPoint.longitude + t * t * endLocation.longitude;
+    CLLocationCoordinate2D point = CLLocationCoordinate2DMake(latitude, longitude);
+    
+    if (idx == floor(range.count / 2)) {
+      centerCoordinate = point;
+    }
+
+    [path addCoordinate:point];
+  }];
+  
+  // Draw polyline
+  GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
+  polyline.map = self.mapView.mapView; // Assign GMSMapView as map
+  polyline.strokeWidth = 2.0;
+
+  GMSStrokeStyle *greenToRed = [GMSStrokeStyle gradientFromColor:[UIColor clearColor] toColor:[UIColor blackColor]];
+  polyline.spans = @[[GMSStyleSpan spanWithStyle:greenToRed]];
+
+  GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithCoordinate:startLocation coordinate:endLocation];
+  UIEdgeInsets insets = UIEdgeInsetsMake(20, 20, 20, 20);
+
+  if ([TiUtils boolValue:@"animate" properties:options]) {
+    GMSCameraPosition *camera = [self.mapView.mapView cameraForBounds:bounds insets:insets];
+    [self.mapView.mapView animateToCameraPosition:camera];
+  } else {
+    [self.mapView.mapView moveCamera:[GMSCameraUpdate fitBounds:bounds withEdgeInsets:insets]];
+  }
+
+  return @{
+    @"latitude": @(centerCoordinate.latitude),
+    @"longitude": @(centerCoordinate.longitude)
+  };
 }
 
 - (NSArray<TiGooglemapsAnnotationProxy *> *)annotations

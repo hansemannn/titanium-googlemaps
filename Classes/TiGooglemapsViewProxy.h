@@ -283,6 +283,14 @@
 - (void)showAnnotations:(id)annotations;
 
 /**
+ *  Draws a rounded polyline between two given coordiinates
+ *
+ *  @param annotations The annotations to show.
+ *  @since 5.5.0
+ */
+- (NSDictionary *)drawRoundedPolylineBetweenCoordinates:(id)args;
+
+/**
  *  Returns all currently added annotations.
  *
  *  @return The available annotations.
