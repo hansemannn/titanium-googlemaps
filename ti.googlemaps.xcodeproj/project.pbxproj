@@ -115,7 +115,6 @@
 		3AF900AF1BC1ED7800172627 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF9009F1BC1ED7800172627 /* CoreGraphics.framework */; };
 		3AF900B01BC1ED7800172627 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900A01BC1ED7800172627 /* CoreLocation.framework */; };
 		3AF900B11BC1ED7800172627 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900A11BC1ED7800172627 /* CoreText.framework */; };
-		3AF900B21BC1ED7800172627 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900A21BC1ED7800172627 /* GLKit.framework */; };
 		3AF900B71BC1ED7800172627 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900A71BC1ED7800172627 /* OpenGLES.framework */; };
 		3AF900B81BC1ED7800172627 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900A81BC1ED7800172627 /* QuartzCore.framework */; };
 		3AF900B91BC1ED7800172627 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900A91BC1ED7800172627 /* Security.framework */; };
@@ -306,7 +305,6 @@
 				3AF900B01BC1ED7800172627 /* CoreLocation.framework in Frameworks */,
 				3AF900B11BC1ED7800172627 /* CoreText.framework in Frameworks */,
 				DBA037071DB1125D004279F0 /* GooglePlaces.framework in Frameworks */,
-				3AF900B21BC1ED7800172627 /* GLKit.framework in Frameworks */,
 				3AF900B71BC1ED7800172627 /* OpenGLES.framework in Frameworks */,
 				3AF900B81BC1ED7800172627 /* QuartzCore.framework in Frameworks */,
 				3AF900B91BC1ED7800172627 /* Security.framework in Frameworks */,
