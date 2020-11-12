@@ -16,4 +16,4 @@ name: ti.googlemaps
 moduleid: ti.googlemaps
 guid: 81fe0326-e874-4843-b902-51bbd46f9283
 platform: iphone
-minsdk: 9.2.9
+minsdk: 9.2.0
