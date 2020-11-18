@@ -22,4 +22,3 @@ xcuserdata/
 *.xcscmblueprint
 /build
 /Carthage
-/platform/*.framework
