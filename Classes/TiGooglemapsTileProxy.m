@@ -15,9 +15,9 @@
     _tile = [GMSURLTileLayer tileLayerWithURLConstructor:^NSURL *(NSUInteger x, NSUInteger y, NSUInteger zoom) {
       NSString *template = [TiUtils stringValue:[self valueForKey:@"url"]];
 
-      template = [template stringByReplacingOccurrencesOfString:@"{x}" withString:[NSString stringWithFormat:@"%lu", x]];
-      template = [template stringByReplacingOccurrencesOfString:@"{y}" withString:[NSString stringWithFormat:@"%lu", y]];
-      template = [template stringByReplacingOccurrencesOfString:@"{z}" withString:[NSString stringWithFormat:@"%lu", zoom]];
+      template = [template stringByReplacingOccurrencesOfString:@"{x}" withString:[NSString stringWithFormat:@"%lu", (unsigned long)x]];
+      template = [template stringByReplacingOccurrencesOfString:@"{y}" withString:[NSString stringWithFormat:@"%lu", (unsigned long)y]];
+      template = [template stringByReplacingOccurrencesOfString:@"{z}" withString:[NSString stringWithFormat:@"%lu", (unsigned long)zoom]];
 
       return [NSURL URLWithString:template];
     }];
