@@ -230,9 +230,10 @@ static NSString *const kGMUMyLocationKeyPath = @"myLocation";
                    @"latitude" : @(marker.position.latitude),
                    @"longitude" : @(marker.position.longitude)
                  }];
+    return YES;
   }
 
-  return YES;
+  return NO;
 }
 
 - (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker
