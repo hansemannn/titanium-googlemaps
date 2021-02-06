@@ -362,4 +362,13 @@
  */
 - (NSNumber *)zoomLevel;
 
+/**
+ *  Generates a map snapshot for a given size
+ *
+ *  @param size The snapshot size as an Object containing the `width` and `height`.
+ *  @return The generated snapshot image as a blob.
+ *  @since 6.2.0
+ */
+- (TiBlob *)takeSnapshot:(id)size;
+
 @end

@@ -933,4 +933,21 @@ const CGFloat LN2 = 0.6931471805599453;
   [self replaceValue:rangeBackgrounds forKey:@"clusterBackgrounds" notification:NO];
 }
 
+- (TiBlob *)takeSnapshot:(id)size
+{
+  ENSURE_SINGLE_ARG(size, NSDictionary);
+  CGSize nativeSize = CGSizeMake([TiUtils floatValue:size[@"width"]], [TiUtils floatValue:size[@"height"]]);
+  
+  UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:nativeSize];
+  UIImage *image = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+    [[self mapView] drawViewHierarchyInRect:[self mapView].bounds afterScreenUpdates:YES];
+  }];
+
+  if (image == nil) {
+    return nil;
+  }
+
+  return [[TiBlob alloc] initWithImage:image];
+}
+
 @end

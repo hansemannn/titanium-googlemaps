@@ -248,6 +248,15 @@ mapView.animateToBearing(45);
 mapView.animateToViewingAngle(30);
 ```
 
+##### Take a snapshot:
+
+```js
+const imageBlob = mapView.takeSnapshot({
+    width: 300, 
+    width: 300
+});
+```
+
 ##### Check if a location is currently visible on the map
 
 ```js
