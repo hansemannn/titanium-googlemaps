@@ -590,8 +590,8 @@ const polygon = maps.createPolygon({
     holes: [ {
         latitude: -32.95785,
         longitude: 115.86234
-    }, [ -32.95785, 115.86234 ] ], // Important: The longitude is at index 1 and the latitude at index 0.
-                                   // This will be deprecated in future releases to align with the other behaviors
+    }, [ -32.95785, 115.86234 ] ], // Important: The longitude is at index 0 and the latitude at index 1.
+                                   // This has been changed in v6.1.2 of the module to align with the other APIs!
     zIndex: 10
 });
 mapView.addPolygon(polygon);
