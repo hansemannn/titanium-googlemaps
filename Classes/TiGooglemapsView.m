@@ -230,7 +230,6 @@ static NSString *const kGMUMyLocationKeyPath = @"myLocation";
                    @"latitude" : @(marker.position.latitude),
                    @"longitude" : @(marker.position.longitude)
                  }];
-    return YES;
   }
 
   return NO;
@@ -338,6 +337,8 @@ static NSString *const kGMUMyLocationKeyPath = @"myLocation";
     };
     [[self proxy] fireEvent:@"locationclick" withObject:event];
   }
+
+  return NO;
 }
 
 - (void)mapViewDidFinishTileRendering:(GMSMapView *)mapView
