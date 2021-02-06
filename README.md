@@ -551,7 +551,7 @@ const polyline = maps.createPolyline({
     points: [ { // Can handle both object and array
         latitude: -37.81319,
         longitude: 144.96298
-    }, [ -31.95285, 115.85734 ] ],
+    }, [ -31.95285, 115.85734 ] ], // Important: The longitude is at index 0 and the latitude at index 1
     strokeWidth: 3, // Default: 1
     strokeColor: '#f00'  // Default: Black (#000000),
     title: 'My Polyline',
@@ -590,7 +590,8 @@ const polygon = maps.createPolygon({
     holes: [ {
         latitude: -32.95785,
         longitude: 115.86234
-    }, [ -32.95785, 115.86234 ] ],
+    }, [ -32.95785, 115.86234 ] ], // Important: The longitude is at index 1 and the latitude at index 0.
+                                   // This will be deprecated in future releases to align with the other behaviors
     zIndex: 10
 });
 mapView.addPolygon(polygon);
@@ -604,7 +605,7 @@ A circle is a shape defined by the `center` property to specify its location as 
 
 ```js
 const circle = maps.createCircle({
-    center: [ -32.9689, 151.7721 ], // Can handle object or array
+    center: [ -32.9689, 151.7721 ], // Can handle object or array. Important: The longitude is at index 0 and the latitude at index 1.
     radius: 500 * 1000, // 500 km, Default: 0
     fillColor: 'blue', // Default: transparent
     strokeWidth: 3,
