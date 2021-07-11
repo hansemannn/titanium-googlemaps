@@ -2,10 +2,10 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 6.2.1
+version: 7.0.0
 apiversion: 2
 mac: false
-architectures: armv7 arm64 i386 x86_64
+architectures: arm64 x86_64
 description: ti.googlemaps
 author: Hans Knoechel
 license: Apache License

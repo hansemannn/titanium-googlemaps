@@ -141,7 +141,6 @@
   NSMutableArray *result = [NSMutableArray new];
   for (GMSAddressComponent *addressComponent in addressComponents) {
     [result addObject:@{
-      @"type" : addressComponent.type,
       @"types" : addressComponent.types,
       @"name" : addressComponent.name
     }];
