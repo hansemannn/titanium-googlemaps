@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:d8704d461bf85d2f907645186edfe4f9df5bcce64c9a0d353c6f8cb82c00c63a
-size 465
+#import <Foundation/Foundation.h>
+
+/**
+ * Accessibility identifier for the compass button.
+ *
+ * @related GMSMapView
+ */
+extern NSString *const kGMSAccessibilityCompass;
+
+/**
+ * Accessibility identifier for the "my location" button.
+ *
+ * @related GMSMapView
+ */
+extern NSString *const kGMSAccessibilityMyLocation;
+
+/**
+ * Accessibility identifier for the "out of quota" error label.
+ *
+ * @related GMSMapView
+ */
+extern NSString *const kGMSAccessiblityOutOfQuota;

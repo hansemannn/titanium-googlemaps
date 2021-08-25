@@ -1,3 +1,17 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:643e3b28e5e61910001b8fbca32846184e16c814e09d5a7d25a44afad9f58baf
-size 498
+//
+//  GMSCompatabilityMacros.h
+//  Google Maps SDK for iOS
+//
+//  Copyright 2015 Google LLC
+//
+//  Usage of this SDK is subject to the Google Maps/Google Earth APIs Terms of
+//  Service: https://developers.google.com/maps/terms
+//
+
+#import <Foundation/Foundation.h>
+
+#if defined(SWIFT_SDK_OVERLAY_UIKIT_EPOCH)
+#define GMS_SWIFT_NAME_2_0_3_0(name_swift_2, name_swift_3) NS_SWIFT_NAME(name_swift_3)
+#else
+#define GMS_SWIFT_NAME_2_0_3_0(name_swift_2, name_swift_3) NS_SWIFT_NAME(name_swift_2)
+#endif

@@ -1,3 +1,20 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7b28373c896242b1a37954a7668d00cd2e5e0d6fcdf00e02947c1921aeb550d7
-size 506
+//
+//  GMSCALayer.h
+//  Google Maps SDK for iOS
+//
+//  Copyright 2013 Google LLC
+//
+//  Usage of this SDK is subject to the Google Maps/Google Earth APIs Terms of
+//  Service: https://developers.google.com/maps/terms
+//
+
+#import <QuartzCore/QuartzCore.h>
+
+/**
+ * GMSCALayer is a superclass used by layers in the Google Maps SDK for iOS, such as GMSMapLayer and
+ * GMSPanoramaLayer.
+ *
+ * This is an implementation detail and it should not be instantiated directly.
+ */
+@interface GMSCALayer : CALayer
+@end

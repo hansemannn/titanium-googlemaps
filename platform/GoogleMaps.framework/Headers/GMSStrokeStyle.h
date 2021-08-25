@@ -1,3 +1,26 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:bc1ae13f297986b825dbc09c2b4a8206ca83f031737fa1d079ba5b74cbb38355
-size 681
+//
+//  GMSStrokeStyle.h
+//  Google Maps SDK for iOS
+//
+//  Copyright 2019 Google LLC
+//
+//  Usage of this SDK is subject to the Google Maps/Google Earth APIs Terms of
+//  Service: https://developers.google.com/maps/terms
+//
+
+#import <UIKit/UIKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+/** Describes the drawing style for one-dimensional entities such as polylines. */
+@interface GMSStrokeStyle : NSObject
+
+/** Creates a solid color stroke style. */
++ (instancetype)solidColor:(UIColor *)color;
+
+/** Creates a gradient stroke style interpolating from |fromColor| to |toColor|. */
++ (instancetype)gradientFromColor:(UIColor *)fromColor toColor:(UIColor *)toColor;
+
+@end
+
+NS_ASSUME_NONNULL_END
