@@ -1,24 +1,29 @@
-var maps = require('ti.googlemaps');
+import GoogleMaps from 'ti.googlemaps';
+
+/**
+ * Optional: Enable metal rendering for improved graphics performance
+ */
+GoogleMaps.metalRendererEnabled = false;
 
 /**
  *  SET YOUR API-KEY BEFORE USING THIS MODULE
  */
-maps.setAPIKey('<YOUR_GOOGLE_MAPS_API_KEY>');
+GoogleMaps.APIKey = '<YOUR_GOOGLE_MAPS_API_KEY>';
 
-var win = Ti.UI.createWindow({
+const win = Ti.UI.createWindow({
     title: 'Ti.Googlemaps',
     includeOpaqueBars: true,
     extendEdges: [Ti.UI.EXTEND_EDGE_ALL]
 });
 
-var nav = Ti.UI.iOS.createNavigationWindow({
+const nav = Ti.UI.createNavigationWindow({
     window: win
 });
 
 /*
  *  Test data
  */
-var companies = {
+const companies = {
     appcelerator: {
         title: 'Appcelerator',
         city: 'San Jose, CA',
@@ -48,8 +53,8 @@ var companies = {
 /*
  *  MapView
  */
-var mapView = maps.createView({
-    mapType: maps.MAP_TYPE_TERRAIN,
+const mapView = GoogleMaps.createView({
+    mapType: GoogleMaps.MAP_TYPE_TERRAIN,
     indoorEnabled: true,
     indoorPicker: false,
     compassButton: true,
@@ -154,11 +159,11 @@ mapView.addEventListener('complete', handleMapCompleteEvent);
 /*
  *  Marker
  */
-for (var key in companies) {
+for (const key in companies) {
     if (companies.hasOwnProperty(key)) {
-        var company = companies[key];
+        const company = companies[key];
 
-        var annotation = maps.createAnnotation({
+        const annotation = GoogleMaps.createAnnotation({
             latitude: company.latitude,
             longitude: company.longitude,
             title: company.title,
@@ -179,7 +184,7 @@ for (var key in companies) {
 /*
  *  Overlays - Polyline
  */
-var polyline = maps.createPolyline({
+const polyline = GoogleMaps.createPolyline({
     points: [{ // Can handle both object and array
         latitude: companies.appcelerator.latitude,
         longitude: companies.appcelerator.longitude,
@@ -197,14 +202,14 @@ mapView.addPolyline(polyline);
 /*
  *  Overlays - Polygon
  */
-var polygon = maps.createPolygon({
+const polygon = GoogleMaps.createPolygon({
     points: [ // Can handle both object and array
         {
             latitude: companies.appcelerator.latitude,
             longitude: companies.appcelerator.longitude,
         },
-        [companies.apple.latitude, companies.apple.longitude],
-        [companies.facebook.latitude, companies.facebook.longitude]
+        [companies.apple.longitude, companies.apple.latitude],
+        [companies.facebook.longitude, companies.facebook.latitude]
     ],
     strokeWidth: 3,
     fillColor: 'rgba(160,26,32,0.2)', // RGB color with alpha transparency
@@ -217,8 +222,8 @@ mapView.addPolygon(polygon);
 /*
  *  Overlays - Circle
  */
-var circle = maps.createCircle({
-    center: [companies.appcelerator.latitude, companies.appcelerator.longitude], // Can handle both object and array
+const circle = GoogleMaps.createCircle({
+    center: [companies.appcelerator.longitude, companies.appcelerator.latitude], // Can handle both object and array
     radius: 5 * 1000, // 5km
     // fillColor: 'green',
     strokeWidth: 3,
@@ -229,7 +234,7 @@ mapView.addCircle(circle);
 // mapView.removeCircle(circle);
 
 function openAutocompleteDialog() {
-    var dialog = maps.createAutocompleteDialog({
+    const dialog = GoogleMaps.createAutocompleteDialog({
         /*tableCellBackgroundColor: '#333',
          tableCellSeparatorColor: '#444',
          primaryTextColor: '#fff',
@@ -242,8 +247,8 @@ function openAutocompleteDialog() {
 
     dialog.addEventListener('success', function(e) {
         Ti.API.info(e.place);
-        var place = e.place;
-        var annotation = maps.createAnnotation({
+        const place = e.place;
+        const annotation = GoogleMaps.createAnnotation({
             latitude: place.latitude,
             longitude: place.longitude,
             title: place.name,
@@ -269,12 +274,12 @@ function openAutocompleteDialog() {
     dialog.open();
 }
 
-var searchButton = Ti.UI.createButton({
+const searchButton = Ti.UI.createButton({
     systemButton: Ti.UI.iOS.SystemButton.ADD
 });
 
 searchButton.addEventListener('click', openAutocompleteDialog);
 
-win.setRightNavButton(searchButton);
+win.rightNavButton = searchButton;
 win.add(mapView);
 nav.open();
