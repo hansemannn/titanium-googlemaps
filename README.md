@@ -359,7 +359,7 @@ const annotation = maps.createAnnotation({
     flat: true, // Default: false
     opacity: 1,
     zIndex: 1,
-    animationStyle: maps.APPEAR_ANIMATION_POP, // One of 'APPEAR_ANIMATION_NONE' (default) and 'APPEAR_ANIMATION_POP'
+    animationStyle: maps.APPEAR_ANIMATION_POP, // One of 'APPEAR_ANIMATION_NONE' (default), 'APPEAR_ANIMATION_POP' or 'APPEAR_ANIMATION_FADE'
     rotation: 30, // measured in degrees clockwise from the default position
     centerOffset: {
         x: 0.5,
