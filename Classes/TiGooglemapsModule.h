@@ -22,6 +22,17 @@
 - (void)setAPIKey:(NSString *)apiKey;
 
 /**
+ * Enables the map to render using Metal instead of OpenGL.
+ *
+ * The rendering might look very slightly different between renderers. The default is @c false and
+ * value must be updated before the services instance is initialized.
+ *
+ * @param metalRendererEnabled Whether or not the metal renderer should be enabled
+ * @since 8.0.0
+ */
+- (void)setMetalRendererEnabled:(NSNumber *)metalRendererEnabled;
+
+/**
  * Returns the version for this release of the Google Maps SDK for iOS.
  *
  * @return The GoogleMaps SDK version.

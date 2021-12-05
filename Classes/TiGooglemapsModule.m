@@ -27,15 +27,6 @@
   return @"ti.googlemaps";
 }
 
-#pragma mark Lifecycle
-
-- (void)startup
-{
-  [super startup];
-
-  NSLog(@"[DEBUG] %@ loaded", self);
-}
-
 #pragma Public APIs
 
 - (void)setAPIKey:(NSString *)apiKey
@@ -44,6 +35,13 @@
 
   _apiKey = [TiUtils stringValue:apiKey];
   [GMSServices provideAPIKey:_apiKey];
+}
+
+- (void)setMetalRendererEnabled:(NSNumber *)metalRendererEnabled
+{
+  ENSURE_UI_THREAD(setMetalRendererEnabled, metalRendererEnabled);
+
+  [GMSServices setMetalRendererEnabled:metalRendererEnabled.boolValue];
 }
 
 - (NSString *)openSourceLicenseInfo
