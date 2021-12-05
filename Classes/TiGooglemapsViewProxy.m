@@ -173,13 +173,6 @@ const CGFloat LN2 = 0.6931471805599453;
   [self replaceValue:value forKey:@"trafficEnabled" notification:NO];
 }
 
-- (void)setMapInsets:(id)args
-{
-  TI_GMS_DEPRECATED(@"View.mapInsets", @"View.padding", @"3.14.0");
-  [self setPadding:args];
-  [self replaceValue:args forKey:@"mapInsets" notification:NO];
-}
-
 - (void)setPadding:(id)args
 {
   ENSURE_UI_THREAD_1_ARG(args);
