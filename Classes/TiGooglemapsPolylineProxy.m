@@ -57,6 +57,24 @@
   [[self polyline] setPath:path];
 }
 
+- (void)setDotsImage:(id)dotsImage
+{
+  ENSURE_UI_THREAD(setDotsImage, dotsImage);
+
+  if (dotsImage == nil) {
+    [[self polyline] setSpans:@[]];
+    return;
+  }
+
+  GMSStrokeStyle *strokeStyle = [[GMSStrokeStyle alloc] init];
+  GMSTextureStyle *stampStyle = [[GMSTextureStyle alloc] initWithImage:[TiUtils image:dotsImage proxy:self]];
+  strokeStyle.stampStyle = stampStyle;
+
+  [[self polyline] setSpans:@[[GMSStyleSpan spanWithStyle:strokeStyle]]];
+
+  [self replaceValue:dotsImage forKey:@"dotsImage" notification:NO];
+}
+
 - (void)setTappable:(id)value
 {
   ENSURE_UI_THREAD(setTappable, value);
