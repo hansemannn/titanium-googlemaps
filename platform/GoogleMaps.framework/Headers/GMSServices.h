@@ -56,6 +56,16 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)provideAPIOptions:(NSArray<NSString *> *)APIOptions;
 
 /**
+ * Enables the map to render using Metal instead of OpenGL.
+ *
+ * The rendering might look very slightly different between renderers. The default is @c NO and
+ * value must be updated before the services instance is initialized.
+ *
+ * This property must be set from the main thread.
+ */
++ (void)setMetalRendererEnabled:(BOOL)enabled;
+
+/**
  * Enables reporting of abnormal SDK terminations such as the app crashes while the SDK is still
  * running. This allows Google to improve SDK stability when applicable. The default is @c YES and
  * value must be updated before the services instance is initialized.

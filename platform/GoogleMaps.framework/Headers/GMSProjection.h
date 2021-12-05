@@ -42,7 +42,8 @@ typedef struct {
  * Passing invalid Earth coordinates (i.e., per CLLocationCoordinate2DIsValid) to this object may
  * result in undefined behavior.
  *
- * This class should not be instantiated directly, instead, obtained via projection on GMSMapView.
+ * This class should not be instantiated directly unless under testing conditions. Instead, obtain
+ * it via projection on GMSMapView.
  */
 @interface GMSProjection : NSObject
 

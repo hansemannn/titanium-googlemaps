@@ -15,12 +15,17 @@
  * GMSPanoramaCamera.
  */
 typedef struct {
-  /** The camera heading (horizontal angle) in degrees. */
+  /**
+   * The camera heading (horizontal angle) in degrees. Type used to represent
+   * the direction in degrees from 0 to 359.9. True north is 0, east is 90,
+   * south is 180, and west is 270.
+   */
   const CLLocationDirection heading;
 
   /**
-   * The camera pitch (vertical angle), in degrees from the horizon. The |pitch| range is [-90,90],
-   * although it is possible that not the full range is supported.
+   * The camera pitch (vertical angle), in degrees from the horizon. The |pitch|
+   * range is [-90,90], although it is possible that not the full range is
+   * supported. A positive value looks up and a negative value looks down.
    */
   const double pitch;
 } GMSOrientation;

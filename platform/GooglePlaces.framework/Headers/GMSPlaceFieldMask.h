@@ -43,6 +43,8 @@ typedef NS_OPTIONS(NSUInteger, GMSPlaceField) {
   GMSPlaceFieldUserRatingsTotal = 1 << 14,
   GMSPlaceFieldUTCOffsetMinutes = 1 << 15,
   GMSPlaceFieldBusinessStatus = 1 << 16,
+  GMSPlaceFieldIconImageURL = 1 << 17,
+  GMSPlaceFieldIconBackgroundColor = 1 << 18,
   GMSPlaceFieldAll = NSUIntegerMax,
 };
 

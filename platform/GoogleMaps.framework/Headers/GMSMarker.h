@@ -10,31 +10,13 @@
 
 #import <UIKit/UIKit.h>
 
+#import "GMSMarkerAnimation.h"
 #import "GMSOverlay.h"
 
 @class GMSMarkerLayer;
 @class GMSPanoramaView;
-@class UIImage;
 
 NS_ASSUME_NONNULL_BEGIN
-
-/**
- * \defgroup MarkerAnimation GMSMarkerAnimation
- * @{
- */
-
-/**
- * Animation types for GMSMarker.
- */
-typedef NS_ENUM(NSUInteger, GMSMarkerAnimation) {
-  /** No animation (default). */
-  kGMSMarkerAnimationNone = 0,
-
-  /** The marker will pop from its groundAnchor when added. */
-  kGMSMarkerAnimationPop,
-};
-
-/**@}*/
 
 /**
  * A marker is an icon placed at a particular point on the map's surface. A marker's icon is drawn

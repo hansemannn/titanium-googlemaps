@@ -825,6 +825,17 @@ To decode the polyline points, use the `maps.decodePolylinePoints(points)` utili
 Note that this is not officially supported in the Google Maps iOS SDK. It has been exposed
 by using the REST-API in combination with the `NSURLSession` API and the provided API key.
 
+### Metal Rendering
+
+Since ti.googlemaps v8.0.0, this module supports the new Metal rendering for 
+improved graphics performance while drawing the map view. Example:
+
+```js
+maps.metalRendererEnabled = true;
+```
+
+This call has to happen **before** initializing the Google Maps SDK.
+
 ### Geometry Utils
 
 #### `geometryContainsLocation`
