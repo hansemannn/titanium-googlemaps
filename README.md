@@ -564,12 +564,18 @@ const polyline = maps.createPolyline({
     strokeWidth: 3, // Default: 1
     strokeColor: '#f00'  // Default: Black (#000000),
     title: 'My Polyline',
-    zIndex: 10
+    zIndex: 10,
+    tappable: true
 });
 mapView.addPolyline(polyline);
 ```
 
-You can get a list of all currently added polylines by using `mapView.polylines`;
+You can get a list of all currently added polylines by using `mapView.polylines`.
+
+You can also set a stamp-styled polyline by setting a dots image:
+```js
+maps.dotsImage = 'images/my_icon.png';
+```
 
 ##### Rounded Polylines
 
