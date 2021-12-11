@@ -233,7 +233,7 @@ mapView.animateToLocation({
 ##### Animate to a zoom level:
 
 ```js
-mapView.animateToZoom(5);
+mapView.animateToZoom(5, 2000 /* Optional parameter to specify the duration (in ms) */);
 ```
 
 ##### Animate to a bearing:

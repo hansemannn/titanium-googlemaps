@@ -670,13 +670,28 @@ const CGFloat LN2 = 0.6931471805599453;
   [[[self mapView] mapView] animateToLocation:CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude])];
 }
 
-- (void)animateToZoom:(id)value
+- (void)animateToZoom:(NSArray *)value
 {
   ENSURE_UI_THREAD(animateToZoom, value);
-  ENSURE_ARG_COUNT(value, 1);
-  ENSURE_TYPE([value objectAtIndex:0], NSNumber);
 
-  [[[self mapView] mapView] animateToZoom:[TiUtils floatValue:[value objectAtIndex:0]]];
+  CGFloat zoomLevel = [TiUtils floatValue:[value objectAtIndex:0]];
+  GMSMapView *mapView = [[self mapView] mapView];
+
+  if (value.count == 2) {
+    CGPoint point = mapView.center;
+    CLLocationCoordinate2D location = [mapView.projection coordinateForPoint:point];
+    CGFloat duration = [TiUtils floatValue:[value objectAtIndex:1]] / 1000;
+
+    [CATransaction begin];
+    [CATransaction setValue:@(duration) forKey:kCATransactionAnimationDuration];
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:location.latitude
+                                                            longitude:location.longitude
+                                                                 zoom:zoomLevel];
+    [mapView animateToCameraPosition: camera];
+    [CATransaction commit];
+  } else {
+    [mapView animateToZoom:zoomLevel];
+  }
 }
 
 - (void)animateToBearing:(id)value
