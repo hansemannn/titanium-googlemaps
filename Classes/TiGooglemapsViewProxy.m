@@ -407,11 +407,11 @@ const CGFloat LN2 = 0.6931471805599453;
   ENSURE_UI_THREAD_1_ARG(args);
 
   dispatch_barrier_async(q, ^{
-    [[self markers] removeAllObjects];
+    for (NSUInteger i = 0; i < [[self markers] count]; i++) {
+      [self removeAnnotation:@[ [[self markers] objectAtIndex:i] ]];
+    }
 
-    dispatch_async(dispatch_get_main_queue(), ^{
-      [[[self mapView] mapView] clear];
-    });
+    [[self markers] removeAllObjects];
   });
 }
 
