@@ -82,7 +82,7 @@ That's it!
 
 If you want to build the module from the source, you need to check some things beforehand:
 - Set the `TITANIUM_SDK_VERSION` inside the `ios/titanium.xcconfig` file to the Ti.SDK version you want to build with.
-- Build the project with `appc run -p ios --build-only`
+- Build the project with `ti build -p ios --build-only`
 - Check the [releases tab](https://github.com/hansemannn/titanium-googlemaps/releases) for stable pre-packaged versions of the module
 
 ## Features
