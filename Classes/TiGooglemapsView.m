@@ -346,6 +346,9 @@ static NSString *const kGMUMyLocationKeyPath = @"myLocation";
   if ([[self proxy] _hasListeners:@"complete"]) {
     [[self proxy] fireEvent:@"complete"];
   }
+  if ([[self proxy] _hasListeners:@"ready"]) {
+    [[self proxy] fireEvent:@"ready"];
+  }
 }
 
 #pragma mark Helper
