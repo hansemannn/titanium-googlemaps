@@ -1,29 +1,3 @@
-//
-//  GMSPlacePhotoMetadataList.h
-//  Google Places SDK for iOS
-//
-//  Copyright 2016 Google LLC
-//
-//  Usage of this SDK is subject to the Google Maps/Google Earth APIs Terms of
-//  Service: https://developers.google.com/maps/terms
-//
-
-#import <UIKit/UIKit.h>
-
-#import "GMSPlacePhotoMetadata.h"
-
-NS_ASSUME_NONNULL_BEGIN
-
-/**
- * A list of |GMSPlacePhotoMetadata| objects.
- */
-@interface GMSPlacePhotoMetadataList : NSObject
-
-/**
- * The array of |GMSPlacePhotoMetadata| objects.
- */
-@property(nonatomic, readonly, copy) NSArray<GMSPlacePhotoMetadata *> *results;
-
-@end
-
-NS_ASSUME_NONNULL_END
+version https://git-lfs.github.com/spec/v1
+oid sha256:b298e3c018b89dae2c437412e204223074ba531793e462c1ed738ca83f78a993
+size 592

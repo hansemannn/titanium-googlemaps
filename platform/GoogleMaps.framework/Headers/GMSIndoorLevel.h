@@ -1,32 +1,3 @@
-//
-//  GMSIndoorLevel.h
-//  Google Maps SDK for iOS
-//
-//  Copyright 2013 Google LLC
-//
-//  Usage of this SDK is subject to the Google Maps/Google Earth APIs Terms of
-//  Service: https://developers.google.com/maps/terms
-//
-#import <Foundation/Foundation.h>
-
-NS_ASSUME_NONNULL_BEGIN
-
-/**
- * Describes a single level in a building.
- *
- * Multiple buildings can share a level - in this case the level instances will compare as equal,
- * even though the level numbers/names may be different.
- */
-@interface GMSIndoorLevel : NSObject
-
-- (instancetype)init NS_UNAVAILABLE;
-
-/** Localized display name for the level, e.g. "Ground floor". */
-@property(nonatomic, copy, readonly, nullable) NSString *name;
-
-/** Localized short display name for the level, e.g. "1". */
-@property(nonatomic, copy, readonly, nullable) NSString *shortName;
-
-@end
-
-NS_ASSUME_NONNULL_END
+version https://git-lfs.github.com/spec/v1
+oid sha256:4dd632624be6f207036bb5299befa18d2e15ed73f642d3a9d492ea8c88c86188
+size 857
