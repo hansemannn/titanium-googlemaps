@@ -2,7 +2,7 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 8.0.0
+version: 8.1.0
 apiversion: 2
 mac: false
 architectures: arm64 x86_64
