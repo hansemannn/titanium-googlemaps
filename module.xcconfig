@@ -7,6 +7,6 @@
 // http://developer.apple.com/mac/library/documentation/DeveloperTools/Conceptual/XcodeBuildSystem/400-Build_Configurations/build_configs.html
 //
 
-OTHER_LDFLAGS = $(inherited) -framework Accelerate -framework CoreData -framework CoreGraphics -framework CoreImage -framework CoreLocation -framework CoreTelephony -framework CoreText -framework GLKit -framework ImageIO -lc++ -lz -framework OpenGLES -framework QuartzCore -framework SystemConfiguration -framework GoogleMaps -framework GoogleMapsBase -framework GoogleMapsCore -framework GooglePlaces
+OTHER_LDFLAGS = $(inherited) -framework Accelerate -framework CoreData -framework CoreGraphics -framework CoreImage -framework CoreLocation -framework CoreTelephony -framework CoreText -framework GLKit -framework ImageIO -lc++ -lz -framework OpenGLES -framework Metal -framework QuartzCore -framework SystemConfiguration -framework GoogleMaps -framework GoogleMapsBase -framework GoogleMapsCore -framework GooglePlaces
 
 WARNING_CFLAGS = -Wno-arc-performSelector-leaks

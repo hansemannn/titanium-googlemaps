@@ -37,11 +37,11 @@
   [GMSServices provideAPIKey:_apiKey];
 }
 
-- (void)setMetalRendererEnabled:(NSNumber *)metalRendererEnabled
+- (void)enableMetalRenderer:(id)unused
 {
-  ENSURE_UI_THREAD(setMetalRendererEnabled, metalRendererEnabled);
-
-  [GMSServices setMetalRendererEnabled:metalRendererEnabled.boolValue];
+  TiThreadPerformOnMainThread(^{
+    [GMSServices setMetalRendererEnabled:YES];
+  }, NO);
 }
 
 - (NSString *)openSourceLicenseInfo
