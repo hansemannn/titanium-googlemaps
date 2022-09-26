@@ -5,7 +5,7 @@
  * Please see the LICENSE included with this distribution for details.
  */
 
-#import "GMUMarkerClustering.h"
+#import <GoogleMapsUtils/GoogleMapsUtils.h>
 
 @interface TiClusterIconGenerator : GMUDefaultClusterIconGenerator <GMUClusterIconGenerator>
 

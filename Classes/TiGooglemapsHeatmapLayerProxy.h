@@ -5,7 +5,7 @@
  * Please see the LICENSE included with this distribution for details.
  */
 
-#import "GMUHeatmapTileLayer.h"
+#import <GoogleMapsUtils/GoogleMapsUtils.h>
 #import "TiProxy.h"
 
 @interface TiGooglemapsHeatmapLayerProxy : TiProxy {

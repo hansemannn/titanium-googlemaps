@@ -4,9 +4,9 @@
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
-#import "GMUMarkerClustering.h"
-#import "TiUIView.h"
+#import <GoogleMapsUtils/GoogleMapsUtils.h>
 #import <GoogleMaps/GoogleMaps.h>
+#import "TiUIView.h"
 #import "TiClusterRenderer.h"
 
 @interface TiGooglemapsView : TiUIView <GMSMapViewDelegate, GMUClusterManagerDelegate, GMUClusterRendererDelegate>

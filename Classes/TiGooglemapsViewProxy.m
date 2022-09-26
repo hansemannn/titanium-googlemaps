@@ -15,8 +15,7 @@
 #import "TiUtils.h"
 #import "math.h"
 #import <GoogleMaps/GMSGeometryUtils.h>
-
-#import "GMUMarkerClustering.h"
+#import <GoogleMapsUtils/GoogleMapsUtils.h>
 
 const CGFloat LN2 = 0.6931471805599453;
 

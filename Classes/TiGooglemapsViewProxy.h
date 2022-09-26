@@ -12,7 +12,6 @@
 #import "TiViewProxy.h"
 
 @interface TiGooglemapsViewProxy : TiViewProxy <GMSMapViewDelegate> {
-  TiGooglemapsViewProxy *mapView;
   NSMutableArray<TiGooglemapsAnnotationProxy *> *markers;
   NSMutableArray *overlays;
 

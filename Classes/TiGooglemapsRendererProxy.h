@@ -6,8 +6,7 @@
  */
 #import "TiProxy.h"
 
-#import "GMUGeometryRenderer.h"
-#import "GMUKMLParser.h"
+#import <GoogleMapsUtils/GoogleMapsUtils.h>
 
 @interface TiGooglemapsRendererProxy : TiProxy {
   GMUGeometryRenderer *_renderer;
