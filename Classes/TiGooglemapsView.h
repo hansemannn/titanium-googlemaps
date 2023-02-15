@@ -9,7 +9,9 @@
 #import "TiUIView.h"
 #import "TiClusterRenderer.h"
 
-@interface TiGooglemapsView : TiUIView <GMSMapViewDelegate, GMUClusterManagerDelegate, GMUClusterRendererDelegate>
+@interface TiGooglemapsView : TiUIView <GMSMapViewDelegate, GMUClusterManagerDelegate, GMUClusterRendererDelegate> {
+  BOOL _centerAnnotationOnTap;
+}
 
 @property (nonatomic, strong) GMSMapView *mapView;
 

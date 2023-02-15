@@ -31,6 +31,7 @@ static NSString *const kGMUMyLocationKeyPath = @"myLocation";
 {
   if (_mapView == nil) {
     _mapView = [[GMSMapView alloc] initWithFrame:[self bounds]];
+    _centerAnnotationOnTap = YES;
     [_mapView setMapType:kGMSTypeNormal];
     [_mapView setDelegate:self];
     [_mapView setAutoresizingMask:UIViewAutoresizingNone];
@@ -232,7 +233,7 @@ static NSString *const kGMUMyLocationKeyPath = @"myLocation";
                  }];
   }
 
-  return NO;
+  return _centerAnnotationOnTap;
 }
 
 - (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker
@@ -389,6 +390,11 @@ static NSString *const kGMUMyLocationKeyPath = @"myLocation";
     @"title" : marker.title ?: [NSNull null],
     @"subtitle" : marker.snippet ?: [NSNull null]
   };
+}
+
+- (void)setCenterAnnotationOnTap_:(id)value
+{
+  _centerAnnotationOnTap = [TiUtils boolValue:value];
 }
 
 - (id)overlayTypeFromOverlay:(GMSOverlay *)overlay
