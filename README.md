@@ -1,4 +1,4 @@
-# Native GoogleMaps iOS SDK in Appcelerator Titanium 
+# Native GoogleMaps iOS SDK in Appcelerator Titanium
 
 [![License](http://hans-knoechel.de/shields/shield-license.svg?v=2)](./LICENSE)  [![Contact](http://hans-knoechel.de/shields/shield-twitter.svg?v=2)](http://twitter.com/hansemannnn)
 
@@ -89,7 +89,7 @@ If you want to build the module from the source, you need to check some things b
 
 ### Map View
 
-A map view creates the view on which annotations and overlays can be added to. You can see all possible events in the demo app. 
+A map view creates the view on which annotations and overlays can be added to. You can see all possible events in the demo app.
 In addition, you can specify one of the following constants to the `mapType` property:
  - `MAP_TYPE_NORMAL`
  - `MAP_TYPE_HYBRID`
@@ -100,7 +100,7 @@ In addition, you can specify one of the following constants to the `mapType` pro
 ```js
 const mapView = maps.createView({
     mapType: maps.MAP_TYPE_TERRAIN,
-    indoorEnabled: true, // shows indoor capabilities (see "Indoor Navigation" section) 
+    indoorEnabled: true, // shows indoor capabilities (see "Indoor Navigation" section)
     indoorPicker: true, // shows the vertical floor level (see "Indoor Navigation" section)
     compassButton: true, // shows the compass (top/right) when bearing is non-zero
     myLocationEnabled: true, // default: false
@@ -153,8 +153,8 @@ The module supports all native delegates - exposed as events. These are:
 - [x] dragend
 - [x] complete
 
-> Note: For annotations, the latitude, longitude and userData is returned, not the whole annotation proxy to keep the 
-> performance at it's best. If you want to identify an annotation, either use the generated UUID string in the `userData` 
+> Note: For annotations, the latitude, longitude and userData is returned, not the whole annotation proxy to keep the
+> performance at it's best. If you want to identify an annotation, either use the generated UUID string in the `userData`
 > or set an own key in the `userData` property of your annotation.
 
 #### Map Controls
@@ -252,7 +252,7 @@ mapView.animateToViewingAngle(30);
 
 ```js
 const imageBlob = mapView.takeSnapshot({
-    width: 300, 
+    width: 300,
     width: 300
 });
 ```
@@ -283,7 +283,7 @@ cameraUpdate.zoomOut();
 ```js
 // The second parameter is optional
 cameraUpdate.zoom(4, {
-    x: 100, 
+    x: 100,
     y: 100
 });
 ```
@@ -317,11 +317,11 @@ cameraUpdate.fitBounds({
     insets: {top: 10, left: 10, bottom: 10, right: 10},
     bounds: {
         coordinate1: {
-            latitude: 10.0, 
+            latitude: 10.0,
             longitude: 10.0
-        }, 
+        },
         coordinate2: {
-            latitude: 12.0, 
+            latitude: 12.0,
             longitude: 12.0
         }
     }
@@ -330,7 +330,7 @@ cameraUpdate.fitBounds({
 - [x] **scrollBy**
 ```js
 cameraUpdate.scrollBy({
-    x: 100, 
+    x: 100,
     y: 100
 });
 ```
@@ -347,7 +347,7 @@ mapView.animateWithCameraUpdate(cameraUpdate);
 
 ### Annotations
 
-An annotation represents a location specified by at least a `title` and a `subtitle` property. 
+An annotation represents a location specified by at least a `title` and a `subtitle` property.
 It can be added to a map view:
 
 ```js
@@ -414,7 +414,7 @@ You can update the location of an Annotation by using:
 annotation.updateLocation({
     // Required
     latitude: 36.368122,
-    longitude: -125.913653, 
+    longitude: -125.913653,
 
     // Optional
     animated: true,
@@ -471,6 +471,17 @@ mapView.addAnnotations([anno1,anno2,anno3]);
 mapView.removeAnnotation(anno4);
 ```
 
+Use a module-generated custom pin to improve performance by decrease crossing the bridge
+and retaining Titanium proxies natively. Compared to `image`, you don't pass a blob but only a file
+reference and compared to `customView`, you don't have to pass JS proxies to the module:
+```js
+const annotation = maps.createAnnotation({
+    latitude: 37.368122,
+    longitude: -121.913653,
+    customIcon: { title: '3+', image: '/images/pin.png', tintColor: 'red', textColor: 'white' }
+});
+```
+
 Remove Annotations by passing an array of Annotations:
 ```js
 mapView.removeAnnotations([anno1,anno2,anno3]);
@@ -525,7 +536,7 @@ mapView.addHeatmapLayer(heatmap);
 ### Autocomplete Dialog
 
 A autocomplete dialog can be opened modally to search for places in realtime. A number of events
-helps to work with partial results and final selections. 
+helps to work with partial results and final selections.
 
 The whole dialog can be styled (like in the following example) and the default native theming is light.
 
@@ -639,7 +650,7 @@ You can get a list of all currently added circles by using `mapView.circles`;
 
 ### Clustering
 
-You can cluster multiple items by using the Clustering API. 
+You can cluster multiple items by using the Clustering API.
 
 First, create a few cluster items using the `ClusterItem`:
 ```js
@@ -649,7 +660,7 @@ const clusterItem = maps.createClusterItem({
     // Required
     latitude: 37.368122,
     longitude: -121.913653,
-    
+
     // Optional - for now only this three properties available
     title: 'My Annotation',
     subtitle: 'Hello World!',
@@ -788,7 +799,7 @@ maps.reverseGeocoder(36.368122, -120.913653, event => {
 
 There are a number of special API's to deal with indoor-navigtion in GoogleMaps. Inside a `View` instance,
 you can enabled indoor-navigation by setting `indoorEnabled` to `true`. To show the the vertical floor levels
-in your map-instance, set `indoorPicker` to `true`. 
+in your map-instance, set `indoorPicker` to `true`.
 
 To receive the indoor-display, use the `indoorDisplay` getter,
 which has the following events to be notified when the indoor-navigation changes:
@@ -805,7 +816,7 @@ which has the following events to be notified when the indoor-navigation changes
 In addition to the above events, you can also communicate with the indoor-display by receiving the `activeBuilding`
 and `activeLevel` properties. Finally, when receiving the floor-level inside the `level` property of the
 `didChangeActiveBuilding` event, you can set the `activeLevel` property as well, to change the currently active
-floor-level. 
+floor-level.
 
 ### Directions
 
@@ -831,7 +842,7 @@ The polyline points will be received encoded:
 }
 ```
 To decode the polyline points, use the `maps.decodePolylinePoints(points)` utility method or [this utility](https://github.com/mapbox/polyline).
-                                                                                                                   
+
 Note that this is not officially supported in the Google Maps iOS SDK. It has been exposed
 by using the REST-API in combination with the `NSURLSession` API and the provided API key.
 
@@ -858,8 +869,8 @@ console.log(`geometryContainsLocation: ${geometryContainsLocation}`);
 
 #### `geometryDistanceBetweenPoints`
 
-Get the geometry distance between two given points in meters. 
-The geodesic is included in the calculation. 
+Get the geometry distance between two given points in meters.
+The geodesic is included in the calculation.
 
 ```js
 const location1 = { latitude: 52.687489, longitude: 7.291130 };

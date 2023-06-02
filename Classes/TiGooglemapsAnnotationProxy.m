@@ -125,6 +125,37 @@
   [self replaceValue:value forKey:@"image" notification:NO];
 }
 
+- (void)setCustomIcon:(id)value
+{
+  ENSURE_UI_THREAD_1_ARG(value);
+  ENSURE_TYPE(value, NSDictionary);
+
+  UIColor *textColor = [TiUtils colorValue:value[@"textColor"]].color;
+  UIColor *tintColor = [TiUtils colorValue:value[@"tintColor"]].color;
+  NSString *title = [TiUtils stringValue:value[@"title"]];
+  UIImage *image = [TiUtils image:value[@"image"] proxy:self];
+  
+  UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+  imageView.frame = CGRectMake(0, 0, image.size.width, image.size.height);
+  if (tintColor != nil) {
+    imageView.tintColor = tintColor;
+    imageView.image = [imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+  }
+  
+  UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, image.size.width, image.size.width)];
+  [titleLabel setFont:[TiUtils fontValue:value[@"font"]].font];
+  [titleLabel setText:title];
+  [titleLabel setTextAlignment:NSTextAlignmentCenter];
+  [titleLabel setTextColor:textColor];
+  
+  UIView *container = [[UIView alloc] initWithFrame:imageView.bounds];
+  [container addSubview:imageView];
+  [container addSubview:titleLabel];
+
+  [[self marker] setIconView:container];
+  [self replaceValue:value forKey:@"customIcon" notification:NO];
+}
+
 - (void)setPinColor:(id)value
 {
   ENSURE_UI_THREAD_1_ARG(value);
