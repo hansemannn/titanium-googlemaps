@@ -153,6 +153,8 @@
   [container addSubview:titleLabel];
 
   [[self marker] setIconView:container];
+  [[self marker] setTracksViewChanges:NO];
+
   [self replaceValue:value forKey:@"customIcon" notification:NO];
 }
 
