@@ -11,7 +11,7 @@
 @interface TiPOIItem : NSObject <GMUClusterItem>
 
 @property (nonatomic, readonly) CLLocationCoordinate2D position;
-@property (nonatomic, readonly) NSString *title;
+@property (nonatomic, copy) NSString *title;
 @property (nonatomic, readonly) NSString *subtitle;
 @property (nonatomic, readonly) UIImage *icon;
 @property (nonatomic, readonly) NSDictionary *userData;
