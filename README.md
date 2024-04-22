@@ -2,7 +2,7 @@
 
 [![License](http://hans-knoechel.de/shields/shield-license.svg?v=2)](./LICENSE)  [![Contact](http://hans-knoechel.de/shields/shield-twitter.svg?v=2)](http://twitter.com/hansemannnn)
 
-<img width="1094" src="https://abload.de/img/687474703a2f2f61626c6ymjhw.jpg">
+<img width="1094" src="https://s20.directupload.net/images/240422/48blkzia.jpg">
 
 ## Summary
 
