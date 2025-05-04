@@ -30,7 +30,12 @@ static NSString *const kGMUMyLocationKeyPath = @"myLocation";
 - (GMSMapView *)mapView
 {
   if (_mapView == nil) {
-    _mapView = [[GMSMapView alloc] initWithFrame:[self bounds]];
+    GMSMapViewOptions *options = [[GMSMapViewOptions alloc] init];
+    options.frame = self.bounds;
+    options.backgroundColor = UIColor.systemBackgroundColor;
+    
+    _mapView = [[GMSMapView alloc] initWithOptions:options];
+
     _centerAnnotationOnTap = YES;
     [_mapView setMapType:kGMSTypeNormal];
     [_mapView setDelegate:self];
