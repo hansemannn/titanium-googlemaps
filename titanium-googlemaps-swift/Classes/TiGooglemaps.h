@@ -14,4 +14,4 @@ FOUNDATION_EXPORT double TiGooglemapsVersionNumber;
 //! Project version string for TiGooglemaps.
 FOUNDATION_EXPORT const unsigned char TiGooglemapsVersionString[];
 
-#import "TiGooglemapsModuleAssets.h"
+#import <TiGooglemaps/TiGooglemapsModuleAssets.h>

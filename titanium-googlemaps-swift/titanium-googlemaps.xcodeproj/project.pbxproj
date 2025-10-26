@@ -7,11 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3ACE51242EAE534B00B5B1AD /* TiGooglemapsClusterItemProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE51232EAE534B00B5B1AD /* TiGooglemapsClusterItemProxy.swift */; };
+		3ACE51282EAE546D00B5B1AD /* GoogleMapsUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 3ACE51272EAE546D00B5B1AD /* GoogleMapsUtils */; };
+		3ACE512A2EAE54EC00B5B1AD /* TiGooglemapsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE51292EAE54EC00B5B1AD /* TiGooglemapsView.swift */; };
+		3ACE512C2EAE54FB00B5B1AD /* TiGooglemapsViewProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE512B2EAE54FB00B5B1AD /* TiGooglemapsViewProxy.swift */; };
+		3ACE51302EAE561D00B5B1AD /* TiGooglemapsCameraUpdateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE512F2EAE561D00B5B1AD /* TiGooglemapsCameraUpdateProxy.swift */; };
+		3ACE51322EAE562B00B5B1AD /* TiGooglemapsHeatmapLayerProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE51312EAE562B00B5B1AD /* TiGooglemapsHeatmapLayerProxy.swift */; };
+		3ACE51342EAE565200B5B1AD /* TiGooglemapsTileProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE51332EAE565200B5B1AD /* TiGooglemapsTileProxy.swift */; };
+		3ACE51362EAE566500B5B1AD /* TiGooglemapsIndoorDisplayProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE51352EAE566500B5B1AD /* TiGooglemapsIndoorDisplayProxy.swift */; };
+		3ACE51382EAE567E00B5B1AD /* TiGooglemapsPolygonProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE51372EAE567E00B5B1AD /* TiGooglemapsPolygonProxy.swift */; };
+		3ACE513C2EAE569C00B5B1AD /* TiGooglemapsAnnotationProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE513B2EAE569C00B5B1AD /* TiGooglemapsAnnotationProxy.swift */; };
+		3ACE513E2EAE56BA00B5B1AD /* TiGooglemapsCircleProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE513D2EAE56BA00B5B1AD /* TiGooglemapsCircleProxy.swift */; };
+		3ACE51482EAE572700B5B1AD /* TiGooglemapsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE51472EAE572700B5B1AD /* TiGooglemapsConstants.swift */; };
+		3ACE514B2EAE580000B5B1AD /* TiGooglemapsAutocompleteDialogProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE514A2EAE580000B5B1AD /* TiGooglemapsAutocompleteDialogProxy.swift */; };
+		3ACE514D2EAE580000B5B1AD /* TiGooglemapsIndoorLevelProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE514C2EAE580000B5B1AD /* TiGooglemapsIndoorLevelProxy.swift */; };
+		3ACE514F2EAE580100B5B1AD /* TiGooglemapsRendererProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE514E2EAE580100B5B1AD /* TiGooglemapsRendererProxy.swift */; };
+		3ACE514F2EAE753200B5B1AD /* TiGMSHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE514D2EAE753200B5B1AD /* TiGMSHTTPClient.swift */; };
+		3ACE51502EAE753200B5B1AD /* TiPOIItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE514E2EAE753200B5B1AD /* TiPOIItem.swift */; };
+		3ACE51512EAE753200B5B1AD /* TiClusterIconGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE514B2EAE753200B5B1AD /* TiClusterIconGenerator.swift */; };
+		3ACE51522EAE753200B5B1AD /* TiClusterRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE514C2EAE753200B5B1AD /* TiClusterRenderer.swift */; };
+		3ACE51542EAE756200B5B1AD /* TiGooglemapsPolylineProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE51532EAE756200B5B1AD /* TiGooglemapsPolylineProxy.swift */; };
 		3AF821012EAE32CA0008224F /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 3AF821002EAE32CA0008224F /* GoogleMaps */; };
 		3AF821042EAE33350008224F /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = 3AF821032EAE33350008224F /* GooglePlaces */; };
 		3AF821062EAE33350008224F /* GooglePlacesSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3AF821052EAE33350008224F /* GooglePlacesSwift */; };
 		B1E00E65241D179500C384C1 /* TitaniumKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1E00E64241D179500C384C1 /* TitaniumKit.xcframework */; };
-		DB24E03C20766AC90033B2B1 /* TiGooglemapsExampleProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB24E03B20766AC90033B2B1 /* TiGooglemapsExampleProxy.swift */; };
 		DB34CDE0207B998A005F8E8C /* TiGooglemapsModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = DB34CDDE207B998A005F8E8C /* TiGooglemapsModuleAssets.m */; };
 		DB34CDE1207B998A005F8E8C /* TiGooglemapsModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = DB34CDDF207B998A005F8E8C /* TiGooglemapsModuleAssets.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DB34CDE6207B9EBD005F8E8C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB34CDE5207B9EBD005F8E8C /* Foundation.framework */; };
@@ -21,8 +40,26 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3ACE51232EAE534B00B5B1AD /* TiGooglemapsClusterItemProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiGooglemapsClusterItemProxy.swift; path = Classes/TiGooglemapsClusterItemProxy.swift; sourceTree = "<group>"; };
+		3ACE51292EAE54EC00B5B1AD /* TiGooglemapsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiGooglemapsView.swift; path = Classes/TiGooglemapsView.swift; sourceTree = "<group>"; };
+		3ACE512B2EAE54FB00B5B1AD /* TiGooglemapsViewProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiGooglemapsViewProxy.swift; path = Classes/TiGooglemapsViewProxy.swift; sourceTree = "<group>"; };
+		3ACE512F2EAE561D00B5B1AD /* TiGooglemapsCameraUpdateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiGooglemapsCameraUpdateProxy.swift; path = Classes/TiGooglemapsCameraUpdateProxy.swift; sourceTree = "<group>"; };
+		3ACE51312EAE562B00B5B1AD /* TiGooglemapsHeatmapLayerProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiGooglemapsHeatmapLayerProxy.swift; path = Classes/TiGooglemapsHeatmapLayerProxy.swift; sourceTree = "<group>"; };
+		3ACE51332EAE565200B5B1AD /* TiGooglemapsTileProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiGooglemapsTileProxy.swift; path = Classes/TiGooglemapsTileProxy.swift; sourceTree = "<group>"; };
+		3ACE51352EAE566500B5B1AD /* TiGooglemapsIndoorDisplayProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiGooglemapsIndoorDisplayProxy.swift; path = Classes/TiGooglemapsIndoorDisplayProxy.swift; sourceTree = "<group>"; };
+		3ACE51372EAE567E00B5B1AD /* TiGooglemapsPolygonProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiGooglemapsPolygonProxy.swift; path = Classes/TiGooglemapsPolygonProxy.swift; sourceTree = "<group>"; };
+		3ACE513B2EAE569C00B5B1AD /* TiGooglemapsAnnotationProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiGooglemapsAnnotationProxy.swift; path = Classes/TiGooglemapsAnnotationProxy.swift; sourceTree = "<group>"; };
+		3ACE513D2EAE56BA00B5B1AD /* TiGooglemapsCircleProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiGooglemapsCircleProxy.swift; path = Classes/TiGooglemapsCircleProxy.swift; sourceTree = "<group>"; };
+		3ACE51472EAE572700B5B1AD /* TiGooglemapsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiGooglemapsConstants.swift; path = Classes/TiGooglemapsConstants.swift; sourceTree = "<group>"; };
+		3ACE514A2EAE580000B5B1AD /* TiGooglemapsAutocompleteDialogProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiGooglemapsAutocompleteDialogProxy.swift; path = Classes/TiGooglemapsAutocompleteDialogProxy.swift; sourceTree = "<group>"; };
+		3ACE514B2EAE753200B5B1AD /* TiClusterIconGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiClusterIconGenerator.swift; path = Classes/TiClusterIconGenerator.swift; sourceTree = "<group>"; };
+		3ACE514C2EAE580000B5B1AD /* TiGooglemapsIndoorLevelProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiGooglemapsIndoorLevelProxy.swift; path = Classes/TiGooglemapsIndoorLevelProxy.swift; sourceTree = "<group>"; };
+		3ACE514C2EAE753200B5B1AD /* TiClusterRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiClusterRenderer.swift; path = Classes/TiClusterRenderer.swift; sourceTree = "<group>"; };
+		3ACE514D2EAE753200B5B1AD /* TiGMSHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiGMSHTTPClient.swift; path = Classes/TiGMSHTTPClient.swift; sourceTree = "<group>"; };
+		3ACE514E2EAE580100B5B1AD /* TiGooglemapsRendererProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiGooglemapsRendererProxy.swift; path = Classes/TiGooglemapsRendererProxy.swift; sourceTree = "<group>"; };
+		3ACE514E2EAE753200B5B1AD /* TiPOIItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiPOIItem.swift; path = Classes/TiPOIItem.swift; sourceTree = "<group>"; };
+		3ACE51532EAE756200B5B1AD /* TiGooglemapsPolylineProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiGooglemapsPolylineProxy.swift; path = Classes/TiGooglemapsPolylineProxy.swift; sourceTree = "<group>"; };
 		B1E00E64241D179500C384C1 /* TitaniumKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TitaniumKit.xcframework; path = "$(TITANIUM_SDK)/iphone/Frameworks/TitaniumKit.xcframework"; sourceTree = "<group>"; };
-		DB24E03B20766AC90033B2B1 /* TiGooglemapsExampleProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiGooglemapsExampleProxy.swift; path = Classes/TiGooglemapsExampleProxy.swift; sourceTree = "<group>"; };
 		DB34CDDE207B998A005F8E8C /* TiGooglemapsModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsModuleAssets.m; path = Classes/TiGooglemapsModuleAssets.m; sourceTree = SOURCE_ROOT; };
 		DB34CDDF207B998A005F8E8C /* TiGooglemapsModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsModuleAssets.h; path = Classes/TiGooglemapsModuleAssets.h; sourceTree = SOURCE_ROOT; };
 		DB34CDE5207B9EBD005F8E8C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -39,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3ACE51282EAE546D00B5B1AD /* GoogleMapsUtils in Frameworks */,
 				DB34CDE6207B9EBD005F8E8C /* Foundation.framework in Frameworks */,
 				3AF821062EAE33350008224F /* GooglePlacesSwift in Frameworks */,
 				3AF821042EAE33350008224F /* GooglePlaces in Frameworks */,
@@ -67,7 +105,25 @@
 			isa = PBXGroup;
 			children = (
 				DB52E2421E9CD0F800AAAEE0 /* TiGooglemapsModule.swift */,
-				DB24E03B20766AC90033B2B1 /* TiGooglemapsExampleProxy.swift */,
+				3ACE51232EAE534B00B5B1AD /* TiGooglemapsClusterItemProxy.swift */,
+				3ACE51292EAE54EC00B5B1AD /* TiGooglemapsView.swift */,
+				3ACE512B2EAE54FB00B5B1AD /* TiGooglemapsViewProxy.swift */,
+				3ACE512F2EAE561D00B5B1AD /* TiGooglemapsCameraUpdateProxy.swift */,
+				3ACE51312EAE562B00B5B1AD /* TiGooglemapsHeatmapLayerProxy.swift */,
+				3ACE51332EAE565200B5B1AD /* TiGooglemapsTileProxy.swift */,
+				3ACE51532EAE756200B5B1AD /* TiGooglemapsPolylineProxy.swift */,
+				3ACE51352EAE566500B5B1AD /* TiGooglemapsIndoorDisplayProxy.swift */,
+				3ACE514C2EAE580000B5B1AD /* TiGooglemapsIndoorLevelProxy.swift */,
+				3ACE51372EAE567E00B5B1AD /* TiGooglemapsPolygonProxy.swift */,
+				3ACE513B2EAE569C00B5B1AD /* TiGooglemapsAnnotationProxy.swift */,
+				3ACE513D2EAE56BA00B5B1AD /* TiGooglemapsCircleProxy.swift */,
+				3ACE514B2EAE753200B5B1AD /* TiClusterIconGenerator.swift */,
+				3ACE514C2EAE753200B5B1AD /* TiClusterRenderer.swift */,
+				3ACE514D2EAE753200B5B1AD /* TiGMSHTTPClient.swift */,
+				3ACE514E2EAE753200B5B1AD /* TiPOIItem.swift */,
+				3ACE514A2EAE580000B5B1AD /* TiGooglemapsAutocompleteDialogProxy.swift */,
+				3ACE514E2EAE580100B5B1AD /* TiGooglemapsRendererProxy.swift */,
+				3ACE51472EAE572700B5B1AD /* TiGooglemapsConstants.swift */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -148,7 +204,8 @@
 		DB52E2211E9CCD7000AAAEE0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1020;
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					DB52E2291E9CCD7000AAAEE0 = {
 						CreatedOnToolsVersion = 8.3;
@@ -195,9 +252,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB24E03C20766AC90033B2B1 /* TiGooglemapsExampleProxy.swift in Sources */,
+				3ACE51482EAE572700B5B1AD /* TiGooglemapsConstants.swift in Sources */,
+				3ACE51242EAE534B00B5B1AD /* TiGooglemapsClusterItemProxy.swift in Sources */,
+				3ACE51382EAE567E00B5B1AD /* TiGooglemapsPolygonProxy.swift in Sources */,
+				3ACE51362EAE566500B5B1AD /* TiGooglemapsIndoorDisplayProxy.swift in Sources */,
 				DB34CDE0207B998A005F8E8C /* TiGooglemapsModuleAssets.m in Sources */,
+				3ACE513C2EAE569C00B5B1AD /* TiGooglemapsAnnotationProxy.swift in Sources */,
+				3ACE51542EAE756200B5B1AD /* TiGooglemapsPolylineProxy.swift in Sources */,
+				3ACE514F2EAE753200B5B1AD /* TiGMSHTTPClient.swift in Sources */,
+				3ACE51502EAE753200B5B1AD /* TiPOIItem.swift in Sources */,
+				3ACE51512EAE753200B5B1AD /* TiClusterIconGenerator.swift in Sources */,
+				3ACE51522EAE753200B5B1AD /* TiClusterRenderer.swift in Sources */,
+				3ACE513E2EAE56BA00B5B1AD /* TiGooglemapsCircleProxy.swift in Sources */,
+				3ACE51322EAE562B00B5B1AD /* TiGooglemapsHeatmapLayerProxy.swift in Sources */,
 				DB52E2431E9CD0F800AAAEE0 /* TiGooglemapsModule.swift in Sources */,
+				3ACE51302EAE561D00B5B1AD /* TiGooglemapsCameraUpdateProxy.swift in Sources */,
+				3ACE51342EAE565200B5B1AD /* TiGooglemapsTileProxy.swift in Sources */,
+				3ACE512C2EAE54FB00B5B1AD /* TiGooglemapsViewProxy.swift in Sources */,
+				3ACE512A2EAE54EC00B5B1AD /* TiGooglemapsView.swift in Sources */,
+				3ACE514B2EAE580000B5B1AD /* TiGooglemapsAutocompleteDialogProxy.swift in Sources */,
+				3ACE514D2EAE580000B5B1AD /* TiGooglemapsIndoorLevelProxy.swift in Sources */,
+				3ACE514F2EAE580100B5B1AD /* TiGooglemapsRendererProxy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +312,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -248,8 +324,11 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;
+				ENABLE_CODE_COVERAGE = NO;
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
+				ENABLE_TESTABILITY = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -264,10 +343,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -303,6 +384,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -314,8 +396,12 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;
+				ENABLE_CODE_COVERAGE = NO;
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -324,9 +410,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -344,8 +432,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -353,6 +440,9 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = NO;
+				ENABLE_CODE_COVERAGE = NO;
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_TESTABILITY = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -362,13 +452,14 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				OTHER_CFLAGS = (
 					"-DDEBUG",
 					"-DTI_POST_1_2",
@@ -380,9 +471,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appcelerator.titanium-googlemaps";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Titanium";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = Debug;
@@ -393,8 +489,7 @@
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -402,6 +497,9 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = NO;
+				ENABLE_CODE_COVERAGE = NO;
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_TESTABILITY = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -411,13 +509,14 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				OTHER_CFLAGS = "-DTI_POST_1_2";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -426,8 +525,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appcelerator.titanium-googlemaps";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Titanium";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = Release;
@@ -483,6 +587,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3ACE51272EAE546D00B5B1AD /* GoogleMapsUtils */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3AF821072EAE33FA0008224F /* XCRemoteSwiftPackageReference "google-maps-ios-utils" */;
+			productName = GoogleMapsUtils;
+		};
 		3AF821002EAE32CA0008224F /* GoogleMaps */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3AF820FF2EAE32CA0008224F /* XCRemoteSwiftPackageReference "ios-maps-sdk" */;
