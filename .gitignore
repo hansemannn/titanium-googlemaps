@@ -22,3 +22,5 @@ xcuserdata/
 *.xcscmblueprint
 /build
 /Carthage
+build
+modules

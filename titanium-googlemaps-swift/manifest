@@ -1,0 +1,19 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 1.0.0
+apiversion: 2
+architectures: arm64 x86_64
+mac: false
+description: titanium-googlemaps
+author: Your Name
+license: Specify your license
+copyright: Copyright (c) 2025 by Your Company
+
+# these should not be edited
+name: titanium-googlemaps
+moduleid: ti.googlemaps
+guid: a599acf0-6c26-4190-965d-b3f8ca5b32de
+platform: iphone
+minsdk: 13.0.1
