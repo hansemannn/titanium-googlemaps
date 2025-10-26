@@ -1,1 +1,1 @@
-{"exports":[]}
+{"exports":[],"spm":{"version":1,"dependencies":[{"remotePackageReference":"ios-maps-sdk","repositoryURL":"https://github.com/googlemaps/ios-maps-sdk","requirementKind":"upToNextMajorVersion","requirementMinimumVersion":"9.4.0","linkage":"embedded","products":[{"productName":"GoogleMaps","frameworkName":"GoogleMaps","linkage":"host"}]}]}}

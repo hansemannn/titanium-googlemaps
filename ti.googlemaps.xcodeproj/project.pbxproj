@@ -18,9 +18,7 @@
 		3A433F031BE9AB270005C8AE /* TiGooglemapsPolygonProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A433F011BE9AB270005C8AE /* TiGooglemapsPolygonProxy.m */; };
 		3A433F071BE9AE620005C8AE /* TiGooglemapsCircleProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A433F051BE9AE620005C8AE /* TiGooglemapsCircleProxy.h */; };
 		3A433F081BE9AE620005C8AE /* TiGooglemapsCircleProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A433F061BE9AE620005C8AE /* TiGooglemapsCircleProxy.m */; };
-		3A5942DC2806163A00664CD0 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A5942DB2806163A00664CD0 /* Metal.framework */; };
 		3A7097E21BF1CD9B0044DBFB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900A31BC1ED7800172627 /* ImageIO.framework */; };
-		3AC1DD1F2DC78CC9008865C2 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 3AC1DD1E2DC78CC9008865C2 /* GoogleMaps */; };
 		3AC1DD232DC78DF0008865C2 /* GooglePlaces.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC1DD222DC78DF0008865C2 /* GooglePlaces.xcframework */; };
 		3AC1DD252DC78EDF008865C2 /* TitaniumKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC1DD242DC78EDF008865C2 /* TitaniumKit.xcframework */; };
 		3ACA7B111D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ACA7B0F1D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.h */; };
@@ -42,6 +40,8 @@
 		3AF900B81BC1ED7800172627 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900A81BC1ED7800172627 /* QuartzCore.framework */; };
 		3AF900B91BC1ED7800172627 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900A91BC1ED7800172627 /* Security.framework */; };
 		3AF900BA1BC1ED7800172627 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900AA1BC1ED7800172627 /* SystemConfiguration.framework */; };
+		3AFF716C2EAE00490013C4F9 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AFF716B2EAE00490013C4F9 /* Metal.framework */; };
+		3AFF71732EAE03AA0013C4F9 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 3AFF71722EAE03AA0013C4F9 /* GoogleMaps */; };
 		AA747D9F0F9514B9006C5449 /* TiGooglemaps_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* TiGooglemaps_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		DB0C69541E49D6DF000F8FA2 /* TiGMSHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = DB0C69521E49D6DF000F8FA2 /* TiGMSHTTPClient.h */; };
@@ -81,7 +81,6 @@
 		3A433F011BE9AB270005C8AE /* TiGooglemapsPolygonProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsPolygonProxy.m; path = Classes/TiGooglemapsPolygonProxy.m; sourceTree = "<group>"; };
 		3A433F051BE9AE620005C8AE /* TiGooglemapsCircleProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsCircleProxy.h; path = Classes/TiGooglemapsCircleProxy.h; sourceTree = "<group>"; };
 		3A433F061BE9AE620005C8AE /* TiGooglemapsCircleProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsCircleProxy.m; path = Classes/TiGooglemapsCircleProxy.m; sourceTree = "<group>"; };
-		3A5942DB2806163A00664CD0 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/System/Library/Frameworks/Metal.framework; sourceTree = DEVELOPER_DIR; };
 		3AC1DD222DC78DF0008865C2 /* GooglePlaces.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GooglePlaces.xcframework; path = platform/GooglePlaces.xcframework; sourceTree = "<group>"; };
 		3AC1DD242DC78EDF008865C2 /* TitaniumKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TitaniumKit.xcframework; path = "/Users/hans/Library/Application Support/Titanium/mobilesdk/osx/12.7.0.GA/iphone/Frameworks/TitaniumKit.xcframework"; sourceTree = "<absolute>"; };
 		3ACA7B0F1D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsAutocompleteDialogProxy.h; path = Classes/TiGooglemapsAutocompleteDialogProxy.h; sourceTree = "<group>"; };
@@ -105,6 +104,7 @@
 		3AF900A81BC1ED7800172627 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3AF900A91BC1ED7800172627 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3AF900AA1BC1ED7800172627 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		3AFF716B2EAE00490013C4F9 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk/System/Library/Frameworks/Metal.framework; sourceTree = DEVELOPER_DIR; };
 		AA747D9E0F9514B9006C5449 /* TiGooglemaps_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiGooglemaps_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libTiGooglemaps.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTiGooglemaps.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,7 +137,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A5942DC2806163A00664CD0 /* Metal.framework in Frameworks */,
 				3AC1DD232DC78DF0008865C2 /* GooglePlaces.xcframework in Frameworks */,
 				3AF900AB1BC1ED7800172627 /* Accelerate.framework in Frameworks */,
 				3AF900AC1BC1ED7800172627 /* AVFoundation.framework in Frameworks */,
@@ -146,12 +145,13 @@
 				3AF900AE1BC1ED7800172627 /* CoreData.framework in Frameworks */,
 				3AF900AF1BC1ED7800172627 /* CoreGraphics.framework in Frameworks */,
 				3AF900B01BC1ED7800172627 /* CoreLocation.framework in Frameworks */,
-				3AC1DD1F2DC78CC9008865C2 /* GoogleMaps in Frameworks */,
 				3AF900B11BC1ED7800172627 /* CoreText.framework in Frameworks */,
+				3AFF716C2EAE00490013C4F9 /* Metal.framework in Frameworks */,
 				3AF900B71BC1ED7800172627 /* OpenGLES.framework in Frameworks */,
 				3AF900B81BC1ED7800172627 /* QuartzCore.framework in Frameworks */,
 				3AF900B91BC1ED7800172627 /* Security.framework in Frameworks */,
 				3AF900BA1BC1ED7800172627 /* SystemConfiguration.framework in Frameworks */,
+				3AFF71732EAE03AA0013C4F9 /* GoogleMaps in Frameworks */,
 				3AC1DD252DC78EDF008865C2 /* TitaniumKit.xcframework in Frameworks */,
 				3A7097E21BF1CD9B0044DBFB /* ImageIO.framework in Frameworks */,
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
@@ -183,9 +183,9 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3A5942DB2806163A00664CD0 /* Metal.framework */,
 				3AC1DD222DC78DF0008865C2 /* GooglePlaces.xcframework */,
 				3A2B2B3A28D2464100915BB4 /* GoogleMapsUtils.xcframework */,
+				3AFF716B2EAE00490013C4F9 /* Metal.framework */,
 				3AF9009B1BC1ED7800172627 /* Accelerate.framework */,
 				3AF9009C1BC1ED7800172627 /* AVFoundation.framework */,
 				3AF9009D1BC1ED7800172627 /* CoreBluetooth.framework */,
@@ -766,7 +766,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3AC1DD1E2DC78CC9008865C2 /* GoogleMaps */ = {
+		3AFF71722EAE03AA0013C4F9 /* GoogleMaps */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3AC1DD1D2DC78CC9008865C2 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */;
 			productName = GoogleMaps;
