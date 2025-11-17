@@ -39,9 +39,7 @@
 
 - (void)enableMetalRenderer:(id)unused
 {
-  TiThreadPerformOnMainThread(^{
-    [GMSServices setMetalRendererEnabled:YES];
-  }, NO);
+  NSLog(@"[WARN] Calls to this methods are now deprecated, as Metal is the default renderer for Google Places.");
 }
 
 - (NSString *)openSourceLicenseInfo
