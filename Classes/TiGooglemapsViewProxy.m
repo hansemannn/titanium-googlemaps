@@ -536,7 +536,7 @@ const CGFloat LN2 = 0.6931471805599453;
     dispatch_async(dispatch_get_main_queue(), ^{
       GMSCircle *circle = [circleProxy circle];
 
-      // Maps SDK 9.x crashes when a circle without a valid center is added to the map.
+      // Maps SDK 9 and later crash when a circle without a valid center is added to the map.
       if (!CLLocationCoordinate2DIsValid(circle.position)) {
         NSLog(@"[ERROR] Ti.GoogleMaps: Cannot add a circle without a valid center.");
         return;

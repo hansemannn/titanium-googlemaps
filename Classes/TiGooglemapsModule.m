@@ -39,7 +39,7 @@
 
 - (void)enableMetalRenderer:(id)unused
 {
-  NSLog(@"[WARN] Calls to this methods are now deprecated, as Metal is the default renderer for Google Places.");
+  NSLog(@"[WARN] Calls to this methods are now deprecated, as Metal is the default renderer for Google Maps.");
 }
 
 - (NSString *)openSourceLicenseInfo

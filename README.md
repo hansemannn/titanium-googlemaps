@@ -14,7 +14,6 @@ Ti.GoogleMaps is an open-source project to support the Google Maps iOS-SDK in Ap
 - [x] Polygon overlay
 - [x] Polyline overlay
 - [x] Circle overlay
-- [x] Autocompletion dialog
 - [x] Clustering
 - [x] Directions
 - [x] Heatmap Layers
@@ -23,7 +22,7 @@ Ti.GoogleMaps is an open-source project to support the Google Maps iOS-SDK in Ap
 ## Requirements
 
   - Titanium 13.1.0+ (the first release that reads the module's Swift package dependencies)
-  - Minimum Deployment Target iOS 15+ (Google Maps SDK 9.x)
+  - Minimum Deployment Target iOS 16+ (Google Maps SDK 11.x)
 
 ## Download, Setup and Build
 
@@ -544,35 +543,6 @@ const heatmap = maps.createHeatmapLayer({
 // Add the layer to your map-view
 mapView.addHeatmapLayer(heatmap);
 ```
-
-### Autocomplete Dialog
-
-A autocomplete dialog can be opened modally to search for places in realtime. A number of events
-helps to work with partial results and final selections.
-
-The whole dialog can be styled (like in the following example) and the default native theming is light.
-
-```js
-const dialog = GoogleMaps.createAutocompleteDialog({
-    tableCellBackgroundColor: '#333',
-    tableCellSeparatorColor: '#444',
-    primaryTextColor: '#fff',
-    primaryTextHighlightColor: 'blue',
-    tintColor: 'blue'
-});
-
-// You need a Google Places API key from the Google Developer Console
-// This is not the same one like your Google Maps API key
-dialog.configure('<YOUR_GOOGLE_PLACES_API_KEY>');
-
-dialog.open();
-```
-
-#### Autocomplete Events
-
-- [x] success
-- [x] error
-- [x] cancel
 
 ### Overlays
 

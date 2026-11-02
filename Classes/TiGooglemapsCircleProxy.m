@@ -33,7 +33,7 @@
 
   CLLocationCoordinate2D position = [self positionFromPoint:args];
 
-  // Maps SDK 9.x crashes in -[GMSCircle setMap:] for an invalid center, where older versions ignored it.
+  // Maps SDK 9 and later crash in -[GMSCircle setMap:] for an invalid center, where older versions ignored it.
   // A common cause is passing [latitude, longitude] instead of [longitude, latitude].
   if (!CLLocationCoordinate2DIsValid(position)) {
     NSLog(@"[ERROR] Ti.GoogleMaps: Invalid circle center (latitude %f, longitude %f). Arrays are [longitude, latitude].", position.latitude, position.longitude);

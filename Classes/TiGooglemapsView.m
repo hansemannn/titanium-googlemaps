@@ -36,8 +36,8 @@ static NSString *const kGMUMyLocationKeyPath = @"myLocation";
     
     _mapView = [[GMSMapView alloc] initWithOptions:options];
 
-    // Maps SDK 9.x pins the map to Light by default. Unspecified lets it follow
-    // the inherited trait collection (system setting or Ti.UI.overrideUserInterfaceStyle).
+    // Follow the inherited trait collection (system setting or Ti.UI.overrideUserInterfaceStyle).
+    // This is the Maps SDK default from 10.0 (9.x defaulted to Light); set explicitly so it never depends on that default.
     _mapView.overrideUserInterfaceStyle = UIUserInterfaceStyleUnspecified;
 
     _centerAnnotationOnTap = YES;

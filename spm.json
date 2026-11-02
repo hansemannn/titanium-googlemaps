@@ -4,7 +4,7 @@
 			"remotePackageReference": "ios-maps-sdk",
 			"repositoryURL": "https://github.com/googlemaps/ios-maps-sdk",
 			"requirementKind": "upToNextMajorVersion",
-			"requirementMinimumVersion": "9.4.0",
+			"requirementMinimumVersion": "11.2.0",
 			"products": [
 				{
 					"productName": "GoogleMaps",
