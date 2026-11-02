@@ -12,7 +12,7 @@ var win = Ti.UI.createWindow({
     extendEdges: [Ti.UI.EXTEND_EDGE_ALL]
 });
 
-var nav = Ti.UI.iOS.createNavigationWindow({
+var nav = Ti.UI.createNavigationWindow({
     window: win
 });
 

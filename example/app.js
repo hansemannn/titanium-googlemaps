@@ -11,7 +11,7 @@ var win = Ti.UI.createWindow({
     extendEdges: [Ti.UI.EXTEND_EDGE_ALL]
 });
 
-var nav = Ti.UI.iOS.createNavigationWindow({
+var nav = Ti.UI.createNavigationWindow({
     window: win
 });
 
@@ -218,7 +218,7 @@ mapView.addPolygon(polygon);
  *  Overlays - Circle
  */
 var circle = maps.createCircle({
-    center: [companies.appcelerator.latitude, companies.appcelerator.longitude], // Can handle both object and array
+    center: { latitude: companies.appcelerator.latitude, longitude: companies.appcelerator.longitude }, // An array is [longitude, latitude]
     radius: 5 * 1000, // 5km
     // fillColor: 'green',
     strokeWidth: 3,
