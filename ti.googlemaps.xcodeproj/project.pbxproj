@@ -82,7 +82,7 @@
 		3A433F051BE9AE620005C8AE /* TiGooglemapsCircleProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsCircleProxy.h; path = Classes/TiGooglemapsCircleProxy.h; sourceTree = "<group>"; };
 		3A433F061BE9AE620005C8AE /* TiGooglemapsCircleProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsCircleProxy.m; path = Classes/TiGooglemapsCircleProxy.m; sourceTree = "<group>"; };
 		3AC1DD222DC78DF0008865C2 /* GooglePlaces.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GooglePlaces.xcframework; path = platform/GooglePlaces.xcframework; sourceTree = "<group>"; };
-		3AC1DD242DC78EDF008865C2 /* TitaniumKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TitaniumKit.xcframework; path = "/Users/hans/Library/Application Support/Titanium/mobilesdk/osx/12.7.0.GA/iphone/Frameworks/TitaniumKit.xcframework"; sourceTree = "<absolute>"; };
+		3AC1DD242DC78EDF008865C2 /* TitaniumKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TitaniumKit.xcframework; path = "$(TITANIUM_SDK)/iphone/Frameworks/TitaniumKit.xcframework"; sourceTree = "<group>"; };
 		3ACA7B0F1D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsAutocompleteDialogProxy.h; path = Classes/TiGooglemapsAutocompleteDialogProxy.h; sourceTree = "<group>"; };
 		3ACA7B101D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsAutocompleteDialogProxy.m; path = Classes/TiGooglemapsAutocompleteDialogProxy.m; sourceTree = "<group>"; };
 		3ACF6A101CBA800600BC765B /* TiGooglemapsAnnotationProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsAnnotationProxy.h; path = Classes/TiGooglemapsAnnotationProxy.h; sourceTree = "<group>"; };
@@ -529,7 +529,7 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = (
 					"-DDEBUG",
@@ -577,7 +577,7 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = "-DTI_POST_1_2";
 				OTHER_LDFLAGS = "-ObjC";
@@ -647,7 +647,7 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-DDEBUG",
@@ -720,7 +720,7 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				OTHER_CFLAGS = "-DTI_POST_1_2";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = TiGooglemaps;
