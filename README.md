@@ -22,8 +22,8 @@ Ti.GoogleMaps is an open-source project to support the Google Maps iOS-SDK in Ap
 
 ## Requirements
 
-  - Titanium 10.0.0+
-  - Minimum Deployment Target iOS 13+
+  - Titanium 13.1.0+ (the first release that reads the module's Swift package dependencies)
+  - Minimum Deployment Target iOS 15+ (Google Maps SDK 9.x)
 
 ## Download, Setup and Build
 
@@ -206,6 +206,18 @@ mapView.mapStyle = 'JSON_STYLE_GOES_HERE';
 mapView.mapStyle = 'mapStyle.json'
 ```
 See [this link](https://developers.google.com/maps/documentation/ios-sdk/hiding-features) for more infos on map styling.
+
+#### Light and Dark Mode
+
+The map follows the app's appearance. When the app is in Dark Mode, whether from the system setting or from `Ti.UI.overrideUserInterfaceStyle`, normal and terrain maps use Google's dark colour scheme, and they switch back when the appearance changes. Google applies the dark scheme to normal and terrain maps only.
+
+To keep the map light, as earlier versions of this module did, pin the app to Light:
+
+```js
+Ti.UI.overrideUserInterfaceStyle = Ti.UI.USER_INTERFACE_STYLE_LIGHT;
+```
+
+Setting `UIUserInterfaceStyle` to `Light` in the `tiapp.xml` plist has the same effect for the whole app.
 
 #### Map Location
 
