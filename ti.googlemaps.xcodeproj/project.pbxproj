@@ -200,7 +200,6 @@
 			children = (
 				DB548D4E1F769041001F54C7 /* Clustering */,
 				3AF900D11BC2288600172627 /* Module */,
-				3ACA7B0E1D2986C400847EBF /* Autocompletion */,
 				3A28A4C91BE9204C0004FCE9 /* Overlays */,
 				DBEFA8DA1F19270D00A8FA1D /* Renderer */,
 				3AF900D31BC2289C00172627 /* View */,
@@ -255,13 +254,6 @@
 				3A433F061BE9AE620005C8AE /* TiGooglemapsCircleProxy.m */,
 			);
 			name = Circle;
-			sourceTree = "<group>";
-		};
-		3ACA7B0E1D2986C400847EBF /* Autocompletion */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Autocompletion;
 			sourceTree = "<group>";
 		};
 		3AF900D01BC2287A00172627 /* Module Asses */ = {
