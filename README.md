@@ -14,7 +14,6 @@ Ti.GoogleMaps is an open-source project to support the Google Maps iOS-SDK in Ap
 - [x] Polygon overlay
 - [x] Polyline overlay
 - [x] Circle overlay
-- [x] Autocompletion dialog
 - [x] Clustering
 - [x] Directions
 - [x] Heatmap Layers
@@ -22,8 +21,8 @@ Ti.GoogleMaps is an open-source project to support the Google Maps iOS-SDK in Ap
 
 ## Requirements
 
-  - Titanium 10.0.0+
-  - Minimum Deployment Target iOS 13+
+  - Titanium 13.1.0+ (the first release that reads the module's Swift package dependencies)
+  - Minimum Deployment Target iOS 16+ (Google Maps SDK 11.x). Titanium SDK 13 defaults to iOS 15, so set `<min-ios-ver>16.0</min-ios-ver>` in the `<ios>` section of your `tiapp.xml`, or the app build fails when Xcode resolves the GoogleMaps package.
 
 ## Download, Setup and Build
 
@@ -81,8 +80,8 @@ That's it!
 ### Build
 
 If you want to build the module from the source, you need to check some things beforehand:
-- Set the `TITANIUM_SDK_VERSION` inside the `ios/titanium.xcconfig` file to the Ti.SDK version you want to build with.
-- Build the project with `appc run -p ios --build-only`
+- Set the `TITANIUM_SDK_VERSION` inside the `titanium.xcconfig` file to the Ti.SDK version you want to build with.
+- Build the project with `ti build -p ios --build-only`
 - Check the [releases tab](https://github.com/hansemannn/titanium-googlemaps/releases) for stable pre-packaged versions of the module
 
 ## Features
@@ -206,6 +205,18 @@ mapView.mapStyle = 'JSON_STYLE_GOES_HERE';
 mapView.mapStyle = 'mapStyle.json'
 ```
 See [this link](https://developers.google.com/maps/documentation/ios-sdk/hiding-features) for more infos on map styling.
+
+#### Light and Dark Mode
+
+The map follows the app's appearance. When the app is in Dark Mode, whether from the system setting or from `Ti.UI.overrideUserInterfaceStyle`, normal and terrain maps use Google's dark colour scheme, and they switch back when the appearance changes. Google applies the dark scheme to normal and terrain maps only.
+
+To keep the map light, as earlier versions of this module did, pin the app to Light:
+
+```js
+Ti.UI.overrideUserInterfaceStyle = Ti.UI.USER_INTERFACE_STYLE_LIGHT;
+```
+
+Setting `UIUserInterfaceStyle` to `Light` in the `tiapp.xml` plist has the same effect for the whole app.
 
 #### Map Location
 
@@ -533,35 +544,6 @@ const heatmap = maps.createHeatmapLayer({
 mapView.addHeatmapLayer(heatmap);
 ```
 
-### Autocomplete Dialog
-
-A autocomplete dialog can be opened modally to search for places in realtime. A number of events
-helps to work with partial results and final selections.
-
-The whole dialog can be styled (like in the following example) and the default native theming is light.
-
-```js
-const dialog = GoogleMaps.createAutocompleteDialog({
-    tableCellBackgroundColor: '#333',
-    tableCellSeparatorColor: '#444',
-    primaryTextColor: '#fff',
-    primaryTextHighlightColor: 'blue',
-    tintColor: 'blue'
-});
-
-// You need a Google Places API key from the Google Developer Console
-// This is not the same one like your Google Maps API key
-dialog.configure('<YOUR_GOOGLE_PLACES_API_KEY>');
-
-dialog.open();
-```
-
-#### Autocomplete Events
-
-- [x] success
-- [x] error
-- [x] cancel
-
 ### Overlays
 
 Overlays can be added to the map view just like annotations. The module supports the methods `addPolygon`, `addPolyline` and `addCircle` to add overlays and `removePolygon`, `removePolyline` and `removeCircle` to remove them.
@@ -575,7 +557,7 @@ const polyline = maps.createPolyline({
     points: [ { // Can handle both object and array
         latitude: -37.81319,
         longitude: 144.96298
-    }, [ -31.95285, 115.85734 ] ], // Important: The longitude is at index 0 and the latitude at index 1
+    }, [ 115.85734, -31.95285 ] ], // Important: The longitude is at index 0 and the latitude at index 1
     strokeWidth: 3, // Default: 1
     strokeColor: '#f00'  // Default: Black (#000000),
     title: 'My Polyline',
@@ -612,7 +594,7 @@ const polygon = maps.createPolygon({
     points: [ { // Can handle both object and array
         latitude: -37.81819,
         longitude: 144.96798
-    }, [ -31.95285, 115.85734 ] ],
+    }, [ 115.85734, -31.95285 ] ],
     strokeWidth: 3,
     fillColor: 'yellow', // Default: Blue (#0000ff)
     strokeColor: 'green',
@@ -620,7 +602,7 @@ const polygon = maps.createPolygon({
     holes: [ {
         latitude: -32.95785,
         longitude: 115.86234
-    }, [ -32.95785, 115.86234 ] ], // Important: The longitude is at index 0 and the latitude at index 1.
+    }, [ 115.86234, -32.95785 ] ], // Important: The longitude is at index 0 and the latitude at index 1.
                                    // This has been changed in v6.1.2 of the module to align with the other APIs!
     zIndex: 10
 });
@@ -635,7 +617,7 @@ A circle is a shape defined by the `center` property to specify its location as 
 
 ```js
 const circle = maps.createCircle({
-    center: [ -32.9689, 151.7721 ], // Can handle object or array. Important: The longitude is at index 0 and the latitude at index 1.
+    center: [ 151.7721, -32.9689 ], // Can handle object or array. Important: The longitude is at index 0 and the latitude at index 1.
     radius: 500 * 1000, // 500 km, Default: 0
     fillColor: 'blue', // Default: transparent
     strokeWidth: 3,

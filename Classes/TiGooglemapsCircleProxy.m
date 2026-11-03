@@ -24,14 +24,29 @@
 - (void)setCenter:(id)args
 {
   ENSURE_UI_THREAD(setCenter, args);
-  [self replaceValue:args forKey:@"center" notification:NO];
 
   if (![args isKindOfClass:[NSArray class]] && ![args isKindOfClass:[NSDictionary class]]) {
     NSLog(@"[WARN] Ti.GoogleMaps: You need to specify the center either using an array or object.");
     return;
   }
 
-  [[self circle] setPosition:[self positionFromPoint:args]];
+  CLLocationCoordinate2D position = [self positionFromPoint:args];
+
+  // Maps SDK 9.4 and 11.2 crash in -[GMSCircle setMap:] for an invalid center.
+  // A common cause is passing [latitude, longitude] instead of [longitude, latitude].
+  if (!CLLocationCoordinate2DIsValid(position)) {
+    NSLog(@"[ERROR] Ti.GoogleMaps: Invalid circle center. Use { latitude, longitude } or a [longitude, latitude] array.");
+    return;
+  }
+
+  [self replaceValue:args forKey:@"center" notification:NO];
+  [[self circle] setPosition:position];
+
+  GMSMapView *pendingMapView = [self pendingMapView];
+  if (pendingMapView != nil && [[self circle] map] == nil) {
+    [[self circle] setMap:pendingMapView];
+  }
+  [self setPendingMapView:nil];
 }
 
 - (void)setRadius:(id)value
@@ -105,19 +120,33 @@
 
 #pragma mark Utilities
 
+static BOOL TiGooglemapsIsCoordinateValue(id value)
+{
+  return [value isKindOfClass:[NSNumber class]] || [value isKindOfClass:[NSString class]];
+}
+
+// Returns kCLLocationCoordinate2DInvalid when a coordinate is missing (a short array or a
+// missing key), so callers reject it instead of crashing or placing the circle at 0,0.
 - (CLLocationCoordinate2D)positionFromPoint:(id)point
 {
   if ([point isKindOfClass:[NSDictionary class]]) {
-    CLLocationDegrees latitude = [TiUtils doubleValue:[point valueForKey:@"latitude"]];
-    CLLocationDegrees longitude = [TiUtils doubleValue:[point valueForKey:@"longitude"]];
+    id latitude = [point valueForKey:@"latitude"];
+    id longitude = [point valueForKey:@"longitude"];
 
-    return CLLocationCoordinate2DMake(latitude, longitude);
+    if (!TiGooglemapsIsCoordinateValue(latitude) || !TiGooglemapsIsCoordinateValue(longitude)) {
+      return kCLLocationCoordinate2DInvalid;
+    }
+
+    return CLLocationCoordinate2DMake([TiUtils doubleValue:latitude], [TiUtils doubleValue:longitude]);
   } else if ([point isKindOfClass:[NSArray class]]) {
-    CLLocationDegrees latitude = [TiUtils doubleValue:[point objectAtIndex:1]];
-    CLLocationDegrees longitude = [TiUtils doubleValue:[point objectAtIndex:0]];
+    if ([point count] < 2 || !TiGooglemapsIsCoordinateValue(point[0]) || !TiGooglemapsIsCoordinateValue(point[1])) {
+      return kCLLocationCoordinate2DInvalid;
+    }
 
-    return CLLocationCoordinate2DMake(latitude, longitude);
+    return CLLocationCoordinate2DMake([TiUtils doubleValue:point[1]], [TiUtils doubleValue:point[0]]);
   }
+
+  return kCLLocationCoordinate2DInvalid;
 }
 
 @end

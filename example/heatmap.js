@@ -25,7 +25,7 @@ var location = {
     longitude: 144.963058
 };
 
-var nav = Ti.UI.iOS.createNavigationWindow({
+var nav = Ti.UI.createNavigationWindow({
     window: win
 });
 

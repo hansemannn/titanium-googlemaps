@@ -534,7 +534,17 @@ const CGFloat LN2 = 0.6931471805599453;
     [[self overlays] addObject:circleProxy];
 
     dispatch_async(dispatch_get_main_queue(), ^{
-      [[circleProxy circle] setMap:[[self mapView] mapView]];
+      GMSCircle *circle = [circleProxy circle];
+
+      // Maps SDK 9.4 and 11.2 crash when a circle without a valid center is added to the map,
+      // so hold the map and let the circle attach itself once it gets a valid center.
+      if (!CLLocationCoordinate2DIsValid(circle.position)) {
+        [circleProxy setPendingMapView:[[self mapView] mapView]];
+        NSLog(@"[WARN] Ti.GoogleMaps: The circle has no valid center yet. It will appear once its center is set.");
+        return;
+      }
+
+      [circle setMap:[[self mapView] mapView]];
     });
   });
 }
@@ -547,6 +557,7 @@ const CGFloat LN2 = 0.6931471805599453;
     [[self overlays] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
       if ([obj isKindOfClass:[TiGooglemapsCircleProxy class]]) {
         dispatch_async(dispatch_get_main_queue(), ^{
+          [(TiGooglemapsCircleProxy *)obj setPendingMapView:nil];
           [[(TiGooglemapsCircleProxy *)obj circle] setMap:nil];
         });
         [[self overlays] removeObject:obj];
@@ -566,6 +577,7 @@ const CGFloat LN2 = 0.6931471805599453;
     [[self overlays] removeObject:circleProxy];
 
     dispatch_async(dispatch_get_main_queue(), ^{
+      [circleProxy setPendingMapView:nil];
       [[circleProxy circle] setMap:nil];
     });
   });

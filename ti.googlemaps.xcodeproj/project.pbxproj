@@ -19,10 +19,7 @@
 		3A433F071BE9AE620005C8AE /* TiGooglemapsCircleProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A433F051BE9AE620005C8AE /* TiGooglemapsCircleProxy.h */; };
 		3A433F081BE9AE620005C8AE /* TiGooglemapsCircleProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A433F061BE9AE620005C8AE /* TiGooglemapsCircleProxy.m */; };
 		3A7097E21BF1CD9B0044DBFB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900A31BC1ED7800172627 /* ImageIO.framework */; };
-		3AC1DD232DC78DF0008865C2 /* GooglePlaces.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC1DD222DC78DF0008865C2 /* GooglePlaces.xcframework */; };
 		3AC1DD252DC78EDF008865C2 /* TitaniumKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC1DD242DC78EDF008865C2 /* TitaniumKit.xcframework */; };
-		3ACA7B111D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ACA7B0F1D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.h */; };
-		3ACA7B121D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACA7B101D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.m */; };
 		3ACF6A121CBA800600BC765B /* TiGooglemapsAnnotationProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ACF6A101CBA800600BC765B /* TiGooglemapsAnnotationProxy.h */; };
 		3ACF6A131CBA800600BC765B /* TiGooglemapsAnnotationProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF6A111CBA800600BC765B /* TiGooglemapsAnnotationProxy.m */; };
 		3ACF6A1A1CBA874700BC765B /* TiGooglemapsView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ACF6A161CBA874700BC765B /* TiGooglemapsView.h */; };
@@ -41,7 +38,6 @@
 		3AF900B91BC1ED7800172627 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900A91BC1ED7800172627 /* Security.framework */; };
 		3AF900BA1BC1ED7800172627 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF900AA1BC1ED7800172627 /* SystemConfiguration.framework */; };
 		3AFF716C2EAE00490013C4F9 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AFF716B2EAE00490013C4F9 /* Metal.framework */; };
-		3AFF71732EAE03AA0013C4F9 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 3AFF71722EAE03AA0013C4F9 /* GoogleMaps */; };
 		AA747D9F0F9514B9006C5449 /* TiGooglemaps_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* TiGooglemaps_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		DB0C69541E49D6DF000F8FA2 /* TiGMSHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = DB0C69521E49D6DF000F8FA2 /* TiGMSHTTPClient.h */; };
@@ -81,10 +77,7 @@
 		3A433F011BE9AB270005C8AE /* TiGooglemapsPolygonProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsPolygonProxy.m; path = Classes/TiGooglemapsPolygonProxy.m; sourceTree = "<group>"; };
 		3A433F051BE9AE620005C8AE /* TiGooglemapsCircleProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsCircleProxy.h; path = Classes/TiGooglemapsCircleProxy.h; sourceTree = "<group>"; };
 		3A433F061BE9AE620005C8AE /* TiGooglemapsCircleProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsCircleProxy.m; path = Classes/TiGooglemapsCircleProxy.m; sourceTree = "<group>"; };
-		3AC1DD222DC78DF0008865C2 /* GooglePlaces.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GooglePlaces.xcframework; path = platform/GooglePlaces.xcframework; sourceTree = "<group>"; };
-		3AC1DD242DC78EDF008865C2 /* TitaniumKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TitaniumKit.xcframework; path = "/Users/hans/Library/Application Support/Titanium/mobilesdk/osx/12.7.0.GA/iphone/Frameworks/TitaniumKit.xcframework"; sourceTree = "<absolute>"; };
-		3ACA7B0F1D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsAutocompleteDialogProxy.h; path = Classes/TiGooglemapsAutocompleteDialogProxy.h; sourceTree = "<group>"; };
-		3ACA7B101D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsAutocompleteDialogProxy.m; path = Classes/TiGooglemapsAutocompleteDialogProxy.m; sourceTree = "<group>"; };
+		3AC1DD242DC78EDF008865C2 /* TitaniumKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TitaniumKit.xcframework; path = "$(TITANIUM_SDK)/iphone/Frameworks/TitaniumKit.xcframework"; sourceTree = "<group>"; };
 		3ACF6A101CBA800600BC765B /* TiGooglemapsAnnotationProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsAnnotationProxy.h; path = Classes/TiGooglemapsAnnotationProxy.h; sourceTree = "<group>"; };
 		3ACF6A111CBA800600BC765B /* TiGooglemapsAnnotationProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiGooglemapsAnnotationProxy.m; path = Classes/TiGooglemapsAnnotationProxy.m; sourceTree = "<group>"; };
 		3ACF6A161CBA874700BC765B /* TiGooglemapsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiGooglemapsView.h; path = Classes/TiGooglemapsView.h; sourceTree = "<group>"; };
@@ -137,7 +130,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AC1DD232DC78DF0008865C2 /* GooglePlaces.xcframework in Frameworks */,
 				3AF900AB1BC1ED7800172627 /* Accelerate.framework in Frameworks */,
 				3AF900AC1BC1ED7800172627 /* AVFoundation.framework in Frameworks */,
 				3AF900AD1BC1ED7800172627 /* CoreBluetooth.framework in Frameworks */,
@@ -151,7 +143,6 @@
 				3AF900B81BC1ED7800172627 /* QuartzCore.framework in Frameworks */,
 				3AF900B91BC1ED7800172627 /* Security.framework in Frameworks */,
 				3AF900BA1BC1ED7800172627 /* SystemConfiguration.framework in Frameworks */,
-				3AFF71732EAE03AA0013C4F9 /* GoogleMaps in Frameworks */,
 				3AC1DD252DC78EDF008865C2 /* TitaniumKit.xcframework in Frameworks */,
 				3A7097E21BF1CD9B0044DBFB /* ImageIO.framework in Frameworks */,
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
@@ -183,7 +174,6 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3AC1DD222DC78DF0008865C2 /* GooglePlaces.xcframework */,
 				3A2B2B3A28D2464100915BB4 /* GoogleMapsUtils.xcframework */,
 				3AFF716B2EAE00490013C4F9 /* Metal.framework */,
 				3AF9009B1BC1ED7800172627 /* Accelerate.framework */,
@@ -210,7 +200,6 @@
 			children = (
 				DB548D4E1F769041001F54C7 /* Clustering */,
 				3AF900D11BC2288600172627 /* Module */,
-				3ACA7B0E1D2986C400847EBF /* Autocompletion */,
 				3A28A4C91BE9204C0004FCE9 /* Overlays */,
 				DBEFA8DA1F19270D00A8FA1D /* Renderer */,
 				3AF900D31BC2289C00172627 /* View */,
@@ -265,15 +254,6 @@
 				3A433F061BE9AE620005C8AE /* TiGooglemapsCircleProxy.m */,
 			);
 			name = Circle;
-			sourceTree = "<group>";
-		};
-		3ACA7B0E1D2986C400847EBF /* Autocompletion */ = {
-			isa = PBXGroup;
-			children = (
-				3ACA7B0F1D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.h */,
-				3ACA7B101D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.m */,
-			);
-			name = Autocompletion;
 			sourceTree = "<group>";
 		};
 		3AF900D01BC2287A00172627 /* Module Asses */ = {
@@ -403,7 +383,6 @@
 				3ACF6A121CBA800600BC765B /* TiGooglemapsAnnotationProxy.h in Headers */,
 				3A433F071BE9AE620005C8AE /* TiGooglemapsCircleProxy.h in Headers */,
 				3A433EFE1BE9AB0C0005C8AE /* TiGooglemapsPolylineProxy.h in Headers */,
-				3ACA7B111D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.h in Headers */,
 				DBEB0D651F19D518005C692F /* TiGooglemapsIndoorDisplayProxy.h in Headers */,
 				24DE9E1111C5FE74003F90F6 /* TiGooglemapsModuleAssets.h in Headers */,
 				3ACF6A1A1CBA874700BC765B /* TiGooglemapsView.h in Headers */,
@@ -422,12 +401,16 @@
 				D2AAC07A0554694100DB518D /* Headers */,
 				D2AAC07B0554694100DB518D /* Sources */,
 				D2AAC07C0554694100DB518D /* Frameworks */,
+				3AD0D0A12F00000100A1B2C3 /* Remove GoogleMaps from static library */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = ti.googlemaps;
+			packageProductDependencies = (
+				3AFF71722EAE03AA0013C4F9 /* GoogleMaps */,
+			);
 			productName = ti.googlemaps;
 			productReference = D2AAC07E0554694100DB518D /* libTiGooglemaps.a */;
 			productType = "com.apple.product-type.library.static";
@@ -465,6 +448,28 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3AD0D0A12F00000100A1B2C3 /* Remove GoogleMaps from static library */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Remove GoogleMaps from static library";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "# The app links the GoogleMaps Swift package itself (spm.json \"host\" linkage,\n# which also copies its resource bundle). Xcode merges package products into\n# static libraries, so remove that copy here or the app fails to link with\n# duplicate symbols.\n#\n# Needs ENABLE_USER_SCRIPT_SANDBOXING = NO on this target: it rewrites the built\n# library in place, and declaring that file as the phase output conflicts with\n# the target's own product.\nset -euo pipefail\nLIB=\"${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\"\nWORK=\"${DERIVED_FILE_DIR}/strip-googlemaps\"\nmkdir -p \"${WORK}\"\nARCHS_IN_LIB=$(lipo -archs \"${LIB}\")\nTHIN_LIBS=()\nfor ARCH in ${ARCHS_IN_LIB}; do\n  THIN=\"${WORK}/${ARCH}.a\"\n  if [ \"$(echo ${ARCHS_IN_LIB} | wc -w)\" -gt 1 ]; then\n    lipo \"${LIB}\" -thin \"${ARCH}\" -output \"${THIN}\"\n  else\n    cp \"${LIB}\" \"${THIN}\"\n  fi\n  MEMBERS=$(ar -t \"${THIN}\" | grep -E '^GoogleMaps(\\.a|_object\\.a|Target\\.o)' || true)\n  if [ -n \"${MEMBERS}\" ]; then\n    ar -d \"${THIN}\" ${MEMBERS}\n    ranlib \"${THIN}\"\n    echo \"Removed ${MEMBERS} from ${ARCH} slice\"\n  fi\n  THIN_LIBS+=(\"${THIN}\")\ndone\nif [ ${#THIN_LIBS[@]} -gt 1 ]; then\n  lipo -create \"${THIN_LIBS[@]}\" -output \"${LIB}\"\nelse\n  cp \"${THIN_LIBS[0]}\" \"${LIB}\"\nfi\n\n# Fail here rather than ship Google Maps inside the library, which would give every\n# app duplicate symbols. This catches Xcode renaming the merged members.\nif nm -gU \"${LIB}\" 2>/dev/null | grep -F '_OBJC_CLASS_$_GMSMapView' >/dev/null; then\n  echo \"error: ${FULL_PRODUCT_NAME} still contains Google Maps; Xcode's merged member names may have changed\" >&2\n  exit 1\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D2AAC07B0554694100DB518D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -482,7 +487,6 @@
 				3ACF6A1B1CBA874700BC765B /* TiGooglemapsView.m in Sources */,
 				24DE9E1211C5FE74003F90F6 /* TiGooglemapsModuleAssets.m in Sources */,
 				3A433F031BE9AB270005C8AE /* TiGooglemapsPolygonProxy.m in Sources */,
-				3ACA7B121D2986FC00847EBF /* TiGooglemapsAutocompleteDialogProxy.m in Sources */,
 				DB9FB86F1E47399300A0790E /* TiGooglemapsTileProxy.m in Sources */,
 				3A433EFF1BE9AB0C0005C8AE /* TiGooglemapsPolylineProxy.m in Sources */,
 				DB0C69551E49D6DF000F8FA2 /* TiGMSHTTPClient.m in Sources */,
@@ -529,13 +533,14 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = (
 					"-DDEBUG",
 					"-DTI_POST_1_2",
 				);
 				OTHER_LDFLAGS = "-ObjC";
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				PRODUCT_NAME = TiGooglemaps;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -577,10 +582,11 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = "-DTI_POST_1_2";
 				OTHER_LDFLAGS = "-ObjC";
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				PRODUCT_NAME = TiGooglemaps;
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
@@ -647,7 +653,7 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-DDEBUG",
@@ -720,7 +726,7 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				OTHER_CFLAGS = "-DTI_POST_1_2";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = TiGooglemaps;
@@ -760,7 +766,7 @@
 			repositoryURL = "https://github.com/googlemaps/ios-maps-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.4.0;
+				minimumVersion = 11.2.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
