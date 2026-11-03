@@ -203,8 +203,8 @@ var polygon = maps.createPolygon({
             latitude: companies.appcelerator.latitude,
             longitude: companies.appcelerator.longitude,
         },
-        [companies.apple.latitude, companies.apple.longitude],
-        [companies.facebook.latitude, companies.facebook.longitude]
+        [companies.apple.longitude, companies.apple.latitude], // Arrays are [longitude, latitude]
+        [companies.facebook.longitude, companies.facebook.latitude]
     ],
     strokeWidth: 3,
     fillColor: 'rgba(160,26,32,0.2)', // RGB color with alpha transparency

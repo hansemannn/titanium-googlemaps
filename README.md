@@ -22,7 +22,7 @@ Ti.GoogleMaps is an open-source project to support the Google Maps iOS-SDK in Ap
 ## Requirements
 
   - Titanium 13.1.0+ (the first release that reads the module's Swift package dependencies)
-  - Minimum Deployment Target iOS 16+ (Google Maps SDK 11.x)
+  - Minimum Deployment Target iOS 16+ (Google Maps SDK 11.x). Titanium SDK 13 defaults to iOS 15, so set `<min-ios-ver>16.0</min-ios-ver>` in the `<ios>` section of your `tiapp.xml`, or the app build fails when Xcode resolves the GoogleMaps package.
 
 ## Download, Setup and Build
 
@@ -80,8 +80,8 @@ That's it!
 ### Build
 
 If you want to build the module from the source, you need to check some things beforehand:
-- Set the `TITANIUM_SDK_VERSION` inside the `ios/titanium.xcconfig` file to the Ti.SDK version you want to build with.
-- Build the project with `appc run -p ios --build-only`
+- Set the `TITANIUM_SDK_VERSION` inside the `titanium.xcconfig` file to the Ti.SDK version you want to build with.
+- Build the project with `ti build -p ios --build-only`
 - Check the [releases tab](https://github.com/hansemannn/titanium-googlemaps/releases) for stable pre-packaged versions of the module
 
 ## Features
@@ -557,7 +557,7 @@ const polyline = maps.createPolyline({
     points: [ { // Can handle both object and array
         latitude: -37.81319,
         longitude: 144.96298
-    }, [ -31.95285, 115.85734 ] ], // Important: The longitude is at index 0 and the latitude at index 1
+    }, [ 115.85734, -31.95285 ] ], // Important: The longitude is at index 0 and the latitude at index 1
     strokeWidth: 3, // Default: 1
     strokeColor: '#f00'  // Default: Black (#000000),
     title: 'My Polyline',
@@ -594,7 +594,7 @@ const polygon = maps.createPolygon({
     points: [ { // Can handle both object and array
         latitude: -37.81819,
         longitude: 144.96798
-    }, [ -31.95285, 115.85734 ] ],
+    }, [ 115.85734, -31.95285 ] ],
     strokeWidth: 3,
     fillColor: 'yellow', // Default: Blue (#0000ff)
     strokeColor: 'green',
@@ -602,7 +602,7 @@ const polygon = maps.createPolygon({
     holes: [ {
         latitude: -32.95785,
         longitude: 115.86234
-    }, [ -32.95785, 115.86234 ] ], // Important: The longitude is at index 0 and the latitude at index 1.
+    }, [ 115.86234, -32.95785 ] ], // Important: The longitude is at index 0 and the latitude at index 1.
                                    // This has been changed in v6.1.2 of the module to align with the other APIs!
     zIndex: 10
 });
@@ -617,7 +617,7 @@ A circle is a shape defined by the `center` property to specify its location as 
 
 ```js
 const circle = maps.createCircle({
-    center: [ -32.9689, 151.7721 ], // Can handle object or array. Important: The longitude is at index 0 and the latitude at index 1.
+    center: [ 151.7721, -32.9689 ], // Can handle object or array. Important: The longitude is at index 0 and the latitude at index 1.
     radius: 500 * 1000, // 500 km, Default: 0
     fillColor: 'blue', // Default: transparent
     strokeWidth: 3,
