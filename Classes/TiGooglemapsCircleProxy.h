@@ -12,4 +12,7 @@
 
 @property (nonatomic, retain) GMSCircle *circle;
 
+// Set when the circle was added to a map before it had a valid center; it is attached once one is set.
+@property (nonatomic, weak) GMSMapView *pendingMapView;
+
 @end
